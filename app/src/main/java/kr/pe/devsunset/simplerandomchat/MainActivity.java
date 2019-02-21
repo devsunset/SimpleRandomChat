@@ -1,4 +1,4 @@
-rm -rf apackage kr.pe.devsunset.simplerandomchat;
+package kr.pe.devsunset.simplerandomchat;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
