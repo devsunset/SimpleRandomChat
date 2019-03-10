@@ -12,13 +12,16 @@ public class AccountInfo {
 
         HashMap<String,Object> accountInfo = new HashMap<String,Object>();
         SharedPreferences pref = context.getSharedPreferences("SRC_PREF", context.MODE_PRIVATE);
+
         accountInfo.put("APP_ID",pref.getString("APP_ID", "-"));
         accountInfo.put("APP_KEY",pref.getString("APP_KEY", "-"));
         accountInfo.put("APP_NUMBER",pref.getString("APP_NUMBER", "-"));
         accountInfo.put("APP_VER",pref.getString("APP_VER", "1.0"));
+
         accountInfo.put("COUNTRY",pref.getString("COUNTRY", "-"));
         accountInfo.put("GENDER",pref.getString("GENDER", "M"));
         accountInfo.put("LANG",pref.getString("LANG", "-"));
+
         accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "N"));
         accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "Y"));
         accountInfo.put("SET_SEND_GENDER",pref.getString("SET_SEND_GENDER", "A"));
@@ -101,7 +104,7 @@ public class AccountInfo {
 
         /*
             // Delete example
-            SharedPreferences pref = getSharedPreferences("SRC_PREF", MODE_PRIVATE);
+            SharedPreferences pref =  context.getSharedPreferences("SRC_PREF", context.MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.remove("APP_ID");
             editor.commit();
