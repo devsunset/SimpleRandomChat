@@ -1,11 +1,15 @@
 package devsunset.simple.random.chat;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import devsunset.simple.random.chat.modules.AccountInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,12 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnCreateAccountInfo)
     void onBtnCreateAccountInfoClicked() {
-        Toast.makeText(this, "Create Local Account Info", Toast.LENGTH_SHORT).show();
+        HashMap<String,Object> myInfo = new HashMap<String,Object>();
+        myInfo.put("APP_ID",UUID.randomUUID().toString());
+        AccountInfo accountInfo = new AccountInfo();
+        Toast.makeText(this, "Create Account Info : "+accountInfo.setAccountInfo(this,myInfo), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.btnGetAccountInfo)
     void onBtnGetAccountInfoClicked() {
-        Toast.makeText(this, "Get Local Account Info", Toast.LENGTH_SHORT).show();
+        AccountInfo accountInfo = new AccountInfo();
+        Toast.makeText(this, "Get Account Info :"+accountInfo.getAccountInfo(this).toString(), Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.btnAppInfoInit)

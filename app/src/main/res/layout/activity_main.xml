@@ -16,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        android:text="Create Local Account Info" />
+        android:text="Create Account Info" />
 
     <Button
         android:id="@+id/btnGetAccountInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        android:text="Get Local Account Info" />
+        android:text="Get Account Info" />
 
     <Button
         android:id="@+id/btnAppInfoInit"
