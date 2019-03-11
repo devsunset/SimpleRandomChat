@@ -1,5 +1,6 @@
 package devsunset.simple.random.chat;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -8,16 +9,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import devsunset.simple.random.chat.modules.AccountInfo;
-import devsunset.simple.random.chat.modules.Data;
-import devsunset.simple.random.chat.modules.RetrofitExService;
-import okhttp3.ResponseBody;
+import devsunset.simple.random.chat.modules.AccountInfoService;
+import devsunset.simple.random.chat.modules.DataVo;
+import devsunset.simple.random.chat.modules.HttpConnectService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,147 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RetrofitExService.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RetrofitExService retrofitExService = retrofit.create(RetrofitExService.class);
-
-        retrofitExService.getData("1").enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(@NonNull Call<Data> call, @NonNull Response<Data> response) {
-                if (response.isSuccessful()) {
-                    Data body = response.body();
-                    if (body != null) {
-                        Log.d("data.getUserId()", body.getUserId() + "");
-                        Log.d("data.getId()", body.getId() + "");
-                        Log.d("data.getTitle()", body.getTitle());
-                        Log.d("data.getBody()", body.getBody());
-                        Log.e("getData end", "======================================");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Data> call, @NonNull Throwable t) {
-
-            }
-        });
-
-        retrofitExService.getData2("1").enqueue(new Callback<List<Data>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Data>> call, @NonNull Response<List<Data>> response) {
-                if (response.isSuccessful()) {
-                    List<Data> datas = response.body();
-                    if (datas != null) {
-                        for (int i = 0; i < datas.size(); i++) {
-                            Log.e("data" + i, datas.get(i).getUserId() + "");
-                        }
-                        Log.e("getData2 end", "======================================");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Data>> call, @NonNull Throwable t) {
-
-            }
-        });
-
-        HashMap<String, Object> input = new HashMap<>();
-        input.put("userId", 1);
-        input.put("title", "this is title!!");
-        input.put("body", "this is body!");
-        retrofitExService.postData(input).enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(@NonNull Call<Data> call, @NonNull Response<Data> response) {
-                if (response.isSuccessful()) {
-                    Data body = response.body();
-                    if (body != null) {
-                        Log.d("data.getUserId()", body.getUserId() + "");
-                        Log.d("data.getId()", body.getId() + "");
-                        Log.d("data.getTitle()", body.getTitle()+"");
-                        Log.d("data.getBody()", body.getBody()+"");
-                        Log.e("postData end", "======================================");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Data> call, @NonNull Throwable t) {
-
-            }
-        });
-
-        retrofitExService.putData(new Data(1, 1, "title", "body")).enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(@NonNull Call<Data> call, @NonNull Response<Data> response) {
-                if (response.isSuccessful()) {
-                    Data body = response.body();
-                    if (body != null) {
-                        Log.d("data.getUserId()", body.getUserId() + "");
-                        Log.d("data.getId()", body.getId() + "");
-                        Log.d("data.getTitle()", body.getTitle());
-                        Log.d("data.getBody()", body.getBody());
-                        Log.e("putData end", "======================================");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Data> call, @NonNull Throwable t) {
-
-            }
-        });
-
-        retrofitExService.patchData("1").enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(@NonNull Call<Data> call, @NonNull Response<Data> response) {
-                if (response.isSuccessful()) {
-                    Data body = response.body();
-                    if (body != null) {
-                        Log.d("data.getUserId()", body.getUserId() + "");
-                        Log.d("data.getId()", body.getId() + "");
-                        Log.d("data.getTitle()", body.getTitle());
-                        Log.d("data.getBody()", body.getBody());
-                        Log.e("patchData end", "======================================");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Data> call, @NonNull Throwable t) {
-
-            }
-        });
-
-        retrofitExService.deleteData().enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    ResponseBody body = response.body();
-                    if (body != null) {
-                        Log.d("body", body.toString() + "");
-                        Log.e("patchData end", "======================================");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-
-        AccountInfo accountInfo = new AccountInfo();
+        AccountInfoService accountInfo = new AccountInfoService();
         if("-".equals(accountInfo.getAccountInfo(this).get("APP_ID"))){
             Toast.makeText(this, "INIT PRE", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this, "INIT NEXT", Toast.LENGTH_LONG).show();
         }
-
     }
 
     @OnClick(R.id.btnCreateAccountInfo)
@@ -188,25 +52,130 @@ public class MainActivity extends AppCompatActivity {
         myInfo.put("COUNTRY",strCountry);
         myInfo.put("LANG",strLanguage);
 
-        AccountInfo accountInfo = new AccountInfo();
+        AccountInfoService accountInfo = new AccountInfoService();
         Toast.makeText(this, "Create Account Info : "+accountInfo.setAccountInfo(this,myInfo), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.btnGetAccountInfo)
     void onBtnGetAccountInfoClicked() {
-        AccountInfo accountInfo = new AccountInfo();
+        AccountInfoService accountInfo = new AccountInfoService();
         Toast.makeText(this, "Get Account Info :"+accountInfo.getAccountInfo(this).toString(), Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.btnAppInfoInit)
     void onBtnAppInfoInitClicked() {
-        Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
-    }
 
+        Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HttpConnectService.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        HttpConnectService httpConnctService = retrofit.create(HttpConnectService.class);
+
+        AccountInfoService accountInfo = new AccountInfoService();
+
+        httpConnctService.appInfoInit(accountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+            @Override
+            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                if (response.isSuccessful()) {
+                    //Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
+                    DataVo data = response.body();
+                    if (data != null) {
+                        Log.d("appInfoInit", data.getCALL_FUNCTION() + "");
+                        Log.d("appInfoInit", data.getRESULT_CODE() + "");
+                        Log.d("appInfoInit", data.getRESULT_MESSAGE()+"");
+                        Log.d("appInfoInit", data.getRESULT_DATA()+"");
+                    }
+                }else{
+                    Log.d("appInfoInit", "response.isSuccessful() :"+response.isSuccessful());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                //Toast.makeText(this, "appInfoInit Error", Toast.LENGTH_SHORT).show();
+                Log.d("appInfoInit Error", "appInfoInit Error :"+t.getMessage());
+            }
+        });
+    }
 
     @OnClick(R.id.btnAppInfoUpdate)
     void onBtnAppInfoUpdateClicked() {
+
         Toast.makeText(this, "appInfoUpdate", Toast.LENGTH_SHORT).show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HttpConnectService.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        HttpConnectService httpConnctService = retrofit.create(HttpConnectService.class);
+
+        AccountInfoService accountInfo = new AccountInfoService();
+
+        httpConnctService.appInfoUpdate(accountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+            @Override
+            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                if (response.isSuccessful()) {
+                    //Toast.makeText(this, "appInfoUpdate", Toast.LENGTH_SHORT).show();
+                    DataVo data = response.body();
+                    if (data != null) {
+                        Log.d("appInfoUpdate", data.getCALL_FUNCTION() + "");
+                        Log.d("appInfoUpdate", data.getRESULT_CODE() + "");
+                        Log.d("appInfoUpdate", data.getRESULT_MESSAGE()+"");
+                        Log.d("appInfoUpdate", data.getRESULT_DATA()+"");
+                    }
+                }else{
+                    Log.d("appInfoUpdate", "response.isSuccessful() :"+response.isSuccessful());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                //Toast.makeText(this, "appInfoUpdate Error", Toast.LENGTH_SHORT).show();
+                Log.d("appInfoUpdate Error", "appInfoInit Error :"+t.getMessage());
+            }
+        });
+    }
+
+    @OnClick(R.id.btnAppInfoRead)
+    void onBtnAppInfoReadClicked() {
+        Toast.makeText(this, "appInfoRead", Toast.LENGTH_SHORT).show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HttpConnectService.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        HttpConnectService httpConnctService = retrofit.create(HttpConnectService.class);
+
+        AccountInfoService accountInfo = new AccountInfoService();
+
+        httpConnctService.appInfoRead(accountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+            @Override
+            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                if (response.isSuccessful()) {
+                    //Toast.makeText(this, "appInfoRead", Toast.LENGTH_SHORT).show();
+                    DataVo data = response.body();
+                    if (data != null) {
+                        Log.d("appInfoRead", data.getCALL_FUNCTION() + "");
+                        Log.d("appInfoRead", data.getRESULT_CODE() + "");
+                        Log.d("appInfoRead", data.getRESULT_MESSAGE()+"");
+                        Log.d("appInfoRead", data.getRESULT_DATA()+"");
+                    }
+                }else{
+                    Log.d("appInfoRead", "response.isSuccessful() :"+response.isSuccessful());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                //Toast.makeText(this, "appInfoRead Error", Toast.LENGTH_SHORT).show();
+                Log.d("appInfoRead Error", "appInfoRead Error :"+t.getMessage());
+            }
+        });
     }
 
     @OnClick(R.id.btnMessageRandomSend)

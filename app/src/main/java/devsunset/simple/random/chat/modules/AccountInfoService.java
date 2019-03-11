@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import java.util.HashMap;
 
 
-public class AccountInfo {
+public class AccountInfoService {
 
     public HashMap<String,Object> getAccountInfo(Context context){
 
@@ -24,6 +24,7 @@ public class AccountInfo {
 
         accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "N"));
         accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "Y"));
+        accountInfo.put("SET_SEND_COUNTRY",pref.getString("SET_SEND_COUNTRY", "N"));
         accountInfo.put("SET_SEND_GENDER",pref.getString("SET_SEND_GENDER", "A"));
         accountInfo.put("SET_SEND_LIST_HIDE_YN",pref.getString("SET_SEND_LIST_HIDE_YN", "N"));
         accountInfo.put("SET_SOUND_YN",pref.getString("SET_SOUND_YN", "Y"));
