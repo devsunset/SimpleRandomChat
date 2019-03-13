@@ -1,6 +1,7 @@
 package devsunset.simple.random.chat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -9,7 +10,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     HttpConnectService httpConnctService = null;
 
@@ -197,6 +197,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnMessageRandomSend)
     void onBtnMessageRandomSendClicked() {
-        FBToast.infoToast(MainActivity.this,"Message Random Send",FBToast.LENGTH_SHORT);
+        FBToast.successToast(MainActivity.this,"FCK KEY : "+AccountInfoService.getAccountInfo(this).get("APP_KEY"),FBToast.LENGTH_SHORT);
     }
 }
