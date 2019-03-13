@@ -1,12 +1,14 @@
 package devsunset.simple.random.chat;
 
-import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -14,25 +16,40 @@ import java.util.UUID;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import devsunset.simple.random.chat.modules.AccountInfoService;
-import devsunset.simple.random.chat.modules.DataVo;
-import devsunset.simple.random.chat.modules.HttpConnectService;
+import devsunset.simple.random.chat.modules.accountservice.AccountInfoService;
+import devsunset.simple.random.chat.modules.httpservice.DataVo;
+import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
+import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    HttpConnectService httpConnctService = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //screen capture disable
+        // 안드로이드 3.0 이상부터 실행
+        if (Build.VERSION.SDK_INT >= 11) {
+            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            // getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        AccountInfoService accountInfo = new AccountInfoService();
-        if("-".equals(accountInfo.getAccountInfo(this).get("APP_ID"))){
+        Logger.addLogAdapter(new AndroidLogAdapter() {
+            @Override public boolean isLoggable(int priority, String tag) {
+                return BuildConfig.DEBUG;
+            }
+        });
+
+        if("-".equals(AccountInfoService.getAccountInfo(this).get("APP_ID"))){
             Toast.makeText(this, "INIT PRE", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this, "INIT NEXT", Toast.LENGTH_LONG).show();
@@ -46,20 +63,18 @@ public class MainActivity extends AppCompatActivity {
         myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
 
         Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
-        String strCountry = systemLocale.getCountry(); // KR
-        String strLanguage = systemLocale.getLanguage(); // ko
+        String strCountry = systemLocale.getCountry();
+        String strLanguage = systemLocale.getLanguage();
 
         myInfo.put("COUNTRY",strCountry);
         myInfo.put("LANG",strLanguage);
 
-        AccountInfoService accountInfo = new AccountInfoService();
-        Toast.makeText(this, "Create Account Info : "+accountInfo.setAccountInfo(this,myInfo), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Create Account Info : "+AccountInfoService.setAccountInfo(this,myInfo), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.btnGetAccountInfo)
     void onBtnGetAccountInfoClicked() {
-        AccountInfoService accountInfo = new AccountInfoService();
-        Toast.makeText(this, "Get Account Info :"+accountInfo.getAccountInfo(this).toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Get Account Info :"+AccountInfoService.getAccountInfo(this).toString(), Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.btnAppInfoInit)
@@ -67,36 +82,29 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HttpConnectService.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-        HttpConnectService httpConnctService = retrofit.create(HttpConnectService.class);
-
-        AccountInfoService accountInfo = new AccountInfoService();
-
-        httpConnctService.appInfoInit(accountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+        httpConnctService.appInfoInit(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
                     //Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
                     DataVo data = response.body();
                     if (data != null) {
-                        Log.d("appInfoInit", data.getCALL_FUNCTION() + "");
-                        Log.d("appInfoInit", data.getRESULT_CODE() + "");
-                        Log.d("appInfoInit", data.getRESULT_MESSAGE()+"");
-                        Log.d("appInfoInit", data.getRESULT_DATA()+"");
+                        Logger.d(data.getCALL_FUNCTION());
+                        Logger.d(data.getRESULT_CODE());
+                        Logger.d(data.getRESULT_MESSAGE());
+                        Logger.d(data.getRESULT_DATA());
                     }
                 }else{
-                    Log.d("appInfoInit", "response.isSuccessful() :"+response.isSuccessful());
+                    Logger.i("appInfoInit : "+response.isSuccessful());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 //Toast.makeText(this, "appInfoInit Error", Toast.LENGTH_SHORT).show();
-                Log.d("appInfoInit Error", "appInfoInit Error :"+t.getMessage());
+                Logger.e(t.getMessage());
             }
         });
     }
@@ -106,36 +114,29 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "appInfoUpdate", Toast.LENGTH_SHORT).show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HttpConnectService.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-        HttpConnectService httpConnctService = retrofit.create(HttpConnectService.class);
-
-        AccountInfoService accountInfo = new AccountInfoService();
-
-        httpConnctService.appInfoUpdate(accountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+        httpConnctService.appInfoUpdate(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
                     //Toast.makeText(this, "appInfoUpdate", Toast.LENGTH_SHORT).show();
                     DataVo data = response.body();
                     if (data != null) {
-                        Log.d("appInfoUpdate", data.getCALL_FUNCTION() + "");
-                        Log.d("appInfoUpdate", data.getRESULT_CODE() + "");
-                        Log.d("appInfoUpdate", data.getRESULT_MESSAGE()+"");
-                        Log.d("appInfoUpdate", data.getRESULT_DATA()+"");
+                        Logger.d(data.getCALL_FUNCTION());
+                        Logger.d(data.getRESULT_CODE());
+                        Logger.d(data.getRESULT_MESSAGE());
+                        Logger.d(data.getRESULT_DATA());
                     }
                 }else{
-                    Log.d("appInfoUpdate", "response.isSuccessful() :"+response.isSuccessful());
+                    Logger.i("appInfoUpdate : "+response.isSuccessful());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 //Toast.makeText(this, "appInfoUpdate Error", Toast.LENGTH_SHORT).show();
-                Log.d("appInfoUpdate Error", "appInfoInit Error :"+t.getMessage());
+                Logger.e(t.getMessage());
             }
         });
     }
@@ -144,36 +145,29 @@ public class MainActivity extends AppCompatActivity {
     void onBtnAppInfoReadClicked() {
         Toast.makeText(this, "appInfoRead", Toast.LENGTH_SHORT).show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HttpConnectService.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-        HttpConnectService httpConnctService = retrofit.create(HttpConnectService.class);
-
-        AccountInfoService accountInfo = new AccountInfoService();
-
-        httpConnctService.appInfoRead(accountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+        httpConnctService.appInfoRead(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
                     //Toast.makeText(this, "appInfoRead", Toast.LENGTH_SHORT).show();
                     DataVo data = response.body();
                     if (data != null) {
-                        Log.d("appInfoRead", data.getCALL_FUNCTION() + "");
-                        Log.d("appInfoRead", data.getRESULT_CODE() + "");
-                        Log.d("appInfoRead", data.getRESULT_MESSAGE()+"");
-                        Log.d("appInfoRead", data.getRESULT_DATA()+"");
+                        Logger.d(data.getCALL_FUNCTION());
+                        Logger.d(data.getRESULT_CODE());
+                        Logger.d(data.getRESULT_MESSAGE());
+                        Logger.d(data.getRESULT_DATA());
                     }
                 }else{
-                    Log.d("appInfoRead", "response.isSuccessful() :"+response.isSuccessful());
+                    Logger.i("appInfoRead : "+response.isSuccessful());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 //Toast.makeText(this, "appInfoRead Error", Toast.LENGTH_SHORT).show();
-                Log.d("appInfoRead Error", "appInfoRead Error :"+t.getMessage());
+                Logger.e(t.getMessage());
             }
         });
     }

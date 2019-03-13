@@ -1,4 +1,4 @@
-package devsunset.simple.random.chat.modules;
+package devsunset.simple.random.chat.modules.httpservice;
 
 import java.util.HashMap;
 
@@ -11,17 +11,34 @@ public interface HttpConnectService {
 
     String URL = "https://src-server.firebaseapp.com/";
 
+    /**
+     * App Info Init
+     * @param param
+     * @return
+     */
     @FormUrlEncoded
     @POST("appInfoInit")
     Call<DataVo> appInfoInit(@FieldMap HashMap<String, Object> param);
 
+    /**
+     * App Info Update
+     * @param param
+     * @return
+     */
     @FormUrlEncoded
     @POST("appInfoUpdate")
     Call<DataVo> appInfoUpdate(@FieldMap HashMap<String, Object> param);
 
+    /**
+     * Get App Info
+     * @param param
+     * @return
+     */
     @FormUrlEncoded
     @POST("appInfoRead")
     Call<DataVo> appInfoRead(@FieldMap HashMap<String, Object> param);
+
+
 
     /**
      * POST 방식, 주소는 위들과 같음.
