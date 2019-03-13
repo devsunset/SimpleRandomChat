@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "devsunset.simple.random.chat.simplerandomchat"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -32,6 +32,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.orhanobut:logger:2.2.0'
+    implementation 'com.github.NaimishTrivedi:FBToast:1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

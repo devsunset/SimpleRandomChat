@@ -1,14 +1,20 @@
 package devsunset.simple.random.chat;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.telephony.TelephonyManager;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.tfb.fbtoast.FBToast;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -50,37 +56,55 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if("-".equals(AccountInfoService.getAccountInfo(this).get("APP_ID"))){
-            Toast.makeText(this, "INIT PRE", Toast.LENGTH_LONG).show();
+            FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
         }else{
-            Toast.makeText(this, "INIT NEXT", Toast.LENGTH_LONG).show();
+            FBToast.successToast(MainActivity.this,"SETTING",FBToast.LENGTH_SHORT);
         }
+    }
+
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getPhoneNumber(Context context){
+        String phoneNumber = "-";
+
+        int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_NUMBERS);
+
+        if(permissionCheck== PackageManager.PERMISSION_DENIED){
+            // 권한 없음
+        }else{
+            TelephonyManager mgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            try {
+                String tmpPhoneNumber = mgr.getLine1Number();
+                phoneNumber = tmpPhoneNumber.replace("+82", "0");
+            } catch (Exception e) {
+                phoneNumber = "-";
+            }
+        }
+        return phoneNumber;
     }
 
     @OnClick(R.id.btnCreateAccountInfo)
     void onBtnCreateAccountInfoClicked() {
-        HashMap<String,Object> myInfo = new HashMap<String,Object>();
-        myInfo.put("APP_ID",UUID.randomUUID().toString());
-        myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
-
         Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
         String strCountry = systemLocale.getCountry();
         String strLanguage = systemLocale.getLanguage();
 
+        HashMap<String,Object> myInfo = new HashMap<String,Object>();
+        myInfo.put("APP_ID",UUID.randomUUID().toString());
+        myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
+        //myInfo.put("APP_PHONE", getPhoneNumber(this.getApplicationContext()));
         myInfo.put("COUNTRY",strCountry);
         myInfo.put("LANG",strLanguage);
 
-        Toast.makeText(this, "Create Account Info : "+AccountInfoService.setAccountInfo(this,myInfo), Toast.LENGTH_SHORT).show();
+        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfoService.setAccountInfo(this,myInfo),FBToast.LENGTH_SHORT);
     }
 
     @OnClick(R.id.btnGetAccountInfo)
     void onBtnGetAccountInfoClicked() {
-        Toast.makeText(this, "Get Account Info :"+AccountInfoService.getAccountInfo(this).toString(), Toast.LENGTH_LONG).show();
+        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfoService.getAccountInfo(this),FBToast.LENGTH_SHORT);
     }
 
     @OnClick(R.id.btnAppInfoInit)
     void onBtnAppInfoInitClicked() {
-
-        Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
 
         httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
@@ -88,31 +112,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
-                    //Toast.makeText(this, "appInfoInit", Toast.LENGTH_SHORT).show();
                     DataVo data = response.body();
                     if (data != null) {
                         Logger.d(data.getCALL_FUNCTION());
                         Logger.d(data.getRESULT_CODE());
                         Logger.d(data.getRESULT_MESSAGE());
                         Logger.d(data.getRESULT_DATA());
+                        FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
                     }
                 }else{
                     Logger.i("appInfoInit : "+response.isSuccessful());
+                    FBToast.errorToast(MainActivity.this,"appInfoInit : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                //Toast.makeText(this, "appInfoInit Error", Toast.LENGTH_SHORT).show();
                 Logger.e(t.getMessage());
+                FBToast.errorToast(MainActivity.this,"appInfoInit : "+t.getMessage(),FBToast.LENGTH_SHORT);
             }
         });
     }
 
     @OnClick(R.id.btnAppInfoUpdate)
     void onBtnAppInfoUpdateClicked() {
-
-        Toast.makeText(this, "appInfoUpdate", Toast.LENGTH_SHORT).show();
 
         httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
@@ -127,23 +150,23 @@ public class MainActivity extends AppCompatActivity {
                         Logger.d(data.getRESULT_CODE());
                         Logger.d(data.getRESULT_MESSAGE());
                         Logger.d(data.getRESULT_DATA());
+                        FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
                     }
                 }else{
-                    Logger.i("appInfoUpdate : "+response.isSuccessful());
+                    FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                //Toast.makeText(this, "appInfoUpdate Error", Toast.LENGTH_SHORT).show();
                 Logger.e(t.getMessage());
+                FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+t.getMessage(),FBToast.LENGTH_SHORT);
             }
         });
     }
 
     @OnClick(R.id.btnAppInfoRead)
     void onBtnAppInfoReadClicked() {
-        Toast.makeText(this, "appInfoRead", Toast.LENGTH_SHORT).show();
 
         httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
@@ -151,29 +174,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
-                    //Toast.makeText(this, "appInfoRead", Toast.LENGTH_SHORT).show();
                     DataVo data = response.body();
                     if (data != null) {
                         Logger.d(data.getCALL_FUNCTION());
                         Logger.d(data.getRESULT_CODE());
                         Logger.d(data.getRESULT_MESSAGE());
                         Logger.d(data.getRESULT_DATA());
+                        FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
                     }
                 }else{
-                    Logger.i("appInfoRead : "+response.isSuccessful());
+                    FBToast.errorToast(MainActivity.this,"appInfoRead : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                //Toast.makeText(this, "appInfoRead Error", Toast.LENGTH_SHORT).show();
                 Logger.e(t.getMessage());
+                FBToast.errorToast(MainActivity.this,"appInfoRead : "+t.getMessage(),FBToast.LENGTH_SHORT);
             }
         });
     }
 
     @OnClick(R.id.btnMessageRandomSend)
     void onBtnMessageRandomSendClicked() {
-        Toast.makeText(this, "Message Random Send", Toast.LENGTH_SHORT).show();
+        FBToast.infoToast(MainActivity.this,"Message Random Send",FBToast.LENGTH_SHORT);
     }
 }
