@@ -1,4 +1,4 @@
-package devsunset.simple.random.chat;
+package devsunset.simple.random.chat.modules.fcmservice;
 
 import android.util.Log;
 

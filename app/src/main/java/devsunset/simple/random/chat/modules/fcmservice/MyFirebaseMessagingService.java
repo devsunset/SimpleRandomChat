@@ -1,4 +1,4 @@
-package devsunset.simple.random.chat;
+package devsunset.simple.random.chat.modules.fcmservice;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +13,9 @@ import android.util.Log;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
+
+import devsunset.simple.random.chat.MainActivity;
+import devsunset.simple.random.chat.R;
 
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();

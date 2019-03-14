@@ -12,6 +12,14 @@ public interface HttpConnectService {
     String URL = "https://src-server.firebaseapp.com/";
 
     /**
+     * App Notice
+     * @param param
+     * @return
+     */
+    @POST("appNotice")
+    Call<DataVo> appNotice();
+
+    /**
      * App Info Init
      * @param param
      * @return
@@ -30,18 +38,112 @@ public interface HttpConnectService {
     Call<DataVo> appInfoUpdate(@FieldMap HashMap<String, Object> param);
 
     /**
-     * Get App Info
+     * Send Message
      * @param param
      * @return
      */
     @FormUrlEncoded
-    @POST("appInfoRead")
-    Call<DataVo> appInfoRead(@FieldMap HashMap<String, Object> param);
+    @POST("sendMessage")
+    Call<DataVo> sendMessage(@FieldMap HashMap<String, Object> param);
 
+    /**
+     * Reply Message
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("replyMessage")
+    Call<DataVo> replyMessage(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Retry Message
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("retryMessage")
+    Call<DataVo> retryMessage(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Good Bye Message
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("goodbyeMessage")
+    Call<DataVo> goodbyeMessage(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Get Image Data
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getImageData")
+    Call<DataVo> getImageData(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Get Voice Data
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getVoiceData")
+    Call<DataVo> getVoiceData(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Request Black List
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("requstBlackList")
+    Call<DataVo> requstBlackList(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Request Voc
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("requestVoc")
+    Call<DataVo> requestVoc(@FieldMap HashMap<String, Object> param);
+
+    /**
+     * Error Stack Trace
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("errorStackTrace")
+    Call<DataVo> errorStackTrace(@FieldMap HashMap<String, Object> param);
 
 
     /**
-     * POST 방식, 주소는 위들과 같음.
+     * GET 방식
+     * URL/posts/{userId} 호출.
+     * @Path("userId")
+     * "http://jsonplaceholder.typicode.com/posts/1"
+     * @param userId 요청에 필요한 userId
+     * @return DataVo
+     *
+     * @GET("/posts/{userId}")
+     * Call<DataVo> getData(@Path("userId") String userId);
+     */
+
+    /**
+     * GET 방식
+     * @Query("userId")
+     * "http://jsonplaceholder.typicode.com/posts?userId=1"
+     * @param userId 요청에 필요한 userId
+     * @return DataVo
+     *
+     * @GET("/posts")
+     * Call<List < DataVo>> getDataSub(@Query("userId") String userId);
+     */
+
+    /**
+     * POST 방식
      * @FieldMap HashMap<String, Object> param :
      * Field 형식을 통해 넘겨주는 값들이 여러 개일 때 FieldMap을 사용함.
      * Retrofit에서는 Map 보다는 HashMap 권장.
@@ -52,34 +154,7 @@ public interface HttpConnectService {
      */
 
     /**
-     * GET 방식, URL/posts/{userId} 호출.
-     * DataVo Type의 JSON을 통신을 통해 받음.
-     * @Path("userId") String id : id 로 들어간 STring 값을, 첫 줄에 말한
-     * {userId}에 넘겨줌.
-     * userId에 1이 들어가면
-     * "http://jsonplaceholder.typicode.com/posts/1" 이 최종 호출 주소.
-     * @param userId 요청에 필요한 userId
-     * @return DataVo 객체를 JSON 형태로 반환.
-     *
-     * @GET("/posts/{userId}")
-     * Call<DataVo> getData(@Path("userId") String userId);
-     */
-
-    /**
-     * GET 방식, URL/posts/{userId} 호출.
-     * DataVo Type의 여러 개의 JSON을 통신을 통해 받음.
-     * @Query("userId") String id : getData와 다르게 뒤에 붙는 파라미터가 없음.
-     * 방식은 위와 같음.
-     * 단, 주소값이 "http://jsonplaceholder.typicode.com/posts?userId=1" 이 됨.
-     * @param userId 요청에 필요한 userId
-     * @return 다수의 DataVo 객체를 JSON 형태로 반환.
-     *
-     * @GET("/posts")
-     * Call<List < DataVo>> getData2(@Query("userId") String userId);
-     */
-
-     /**
-     * PUT 방식. 값은 위들과 같음.
+     * PUT 방식
      * @Body DataVo param : 통신을 통해 전달하는 값이 특정 JSON 형식일 경우
      * 매번 JSON 으로 변환하지 않고, 객체를 통해서 넘겨주는 방식.
      * PUT 뿐만 아니라 다른 방식에서도 사용가능.
@@ -91,7 +166,7 @@ public interface HttpConnectService {
      */
 
     /**
-     * PATCH 방식. 값은 위들과 같습니다.
+     * PATCH 방식
      * @FIeld("title") String title : patch 방식을 통해 title 에 해당하는 값을 넘기기 위해 사용.
      * @FormUrlEncoded Field 형식 사용 시 Form이 Encoding 되어야 하기 때문에 사용하는 어노테이션
      * @param title
@@ -103,7 +178,7 @@ public interface HttpConnectService {
      */
 
     /**
-     * DELETE 방식. 값은 위들과 같습니다.
+     * DELETE 방식
      * Call<ResponseBody> : ResponseBody는 통신을 통해 되돌려 받는 값이 없을 경우 사용.
      * @return
      *
@@ -115,5 +190,3 @@ public interface HttpConnectService {
      * Call<ResponseBody> delete(@Body RequestGet parameters);
      */
 }
-
-

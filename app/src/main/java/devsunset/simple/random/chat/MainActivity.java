@@ -13,7 +13,9 @@ import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.tfb.fbtoast.FBToast;
 
 import java.util.HashMap;
@@ -37,6 +39,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
         //screen capture disable
         // 안드로이드 3.0 이상부터 실행
         if (Build.VERSION.SDK_INT >= 11) {
@@ -45,20 +51,51 @@ public class MainActivity extends Activity {
             // getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
         }
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(true)  // (Optional) Whether to show thread info or not. Default true
+                .methodCount(2)         // (Optional) How many method line to show. Default 2
+                .methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
+                //.logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
+                .tag("___SIMPLE_RANDOM_CHAT____")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .build();
 
-        Logger.addLogAdapter(new AndroidLogAdapter() {
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
             @Override public boolean isLoggable(int priority, String tag) {
                 return BuildConfig.DEBUG;
             }
         });
 
+
         if("-".equals(AccountInfoService.getAccountInfo(this).get("APP_ID"))){
             FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
         }else{
             FBToast.successToast(MainActivity.this,"SETTING",FBToast.LENGTH_SHORT);
+
+            httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+
+            httpConnctService.appNotice().enqueue(new Callback<DataVo>() {
+                @Override
+                public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                    if (response.isSuccessful()) {
+                        DataVo data = response.body();
+                        if (data != null) {
+                            Logger.d(data.getCALL_FUNCTION());
+                            Logger.d(data.getRESULT_CODE());
+                            Logger.d(data.getRESULT_MESSAGE());
+                            Logger.d(data.getRESULT_DATA());
+                            FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
+                        }
+                    }else{
+                        FBToast.errorToast(MainActivity.this,"appNotice : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                    Logger.e(t.getMessage());
+                    FBToast.errorToast(MainActivity.this,"appNotice : "+t.getMessage(),FBToast.LENGTH_SHORT);
+                }
+            });
         }
     }
 
@@ -161,36 +198,6 @@ public class MainActivity extends Activity {
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 Logger.e(t.getMessage());
                 FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+t.getMessage(),FBToast.LENGTH_SHORT);
-            }
-        });
-    }
-
-    @OnClick(R.id.btnAppInfoRead)
-    void onBtnAppInfoReadClicked() {
-
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
-
-        httpConnctService.appInfoRead(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
-            @Override
-            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                if (response.isSuccessful()) {
-                    DataVo data = response.body();
-                    if (data != null) {
-                        Logger.d(data.getCALL_FUNCTION());
-                        Logger.d(data.getRESULT_CODE());
-                        Logger.d(data.getRESULT_MESSAGE());
-                        Logger.d(data.getRESULT_DATA());
-                        FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
-                    }
-                }else{
-                    FBToast.errorToast(MainActivity.this,"appInfoRead : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                Logger.e(t.getMessage());
-                FBToast.errorToast(MainActivity.this,"appInfoRead : "+t.getMessage(),FBToast.LENGTH_SHORT);
             }
         });
     }

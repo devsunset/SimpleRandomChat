@@ -23,12 +23,12 @@ public class AccountInfoService {
         accountInfo.put("APP_NUMBER",pref.getString("APP_NUMBER", "-"));
         accountInfo.put("APP_PHONE",pref.getString("APP_PHONE", "-"));
         accountInfo.put("APP_VER",pref.getString("APP_VER", "1.0"));
-
         accountInfo.put("COUNTRY",pref.getString("COUNTRY", "-"));
         accountInfo.put("COUNTRY_NAME",pref.getString("COUNTRY_NAME", "-"));
         accountInfo.put("GENDER",pref.getString("GENDER", "M"));
         accountInfo.put("LANG",pref.getString("LANG", "-"));
-
+        accountInfo.put("NOTICE_NUMBER",pref.getString("NOTICE_NUMBER", "0"));
+        accountInfo.put("SET_ALARM_YN",pref.getString("SET_ALARM_YN", "Y"));
         accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "N"));
         accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "Y"));
         accountInfo.put("SET_SEND_COUNTRY",pref.getString("SET_SEND_COUNTRY", "N"));
@@ -86,6 +86,14 @@ public class AccountInfoService {
 
             if(accountInfo.containsKey("LANG") && !"".equals(accountInfo.get("LANG"))){
                 editor.putString("LANG", accountInfo.get("LANG").toString());
+            }
+
+            if(accountInfo.containsKey("NOTICE_NUMBER") && !"".equals(accountInfo.get("NOTICE_NUMBER"))){
+                editor.putString("NOTICE_NUMBER", accountInfo.get("NOTICE_NUMBER").toString());
+            }
+
+            if(accountInfo.containsKey("SET_ALARM_YN") && !"".equals(accountInfo.get("SET_ALARM_YN"))){
+                editor.putString("SET_ALARM_YN", accountInfo.get("SET_ALARM_YN").toString());
             }
 
             if(accountInfo.containsKey("SET_BYE_CONFIRM_YN") && !"".equals(accountInfo.get("SET_BYE_CONFIRM_YN"))){
