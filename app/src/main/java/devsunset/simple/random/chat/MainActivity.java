@@ -65,6 +65,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
         if("-".equals(AccountInfoService.getAccountInfo(this).get("APP_ID"))){
             FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
@@ -143,8 +144,6 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btnAppInfoInit)
     void onBtnAppInfoInitClicked() {
 
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
-
         httpConnctService.appInfoInit(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
@@ -174,13 +173,10 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btnAppInfoUpdate)
     void onBtnAppInfoUpdateClicked() {
 
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
-
         httpConnctService.appInfoUpdate(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
-                    //Toast.makeText(this, "appInfoUpdate", Toast.LENGTH_SHORT).show();
                     DataVo data = response.body();
                     if (data != null) {
                         Logger.d(data.getCALL_FUNCTION());
@@ -204,6 +200,29 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.btnMessageRandomSend)
     void onBtnMessageRandomSendClicked() {
-        FBToast.successToast(MainActivity.this,"FCK KEY : "+AccountInfoService.getAccountInfo(this).get("APP_KEY"),FBToast.LENGTH_SHORT);
+
+        httpConnctService.sendMessage(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+            @Override
+            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                if (response.isSuccessful()) {
+                    DataVo data = response.body();
+                    if (data != null) {
+                        Logger.d(data.getCALL_FUNCTION());
+                        Logger.d(data.getRESULT_CODE());
+                        Logger.d(data.getRESULT_MESSAGE());
+                        Logger.d(data.getRESULT_DATA());
+                        FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
+                    }
+                }else{
+                    FBToast.errorToast(MainActivity.this,"sendMessage : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                Logger.e(t.getMessage());
+                FBToast.errorToast(MainActivity.this,"sendMessage : "+t.getMessage(),FBToast.LENGTH_SHORT);
+            }
+        });
     }
 }
