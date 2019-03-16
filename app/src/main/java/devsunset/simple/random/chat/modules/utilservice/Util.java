@@ -1,4 +1,4 @@
-package devsunset.simple.random.chat.modules.utils;
+package devsunset.simple.random.chat.modules.utilservice;
 
 import java.io.File;
 import java.io.FileInputStream;

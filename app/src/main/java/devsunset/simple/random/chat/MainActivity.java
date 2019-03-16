@@ -3,7 +3,9 @@ package devsunset.simple.random.chat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -19,12 +21,15 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 import com.tfb.fbtoast.FBToast;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfoService;
+import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
+import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
@@ -52,10 +57,10 @@ public class MainActivity extends Activity {
         }
 
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(true)  // (Optional) Whether to show thread info or not. Default true
-                .methodCount(2)         // (Optional) How many method line to show. Default 2
-                .methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
-                //.logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
+                .showThreadInfo(true)               // (Optional) Whether to show thread info or not. Default true
+                .methodCount(2)                     // (Optional) How many method line to show. Default 2
+                .methodOffset(5)                    // (Optional) Hides internal method calls up to offset. Default 5
+                //.logStrategy(customLog)           // (Optional) Changes the log strategy to print out. Default LogCat
                 .tag("___SIMPLE_RANDOM_CHAT____")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
 
@@ -224,5 +229,82 @@ public class MainActivity extends Activity {
                 FBToast.errorToast(MainActivity.this,"sendMessage : "+t.getMessage(),FBToast.LENGTH_SHORT);
             }
         });
+    }
+
+
+    @OnClick(R.id.btnDBCreate)
+    void onBtnDBCreateClicked() {
+        saveDatabse();
+    }
+
+    private void saveDatabse() {
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                //creating a task
+                AppTalkThread att = new AppTalkThread();
+                att.setTALK_ID(UUID.randomUUID().toString());
+                att.setTALK_TEXT("text___________: "+UUID.randomUUID().toString());
+
+                //adding to database
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkThreadDao().insert(att);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                FBToast.infoToast(MainActivity.this,"DB Create",FBToast.LENGTH_SHORT);
+            }
+        }
+
+        SaveTask st = new SaveTask();
+        st.execute();
+    }
+
+    @OnClick(R.id.btnDBRead)
+    void onbtnDBReadClicked() {
+        getDatabase();
+    }
+
+    private void getDatabase() {
+
+        class GetTasks extends AsyncTask<Void, Void, List<AppTalkThread>> {
+
+            @Override
+            protected List<AppTalkThread> doInBackground(Void... voids) {
+                List<AppTalkThread> taskList = DatabaseClient
+                        .getInstance(getApplicationContext())
+                        .getAppDataBase()
+                        .AppTalkThreadDao()
+                        .getAll();
+                return taskList;
+            }
+
+            @Override
+            protected void onPostExecute(List<AppTalkThread> appTalkThread) {
+                String temp  ="";
+
+                if(appTalkThread !=null && !appTalkThread.isEmpty()){
+                    for(int i=0;i<appTalkThread.size();i++){
+                        temp += appTalkThread.get(i).getTALK_TEXT();
+
+                        if(i > 5){
+                            break;
+                        }
+                    }
+                }
+
+                FBToast.infoToast(MainActivity.this,temp,FBToast.LENGTH_SHORT);
+
+            }
+        }
+
+        GetTasks gt = new GetTasks();
+        gt.execute();
     }
 }

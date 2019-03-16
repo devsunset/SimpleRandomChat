@@ -46,6 +46,20 @@
         android:layout_marginBottom="3dp"
         android:text="Message Random Send" />
 
+    <Button
+        android:id="@+id/btnDBCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="DB Create" />
+
+    <Button
+        android:id="@+id/btnDBRead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="DB Read" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
