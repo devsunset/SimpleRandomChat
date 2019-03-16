@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import java.util.HashMap;
 
 
-public class AccountInfoService {
+public class AccountInfo {
 
     /**
      * Get Account Info

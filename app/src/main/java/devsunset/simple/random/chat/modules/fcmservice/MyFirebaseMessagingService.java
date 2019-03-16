@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 import devsunset.simple.random.chat.MainActivity;
 import devsunset.simple.random.chat.R;
-import devsunset.simple.random.chat.modules.accountservice.AccountInfoService;
+import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
 //import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 //import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -133,7 +133,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO: Implement this method to send token to your app server.
         HashMap<String,Object> myInfo = new HashMap<String,Object>();
         myInfo.put("APP_KEY",token);
-        AccountInfoService.setAccountInfo(this,myInfo);
+        AccountInfo.setAccountInfo(this,myInfo);
     }
 
     /**

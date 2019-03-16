@@ -3,7 +3,6 @@ package devsunset.simple.random.chat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,7 +26,7 @@ import java.util.UUID;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import devsunset.simple.random.chat.modules.accountservice.AccountInfoService;
+import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
@@ -72,7 +71,7 @@ public class MainActivity extends Activity {
 
         httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-        if("-".equals(AccountInfoService.getAccountInfo(this).get("APP_ID"))){
+        if("-".equals(AccountInfo.getAccountInfo(this).get("APP_ID"))){
             FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
         }else{
             FBToast.successToast(MainActivity.this,"SETTING",FBToast.LENGTH_SHORT);
@@ -138,18 +137,18 @@ public class MainActivity extends Activity {
         myInfo.put("COUNTRY",strCountry);
         myInfo.put("LANG",strLanguage);
 
-        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfoService.setAccountInfo(this,myInfo),FBToast.LENGTH_SHORT);
+        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.setAccountInfo(this,myInfo),FBToast.LENGTH_SHORT);
     }
 
     @OnClick(R.id.btnGetAccountInfo)
     void onBtnGetAccountInfoClicked() {
-        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfoService.getAccountInfo(this),FBToast.LENGTH_SHORT);
+        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.getAccountInfo(this),FBToast.LENGTH_SHORT);
     }
 
     @OnClick(R.id.btnAppInfoInit)
     void onBtnAppInfoInitClicked() {
 
-        httpConnctService.appInfoInit(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+        httpConnctService.appInfoInit(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
@@ -178,7 +177,7 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btnAppInfoUpdate)
     void onBtnAppInfoUpdateClicked() {
 
-        httpConnctService.appInfoUpdate(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+        httpConnctService.appInfoUpdate(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
@@ -206,7 +205,7 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btnMessageRandomSend)
     void onBtnMessageRandomSendClicked() {
 
-        httpConnctService.sendMessage(AccountInfoService.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+        httpConnctService.sendMessage(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
