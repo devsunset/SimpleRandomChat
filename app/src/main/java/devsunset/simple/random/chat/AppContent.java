@@ -6,12 +6,14 @@
 package devsunset.simple.random.chat;
 
 import android.annotation.SuppressLint;
-import android.app.LauncherActivity.ListItem;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -34,11 +36,16 @@ import java.util.ArrayList;
  * @since SimpleRandomChat 1.0
  */
 
-public class AppContent extends FragmentActivity{
+public class AppContent extends FragmentActivity {
+
 
 	private final int TAB_MESSAGE_SEND = 0;
 	private final int TAB_MESSAGE_LIST = 1;
 	private final int TAB_MESSAGE_SETTING = 2;
+
+	FragmentManager fm;
+	FragmentTransaction tran;
+
 
 	private RelativeLayout llTab1 = null;
 	private RelativeLayout llTab2 = null;
@@ -51,8 +58,7 @@ public class AppContent extends FragmentActivity{
 	private TextView tvTab3 = null;
 
 	private ArrayList<Fragment> list = null;
-	private ListItem itemInfo = null;
-	
+
 	public boolean boolBackKeyPressFlag = false;
 
 	private AdView adView;
@@ -61,6 +67,14 @@ public class AppContent extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_content);
+
+		//screen capture disable
+		// 안드로이드 3.0 이상부터 실행
+		if (Build.VERSION.SDK_INT >= 11) {
+			getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+			// getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+			// getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+		}
 
 		llTab1 = (RelativeLayout) findViewById(R.id.ll_tab1);
 		llTab2 = (RelativeLayout) findViewById(R.id.ll_tab2);
@@ -104,15 +118,28 @@ public class AppContent extends FragmentActivity{
 	// ---------------------------------------------------------------------------------------------
 	public void setCurrentItem(int position) {
 		setTab(position);
+		fm = getSupportFragmentManager();
+		tran = fm.beginTransaction();
+		switch (position){
+			case 0:
+				tran.replace(R.id.main_frame, list.get(0));
+				tran.commit();
+				break;
+			case 1:
+				tran.replace(R.id.main_frame, list.get(1));
+				tran.commit();
+				break;
+			case 2:
+				tran.replace(R.id.main_frame, list.get(2));
+				tran.commit();
+				break;
+		}
+
 	}
 
 	public void setTab(int position) {
 		clearEnable();
 		enableLine(position);
-	}
-
-	public ListItem getItemInfo() {
-		return this.itemInfo;
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -178,7 +205,6 @@ public class AppContent extends FragmentActivity{
 		}
 	};
 
-
 	// ---------------------------------------------------------------------------------------------
 	// inner class
 	// ---------------------------------------------------------------------------------------------
@@ -205,26 +231,9 @@ public class AppContent extends FragmentActivity{
 		}
 	};
 
-
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
-
+	// ---------------------------------------------------------------------------------------------
+	// Ads method
+	// ---------------------------------------------------------------------------------------------
 	/** Called when leaving the activity */
 	@Override
 	public void onPause() {

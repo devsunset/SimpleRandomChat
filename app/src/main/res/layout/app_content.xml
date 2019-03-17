@@ -4,23 +4,31 @@
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@color/content_bg"
-    android:orientation="vertical"
-    android:padding="@dimen/contents_margin">
+    android:orientation="vertical">
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/ad_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id" />
+        android:layout_height="60dp"
+        android:background="@color/black"
+        android:orientation="horizontal" >
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/ad_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id" />
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="@dimen/contents_margin">
 
         <RelativeLayout
             android:id="@+id/ll_tab1"
@@ -123,6 +131,13 @@
                 android:layout_alignParentRight="true"
                 android:background="@color/tab_disable" />
         </RelativeLayout>
+
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>

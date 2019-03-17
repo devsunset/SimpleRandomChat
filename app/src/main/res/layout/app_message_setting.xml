@@ -30,13 +30,12 @@
 
         <TextView
             android:id="@+id/app_name"
-            style="@style/textview"
+            style="@style/textview_header"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:singleLine="true"
             android:textStyle="bold" />
     </LinearLayout>
-
 
 </LinearLayout>
