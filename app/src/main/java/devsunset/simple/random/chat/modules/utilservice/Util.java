@@ -1,3 +1,8 @@
+/*
+ * @(#)Util.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.utilservice;
 
 import java.io.File;
@@ -5,6 +10,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+/**
+ * <PRE>
+ * SimpleRandomChat Util
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
 
 public class Util {
 

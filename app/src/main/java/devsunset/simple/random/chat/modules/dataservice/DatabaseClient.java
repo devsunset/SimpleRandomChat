@@ -1,9 +1,23 @@
+/*
+ * @(#)DatabaseClient.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.dataservice;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import devsunset.simple.random.chat.MainActivity;
+/**
+ * <PRE>
+ * SimpleRandomChat DatabaseClient
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
+
 
 public class DatabaseClient {
 

@@ -1,3 +1,8 @@
+/*
+ * @(#)HttpConnectService.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.httpservice;
 
 import java.util.HashMap;
@@ -6,6 +11,16 @@ import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+
+/**
+ * <PRE>
+ * SimpleRandomChat HttpConnectService
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
 
 public interface HttpConnectService {
 

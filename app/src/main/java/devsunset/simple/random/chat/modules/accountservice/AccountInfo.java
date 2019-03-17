@@ -1,3 +1,8 @@
+/*
+ * @(#)AccountInfo.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.accountservice;
 
 import android.content.Context;
@@ -5,6 +10,15 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
+/**
+ * <PRE>
+ * SimpleRandomChat AccountInfo
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
 
 public class AccountInfo {
 

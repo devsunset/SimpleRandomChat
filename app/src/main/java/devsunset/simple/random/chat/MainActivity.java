@@ -1,8 +1,13 @@
+/*
+ * @(#)MainActivity.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -36,274 +41,297 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends Activity {
+/**
+ * <PRE>
+ * SimpleRandomChat Main
+ * </PRE>
+ * 
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
 
-    HttpConnectService httpConnctService = null;
+public class MainActivity extends BaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+	HttpConnectService httpConnctService = null;
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 
-        //screen capture disable
-        // 안드로이드 3.0 이상부터 실행
-        if (Build.VERSION.SDK_INT >= 11) {
-            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
-            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-            // getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
-        }
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_activity);
+		ButterKnife.bind(this);
 
-        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(true)               // (Optional) Whether to show thread info or not. Default true
-                .methodCount(2)                     // (Optional) How many method line to show. Default 2
-                .methodOffset(5)                    // (Optional) Hides internal method calls up to offset. Default 5
-                //.logStrategy(customLog)           // (Optional) Changes the log strategy to print out. Default LogCat
-                .tag("___SIMPLE_RANDOM_CHAT____")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
-                .build();
+		//screen capture disable
+		// 안드로이드 3.0 이상부터 실행
+		if (Build.VERSION.SDK_INT >= 11) {
+			getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+			// getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+			// getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+		}
 
-        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
-            @Override public boolean isLoggable(int priority, String tag) {
-                return BuildConfig.DEBUG;
-            }
-        });
+		FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+				.showThreadInfo(true)               // (Optional) Whether to show thread info or not. Default true
+				.methodCount(2)                     // (Optional) How many method line to show. Default 2
+				.methodOffset(5)                    // (Optional) Hides internal method calls up to offset. Default 5
+				//.logStrategy(customLog)           // (Optional) Changes the log strategy to print out. Default LogCat
+				.tag("___SIMPLE_RANDOM_CHAT____")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+				.build();
 
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+		Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
+			@Override public boolean isLoggable(int priority, String tag) {
+				return BuildConfig.DEBUG;
+			}
+		});
 
-        if("-".equals(AccountInfo.getAccountInfo(this).get("APP_ID"))){
-            FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
-        }else{
-            FBToast.successToast(MainActivity.this,"SETTING",FBToast.LENGTH_SHORT);
+		httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-            httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+		if("-".equals(AccountInfo.getAccountInfo(this).get("APP_ID"))){
+			FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
+		}else{
+			FBToast.successToast(MainActivity.this,"SETTING",FBToast.LENGTH_SHORT);
 
-            httpConnctService.appNotice().enqueue(new Callback<DataVo>() {
-                @Override
-                public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                    if (response.isSuccessful()) {
-                        DataVo data = response.body();
-                        if (data != null) {
-                            Logger.d(data.getCALL_FUNCTION());
-                            Logger.d(data.getRESULT_CODE());
-                            Logger.d(data.getRESULT_MESSAGE());
-                            Logger.d(data.getRESULT_DATA());
-                            FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
-                        }
-                    }else{
-                        FBToast.errorToast(MainActivity.this,"appNotice : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-                    }
-                }
+			httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-                @Override
-                public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                    Logger.e(t.getMessage());
-                    FBToast.errorToast(MainActivity.this,"appNotice : "+t.getMessage(),FBToast.LENGTH_SHORT);
-                }
-            });
-        }
-    }
+			httpConnctService.appNotice().enqueue(new Callback<DataVo>() {
+				@Override
+				public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+					if (response.isSuccessful()) {
+						DataVo data = response.body();
+						if (data != null) {
+							Logger.d(data.getCALL_FUNCTION());
+							Logger.d(data.getRESULT_CODE());
+							Logger.d(data.getRESULT_MESSAGE());
+							Logger.d(data.getRESULT_DATA());
+							FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
+						}
+					}else{
+						FBToast.errorToast(MainActivity.this,"appNotice : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+					}
+				}
 
-    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getPhoneNumber(Context context){
-        String phoneNumber = "-";
+				@Override
+				public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+					Logger.e(t.getMessage());
+					FBToast.errorToast(MainActivity.this,"appNotice : "+t.getMessage(),FBToast.LENGTH_SHORT);
+				}
+			});
+		}
 
-        int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_NUMBERS);
+		//initActivity();
+	}
 
-        if(permissionCheck== PackageManager.PERMISSION_DENIED){
-            // 권한 없음
-        }else{
-            TelephonyManager mgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            try {
-                String tmpPhoneNumber = mgr.getLine1Number();
-                phoneNumber = tmpPhoneNumber.replace("+82", "0");
-            } catch (Exception e) {
-                phoneNumber = "-";
-            }
-        }
-        return phoneNumber;
-    }
+	@OnClick(R.id.btnGo)
+	void onBtnGoClicked() {
+		initActivity();
+	}
 
-    @OnClick(R.id.btnCreateAccountInfo)
-    void onBtnCreateAccountInfoClicked() {
-        Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
-        String strCountry = systemLocale.getCountry();
-        String strLanguage = systemLocale.getLanguage();
+	private void initActivity(){
+		Intent intent = new Intent(this, AppContent.class);
+		startActivity(intent);
+		finish();
+	}
 
-        HashMap<String,Object> myInfo = new HashMap<String,Object>();
-        myInfo.put("APP_ID",UUID.randomUUID().toString());
-        myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
-        //myInfo.put("APP_PHONE", getPhoneNumber(this.getApplicationContext()));
-        myInfo.put("COUNTRY",strCountry);
-        myInfo.put("LANG",strLanguage);
+	@RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+	public static String getPhoneNumber(Context context){
+		String phoneNumber = "-";
 
-        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.setAccountInfo(this,myInfo),FBToast.LENGTH_SHORT);
-    }
+		int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_NUMBERS);
 
-    @OnClick(R.id.btnGetAccountInfo)
-    void onBtnGetAccountInfoClicked() {
-        FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.getAccountInfo(this),FBToast.LENGTH_SHORT);
-    }
+		if(permissionCheck== PackageManager.PERMISSION_DENIED){
+			// 권한 없음
+		}else{
+			TelephonyManager mgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+			try {
+				String tmpPhoneNumber = mgr.getLine1Number();
+				phoneNumber = tmpPhoneNumber.replace("+82", "0");
+			} catch (Exception e) {
+				phoneNumber = "-";
+			}
+		}
+		return phoneNumber;
+	}
 
-    @OnClick(R.id.btnAppInfoInit)
-    void onBtnAppInfoInitClicked() {
+	@OnClick(R.id.btnCreateAccountInfo)
+	void onBtnCreateAccountInfoClicked() {
+		Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
+		String strCountry = systemLocale.getCountry();
+		String strLanguage = systemLocale.getLanguage();
 
-        httpConnctService.appInfoInit(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
-            @Override
-            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                if (response.isSuccessful()) {
-                    DataVo data = response.body();
-                    if (data != null) {
-                        Logger.d(data.getCALL_FUNCTION());
-                        Logger.d(data.getRESULT_CODE());
-                        Logger.d(data.getRESULT_MESSAGE());
-                        Logger.d(data.getRESULT_DATA());
-                        FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
-                    }
-                }else{
-                    Logger.i("appInfoInit : "+response.isSuccessful());
-                    FBToast.errorToast(MainActivity.this,"appInfoInit : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-                }
-            }
+		HashMap<String,Object> myInfo = new HashMap<String,Object>();
+		myInfo.put("APP_ID",UUID.randomUUID().toString());
+		myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
+		//myInfo.put("APP_PHONE", getPhoneNumber(this.getApplicationContext()));
+		myInfo.put("COUNTRY",strCountry);
+		myInfo.put("LANG",strLanguage);
 
-            @Override
-            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                Logger.e(t.getMessage());
-                FBToast.errorToast(MainActivity.this,"appInfoInit : "+t.getMessage(),FBToast.LENGTH_SHORT);
-            }
-        });
-    }
+		FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.setAccountInfo(this,myInfo),FBToast.LENGTH_SHORT);
+	}
 
-    @OnClick(R.id.btnAppInfoUpdate)
-    void onBtnAppInfoUpdateClicked() {
+	@OnClick(R.id.btnGetAccountInfo)
+	void onBtnGetAccountInfoClicked() {
+		FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.getAccountInfo(this),FBToast.LENGTH_SHORT);
+	}
 
-        httpConnctService.appInfoUpdate(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
-            @Override
-            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                if (response.isSuccessful()) {
-                    DataVo data = response.body();
-                    if (data != null) {
-                        Logger.d(data.getCALL_FUNCTION());
-                        Logger.d(data.getRESULT_CODE());
-                        Logger.d(data.getRESULT_MESSAGE());
-                        Logger.d(data.getRESULT_DATA());
-                        FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
-                    }
-                }else{
-                    FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-                }
-            }
+	@OnClick(R.id.btnAppInfoInit)
+	void onBtnAppInfoInitClicked() {
 
-            @Override
-            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                Logger.e(t.getMessage());
-                FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+t.getMessage(),FBToast.LENGTH_SHORT);
-            }
-        });
-    }
+		httpConnctService.appInfoInit(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+			@Override
+			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+				if (response.isSuccessful()) {
+					DataVo data = response.body();
+					if (data != null) {
+						Logger.d(data.getCALL_FUNCTION());
+						Logger.d(data.getRESULT_CODE());
+						Logger.d(data.getRESULT_MESSAGE());
+						Logger.d(data.getRESULT_DATA());
+						FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
+					}
+				}else{
+					Logger.i("appInfoInit : "+response.isSuccessful());
+					FBToast.errorToast(MainActivity.this,"appInfoInit : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+				}
+			}
 
-    @OnClick(R.id.btnMessageRandomSend)
-    void onBtnMessageRandomSendClicked() {
+			@Override
+			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+				Logger.e(t.getMessage());
+				FBToast.errorToast(MainActivity.this,"appInfoInit : "+t.getMessage(),FBToast.LENGTH_SHORT);
+			}
+		});
+	}
 
-        httpConnctService.sendMessage(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
-            @Override
-            public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                if (response.isSuccessful()) {
-                    DataVo data = response.body();
-                    if (data != null) {
-                        Logger.d(data.getCALL_FUNCTION());
-                        Logger.d(data.getRESULT_CODE());
-                        Logger.d(data.getRESULT_MESSAGE());
-                        Logger.d(data.getRESULT_DATA());
-                        FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
-                    }
-                }else{
-                    FBToast.errorToast(MainActivity.this,"sendMessage : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-                }
-            }
+	@OnClick(R.id.btnAppInfoUpdate)
+	void onBtnAppInfoUpdateClicked() {
 
-            @Override
-            public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                Logger.e(t.getMessage());
-                FBToast.errorToast(MainActivity.this,"sendMessage : "+t.getMessage(),FBToast.LENGTH_SHORT);
-            }
-        });
-    }
+		httpConnctService.appInfoUpdate(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+			@Override
+			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+				if (response.isSuccessful()) {
+					DataVo data = response.body();
+					if (data != null) {
+						Logger.d(data.getCALL_FUNCTION());
+						Logger.d(data.getRESULT_CODE());
+						Logger.d(data.getRESULT_MESSAGE());
+						Logger.d(data.getRESULT_DATA());
+						FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
+					}
+				}else{
+					FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+				}
+			}
+
+			@Override
+			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+				Logger.e(t.getMessage());
+				FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+t.getMessage(),FBToast.LENGTH_SHORT);
+			}
+		});
+	}
+
+	@OnClick(R.id.btnMessageRandomSend)
+	void onBtnMessageRandomSendClicked() {
+
+		httpConnctService.sendMessage(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+			@Override
+			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+				if (response.isSuccessful()) {
+					DataVo data = response.body();
+					if (data != null) {
+						Logger.d(data.getCALL_FUNCTION());
+						Logger.d(data.getRESULT_CODE());
+						Logger.d(data.getRESULT_MESSAGE());
+						Logger.d(data.getRESULT_DATA());
+						FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
+					}
+				}else{
+					FBToast.errorToast(MainActivity.this,"sendMessage : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+				}
+			}
+
+			@Override
+			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+				Logger.e(t.getMessage());
+				FBToast.errorToast(MainActivity.this,"sendMessage : "+t.getMessage(),FBToast.LENGTH_SHORT);
+			}
+		});
+	}
 
 
-    @OnClick(R.id.btnDBCreate)
-    void onBtnDBCreateClicked() {
-        saveDatabse();
-    }
+	@OnClick(R.id.btnDBCreate)
+	void onBtnDBCreateClicked() {
+		saveDatabse();
+	}
 
-    private void saveDatabse() {
+	private void saveDatabse() {
 
-        class SaveTask extends AsyncTask<Void, Void, Void> {
+		class SaveTask extends AsyncTask<Void, Void, Void> {
 
-            @Override
-            protected Void doInBackground(Void... voids) {
+			@Override
+			protected Void doInBackground(Void... voids) {
 
-                //creating a task
-                AppTalkThread att = new AppTalkThread();
-                att.setTALK_ID(UUID.randomUUID().toString());
-                att.setTALK_TEXT("text___________: "+UUID.randomUUID().toString());
+				//creating a task
+				AppTalkThread att = new AppTalkThread();
+				att.setTALK_ID(UUID.randomUUID().toString());
+				att.setTALK_TEXT("text___________: "+UUID.randomUUID().toString());
 
-                //adding to database
-                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkThreadDao().insert(att);
+				//adding to database
+				DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+						.AppTalkThreadDao().insert(att);
 
-                return null;
-            }
+				return null;
+			}
 
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                FBToast.infoToast(MainActivity.this,"DB Create",FBToast.LENGTH_SHORT);
-            }
-        }
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				FBToast.infoToast(MainActivity.this,"DB Create",FBToast.LENGTH_SHORT);
+			}
+		}
 
-        SaveTask st = new SaveTask();
-        st.execute();
-    }
+		SaveTask st = new SaveTask();
+		st.execute();
+	}
 
-    @OnClick(R.id.btnDBRead)
-    void onbtnDBReadClicked() {
-        getDatabase();
-    }
+	@OnClick(R.id.btnDBRead)
+	void onbtnDBReadClicked() {
+		getDatabase();
+	}
 
-    private void getDatabase() {
+	private void getDatabase() {
 
-        class GetTasks extends AsyncTask<Void, Void, List<AppTalkThread>> {
+		class GetTasks extends AsyncTask<Void, Void, List<AppTalkThread>> {
 
-            @Override
-            protected List<AppTalkThread> doInBackground(Void... voids) {
-                List<AppTalkThread> taskList = DatabaseClient
-                        .getInstance(getApplicationContext())
-                        .getAppDataBase()
-                        .AppTalkThreadDao()
-                        .getAll();
-                return taskList;
-            }
+			@Override
+			protected List<AppTalkThread> doInBackground(Void... voids) {
+				List<AppTalkThread> taskList = DatabaseClient
+						.getInstance(getApplicationContext())
+						.getAppDataBase()
+						.AppTalkThreadDao()
+						.getAll();
+				return taskList;
+			}
 
-            @Override
-            protected void onPostExecute(List<AppTalkThread> appTalkThread) {
-                String temp  ="";
+			@Override
+			protected void onPostExecute(List<AppTalkThread> appTalkThread) {
+				String temp  ="";
 
-                if(appTalkThread !=null && !appTalkThread.isEmpty()){
-                    for(int i=0;i<appTalkThread.size();i++){
-                        temp += appTalkThread.get(i).getTALK_TEXT();
+				if(appTalkThread !=null && !appTalkThread.isEmpty()){
+					for(int i=0;i<appTalkThread.size();i++){
+						temp += appTalkThread.get(i).getTALK_TEXT();
 
-                        if(i > 5){
-                            break;
-                        }
-                    }
-                }
+						if(i > 5){
+							break;
+						}
+					}
+				}
 
-                FBToast.infoToast(MainActivity.this,temp,FBToast.LENGTH_SHORT);
+				FBToast.infoToast(MainActivity.this,temp,FBToast.LENGTH_SHORT);
 
-            }
-        }
+			}
+		}
 
-        GetTasks gt = new GetTasks();
-        gt.execute();
-    }
+		GetTasks gt = new GetTasks();
+		gt.execute();
+	}
 }

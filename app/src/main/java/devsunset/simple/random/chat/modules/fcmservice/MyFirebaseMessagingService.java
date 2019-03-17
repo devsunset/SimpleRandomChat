@@ -1,3 +1,8 @@
+/*
+ * @(#)MyFirebaseMessagingService.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.fcmservice;
 
 import android.app.NotificationChannel;
@@ -16,13 +21,25 @@ import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 
-import devsunset.simple.random.chat.MainActivity;
+import devsunset.simple.random.chat.AppContent;
+import devsunset.simple.random.chat.MainActivity_ViewBinding;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
 //import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 //import com.firebase.jobdispatcher.GooglePlayDriver;
 //import com.firebase.jobdispatcher.Job;
+
+/**
+ * <PRE>
+ * SimpleRandomChat MyFirebaseMessagingService
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
+
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -142,7 +159,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent =new Intent(this, AppContent.class);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 

@@ -1,7 +1,22 @@
+/*
+ * @(#)DataVo.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.httpservice;
 
 import java.util.HashMap;
 import java.util.List;
+
+/**
+ * <PRE>
+ * SimpleRandomChat DataVo
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
 
 public class DataVo {
 

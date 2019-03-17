@@ -1,3 +1,8 @@
+/*
+ * @(#)AppTalkMain.java
+ * Date : 2019. 3. 31.
+ * Copyright: (C) 2019 by devsunset All right reserved.
+ */
 package devsunset.simple.random.chat.modules.dataservice;
 
 import android.arch.persistence.room.Entity;
@@ -5,6 +10,16 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
+
+/**
+ * <PRE>
+ * SimpleRandomChat AppTalkMain
+ * </PRE>
+ *
+ * @author devsunset
+ * @version 1.0
+ * @since SimpleRandomChat 1.0
+ */
 
 @Entity(tableName = "APP_TALK_MAIN")
 public class AppTalkMain implements Serializable {
