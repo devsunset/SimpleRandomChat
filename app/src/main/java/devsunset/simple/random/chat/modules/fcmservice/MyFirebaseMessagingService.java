@@ -21,8 +21,7 @@ import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 
-import devsunset.simple.random.chat.AppContent;
-import devsunset.simple.random.chat.MainActivity_ViewBinding;
+import devsunset.simple.random.chat.LockActivity;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
@@ -159,7 +158,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent =new Intent(this, AppContent.class);
+        Intent intent =new Intent(this, LockActivity.class);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);

@@ -94,6 +94,8 @@ public class AppContent extends FragmentActivity {
 		llTab2.setOnClickListener(mOnClickListener);
 		llTab3.setOnClickListener(mOnClickListener);
 
+        setCurrentItem(TAB_MESSAGE_SEND);
+
 
 		// Initialize the Mobile Ads SDK.
 		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
@@ -112,6 +114,8 @@ public class AppContent extends FragmentActivity {
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);
 	}
+
+
 
 	// ---------------------------------------------------------------------------------------------
 	// public methods

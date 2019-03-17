@@ -34,16 +34,16 @@ dependencies {
     implementation ('com.squareup.retrofit2:retrofit:2.5.0') {
         exclude module: 'okhttp'
     }
-    implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.android.gms:play-services-ads:16.0.0'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'com.github.NaimishTrivedi:FBToast:1.0'
-    implementation 'com.google.android.gms:play-services-ads:16.0.0'
-
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.0'
 
     //room
     implementation "android.arch.persistence.room:runtime:$room_version"

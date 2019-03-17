@@ -127,9 +127,14 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void initActivity(){
-		Intent intent = new Intent(this, AppContent.class);
+		Intent intent = new Intent(this, LockActivity.class);
 		startActivity(intent);
 		finish();
+
+//		Intent intent = new Intent(this, AppContent.class);
+//		startActivity(intent);
+//		finish();
+
 	}
 
 	@RequiresPermission(Manifest.permission.READ_PHONE_STATE)

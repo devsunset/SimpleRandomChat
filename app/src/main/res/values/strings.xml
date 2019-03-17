@@ -16,6 +16,10 @@
     <string name="alert_info_title">Notice</string>
     <string name="processing">Processing... Please wait.</string>
 
+    <string name="verification_code_subtext">Please input the verification code</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="validate">Validate</string>
+
 
     <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>

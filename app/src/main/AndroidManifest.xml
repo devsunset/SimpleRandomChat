@@ -19,9 +19,14 @@
         </activity>
         <activity
             android:name="devsunset.simple.random.chat.AppContent"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="devsunset.simple.random.chat.LockActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+
         <!-- [START firebase_service] -->
         <service android:name=".modules.fcmservice.MyFirebaseMessagingService">
             <intent-filter>
