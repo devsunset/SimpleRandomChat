@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
 		httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
 		//최초 설치 여부 확인
-		if("-".equals(AccountInfo.getAccountInfo(this).get("APP_ID"))){
+		if("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))){
 
 			// 최초 설정 여부 저장
 			Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
@@ -103,10 +103,10 @@ public class MainActivity extends BaseActivity {
 			myInfo.put("COUNTRY",strCountry);
 			myInfo.put("LANG",strLanguage);
 			myInfo.put("INITIALIZE","Y");
-			AccountInfo.setAccountInfo(this,myInfo);
+			AccountInfo.setAccountInfo(getApplicationContext(),myInfo);
 
 			// 서버에 계정 생성 호출
-			httpConnctService.appInfoInit(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+			httpConnctService.appInfoInit(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
 				@Override
 				public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
 					if (response.isSuccessful()) {
@@ -132,6 +132,8 @@ public class MainActivity extends BaseActivity {
 				}
 			});
 
+		}else{
+			getNoticeProcess();
 		}
 	}
 
@@ -201,38 +203,9 @@ public class MainActivity extends BaseActivity {
 	void onBtnInitializeClicked() {
 		HashMap<String,Object> params = new HashMap<String,Object>();
 		params.put("APP_ID","-");
-		AccountInfo.setAccountInfo(this,params);
-		FBToast.successToast(MainActivity.this,"Initialize : "+AccountInfo.getAccountInfo(this),FBToast.LENGTH_SHORT);
+		AccountInfo.setAccountInfo(getApplicationContext(),params);
+		FBToast.successToast(MainActivity.this,"Initialize : "+AccountInfo.getAccountInfo(getApplicationContext()),FBToast.LENGTH_SHORT);
 	}
-
-	@OnClick(R.id.btnMessageRandomSend)
-	void onBtnMessageRandomSendClicked() {
-
-		httpConnctService.sendMessage(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
-			@Override
-			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-				if (response.isSuccessful()) {
-					DataVo data = response.body();
-					if (data != null) {
-						Logger.d(data.getCALL_FUNCTION());
-						Logger.d(data.getRESULT_CODE());
-						Logger.d(data.getRESULT_MESSAGE());
-						Logger.d(data.getRESULT_DATA());
-						FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
-					}
-				}else{
-					FBToast.errorToast(MainActivity.this,"sendMessage : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-				}
-			}
-
-			@Override
-			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-				Logger.e(t.getMessage());
-				FBToast.errorToast(MainActivity.this,"sendMessage : "+t.getMessage(),FBToast.LENGTH_SHORT);
-			}
-		});
-	}
-
 
 	@OnClick(R.id.btnDBCreate)
 	void onBtnDBCreateClicked() {

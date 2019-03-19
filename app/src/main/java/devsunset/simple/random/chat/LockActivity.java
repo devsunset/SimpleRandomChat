@@ -27,42 +27,44 @@ import com.tfb.fbtoast.FBToast;
 
 
 public class LockActivity extends Activity implements View.OnClickListener,
-		OnOtpCompletionListener {
-	private OtpView otpView;
-	private Button validateButton;
+        OnOtpCompletionListener {
+    private OtpView otpView;
+    private Button validateButton;
 
-	@Override protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.lock_activity);
-		initializeUi();
-		setListeners();
-	}
+    @Override protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.lock_activity);
+        initializeUi();
+        setListeners();
+    }
 
-	@Override public void onClick(View v) {
-		if (v.getId() == R.id.validate_button) {
-			FBToast.successToast(LockActivity.this,"otp",FBToast.LENGTH_SHORT);
+    @Override public void onClick(View v) {
+        if (v.getId() == R.id.validate_button) {
+            FBToast.successToast(LockActivity.this,"otp",FBToast.LENGTH_SHORT);
 
-			Intent intent = new Intent(this, AppContent.class);
-			startActivity(intent);
-			finish();
-		}
-	}
+            Intent intent = new Intent(this, AppContent.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
-	private void initializeUi() {
-		otpView = findViewById(R.id.otp_view);
-		validateButton = findViewById(R.id.validate_button);
-	}
+    private void initializeUi() {
+        otpView = findViewById(R.id.otp_view);
+        validateButton = findViewById(R.id.validate_button);
+    }
 
-	private void setListeners() {
-		otpView.setOtpCompletionListener(this);
-		validateButton.setOnClickListener(this);
-	}
+    private void setListeners() {
+        otpView.setOtpCompletionListener(this);
+        validateButton.setOnClickListener(this);
+    }
 
-	@Override public void onOtpCompleted(String otp) {
-		FBToast.successToast(LockActivity.this,"otp : "+otp,FBToast.LENGTH_SHORT);
-
-		Intent intent = new Intent(this, AppContent.class);
-		startActivity(intent);
-		finish();
-	}
+    @Override public void onOtpCompleted(String otp) {
+        if("1111".equals(otp)){
+            Intent intent = new Intent(this, AppContent.class);
+            startActivity(intent);
+            finish();
+        }else{
+            FBToast.infoToast(LockActivity.this,"Auth Fail",FBToast.LENGTH_SHORT);
+        }
+    }
 }

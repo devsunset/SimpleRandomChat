@@ -169,8 +169,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                        .setContentTitle("Received") //getString(R.string.default_received_message);
-                        .setContentText(messageBody)
+                        .setContentTitle("receive message") //getString(R.string.default_received_message);
+                        .setContentText("")  //messageBody
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
