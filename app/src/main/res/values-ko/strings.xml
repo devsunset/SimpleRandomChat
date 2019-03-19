@@ -2,8 +2,7 @@
 <resources>
 
     <string name="app_name">메시톡</string>
-    <string name="loading">로딩중</string>
-    <string name="main_desc">새로운 친구를 사귀어 보세요 ^^</string>
+    <string name="loading">loading...</string>
 
     <string name="app_message_send">메세지 전송</string>
     <string name="app_message_list">메세지 목록</string>
@@ -13,7 +12,8 @@
     <string name="common_ok">확인</string>
     <string name="main_back_finish">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다 </string>
     <string name="alert_info_title">알림</string>
-    <string name="processing">조회 중입니다. 잠시 후 조회해 주세요</string>
+    <string name="processing">처리 중입니다. 잠시만 기다려 주세요.</string>
+    <string name="networkerror">네트워크 연결에 실패 하였습니다. 잠시후 시도해 주세요.</string>
 
     <string name="verification_code_subtext">Please input the verification code</string>
     <string name="verification_code">Verification Code</string>

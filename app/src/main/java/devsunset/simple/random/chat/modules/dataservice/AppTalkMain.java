@@ -37,6 +37,8 @@ public class AppTalkMain implements Serializable {
     private String FROM_GENDER;
     private String FROM_LANG;
     private String LAST_TALK_TEXT;
+    private String LAST_TALK_TEXT_IMAGE;
+    private String LAST_TALK_TEXT_VOICE;
     private String TALK_TYPE;
     private String TO_APP_ID;
     private String TO_APP_KEY;
@@ -110,6 +112,18 @@ public class AppTalkMain implements Serializable {
     }
     public void setLAST_TALK_TEXT(String lAST_TALK_TEXT) {
         LAST_TALK_TEXT = lAST_TALK_TEXT;
+    }
+    public String getLAST_TALK_TEXT_IMAGE() {
+        return LAST_TALK_TEXT_IMAGE;
+    }
+    public void setLAST_TALK_TEXT_IMAGE(String lAST_TALK_TEXT_IMAGE) {
+        LAST_TALK_TEXT_IMAGE = lAST_TALK_TEXT_IMAGE;
+    }
+    public String getLAST_TALK_TEXT_VOICE() {
+        return LAST_TALK_TEXT_VOICE;
+    }
+    public void setLAST_TALK_TEXT_VOICE(String lAST_TALK_TEXT_VOICE) {
+        LAST_TALK_TEXT_VOICE = lAST_TALK_TEXT_VOICE;
     }
     public String getTALK_TYPE() {
         return TALK_TYPE;

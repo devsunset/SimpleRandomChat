@@ -84,16 +84,29 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
+
 		httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
+		//최초 설치 여부 확인
 		if("-".equals(AccountInfo.getAccountInfo(this).get("APP_ID"))){
-			FBToast.successToast(MainActivity.this,"INIT",FBToast.LENGTH_SHORT);
-		}else{
-			FBToast.successToast(MainActivity.this,"SETTING",FBToast.LENGTH_SHORT);
 
-			httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+			// 최초 설정 여부 저장
+			Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
+			String strCountry = systemLocale.getCountry();
+			String strLanguage = systemLocale.getLanguage();
 
-			httpConnctService.appNotice().enqueue(new Callback<DataVo>() {
+			HashMap<String,Object> myInfo = new HashMap<String,Object>();
+			myInfo.put("APP_ID",UUID.randomUUID().toString());
+			myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
+			//myInfo.put("GENDER","M");
+			//myInfo.put("APP_PHONE", getPhoneNumber(this.getApplicationContext()));
+			myInfo.put("COUNTRY",strCountry);
+			myInfo.put("LANG",strLanguage);
+			myInfo.put("INITIALIZE","Y");
+			AccountInfo.setAccountInfo(this,myInfo);
+
+			// 서버에 계정 생성 호출
+			httpConnctService.appInfoInit(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
 				@Override
 				public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
 					if (response.isSuccessful()) {
@@ -103,38 +116,23 @@ public class MainActivity extends BaseActivity {
 							Logger.d(data.getRESULT_CODE());
 							Logger.d(data.getRESULT_MESSAGE());
 							Logger.d(data.getRESULT_DATA());
-							FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
+							Logger.i("appInfoInit Success : "+data.getRESULT_MESSAGE());
+							getNoticeProcess();
 						}
 					}else{
-						FBToast.errorToast(MainActivity.this,"appNotice : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+						Logger.e("appInfoInit : "+response.isSuccessful());
+						FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
 					}
 				}
 
 				@Override
 				public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
 					Logger.e(t.getMessage());
-					FBToast.errorToast(MainActivity.this,"appNotice : "+t.getMessage(),FBToast.LENGTH_SHORT);
+					FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
 				}
 			});
+
 		}
-
-		//initActivity();
-	}
-
-	@OnClick(R.id.btnGo)
-	void onBtnGoClicked() {
-		initActivity();
-	}
-
-	private void initActivity(){
-		Intent intent = new Intent(this, LockActivity.class);
-		startActivity(intent);
-		finish();
-
-//		Intent intent = new Intent(this, AppContent.class);
-//		startActivity(intent);
-//		finish();
-
 	}
 
 	@RequiresPermission(Manifest.permission.READ_PHONE_STATE)
@@ -157,31 +155,10 @@ public class MainActivity extends BaseActivity {
 		return phoneNumber;
 	}
 
-	@OnClick(R.id.btnCreateAccountInfo)
-	void onBtnCreateAccountInfoClicked() {
-		Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
-		String strCountry = systemLocale.getCountry();
-		String strLanguage = systemLocale.getLanguage();
 
-		HashMap<String,Object> myInfo = new HashMap<String,Object>();
-		myInfo.put("APP_ID",UUID.randomUUID().toString());
-		myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
-		//myInfo.put("APP_PHONE", getPhoneNumber(this.getApplicationContext()));
-		myInfo.put("COUNTRY",strCountry);
-		myInfo.put("LANG",strLanguage);
-
-		FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.setAccountInfo(this,myInfo),FBToast.LENGTH_SHORT);
-	}
-
-	@OnClick(R.id.btnGetAccountInfo)
-	void onBtnGetAccountInfoClicked() {
-		FBToast.successToast(MainActivity.this,"Create Account Info : "+AccountInfo.getAccountInfo(this),FBToast.LENGTH_SHORT);
-	}
-
-	@OnClick(R.id.btnAppInfoInit)
-	void onBtnAppInfoInitClicked() {
-
-		httpConnctService.appInfoInit(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
+	private void getNoticeProcess(){
+		//공지 사항 조회 처리
+		httpConnctService.appNotice().enqueue(new Callback<DataVo>() {
 			@Override
 			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
 				if (response.isSuccessful()) {
@@ -191,48 +168,41 @@ public class MainActivity extends BaseActivity {
 						Logger.d(data.getRESULT_CODE());
 						Logger.d(data.getRESULT_MESSAGE());
 						Logger.d(data.getRESULT_DATA());
-						FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
+						FBToast.successToast(MainActivity.this,data.getRESULT_DATA().toString(),FBToast.LENGTH_SHORT);
+						//initActivity();
 					}
 				}else{
-					Logger.i("appInfoInit : "+response.isSuccessful());
-					FBToast.errorToast(MainActivity.this,"appInfoInit : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
+					FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
 				}
 			}
 
 			@Override
 			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+				//initActivity();
 				Logger.e(t.getMessage());
-				FBToast.errorToast(MainActivity.this,"appInfoInit : "+t.getMessage(),FBToast.LENGTH_SHORT);
+				FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
 			}
 		});
 	}
 
-	@OnClick(R.id.btnAppInfoUpdate)
-	void onBtnAppInfoUpdateClicked() {
+	private void initActivity(){
+		Intent intent = new Intent(this, LockActivity.class);
+		startActivity(intent);
+		finish();
+	}
 
-		httpConnctService.appInfoUpdate(AccountInfo.getAccountInfo(this)).enqueue(new Callback<DataVo>() {
-			@Override
-			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-				if (response.isSuccessful()) {
-					DataVo data = response.body();
-					if (data != null) {
-						Logger.d(data.getCALL_FUNCTION());
-						Logger.d(data.getRESULT_CODE());
-						Logger.d(data.getRESULT_MESSAGE());
-						Logger.d(data.getRESULT_DATA());
-						FBToast.successToast(MainActivity.this,data.getRESULT_MESSAGE().toString(),FBToast.LENGTH_SHORT);
-					}
-				}else{
-					FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+response.isSuccessful(),FBToast.LENGTH_SHORT);
-				}
-			}
+	@OnClick(R.id.btnGo)
+	void onBtnGoClicked() {
+		initActivity();
+	}
 
-			@Override
-			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-				Logger.e(t.getMessage());
-				FBToast.errorToast(MainActivity.this,"appInfoUpdate : "+t.getMessage(),FBToast.LENGTH_SHORT);
-			}
-		});
+
+	@OnClick(R.id.btnInitialize)
+	void onBtnInitializeClicked() {
+		HashMap<String,Object> params = new HashMap<String,Object>();
+		params.put("APP_ID","-");
+		AccountInfo.setAccountInfo(this,params);
+		FBToast.successToast(MainActivity.this,"Initialize : "+AccountInfo.getAccountInfo(this),FBToast.LENGTH_SHORT);
 	}
 
 	@OnClick(R.id.btnMessageRandomSend)

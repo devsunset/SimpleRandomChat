@@ -7,8 +7,17 @@ package devsunset.simple.random.chat.modules.accountservice;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.HashMap;
+
+import devsunset.simple.random.chat.modules.httpservice.DataVo;
+import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
+import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * <PRE>
@@ -21,6 +30,8 @@ import java.util.HashMap;
  */
 
 public class AccountInfo {
+
+    public static final String TAG = AccountInfo.class.getSimpleName();
 
     /**
      * Get Account Info
@@ -39,11 +50,13 @@ public class AccountInfo {
         accountInfo.put("APP_VER",pref.getString("APP_VER", "1.0"));
         accountInfo.put("COUNTRY",pref.getString("COUNTRY", "-"));
         accountInfo.put("COUNTRY_NAME",pref.getString("COUNTRY_NAME", "-"));
-        accountInfo.put("GENDER",pref.getString("GENDER", "M"));
+        accountInfo.put("GENDER",pref.getString("GENDER", "W"));
         accountInfo.put("LANG",pref.getString("LANG", "-"));
         accountInfo.put("NOTICE_NUMBER",pref.getString("NOTICE_NUMBER", "0"));
         accountInfo.put("SET_ALARM_YN",pref.getString("SET_ALARM_YN", "Y"));
         accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "N"));
+        accountInfo.put("SET_LOCK_PWD",pref.getString("SET_LOCK_PWD", "-"));
+        accountInfo.put("SET_LOCK_YN",pref.getString("SET_LOCK_YN", "N"));
         accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "Y"));
         accountInfo.put("SET_SEND_COUNTRY",pref.getString("SET_SEND_COUNTRY", "N"));
         accountInfo.put("SET_SEND_GENDER",pref.getString("SET_SEND_GENDER", "A"));
@@ -114,6 +127,14 @@ public class AccountInfo {
                 editor.putString("SET_BYE_CONFIRM_YN", accountInfo.get("SET_BYE_CONFIRM_YN").toString());
             }
 
+            if(accountInfo.containsKey("SET_LOCK_PWD") && !"".equals(accountInfo.get("SET_LOCK_PWD"))){
+                editor.putString("SET_LOCK_PWD", accountInfo.get("SET_LOCK_PWD").toString());
+            }
+
+            if(accountInfo.containsKey("SET_LOCK_YN") && !"".equals(accountInfo.get("SET_LOCK_YN"))){
+                editor.putString("SET_LOCK_YN", accountInfo.get("SET_LOCK_YN").toString());
+            }
+
             if(accountInfo.containsKey("SET_NEW_RECEIVE_YN") && !"".equals(accountInfo.get("SET_NEW_RECEIVE_YN"))){
                 editor.putString("SET_NEW_RECEIVE_YN", accountInfo.get("SET_NEW_RECEIVE_YN").toString());
             }
@@ -139,6 +160,35 @@ public class AccountInfo {
             }
 
             editor.commit();
+
+
+            // LOCAL 설정 SERVER와 동기화 처리
+            if(!accountInfo.containsKey("INITIALIZE") || !"Y".equals(accountInfo.get("INITIALIZE"))){
+                HttpConnectService httpConnctService =  HttpConnectClient.getClient().create(HttpConnectService.class);
+
+                httpConnctService.appInfoUpdate(AccountInfo.getAccountInfo(context)).enqueue(new Callback<DataVo>() {
+                    @Override
+                    public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                        if (response.isSuccessful()) {
+                            DataVo data = response.body();
+                            if (data != null) {
+                                if("S" == data.getRESULT_CODE()){
+                                    Log.i(TAG,"appInfoUpdate Success ");
+                                }else{
+                                    Log.i(TAG,"appInfoUpdate Fail : "+data.getRESULT_MESSAGE());
+                                }
+                            }else{
+                                Log.e(TAG,"appInfoUpdate response error :" +response.isSuccessful());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                        Log.e(TAG,"appInfoUpdate error :" +t.getMessage());
+                    }
+                });
+            }
 
             result = true;
         }

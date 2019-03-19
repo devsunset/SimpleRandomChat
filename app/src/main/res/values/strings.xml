@@ -2,9 +2,7 @@
 <resources>
 
     <string name="app_name">Message Talk</string>
-    <string name="loading">Loading</string>
-    <string name="main_desc">Welcome to Message Talk</string>
-
+    <string name="loading">loading...</string>
 
     <string name="app_message_send">Message Send</string>
     <string name="app_message_list">Message List</string>
@@ -15,6 +13,8 @@
     <string name="main_back_finish">Press the back key again to close the app.</string>
     <string name="alert_info_title">Notice</string>
     <string name="processing">Processing... Please wait.</string>
+    <string name="networkerror">Network Connection Failed. Retry again</string>
+
 
     <string name="verification_code_subtext">Please input the verification code</string>
     <string name="verification_code">Verification Code</string>

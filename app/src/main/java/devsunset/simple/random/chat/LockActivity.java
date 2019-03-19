@@ -5,9 +5,9 @@
  */
 package devsunset.simple.random.chat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,7 +26,7 @@ import com.tfb.fbtoast.FBToast;
  */
 
 
-public class LockActivity extends AppCompatActivity implements View.OnClickListener,
+public class LockActivity extends Activity implements View.OnClickListener,
 		OnOtpCompletionListener {
 	private OtpView otpView;
 	private Button validateButton;
