@@ -12,15 +12,13 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/message"
+            android:id="@+id/chat_message"
             style="@style/edittext_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dip"
             android:minHeight="@dimen/textbox_height" />
-
     </LinearLayout>
-
 
     <Button
         android:id="@+id/btnMessageRandomSend"

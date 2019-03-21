@@ -2,40 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/content_bg"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#c4d0e5"
-        android:baselineAligned="false"
-        android:orientation="horizontal" />
+    <CheckBox
+        android:id="@+id/setSoundYn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="소리 알림" />
 
-    <LinearLayout
-        android:id="@+id/listItemHeader"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:background="@color/install_header"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+    <CheckBox
+        android:id="@+id/setVirationYn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="진동 알림" />
 
-        <ImageView
-            android:id="@+id/app_icon"
-            android:layout_width="@android:dimen/app_icon_size"
-            android:layout_height="@android:dimen/app_icon_size"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/trash" />
+    <CheckBox
+        android:id="@+id/setByeConfirmYn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="삭제시 물어보지 않기" />
 
-        <TextView
-            android:id="@+id/app_name"
-            style="@style/textview_header"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:textStyle="bold" />
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/setLockYn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="화면 잠금" />
 
 </LinearLayout>

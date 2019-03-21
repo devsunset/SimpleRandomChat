@@ -147,7 +147,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      */
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
-        HashMap<String,Object> myInfo = new HashMap<String,Object>();
+        HashMap<String,String> myInfo = new HashMap<String,String>();
         myInfo.put("APP_KEY",token);
         AccountInfo.setAccountInfo(this,myInfo);
     }

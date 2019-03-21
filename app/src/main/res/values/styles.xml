@@ -57,10 +57,26 @@
     </style>
 
     <style name="edittext_new" parent="@android:style/TextAppearance">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">#606060</item>
         <item name="android:textColorHint">#a1a1a1</item>
         <item name="android:background">@drawable/bg_selector_edit_text</item>
     </style>
+
+    <style name="CheckBoxTintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/darkGreen</item>
+    </style>
+
+    <style name="EditTextTintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/primaryText</item>
+    </style>
+
+    <style name="DialogTriggerButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 
 </resources>

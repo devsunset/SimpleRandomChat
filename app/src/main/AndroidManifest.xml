@@ -25,6 +25,7 @@
         <activity
             android:name="devsunset.simple.random.chat.LockActivity"
             android:configChanges="orientation"
+            android:windowSoftInputMode="stateAlwaysVisible"
             android:screenOrientation="portrait"/>
 
         <!-- [START firebase_service] -->
@@ -44,7 +45,6 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 

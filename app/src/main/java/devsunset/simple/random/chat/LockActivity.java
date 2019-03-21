@@ -8,12 +8,12 @@ package devsunset.simple.random.chat;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.mukesh.OnOtpCompletionListener;
 import com.mukesh.OtpView;
 import com.tfb.fbtoast.FBToast;
+
+import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
 /**
  * <PRE>
@@ -26,45 +26,42 @@ import com.tfb.fbtoast.FBToast;
  */
 
 
-public class LockActivity extends Activity implements View.OnClickListener,
-        OnOtpCompletionListener {
+public class LockActivity extends Activity implements OnOtpCompletionListener {
     private OtpView otpView;
-    private Button validateButton;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(!"Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_LOCK_YN"))){
+            goNextIntent();
+        }
         setContentView(R.layout.lock_activity);
         initializeUi();
         setListeners();
     }
 
-    @Override public void onClick(View v) {
-        if (v.getId() == R.id.validate_button) {
-            FBToast.successToast(LockActivity.this,"otp",FBToast.LENGTH_SHORT);
-
-            Intent intent = new Intent(this, AppContent.class);
-            startActivity(intent);
-            finish();
-        }
+    private void goNextIntent(){
+        Intent intent = new Intent(this, AppContent.class);
+        startActivity(intent);
+        finish();
     }
 
     private void initializeUi() {
         otpView = findViewById(R.id.otp_view);
-        validateButton = findViewById(R.id.validate_button);
     }
 
     private void setListeners() {
         otpView.setOtpCompletionListener(this);
-        validateButton.setOnClickListener(this);
     }
 
     @Override public void onOtpCompleted(String otp) {
-        if("1111".equals(otp)){
-            Intent intent = new Intent(this, AppContent.class);
-            startActivity(intent);
-            finish();
+        if((AccountInfo.getAccountInfo(getApplicationContext()).get("SET_LOCK_PWD")+"").equals(otp)){
+            goNextIntent();
         }else{
             FBToast.infoToast(LockActivity.this,"Auth Fail",FBToast.LENGTH_SHORT);
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         }
     }
 }

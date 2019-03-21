@@ -41,7 +41,7 @@ public interface HttpConnectService {
      */
     @FormUrlEncoded
     @POST("appInfoInit")
-    Call<DataVo> appInfoInit(@FieldMap HashMap<String, Object> param);
+    Call<DataVo> appInfoInit(@FieldMap HashMap<String, String> param);
 
     /**
      * App Info Update
@@ -50,7 +50,7 @@ public interface HttpConnectService {
      */
     @FormUrlEncoded
     @POST("appInfoUpdate")
-    Call<DataVo> appInfoUpdate(@FieldMap HashMap<String, Object> param);
+    Call<DataVo> appInfoUpdate(@FieldMap HashMap<String, String> param);
 
     /**
      * Send Message

@@ -25,11 +25,8 @@ import java.util.List;
 @Dao
 public interface AppTalkMainDao {
 
-    @Query("SELECT * FROM APP_TALK_MAIN")
+    @Query("SELECT * FROM APP_TALK_MAIN ORDER BY ATX_LOCAL_TIME DESC")
     List<AppTalkMain> getAll();
-
-    @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_ID IN (:atxIds)")
-    List<AppTalkMain> findByAtxIds(int[] atxIds);
 
     @Insert
     void insert(AppTalkMain appTalkMain);
@@ -37,8 +34,10 @@ public interface AppTalkMainDao {
     @Delete
     void delete(AppTalkMain appTalkMain);
 
-
     // Example
+
+    //@Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_ID IN (:atxIds)")
+    //List<AppTalkMain> findByAtxIds(int[] atxIds);
 
     //@Query("SELECT * FROM APP_TALK_MAIN WHERE first_name LIKE :first AND " + "last_name LIKE :last LIMIT 1")
     //User findByName(String first, String last);

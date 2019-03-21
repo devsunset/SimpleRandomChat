@@ -8,4 +8,9 @@
         <item>[SELECT]</item>
     </string-array>
 
+    <string-array name="gender">
+        <item>Man%M</item>
+        <item>Woman%W</item>
+    </string-array>
+
 </resources>

@@ -6,6 +6,7 @@
 package devsunset.simple.random.chat;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,11 +71,8 @@ public class AppContent extends FragmentActivity {
 		setContentView(R.layout.app_content);
 
 		//screen capture disable
-		// 안드로이드 3.0 이상부터 실행
 		if (Build.VERSION.SDK_INT >= 11) {
 			getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
-			// getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-			// getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
 		}
 
 		llTab1 = (RelativeLayout) findViewById(R.id.ll_tab1);
@@ -169,11 +168,21 @@ public class AppContent extends FragmentActivity {
 			int enable2 = getResources().getColor(R.color.tab_enable2);
 			vTab2.setBackgroundColor(enable2);
 			tvTab2.setTextColor(enable2);
+			View view = this.getCurrentFocus();
+			if (view!= null) {
+				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+			}
 			break;
 		case TAB_MESSAGE_SETTING:
 			int enable3 = getResources().getColor(R.color.tab_enable3);
 			vTab3.setBackgroundColor(enable3);
 			tvTab3.setTextColor(enable3);
+			View viewx = this.getCurrentFocus();
+			if (viewx!= null) {
+				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(viewx.getWindowToken(), 0);
+			}
 			break;
 		}
 	}

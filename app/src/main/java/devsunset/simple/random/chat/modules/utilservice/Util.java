@@ -5,6 +5,8 @@
  */
 package devsunset.simple.random.chat.modules.utilservice;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -37,15 +39,15 @@ public class Util {
             inFile.read(data);
             base64 = null;//Base64.getEncoder().encodeToString(data);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Logger.e("encoder Error : "+e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.e("encoder Error : "+e.getMessage());
         } finally{
             if(inFile !=null){
                 try {
                     inFile.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Logger.e("encoder Error : "+e.getMessage());
                 }
             }
         }
@@ -67,16 +69,16 @@ public class Util {
             outFile.flush();
         } catch (FileNotFoundException e) {
             check = false;
-            e.printStackTrace();
+            Logger.e("decoder Error : "+e.getMessage());
         } catch (IOException e) {
             check = false;
-            e.printStackTrace();
+            Logger.e("decoder Error : "+e.getMessage());
         } finally{
             if(outFile !=null){
                 try {
                     outFile.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Logger.e("decoder Error : "+e.getMessage());
                 }
             }
         }

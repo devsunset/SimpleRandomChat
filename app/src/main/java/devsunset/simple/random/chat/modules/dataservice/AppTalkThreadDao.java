@@ -36,5 +36,4 @@ public interface AppTalkThreadDao {
 
     @Delete
     void delete(AppTalkThread appTalkThread);
-
 }
