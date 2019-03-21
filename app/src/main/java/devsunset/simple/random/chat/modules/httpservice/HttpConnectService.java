@@ -31,8 +31,9 @@ public interface HttpConnectService {
      * @param param
      * @return
      */
+    @FormUrlEncoded
     @POST("appNotice")
-    Call<DataVo> appNotice();
+    Call<DataVo> appNotice(@FieldMap HashMap<String, String> param);
 
     /**
      * App Info Init

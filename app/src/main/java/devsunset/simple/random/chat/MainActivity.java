@@ -175,7 +175,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
     //공지 사항 조회 처리
 	private void getNoticeProcess(){
-		httpConnctService.appNotice().enqueue(new Callback<DataVo>() {
+		httpConnctService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
 			@Override
 			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
 				if (response.isSuccessful()) {
@@ -200,7 +200,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 	}
 
 	private void showInfoDialog(List<HashMap<String,Object>> params) {
-	    if(params !=null && !params.isEmpty() && params.size() > 0){
+	    if(params !=null && !params.isEmpty() && params.size() > 0 && !params.get(0).containsKey("EMPTY_DATA")){
 
 			CharSequence cs = new StringBuffer((String)params.get(0).get("NOTICE_TXT"));
 			int noticeId = Integer.parseInt((String)params.get(0).get("NOTICE_ID"));
