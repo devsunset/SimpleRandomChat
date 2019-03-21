@@ -105,7 +105,6 @@ public class MessageSend extends Fragment {
 
 							AppTalkMain atm = new AppTalkMain();
 							atm.setATX_ID(atxId);
-							atm.setATX_INIT_TIME(ctm);
 							atm.setATX_LOCAL_TIME(ctm);
 							atm.setATX_STATUS("F");
 							atm.setFROM_APP_ID(account.get("APP_ID"));
@@ -127,7 +126,6 @@ public class MessageSend extends Fragment {
 
 							AppTalkThread att = new AppTalkThread();
 							att.setATX_ID(atxId);
-							att.setTALK_ACCESS_TIME(ctm);
 							att.setTALK_ACCESS_LOCAL_TIME(ctm);
 							att.setTALK_APP_ID(account.get("APP_ID"));
 							att.setTALK_ID(UUID.randomUUID().toString());

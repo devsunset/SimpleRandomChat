@@ -27,7 +27,6 @@ public class AppTalkMain implements Serializable {
     @PrimaryKey
     @NonNull
     private String ATX_ID;
-    private String ATX_INIT_TIME;
     private String ATX_LOCAL_TIME;
     private String ATX_STATUS;
     private String FROM_APP_ID;
@@ -52,12 +51,6 @@ public class AppTalkMain implements Serializable {
     }
     public void setATX_ID(String aTX_ID) {
         ATX_ID = aTX_ID;
-    }
-    public String getATX_INIT_TIME() {
-        return ATX_INIT_TIME;
-    }
-    public void setATX_INIT_TIME(String aTX_INIT_TIME) {
-        ATX_INIT_TIME = aTX_INIT_TIME;
     }
     public String getATX_LOCAL_TIME() {
         return ATX_LOCAL_TIME;
