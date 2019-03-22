@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="app_name">메시톡</string>
     <string name="loading">loading...</string>
@@ -13,18 +15,20 @@
     <string name="main_back_finish">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다 </string>
     <string name="alert_info_title">알림</string>
     <string name="processing">처리 중입니다. 잠시만 기다려 주세요.</string>
-    <string name="networkerror">네트워크 연결에 실패 하였습니다. 잠시후 시도해 주세요.</string>
+    <string name="networkerror">네트워크 연결에 실패 하였습니다</string>
 
-    <string name="verification_code_subtext">Please input the verification code</string>
-    <string name="verification_code">Verification Code</string>
-    <string name="validate">Validate</string>
-
-    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-
+    <string name="verification_code_subtext">화면 잠금 비밀 번호를 입력하세요</string>
+    <string name="verification_code">비밀번호</string>
 
     <string name="info_title">알림</string>
     <string name="gender_choice_title">성별 선택</string>
     <string name="gender_choice_message">성별을 선택해 주세요.</string>
+
+    <string name="send">전송</string>
+    <string name="sendinput">메세지를 입력해 주세요.</string>
+    <string name="sendresult">메세지를 보냈습니다.</string>
+
+    <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
+    <string name="default_received_message">메세지 도착</string>
 
 </resources>

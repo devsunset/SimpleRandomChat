@@ -5,25 +5,42 @@
  */
 package devsunset.simple.random.chat.modules.fcmservice;
 
+import android.app.ActivityManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.orhanobut.logger.Logger;
+import com.tfb.fbtoast.FBCustomToast;
+import com.tfb.fbtoast.FBToast;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 import devsunset.simple.random.chat.LockActivity;
+import devsunset.simple.random.chat.MainActivity;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
+import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
+import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
+import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 
 //import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 //import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -41,7 +58,6 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-
     /**
      * Called when message is received.
      *
@@ -68,28 +84,81 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Logger.d("From: " + remoteMessage.getFrom());
+        // Logger.d("From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
-            Logger.d("Message data payload: " + remoteMessage.getData());
-
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                // scheduleJob();
-            } else {
-                // Handle message within 10 seconds
-                handleNow();
+        /*
+            if (remoteMessage.getData().size() > 0) {
+                // Logger.d("Message data payload: " + remoteMessage.getData());
+                // Check if data needs to be processed by long running job
+                if (true) {
+                    // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
+                    scheduleJob();
+                } else {
+                    // Handle message within 10 seconds
+                    handleNow();
+                }
             }
-
-        }
+        */
 
         // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Logger.d("Message Notification Body: " + remoteMessage.getNotification().getBody());
+        if (remoteMessage.getNotification() != null && remoteMessage.getData() != null) {
+            Logger.d("Message Notification  : remoteMessage.getNotification() != null && remoteMessage.getData() != null)");
+            if( remoteMessage.getData().get("ATX_STATUS") !=null && !"".equals( remoteMessage.getData().get("ATX_STATUS"))){
+                Logger.d("Message Notification  : remoteMessage.getNotification() != null && remoteMessage.getData() != null) && ATX_STATUS EXIST");
+                String ctm = System.currentTimeMillis()+"";
+
+                if("F".equals(remoteMessage.getData().get("ATX_STATUS"))){
+                    String talkType = "X";
+                    HashMap<String,String> account = AccountInfo.getAccountInfo(getApplicationContext());
+
+                    Logger.e("==============================="+remoteMessage.getData().get("ATX_ID"));
+                    AppTalkMain atm = new AppTalkMain();
+                    atm.setATX_ID(remoteMessage.getData().get("ATX_ID"));
+                    atm.setATX_LOCAL_TIME(ctm);
+                    if(account.get("APP_ID").equals(remoteMessage.getData().get("FROM_APP_ID"))){
+                        atm.setATX_STATUS("F");
+                        talkType = "F";
+                    }else{
+                        atm.setATX_STATUS("P");
+                        talkType = "P";
+                    }
+                    atm.setFROM_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
+                    atm.setFROM_APP_KEY(remoteMessage.getData().get("FROM_APP_KEY"));
+                    atm.setFROM_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
+                    atm.setFROM_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
+                    atm.setFROM_GENDER(remoteMessage.getData().get("FROM_GENDER"));
+                    atm.setFROM_LANG(remoteMessage.getData().get("FROM_LANG"));
+                    atm.setLAST_TALK_TEXT(remoteMessage.getData().get("LAST_TALK_TEXT"));
+                    atm.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
+                    atm.setTO_APP_ID(remoteMessage.getData().get("TO_APP_ID"));
+                    atm.setTO_APP_KEY(remoteMessage.getData().get("TO_APP_KEY"));
+                    atm.setTO_COUNTRY(remoteMessage.getData().get("TO_COUNTRY"));
+                    atm.setTO_COUNTRY_NAME(remoteMessage.getData().get("TO_COUNTRY_NAME"));
+                    atm.setTO_GENDER(remoteMessage.getData().get("TO_GENDER"));
+                    atm.setTO_LANG(remoteMessage.getData().get("TO_LANG"));
+
+                    AppTalkThread att = new AppTalkThread();
+                    att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
+                    att.setTALK_ACCESS_LOCAL_TIME(ctm);
+                    att.setTALK_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
+                    att.setTALK_ID(remoteMessage.getData().get("TALK_ID"));
+                    att.setTALK_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
+                    att.setTALK_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
+                    att.setTALK_GENDER(remoteMessage.getData().get("FROM_GENDER"));
+                    att.setTALK_TEXT(remoteMessage.getData().get("LAST_TALK_TEXT"));
+                    att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
+
+                    saveFirstMessage(atm,att,remoteMessage.getNotification().getBody(),talkType);
+                }
+            }else{
+                Logger.d("Message Notification  : remoteMessage.getNotification() != null && remoteMessage.getData() != null) && ATX_STATUS NOT EXIST");
+                sendNotification(remoteMessage.getNotification().getBody());
+            }
+        }else if (remoteMessage.getNotification() != null && remoteMessage.getData() == null) {
+            Logger.d("Message Notification  : remoteMessage.getNotification() != null && remoteMessage.getData() == null)");
             sendNotification(remoteMessage.getNotification().getBody());
         }
-
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
@@ -97,7 +166,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     // [START on_new_token]
-
     /**
      * Called if InstanceID token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the InstanceID token
@@ -106,7 +174,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String token) {
         Logger.d("Refreshed token: " + token);
-
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
@@ -118,6 +185,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * Schedule a job using FirebaseJobDispatcher.
      */
     private void scheduleJob() {
+        Logger.d("Long lived task is done.");
         // [START dispatch_job]
         /*
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
@@ -146,7 +214,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
         HashMap<String,String> myInfo = new HashMap<String,String>();
         myInfo.put("APP_KEY",token);
         AccountInfo.setAccountInfo(this,myInfo);
@@ -158,33 +225,142 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent =new Intent(this, LockActivity.class);
+        String channelId = getString(R.string.default_notification_channel_id);
 
+        Intent intent =new Intent(this, LockActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        String channelId = "SIMPLE_RANDOM_CHAT"; //getString(R.string.default_notification_channel_id);
-
+        Bitmap mLargeIcon = BitmapFactory.decodeResource(getResources(),R.drawable.ic_stat_ic_notification);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                        .setContentTitle("receive message") //getString(R.string.default_received_message);
-                        .setContentText("")  //messageBody
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))){
+            NotificationCompat.Builder notificationBuilder =
+                    new NotificationCompat.Builder(this, channelId)
+                            .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                            .setLargeIcon(mLargeIcon)
+                            .setContentTitle(getString(R.string.default_received_message))
+                            .setContentText(messageBody)
+                            .setSound(defaultSoundUri)
+                            .setDefaults(NotificationCompat.DEFAULT_ALL)
+                            .setVibrate(new long[]{0L})
+                            .setAutoCancel(true)
+                            .setContentIntent(pendingIntent);
 
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            // Since android Oreo notification channel is needed.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel(channelId,
+                        channelId,
+                        NotificationManager.IMPORTANCE_HIGH);
+                notificationManager.createNotificationChannel(channel);
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{0L});
+            }
+
+            notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
+
+        }else if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))){
+            Notification notification;
+            NotificationCompat.Builder mBuilder;
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH);
+                //Disabling vibration!
+                notificationChannel.setVibrationPattern(new long[]{ 0 });
+                notificationChannel.enableVibration(true);
+                notificationChannel.setSound(null, null);
+                notificationManager.createNotificationChannel(notificationChannel);
+                mBuilder = new NotificationCompat.Builder(this, channelId);
+            } else {
+                mBuilder = new NotificationCompat.Builder(this);
+                mBuilder.setVibrate(new long[]{0L});
+                mBuilder.setSound(null,1);
+            }
+
+            mBuilder.setContentTitle(getString(R.string.default_received_message))
+                    .setContentText(messageBody)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setLargeIcon(mLargeIcon);
+
+            notification = mBuilder.build();
+            notificationManager.notify(1, notification);
         }
+    }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    private void saveFirstMessage(AppTalkMain atm, AppTalkThread att,String message,String talkType) {
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().insert(atm);
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkThreadDao().insert(att);
+
+                if("P".equals(talkType) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                    if(isAppIsInBackground(getApplicationContext())){
+                        sendNotification(""); // message
+                    }
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                boolean POPUP_FLAG = true;
+                if("P".equals(talkType) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                    if(!isAppIsInBackground(getApplicationContext())){
+                        POPUP_FLAG = false;
+                        FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
+                        fbCustomToast.setMsg(getString(R.string.default_received_message));
+                        fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
+                        fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
+                        fbCustomToast.setGravity(1);
+                        fbCustomToast.show();
+                    }
+                }
+
+                if("P".equals(talkType) && POPUP_FLAG && "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
+                    FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
+                    fbCustomToast.setMsg(getString(R.string.default_received_message));
+                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
+                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
+                    fbCustomToast.setGravity(1);
+                    fbCustomToast.show();
+                }
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
+    }
+
+    private boolean isAppIsInBackground(Context context) {
+        boolean isInBackground = true;
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            List<ActivityManager.RunningAppProcessInfo> runningProcesses = am.getRunningAppProcesses();
+            for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
+                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    for (String activeProcess : processInfo.pkgList) {
+                        if (activeProcess.equals(context.getPackageName())) {
+                            isInBackground = false;
+                        }
+                    }
+                }
+            }
+        } else {
+            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+            ComponentName componentInfo = taskInfo.get(0).topActivity;
+            if (componentInfo.getPackageName().equals(context.getPackageName())) {
+                isInBackground = false;
+            }
+        }
+        return isInBackground;
     }
 }

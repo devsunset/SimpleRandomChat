@@ -14,8 +14,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.telephony.TelephonyManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.etcservice.GenderAdapter;
@@ -51,12 +53,15 @@ import retrofit2.Response;
  */
 
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
-	private final int MY_PERMISSIONS_REQUEST_CODE = 1;
-	TelephonyManager telephonyManager;
+	//private final int MY_PERMISSIONS_REQUEST_CODE = 1;
+	//TelephonyManager telephonyManager;
 
 	HttpConnectService httpConnctService = null;
 	private LovelySaveStateHandler saveStateHandler;
 	private  int INIT_CHECK = 0;
+
+	@BindView(R.id.progress)
+	ProgressBar progress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,8 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 			});
 			builder.show();
 		}*/
+
+		progress.setProgress(2);
 
 		//최초 설치 여부 확인
 		if("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))){
@@ -127,6 +134,8 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 	private void setAppInitProcess(String strGender){
 		INIT_CHECK  = 1;
 
+		progress.setProgress(3);
+
 		// 최초 설정 여부 저장
 		Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
 		String strCountry = systemLocale.getCountry();
@@ -162,6 +171,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 					FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
 					finish();
 				}
+				progress.setProgress(4);
 			}
 
 			@Override
@@ -175,6 +185,9 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
     //공지 사항 조회 처리
 	private void getNoticeProcess(){
+
+		progress.setProgress(5);
+
 		httpConnctService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
 			@Override
 			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
@@ -200,7 +213,10 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 	}
 
 	private void showInfoDialog(List<HashMap<String,Object>> params) {
-	    if(params !=null && !params.isEmpty() && params.size() > 0 && !params.get(0).containsKey("EMPTY_DATA")){
+
+		progress.setProgress(10);
+
+		if(params !=null && !params.isEmpty() && params.size() > 0 && !params.get(0).containsKey("EMPTY_DATA")){
 
 			CharSequence cs = new StringBuffer((String)params.get(0).get("NOTICE_TXT"));
 			int noticeId = Integer.parseInt((String)params.get(0).get("NOTICE_ID"));
@@ -274,5 +290,4 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		//String deviceId = telephonyManager.getDeviceId();
 	}*/
-
 }

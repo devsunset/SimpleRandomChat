@@ -52,16 +52,15 @@ public class AccountInfo {
         accountInfo.put("GENDER",pref.getString("GENDER", "-"));
         accountInfo.put("LANG",pref.getString("LANG", "-"));
         accountInfo.put("SET_ALARM_YN",pref.getString("SET_ALARM_YN", "Y"));
-        accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "N"));
+        accountInfo.put("SET_ALARM_NOTI_YN",pref.getString("SET_ALARM_NOTI_YN", "N"));
+        accountInfo.put("SET_ALARM_POPUP_YN",pref.getString("SET_ALARM_POPUP_YN", "Y"));
+        accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "Y"));
         accountInfo.put("SET_LOCK_PWD",pref.getString("SET_LOCK_PWD", "-"));
         accountInfo.put("SET_LOCK_YN",pref.getString("SET_LOCK_YN", "N"));
         accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "N"));
         accountInfo.put("SET_SEND_COUNTRY",pref.getString("SET_SEND_COUNTRY", "N"));
         accountInfo.put("SET_SEND_GENDER",pref.getString("SET_SEND_GENDER", "A"));
         accountInfo.put("SET_SEND_LIST_HIDE_YN",pref.getString("SET_SEND_LIST_HIDE_YN", "N"));
-        accountInfo.put("SET_SOUND_YN",pref.getString("SET_SOUND_YN", "Y"));
-        accountInfo.put("SET_VIBRATION_YN",pref.getString("SET_VIBRATION_YN", "Y"));
-
         return accountInfo;
     }
 
@@ -117,6 +116,14 @@ public class AccountInfo {
                 editor.putString("SET_ALARM_YN", accountInfo.get("SET_ALARM_YN").toString());
             }
 
+            if(accountInfo.containsKey("SET_ALARM_NOTI_YN") && !"".equals(accountInfo.get("SET_ALARM_NOTI_YN"))){
+                editor.putString("SET_ALARM_NOTI_YN", accountInfo.get("SET_ALARM_NOTI_YN").toString());
+            }
+
+            if(accountInfo.containsKey("SET_ALARM_POPUP_YN") && !"".equals(accountInfo.get("SET_ALARM_POPUP_YN"))){
+                editor.putString("SET_ALARM_POPUP_YN", accountInfo.get("SET_ALARM_POPUP_YN").toString());
+            }
+
             if(accountInfo.containsKey("SET_BYE_CONFIRM_YN") && !"".equals(accountInfo.get("SET_BYE_CONFIRM_YN"))){
                 editor.putString("SET_BYE_CONFIRM_YN", accountInfo.get("SET_BYE_CONFIRM_YN").toString());
             }
@@ -143,14 +150,6 @@ public class AccountInfo {
 
             if(accountInfo.containsKey("SET_SEND_LIST_HIDE_YN") && !"".equals(accountInfo.get("SET_SEND_LIST_HIDE_YN"))){
                 editor.putString("SET_SEND_LIST_HIDE_YN", accountInfo.get("SET_SEND_LIST_HIDE_YN").toString());
-            }
-
-            if(accountInfo.containsKey("SET_SOUND_YN") && !"".equals(accountInfo.get("SET_SOUND_YN"))){
-                editor.putString("SET_SOUND_YN", accountInfo.get("SET_SOUND_YN").toString());
-            }
-
-            if(accountInfo.containsKey("SET_VIBRATION_YN") && !"".equals(accountInfo.get("SET_VIBRATION_YN"))){
-                editor.putString("SET_VIBRATION_YN", accountInfo.get("SET_VIBRATION_YN").toString());
             }
 
             editor.commit();

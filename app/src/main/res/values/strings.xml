@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="app_name">Message Talk</string>
     <string name="loading">loading...</string>
@@ -13,19 +15,22 @@
     <string name="main_back_finish">Press the back key again to close the app.</string>
     <string name="alert_info_title">Notice</string>
     <string name="processing">Processing... Please wait.</string>
-    <string name="networkerror">Network Connection Failed. Retry again</string>
-
+    <string name="networkerror">Network Connection Failed.</string>
 
     <string name="verification_code_subtext">Please input the verification code</string>
     <string name="verification_code">Verification Code</string>
-    <string name="validate">Validate</string>
-
-
-    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="info_title">Notice</string>
-    <string name="gender_choice_title">Choice Gender</string>
-    <string name="gender_choice_message">Select an gender please.</string>
+    <string name="gender_choice_title">Gender Selection</string>
+    <string name="gender_choice_message">Please choose your sex.</string>
+
+    <string name="send">SEND</string>
+    <string name="sendinput">Please enter a message.</string>
+    <string name="sendresult">Send complete.</string>
+
+    <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
+    <string name="default_received_message">Receive Message</string>
+
+
 
 </resources>

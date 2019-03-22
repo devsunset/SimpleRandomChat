@@ -29,7 +29,6 @@ public class DatabaseClient {
 
     private DatabaseClient(Context mCtx) {
         this.mCtx = mCtx;
-
         //creating the app database with Room database builder
         //MyToDos is the name of the database
         appDataBase = Room.databaseBuilder(mCtx, AppDataBase.class, "SRC_DB").build();
@@ -47,13 +46,10 @@ public class DatabaseClient {
     }
 }
 
-
-
 /*
     ### Example Migration ###
 
     Room.databaseBuilder(getApplicationContext(), AppDataBase.class, "database-name") .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build();
-
 
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
 	@Override
@@ -61,7 +57,6 @@ public class DatabaseClient {
 		database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, " + "`name` TEXT, PRIMARY KEY(`id`))");
 		}
 	};
-
 
 	static final Migration MIGRATION_2_3 = new Migration(2, 3) {
 	@Override

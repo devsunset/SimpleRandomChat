@@ -5,7 +5,6 @@
  */
 package devsunset.simple.random.chat;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -24,9 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
-import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
-import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
-import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
@@ -65,23 +61,28 @@ public class MessageSend extends Fragment {
 
 	@OnClick(R.id.btnMessageRandomSend)
 	void onBtnMessageRandomSendClicked() {
+
 		String message = chat_message.getText().toString();
 
 		if (chat_message.getText().toString().trim().length() == 0 ) {
-			FBToast.infoToast(getContext(),"input message ",FBToast.LENGTH_SHORT);
+			FBToast.infoToast(getContext(),getString(R.string.sendinput),FBToast.LENGTH_SHORT);
 			return;
 		} else {
-			FBToast.infoToast(getContext(),"send to message",FBToast.LENGTH_SHORT);
+			FBToast.infoToast(getContext(),getString(R.string.sendresult),FBToast.LENGTH_SHORT);
 			chat_message.setText("");
 		}
 
+		// 메세지 내용 최대 500자 제한
+		if(message.length() >= 500){
+			message = message.substring(0,500)+" ...";
+		}
+
 		HashMap<String,String> account = AccountInfo.getAccountInfo(getContext());
-		HashMap<String,Object> params = new HashMap<String,Object>();
-		String atxId = UUID.randomUUID().toString();
 		String ctm = System.currentTimeMillis()+"";
 
-		params.put("APP_KEY",account.get("APP_KEY"));
-		params.put("ATX_ID",atxId);
+        HashMap<String,Object> params = new HashMap<String,Object>();
+        params.put("APP_KEY",account.get("APP_KEY"));
+		params.put("ATX_ID",UUID.randomUUID().toString());
 		params.put("ATX_LOCAL_TIME",ctm);
 		params.put("ATX_STATUS","F");
 		params.put("FROM_APP_ID",account.get("APP_ID"));
@@ -94,6 +95,7 @@ public class MessageSend extends Fragment {
 		params.put("LAST_TALK_TEXT_IMAGE","");
 		params.put("LAST_TALK_TEXT_VOICE","");
 		params.put("TALK_TYPE","T");
+        params.put("TALK_ID",UUID.randomUUID().toString());
 
 		httpConnctService.sendMessage(params).enqueue(new Callback<DataVo>() {
 			@Override
@@ -102,42 +104,9 @@ public class MessageSend extends Fragment {
 					DataVo data = response.body();
 					if (data != null) {
 						if("S".equals(data.getRESULT_CODE())){
-
-							AppTalkMain atm = new AppTalkMain();
-							atm.setATX_ID(atxId);
-							atm.setATX_LOCAL_TIME(ctm);
-							atm.setATX_STATUS("F");
-							atm.setFROM_APP_ID(account.get("APP_ID"));
-							atm.setFROM_APP_KEY(account.get("APP_KEY"));
-							atm.setFROM_COUNTRY(account.get("COUNTRY"));
-							atm.setFROM_COUNTRY_NAME(account.get("COUNTRY_NAME"));
-							atm.setFROM_GENDER(account.get("GENDER"));
-							atm.setFROM_LANG(account.get("LANG"));
-							atm.setLAST_TALK_TEXT(message);
-							atm.setLAST_TALK_TEXT_IMAGE("");
-							atm.setLAST_TALK_TEXT_VOICE("");
-							atm.setTALK_TYPE("T");
-							atm.setTO_APP_ID("APP_ID");
-							atm.setTO_APP_KEY("APP_KEY");
-							atm.setTO_COUNTRY("KR");
-							atm.setTO_COUNTRY_NAME("South Korea");
-							atm.setTO_GENDER("W");
-							atm.setTO_LANG("ko");
-
-							AppTalkThread att = new AppTalkThread();
-							att.setATX_ID(atxId);
-							att.setTALK_ACCESS_LOCAL_TIME(ctm);
-							att.setTALK_APP_ID(account.get("APP_ID"));
-							att.setTALK_ID(UUID.randomUUID().toString());
-							att.setTALK_COUNTRY(account.get("COUNTRY"));
-							att.setTALK_COUNTRY_NAME(account.get("COUNTRY_NAME"));
-							att.setTALK_GENDER(account.get("GENDER"));
-							att.setTALK_TEXT(message);
-							att.setTALK_TEXT_IMAGE("");
-							att.setTALK_TEXT_VOICE("");
-							att.setTALK_TYPE("T");
-
-							saveDatabse(atm,att);
+							Logger.i("sendMessage Success : ");
+						}else{
+							Logger.e("sendMessage Fail : ");
 						}
 					}
 				}
@@ -148,24 +117,5 @@ public class MessageSend extends Fragment {
 				Logger.e("sendMessage Error : "+t.getMessage());
 			}
 		});
-	}
-
-	private void saveDatabse(AppTalkMain atm, AppTalkThread att) {
-		class SaveTask extends AsyncTask<Void, Void, Void> {
-			@Override
-			protected Void doInBackground(Void... voids) {
-				DatabaseClient.getInstance(getActivity()).getAppDataBase()
-						.AppTalkMainDao().insert(atm);
-
-				DatabaseClient.getInstance(getActivity()).getAppDataBase()
-						.AppTalkThreadDao().insert(att);
-				return null;
-			}
-			@Override
-			protected void onPostExecute(Void aVoid) {
-			}
-		}
-		SaveTask st = new SaveTask();
-		st.execute();
 	}
 }
