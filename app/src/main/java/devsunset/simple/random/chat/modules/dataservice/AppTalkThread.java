@@ -25,7 +25,7 @@ import java.io.Serializable;
 public class AppTalkThread  implements Serializable {
 
     private String ATX_ID;
-    private String TALK_ACCESS_LOCAL_TIME;
+    private String TALK_LOCAL_TIME;
     private String TALK_APP_ID;
     @PrimaryKey
     @NonNull
@@ -45,11 +45,11 @@ public class AppTalkThread  implements Serializable {
     public void setATX_ID(String aTX_ID) {
         ATX_ID = aTX_ID;
     }
-    public String getTALK_ACCESS_LOCAL_TIME() {
-        return TALK_ACCESS_LOCAL_TIME;
+    public String getTALK_LOCAL_TIME() {
+        return TALK_LOCAL_TIME;
     }
-    public void setTALK_ACCESS_LOCAL_TIME(String tALK_ACCESS_LOCAL_TIME) {
-        TALK_ACCESS_LOCAL_TIME = tALK_ACCESS_LOCAL_TIME;
+    public void setTALK_LOCAL_TIME(String tALK_LOCAL_TIME) {
+        TALK_LOCAL_TIME = tALK_LOCAL_TIME;
     }
     public String getTALK_APP_ID() {
         return TALK_APP_ID;

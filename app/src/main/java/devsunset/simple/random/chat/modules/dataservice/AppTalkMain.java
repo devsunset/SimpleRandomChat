@@ -36,6 +36,7 @@ public class AppTalkMain implements Serializable {
     private String FROM_GENDER;
     private String FROM_LANG;
     private String LAST_TALK_TEXT;
+    private String LAST_TALK_APP_ID;
     private String TALK_TYPE;
     private String TO_APP_ID;
     private String TO_APP_KEY;
@@ -103,6 +104,12 @@ public class AppTalkMain implements Serializable {
     }
     public void setLAST_TALK_TEXT(String lAST_TALK_TEXT) {
         LAST_TALK_TEXT = lAST_TALK_TEXT;
+    }
+    public String getLAST_TALK_APP_ID() {
+        return LAST_TALK_APP_ID;
+    }
+    public void setLAST_TALK_APP_ID(String lAST_TALK_APP_ID) {
+        LAST_TALK_APP_ID = lAST_TALK_APP_ID;
     }
     public String getTALK_TYPE() {
         return TALK_TYPE;

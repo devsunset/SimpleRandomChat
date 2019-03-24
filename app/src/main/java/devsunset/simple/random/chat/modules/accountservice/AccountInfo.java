@@ -44,7 +44,6 @@ public class AccountInfo {
 
         accountInfo.put("APP_ID",pref.getString("APP_ID", "-"));
         accountInfo.put("APP_KEY",pref.getString("APP_KEY", "-"));
-        accountInfo.put("APP_NUMBER",pref.getString("APP_NUMBER", "-"));
         accountInfo.put("APP_PHONE",pref.getString("APP_PHONE", "-"));
         accountInfo.put("APP_VER",pref.getString("APP_VER", "1.0"));
         accountInfo.put("COUNTRY",pref.getString("COUNTRY", "-"));
@@ -85,10 +84,6 @@ public class AccountInfo {
 
             if(accountInfo.containsKey("APP_KEY") && !"".equals(accountInfo.get("APP_KEY"))){
                 editor.putString("APP_KEY", accountInfo.get("APP_KEY").toString());
-            }
-
-            if(accountInfo.containsKey("APP_NUMBER") && !"".equals(accountInfo.get("APP_NUMBER"))){
-                editor.putString("APP_NUMBER", accountInfo.get("APP_NUMBER").toString());
             }
 
             if(accountInfo.containsKey("APP_PHONE") && !"".equals(accountInfo.get("APP_PHONE"))){

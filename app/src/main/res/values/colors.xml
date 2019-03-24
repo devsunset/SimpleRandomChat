@@ -16,9 +16,9 @@
     <color name="blue">#0000FF</color>
     <color name="transparent">#00000000</color>
     <color name="content_bg">#3869b8</color>
-    <color name="tab_enable1">#FF0000</color>
-    <color name="tab_enable2">#0000FF</color>
-    <color name="tab_enable3">#4db849</color>
+    <color name="tab_enable1">#e18745</color>
+    <color name="tab_enable2">#4db849</color>
+    <color name="tab_enable3">#e18745</color>
     <color name="tab_disable">#D7D7D7</color>
     <color name="tab_background">#d8eff0</color>
     <color name="tab_text_disable">#000000</color>

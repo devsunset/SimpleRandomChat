@@ -5,19 +5,26 @@
  */
 package devsunset.simple.random.chat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
@@ -28,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -53,9 +61,6 @@ import retrofit2.Response;
  */
 
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
-	//private final int MY_PERMISSIONS_REQUEST_CODE = 1;
-	//TelephonyManager telephonyManager;
-
 	HttpConnectService httpConnctService = null;
 	private LovelySaveStateHandler saveStateHandler;
 	private  int INIT_CHECK = 0;
@@ -76,32 +81,75 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
 		httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 		saveStateHandler = new LovelySaveStateHandler();
-
-		/*if (checkPermissions()) {
-			startApplication();
-			telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("msg");
-			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					setPermissions();
-				}
-			});
-			builder.show();
-		}*/
-
 		progress.setProgress(2);
 
-		//최초 설치 여부 확인
-		if("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))){
-			showGenderChoiceDialog();
-		}else{
-			getNoticeProcess();
-		}
+		// 권한 획득
+		//Single permission:
+		Permissions.check(this/*context*/, Manifest.permission.READ_PHONE_STATE, null, new PermissionHandler() {
+			@Override
+			public void onGranted() {
+				int step = 0;
+				String phoneNumber ="";
+				TelephonyManager telephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+				try {
+					if (telephony.getLine1Number() != null) {
+						phoneNumber = telephony.getLine1Number();
+						step = 1;
+					} else {
+						if (telephony.getSimSerialNumber() != null) {
+							phoneNumber = telephony.getSimSerialNumber();
+							step = 2;
+						}
+					}
+				}catch(SecurityException e) {
+					finish();
+				}catch (Exception e){
+					finish();
+				}
+
+				if(step == 1 && phoneNumber.startsWith("+82")){
+					phoneNumber = phoneNumber.replace("+82", "0");
+				}
+
+				if(step == 1){
+					phoneNumber = PhoneNumberUtils.formatNumber(phoneNumber);
+				}
+
+				if(step == 0){
+					phoneNumber = "XXX";
+				}
+
+				HashMap<String,String> myInfo = new HashMap<String,String>();
+				myInfo.put("APP_PHONE", phoneNumber);
+				myInfo.put("INITIALIZE","Y");
+				AccountInfo.setAccountInfo(getApplicationContext(),myInfo);
+
+				//최초 설치 여부 확인
+				if("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))){
+					showGenderChoiceDialog();
+				}else{
+					getNoticeProcess();
+				}
+			}
+
+			@Override
+			public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+				finish();
+			}
+		});
+
+//		Multiple permissions:
+//		String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+//		Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
+//			@Override
+//			public void onGranted() {
+//			}
+//		});
 	}
 
+	/**
+	 * 성별 선택 팝업 처리
+	 */
 	private void showGenderChoiceDialog() {
 		ArrayAdapter<GenderOption> adapter = new GenderAdapter(this, loadGenderOptions());
 		Dialog dlg = new LovelyChoiceDialog(this)
@@ -121,6 +169,10 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		});
 	}
 
+	/**
+	 * 성별 option 값 구성
+	 * @return
+	 */
 	private List<GenderOption> loadGenderOptions() {
 		List<GenderOption> result = new ArrayList<>();
 		String[] raw = getResources().getStringArray(R.array.gender);
@@ -131,9 +183,12 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		return result;
 	}
 
+	/**
+	 * 최초 설치 프로세스 진행
+	 * @param strGender
+	 */
 	private void setAppInitProcess(String strGender){
 		INIT_CHECK  = 1;
-
 		progress.setProgress(3);
 
 		// 최초 설정 여부 저장
@@ -143,9 +198,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
 		HashMap<String,String> myInfo = new HashMap<String,String>();
 		myInfo.put("APP_ID",UUID.randomUUID().toString());
-		myInfo.put("APP_NUMBER",Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID));
 		myInfo.put("GENDER",strGender);
-		//myInfo.put("APP_PHONE", getPhoneNumber(this.getApplicationContext()));
 		myInfo.put("COUNTRY",strCountry);
 		myInfo.put("LANG",strLanguage);
 		myInfo.put("INITIALIZE","Y");
@@ -183,10 +236,13 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		});
 	}
 
-    //공지 사항 조회 처리
+	/**
+	 * 공지 사항 조회 처리
+	 */
 	private void getNoticeProcess(){
-
-		progress.setProgress(5);
+		// random
+		Random rnd = new Random();
+		progress.setProgress(rnd.nextInt(7)+1);
 
 		httpConnctService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
 			@Override
@@ -212,12 +268,14 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		});
 	}
 
+	/**
+	 * 공지 사항 팝업 출력
+	 * @param params
+	 */
 	private void showInfoDialog(List<HashMap<String,Object>> params) {
-
 		progress.setProgress(10);
 
 		if(params !=null && !params.isEmpty() && params.size() > 0 && !params.get(0).containsKey("EMPTY_DATA")){
-
 			CharSequence cs = new StringBuffer((String)params.get(0).get("NOTICE_TXT"));
 			int noticeId = Integer.parseInt((String)params.get(0).get("NOTICE_ID"));
 
@@ -246,48 +304,12 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		}
 	}
 
+	/**
+	 * Lock 화면으로 이동 처리
+	 */
 	private void initActivity(){
 		Intent intent = new Intent(this, LockActivity.class);
 		startActivity(intent);
 		finish();
 	}
-
-	/*
-	private boolean checkPermissions() {
-		if (ActivityCompat.checkSelfPermission(this,
-				Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		if (requestCode != MY_PERMISSIONS_REQUEST_CODE) {
-			return;
-		}
-		boolean isGranted = true;
-		for (int result : grantResults) {
-			if (result != PackageManager.PERMISSION_GRANTED) {
-				isGranted = false;
-				break;
-			}
-		}
-
-		if (isGranted) {
-			startApplication();
-		} else {
-			Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
-		}
-	}
-
-	private void setPermissions() {
-		ActivityCompat.requestPermissions(this, new String[]{
-				Manifest.permission.READ_PHONE_STATE        }, MY_PERMISSIONS_REQUEST_CODE);
-	}
-
-	public void startApplication() {
-		telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		//String deviceId = telephonyManager.getDeviceId();
-	}*/
 }

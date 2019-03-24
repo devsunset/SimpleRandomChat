@@ -130,6 +130,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     atm.setFROM_GENDER(remoteMessage.getData().get("FROM_GENDER"));
                     atm.setFROM_LANG(remoteMessage.getData().get("FROM_LANG"));
                     atm.setLAST_TALK_TEXT(remoteMessage.getData().get("LAST_TALK_TEXT"));
+                    atm.setLAST_TALK_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
                     atm.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
                     atm.setTO_APP_ID(remoteMessage.getData().get("TO_APP_ID"));
                     atm.setTO_APP_KEY(remoteMessage.getData().get("TO_APP_KEY"));
@@ -140,7 +141,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
                     AppTalkThread att = new AppTalkThread();
                     att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
-                    att.setTALK_ACCESS_LOCAL_TIME(ctm);
+                    att.setTALK_LOCAL_TIME(ctm);
                     att.setTALK_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
                     att.setTALK_ID(remoteMessage.getData().get("TALK_ID"));
                     att.setTALK_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
