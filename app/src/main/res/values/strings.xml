@@ -28,8 +28,17 @@
     <string name="sendinput">Please enter a message.</string>
     <string name="sendresult">Send complete.</string>
 
+    <string name="all">ALL</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="local">Local</string>
+    <string name="world">World</string>
+    <string name="newmessagereceive">Do not accept new messages</string>
+
+
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">Receive Message</string>
+
 
 
 

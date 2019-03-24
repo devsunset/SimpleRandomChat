@@ -13,12 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.github.angads25.toggle.interfaces.OnToggledListener;
+import com.github.angads25.toggle.model.ToggleableView;
+import com.github.angads25.toggle.widget.LabeledSwitch;
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
 
 import java.util.HashMap;
 import java.util.UUID;
 
+import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -40,12 +44,23 @@ import retrofit2.Response;
  * @since SimpleRandomChat 1.0
  */
 
-public class MessageSend extends Fragment {
+public class MessageSend extends Fragment{
 
 	HttpConnectService httpConnctService = null;
 
 	@BindView(R.id.chat_message)
 	EditText chat_message;
+
+	@BindView(R.id.toogleTargetGender)
+	ToggleSwitch toogleTargetGender;
+
+	@BindView(R.id.toogleTargetCountry)
+	ToggleSwitch toogleTargetCountry;
+
+
+	@BindView(R.id.newMessageRecived)
+	LabeledSwitch switchNewMessageReceive;
+
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +71,36 @@ public class MessageSend extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.app_message_send, container, false);
 		ButterKnife.bind(this, v);
+
+
+		toogleTargetGender.setCheckedTogglePosition(1);
+		toogleTargetCountry.setCheckedTogglePosition(1);
+
+		toogleTargetGender.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
+			@Override
+			public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+				// Write your code ...
+				FBToast.infoToast(getContext(),"xxx - "+position,FBToast.LENGTH_SHORT);
+			}
+		});
+
+		toogleTargetCountry.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
+			@Override
+			public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+				// Write your code ...
+				FBToast.infoToast(getContext(),"zzz - "+position,FBToast.LENGTH_SHORT);
+			}
+		});
+
+		switchNewMessageReceive.setOn(true);
+		switchNewMessageReceive.setOnToggledListener(new OnToggledListener() {
+			@Override
+			public void onSwitched(ToggleableView toggleableView, boolean isOn) {
+				// Implement your switching logic here
+				FBToast.infoToast(getContext(),"yyy - "+isOn,FBToast.LENGTH_SHORT);
+			}
+		});
+
 		return v;
 	}
 

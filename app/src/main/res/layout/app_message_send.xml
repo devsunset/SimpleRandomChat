@@ -1,8 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/install_header"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/install_header"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                android:id="@+id/toogleTargetGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                custom:activeBgColor="@android:color/holo_blue_dark"
+                custom:activeTextColor="@android:color/white"
+                custom:inactiveBgColor="@color/common_table_line_gray"
+                custom:inactiveTextColor="@android:color/black"
+                custom:separatorColor="@color/white"
+                custom:textToggleCenter="@string/man"
+                custom:textToggleLeft="@string/all"
+                custom:textToggleRight="@string/woman"
+                custom:toggleWidth="70dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@color/install_header"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                android:id="@+id/toogleTargetCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                custom:activeBgColor="@android:color/holo_blue_dark"
+                custom:activeTextColor="@android:color/white"
+                custom:inactiveBgColor="@color/common_table_line_gray"
+                custom:inactiveTextColor="@android:color/black"
+                custom:separatorColor="@color/white"
+                custom:textToggleLeft="@string/local"
+                custom:textToggleRight="@string/world"
+                custom:toggleWidth="80dp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,5 +83,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/send" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.github.angads25.toggle.widget.LabeledSwitch
+            android:id="@+id/newMessageRecived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="14sp"
+            app:on="false"
+            app:colorBorder="@color/colorAccent"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/newmessagereceive"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
