@@ -28,6 +28,9 @@ public interface AppTalkMainDao {
     @Query("SELECT * FROM APP_TALK_MAIN ORDER BY ATX_LOCAL_TIME DESC")
     List<AppTalkMain> getAll();
 
+    @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_ID = :atxId")
+    List<AppTalkMain> findByAtxId(String atxId);
+
     @Insert
     void insert(AppTalkMain appTalkMain);
 

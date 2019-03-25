@@ -27,6 +27,11 @@
             android:configChanges="orientation"
             android:windowSoftInputMode="stateAlwaysVisible"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="devsunset.simple.random.chat.LockSetting"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:screenOrientation="portrait"/>
 
         <!-- [START firebase_service] -->
         <service android:name=".modules.fcmservice.MyFirebaseMessagingService">

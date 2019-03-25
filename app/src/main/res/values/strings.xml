@@ -33,12 +33,22 @@
     <string name="woman">Woman</string>
     <string name="local">Local</string>
     <string name="world">World</string>
-    <string name="newmessagereceive">Do not accept new messages</string>
-
+    <string name="newmessagereceive">Accept new messages</string>
 
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">Receive Message</string>
 
+    <string name="alarm_title">Notification to Message Reception </string>
+    <string name="alarm">Notification</string>
+    <string name="atype_msg">Phone default + Pop-up notification</string>
+    <string name="btype_msg">Phone (No sound,No vibration) + Pop-up notification</string>
+    <string name="ctype_msg">Pop-up notification</string>
+    <string name="dtype_msg">No notification</string>
+    <string name="byconfirm_msg">Do not ask when deleting</string>
+    <string name="replynewmessagehide_msg">Hide from the answered message list</string>
+    <string name="lockpwd_msg">Screen lock</string>
+    <string name="passwordsuccess">Success - Password setup success</string>
+    <string name="passwordfail">Fail - Password do not match</string>
 
 
 

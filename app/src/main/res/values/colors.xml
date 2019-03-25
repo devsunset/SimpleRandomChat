@@ -23,21 +23,7 @@
     <color name="tab_background">#d8eff0</color>
     <color name="tab_text_disable">#000000</color>
     <color name="tab_bg">#FFFFFF</color>
-    <color name="common_table_line">#e18745</color>
-
-    <!-- ============================== -->
-    <!-- Common Drawable -->
-    <!-- ============================== -->
-    <drawable name="black">#000000</drawable>
-    <drawable name="white">#FFFFFF</drawable>
-    <drawable name="white_smoke">#F5F5F5</drawable>
-    <drawable name="gray">#808080</drawable>
-    <drawable name="dark_gray">#222222</drawable>
-    <drawable name="light_gray">#D3D3D3</drawable>
-    <drawable name="orange">#FF9933</drawable>
-    <drawable name="red">#FF0000</drawable>
-    <drawable name="blue">#0000FF</drawable>
-    <drawable name="transparent">#00000000</drawable>
+    <color name="common_table_line">#009688</color>
 
     <color name="common_table_label">#f2f2f2</color>
     <color name="common_table_line_gray">#c4d0e5</color>
@@ -52,5 +38,19 @@
     <color name="darkRed">#D32F2F</color>
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#727272</color>
+
+    <!-- ============================== -->
+    <!-- Common Drawable -->
+    <!-- ============================== -->
+    <drawable name="black">#000000</drawable>
+    <drawable name="white">#FFFFFF</drawable>
+    <drawable name="white_smoke">#F5F5F5</drawable>
+    <drawable name="gray">#808080</drawable>
+    <drawable name="dark_gray">#222222</drawable>
+    <drawable name="light_gray">#D3D3D3</drawable>
+    <drawable name="orange">#FF9933</drawable>
+    <drawable name="red">#FF0000</drawable>
+    <drawable name="blue">#0000FF</drawable>
+    <drawable name="transparent">#00000000</drawable>
 
 </resources>

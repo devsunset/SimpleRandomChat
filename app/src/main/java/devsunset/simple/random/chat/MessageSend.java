@@ -57,10 +57,8 @@ public class MessageSend extends Fragment{
 	@BindView(R.id.toogleTargetCountry)
 	ToggleSwitch toogleTargetCountry;
 
-
 	@BindView(R.id.newMessageRecived)
 	LabeledSwitch switchNewMessageReceive;
-
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,38 +70,86 @@ public class MessageSend extends Fragment{
 		View v = inflater.inflate(R.layout.app_message_send, container, false);
 		ButterKnife.bind(this, v);
 
+		HashMap<String,String> account = AccountInfo.getAccountInfo(getContext());
 
-		toogleTargetGender.setCheckedTogglePosition(1);
-		toogleTargetCountry.setCheckedTogglePosition(1);
+		if("A".equals(account.get("SET_SEND_GENDER"))){
+			toogleTargetGender.setCheckedTogglePosition(0);
+		}else if("M".equals(account.get("SET_SEND_GENDER"))){
+			toogleTargetGender.setCheckedTogglePosition(1);
+		}else{
+			toogleTargetGender.setCheckedTogglePosition(2);
+		}
+
+		if("L".equals(account.get("SET_SEND_COUNTRY"))){
+			toogleTargetCountry.setCheckedTogglePosition(0);
+		}else{
+			toogleTargetCountry.setCheckedTogglePosition(1);
+		}
+
+		if("Y".equals(account.get("SET_NEW_RECEIVE_YN"))){
+			switchNewMessageReceive.setOn(true);
+		}else{
+			switchNewMessageReceive.setOn(false);
+		}
 
 		toogleTargetGender.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
 			@Override
 			public void onToggleSwitchChangeListener(int position, boolean isChecked) {
-				// Write your code ...
-				FBToast.infoToast(getContext(),"xxx - "+position,FBToast.LENGTH_SHORT);
+				appInfoSetting();
 			}
 		});
 
 		toogleTargetCountry.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
 			@Override
 			public void onToggleSwitchChangeListener(int position, boolean isChecked) {
-				// Write your code ...
-				FBToast.infoToast(getContext(),"zzz - "+position,FBToast.LENGTH_SHORT);
+				appInfoSetting();
 			}
 		});
 
-		switchNewMessageReceive.setOn(true);
 		switchNewMessageReceive.setOnToggledListener(new OnToggledListener() {
 			@Override
 			public void onSwitched(ToggleableView toggleableView, boolean isOn) {
-				// Implement your switching logic here
-				FBToast.infoToast(getContext(),"yyy - "+isOn,FBToast.LENGTH_SHORT);
+				appInfoSetting();
 			}
 		});
 
 		return v;
 	}
 
+	/**
+	 * App Info Setting
+	 */
+	private void appInfoSetting(){
+		HashMap<String,String> params = new HashMap<String,String>();
+		int positionGender = toogleTargetGender.getCheckedTogglePosition();
+		int positioCountry = toogleTargetCountry.getCheckedTogglePosition();
+
+		if(positionGender == 0){
+			params.put("SET_SEND_GENDER","A");
+		}else if(positionGender == 1){
+			params.put("SET_SEND_GENDER","M");
+		}else{
+			params.put("SET_SEND_GENDER","W");
+		}
+
+		if(positioCountry == 0){
+			params.put("SET_SEND_COUNTRY","L");
+		}else{
+			params.put("SET_SEND_COUNTRY","W");
+		}
+
+		if(switchNewMessageReceive.isOn()){
+			params.put("SET_NEW_RECEIVE_YN","Y");
+		}else{
+			params.put("SET_NEW_RECEIVE_YN","N");
+		}
+
+		AccountInfo.setAccountInfo(getContext(),params);
+	}
+
+	/**
+	 * message send button click
+	 */
 	@OnClick(R.id.btnMessageRandomSend)
 	void onBtnMessageRandomSendClicked() {
 
@@ -126,7 +172,6 @@ public class MessageSend extends Fragment{
 		String ctm = System.currentTimeMillis()+"";
 
         HashMap<String,Object> params = new HashMap<String,Object>();
-        params.put("APP_KEY",account.get("APP_KEY"));
 		params.put("ATX_ID",UUID.randomUUID().toString());
 		params.put("ATX_LOCAL_TIME",ctm);
 		params.put("ATX_STATUS","F");
@@ -141,6 +186,7 @@ public class MessageSend extends Fragment{
 		params.put("LAST_TALK_TEXT_VOICE","");
 		params.put("TALK_TYPE","T");
         params.put("TALK_ID",UUID.randomUUID().toString());
+        params.putAll(account);
 
 		httpConnctService.sendMessage(params).enqueue(new Callback<DataVo>() {
 			@Override

@@ -54,7 +54,7 @@
                 custom:activeTextColor="@android:color/white"
                 custom:inactiveBgColor="@color/common_table_line_gray"
                 custom:inactiveTextColor="@android:color/black"
-                custom:separatorColor="@color/white"
+                custom:separatorColor="@color/black"
                 custom:textToggleLeft="@string/local"
                 custom:textToggleRight="@string/world"
                 custom:toggleWidth="80dp" />

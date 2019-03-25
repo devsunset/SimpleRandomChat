@@ -33,10 +33,21 @@
     <string name="woman">여자</string>
     <string name="local">국내</string>
     <string name="world">해외</string>
-    <string name="newmessagereceive">새로운 메세지 받지 않기</string>
-
+    <string name="newmessagereceive">새로운 메세지 받기</string>
 
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">메세지 도착</string>
+
+    <string name="alarm_title">메세지 수신 알림 설정</string>
+    <string name="alarm">알림</string>
+    <string name="atype_msg">단말 기본 설정 알림 + 팝업 알림</string>
+    <string name="btype_msg">단말 알림(무음,무진동) + 팝업 알림</string>
+    <string name="ctype_msg">팝업 알림</string>
+    <string name="dtype_msg">알림 없음</string>
+    <string name="byconfirm_msg">삭제 시 물어보지 않기</string>
+    <string name="replynewmessagehide_msg">답변한 메세지 목록에서 숨기기</string>
+    <string name="lockpwd_msg">화면 잠금</string>
+    <string name="passwordsuccess">비밀번호가 정상적으로 설정 되었습니다.</string>
+    <string name="passwordfail">비밀 번호가 일치 하지 않습니다.</string>
 
 </resources>

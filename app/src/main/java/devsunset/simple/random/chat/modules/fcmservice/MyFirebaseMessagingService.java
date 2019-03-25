@@ -112,7 +112,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     String talkType = "X";
                     HashMap<String,String> account = AccountInfo.getAccountInfo(getApplicationContext());
 
-                    Logger.e("==============================="+remoteMessage.getData().get("ATX_ID"));
                     AppTalkMain atm = new AppTalkMain();
                     atm.setATX_ID(remoteMessage.getData().get("ATX_ID"));
                     atm.setATX_LOCAL_TIME(ctm);
@@ -293,20 +292,35 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
+    /**
+     * 최초 메세지 처리
+     * @param atm
+     * @param att
+     * @param message
+     * @param talkType
+     */
     private void saveFirstMessage(AppTalkMain atm, AppTalkThread att,String message,String talkType) {
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
-                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkMainDao().insert(atm);
+                List<AppTalkMain> existDataCheck = DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().findByAtxId(atm.getATX_ID());
 
-                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkThreadDao().insert(att);
+                // 방어코딩 서버에서 FROM - TO 동일한지 확인할수 있는 값이 없는 관계로 단말에서 예외처리
+                if(existDataCheck !=null && !existDataCheck.isEmpty()){
+                    Logger.d("First Message FROM == TO Skip...");
+                }else{
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkMainDao().insert(atm);
 
-                if("P".equals(talkType) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
-                    if(isAppIsInBackground(getApplicationContext())){
-                        sendNotification(""); // message
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkThreadDao().insert(att);
+
+                    if("P".equals(talkType) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                            || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                        if(isAppIsInBackground(getApplicationContext())){
+                            sendNotification(""); // message
+                        }
                     }
                 }
                 return null;
@@ -341,6 +355,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         st.execute();
     }
 
+    /**
+     * Service Background 여부 판단
+     * @param context
+     * @return
+     */
     private boolean isAppIsInBackground(Context context) {
         boolean isInBackground = true;
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

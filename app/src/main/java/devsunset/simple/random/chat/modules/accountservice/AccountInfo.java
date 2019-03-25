@@ -52,12 +52,12 @@ public class AccountInfo {
         accountInfo.put("LANG",pref.getString("LANG", "-"));
         accountInfo.put("SET_ALARM_YN",pref.getString("SET_ALARM_YN", "Y"));
         accountInfo.put("SET_ALARM_NOTI_YN",pref.getString("SET_ALARM_NOTI_YN", "N"));
-        accountInfo.put("SET_ALARM_POPUP_YN",pref.getString("SET_ALARM_POPUP_YN", "Y"));
-        accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "Y"));
+        accountInfo.put("SET_ALARM_POPUP_YN",pref.getString("SET_ALARM_POPUP_YN", "N"));
+        accountInfo.put("SET_BYE_CONFIRM_YN",pref.getString("SET_BYE_CONFIRM_YN", "N"));
         accountInfo.put("SET_LOCK_PWD",pref.getString("SET_LOCK_PWD", "-"));
         accountInfo.put("SET_LOCK_YN",pref.getString("SET_LOCK_YN", "N"));
-        accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "N"));
-        accountInfo.put("SET_SEND_COUNTRY",pref.getString("SET_SEND_COUNTRY", "N"));
+        accountInfo.put("SET_NEW_RECEIVE_YN",pref.getString("SET_NEW_RECEIVE_YN", "Y"));
+        accountInfo.put("SET_SEND_COUNTRY",pref.getString("SET_SEND_COUNTRY", "L"));
         accountInfo.put("SET_SEND_GENDER",pref.getString("SET_SEND_GENDER", "A"));
         accountInfo.put("SET_SEND_LIST_HIDE_YN",pref.getString("SET_SEND_LIST_HIDE_YN", "N"));
         return accountInfo;
@@ -199,7 +199,7 @@ public class AccountInfo {
      */
     public static String getContryName (String country){
 
-        String countryName = "OverSea";
+        String countryName = "World";
 
         HashMap<String,String> countryMap = new HashMap<String,String>();
         countryMap.put("AF","Afghanistan");

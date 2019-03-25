@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.github.NaimishTrivedi:FBToast:1.0'
     //optview
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.0'
+    implementation 'com.github.GoodieBag:Pinview:v1.3'
     //dialog
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
     //room
@@ -77,4 +78,5 @@ dependencies {
     //togglebutton
     implementation 'us.belka:androidtoggleswitch:1.2.2'
     implementation 'com.github.angads25:toggle:1.1.0'
+
 }
