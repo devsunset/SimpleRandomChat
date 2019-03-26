@@ -243,8 +243,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                             .setSound(defaultSoundUri)
                             .setDefaults(NotificationCompat.DEFAULT_ALL)
                             .setVibrate(new long[]{0L})
-                            .setAutoCancel(true)
-                            .setContentIntent(pendingIntent);
+                            //.setContentIntent(pendingIntent)
+                            .setAutoCancel(true);
 
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -281,7 +281,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             mBuilder.setContentTitle(getString(R.string.default_received_message))
                     .setContentText(messageBody)
-                    .setContentIntent(pendingIntent)
+                    //.setContentIntent(pendingIntent)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.ic_launcher)
                     .setLargeIcon(mLargeIcon);
