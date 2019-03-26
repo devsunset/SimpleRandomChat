@@ -25,19 +25,20 @@ import java.io.Serializable;
 public class AppTalkThread  implements Serializable {
 
     private String ATX_ID;
-    private String TALK_LOCAL_TIME;
     private String TALK_APP_ID;
+    private String TALK_LOCAL_TIME;
     @PrimaryKey
     @NonNull
     private String TALK_ID;
     private String TALK_COUNTRY;
     private String TALK_COUNTRY_NAME;
     private String TALK_GENDER;
+    private String TALK_LANG;
     private String TALK_TEXT;
     private String TALK_TEXT_IMAGE;
     private String TALK_TEXT_VOICE;
+    private String TALK_TRANS_TEXT;
     private String TALK_TYPE;
-
 
     public String getATX_ID() {
         return ATX_ID;
@@ -45,17 +46,17 @@ public class AppTalkThread  implements Serializable {
     public void setATX_ID(String aTX_ID) {
         ATX_ID = aTX_ID;
     }
-    public String getTALK_LOCAL_TIME() {
-        return TALK_LOCAL_TIME;
-    }
-    public void setTALK_LOCAL_TIME(String tALK_LOCAL_TIME) {
-        TALK_LOCAL_TIME = tALK_LOCAL_TIME;
-    }
     public String getTALK_APP_ID() {
         return TALK_APP_ID;
     }
     public void setTALK_APP_ID(String tALK_APP_ID) {
         TALK_APP_ID = tALK_APP_ID;
+    }
+    public String getTALK_LOCAL_TIME() {
+        return TALK_LOCAL_TIME;
+    }
+    public void setTALK_LOCAL_TIME(String tALK_LOCAL_TIME) {
+        TALK_LOCAL_TIME = tALK_LOCAL_TIME;
     }
     public String getTALK_ID() {
         return TALK_ID;
@@ -81,6 +82,12 @@ public class AppTalkThread  implements Serializable {
     public void setTALK_GENDER(String tALK_GENDER) {
         TALK_GENDER = tALK_GENDER;
     }
+    public String getTALK_LANG() {
+        return TALK_LANG;
+    }
+    public void setTALK_LANG(String tALK_LANG) {
+        TALK_LANG = tALK_LANG;
+    }
     public String getTALK_TEXT() {
         return TALK_TEXT;
     }
@@ -98,6 +105,12 @@ public class AppTalkThread  implements Serializable {
     }
     public void setTALK_TEXT_VOICE(String tALK_TEXT_VOICE) {
         TALK_TEXT_VOICE = tALK_TEXT_VOICE;
+    }
+    public String getTALK_TRANS_TEXT() {
+        return TALK_TRANS_TEXT;
+    }
+    public void setTALK_TRANS_TEXT(String tALK_TRANS_TEXT) {
+        TALK_TRANS_TEXT = tALK_TRANS_TEXT;
     }
     public String getTALK_TYPE() {
         return TALK_TYPE;

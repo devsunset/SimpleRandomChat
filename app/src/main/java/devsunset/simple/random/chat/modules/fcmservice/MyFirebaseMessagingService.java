@@ -15,27 +15,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBCustomToast;
-import com.tfb.fbtoast.FBToast;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import devsunset.simple.random.chat.LockActivity;
-import devsunset.simple.random.chat.MainActivity;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
@@ -109,7 +104,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 String ctm = System.currentTimeMillis()+"";
 
                 if("F".equals(remoteMessage.getData().get("ATX_STATUS"))){
-                    String talkType = "X";
+                    String talkStatus = "X";
                     HashMap<String,String> account = AccountInfo.getAccountInfo(getApplicationContext());
 
                     AppTalkMain atm = new AppTalkMain();
@@ -117,10 +112,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     atm.setATX_LOCAL_TIME(ctm);
                     if(account.get("APP_ID").equals(remoteMessage.getData().get("FROM_APP_ID"))){
                         atm.setATX_STATUS("F");
-                        talkType = "F";
+                        talkStatus = "F";
                     }else{
                         atm.setATX_STATUS("P");
-                        talkType = "P";
+                        talkStatus = "P";
                     }
                     atm.setFROM_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
                     atm.setFROM_APP_KEY(remoteMessage.getData().get("FROM_APP_KEY"));
@@ -140,16 +135,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
                     AppTalkThread att = new AppTalkThread();
                     att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
-                    att.setTALK_LOCAL_TIME(ctm);
                     att.setTALK_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
+                    att.setTALK_LOCAL_TIME(ctm);
                     att.setTALK_ID(remoteMessage.getData().get("TALK_ID"));
                     att.setTALK_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
                     att.setTALK_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
                     att.setTALK_GENDER(remoteMessage.getData().get("FROM_GENDER"));
+                    att.setTALK_LANG(remoteMessage.getData().get("FROM_LANG"));
                     att.setTALK_TEXT(remoteMessage.getData().get("LAST_TALK_TEXT"));
+                    //TALK_TEXT_IMAGE
+                    //TALK_TEXT_VOICE
+                    //TALK_TRANS_TEXT
                     att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
 
-                    saveFirstMessage(atm,att,remoteMessage.getNotification().getBody(),talkType);
+                    saveFirstMessage(atm,att,remoteMessage.getNotification().getBody(),talkStatus);
                 }
             }else{
                 Logger.d("Message Notification  : remoteMessage.getNotification() != null && remoteMessage.getData() != null) && ATX_STATUS NOT EXIST");
@@ -297,9 +296,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param atm
      * @param att
      * @param message
-     * @param talkType
+     * @param talkStatus
      */
-    private void saveFirstMessage(AppTalkMain atm, AppTalkThread att,String message,String talkType) {
+    private void saveFirstMessage(AppTalkMain atm, AppTalkThread att,String message,String talkStatus) {
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -316,7 +315,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().insert(att);
 
-                    if("P".equals(talkType) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                    if("P".equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                             || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
                         if(isAppIsInBackground(getApplicationContext())){
                             sendNotification(""); // message
@@ -328,7 +327,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             @Override
             protected void onPostExecute(Void aVoid) {
                 boolean POPUP_FLAG = true;
-                if("P".equals(talkType) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                if("P".equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                         || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
                     if(!isAppIsInBackground(getApplicationContext())){
                         POPUP_FLAG = false;
@@ -341,7 +340,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     }
                 }
 
-                if("P".equals(talkType) && POPUP_FLAG && "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
+                if("P".equals(talkStatus) && POPUP_FLAG && "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
                     fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
