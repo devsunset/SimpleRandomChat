@@ -11,13 +11,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.widget.ArrayAdapter;
@@ -197,7 +194,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		String strLanguage = systemLocale.getLanguage();
 
 		HashMap<String,String> myInfo = new HashMap<String,String>();
-		myInfo.put("APP_ID",UUID.randomUUID().toString());
+		myInfo.put("APP_ID","UID_"+UUID.randomUUID().toString());
 		myInfo.put("GENDER",strGender);
 		myInfo.put("COUNTRY",strCountry);
 		myInfo.put("LANG",strLanguage);

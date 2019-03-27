@@ -53,4 +53,11 @@
     <drawable name="blue">#0000FF</drawable>
     <drawable name="transparent">#00000000</drawable>
 
+    <drawable name="newmessage_bg">#4db849</drawable>
+    <drawable name="man_bg">#d8f6fe</drawable>
+    <drawable name="woman_bg">#ffdbc3</drawable>
+    <drawable name="trash_bg">#D3D3D3</drawable>
+
+
+
 </resources>

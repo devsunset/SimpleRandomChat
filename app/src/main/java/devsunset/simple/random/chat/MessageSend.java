@@ -172,7 +172,7 @@ public class MessageSend extends Fragment{
 		String ctm = System.currentTimeMillis()+"";
 
         HashMap<String,Object> params = new HashMap<String,Object>();
-		params.put("ATX_ID",UUID.randomUUID().toString());
+		params.put("ATX_ID","ATX_"+UUID.randomUUID().toString());
 		params.put("ATX_LOCAL_TIME",ctm);
 		params.put("ATX_STATUS","F");
 		params.put("FROM_APP_ID",account.get("APP_ID"));
@@ -185,7 +185,7 @@ public class MessageSend extends Fragment{
 		params.put("LAST_TALK_TEXT_IMAGE","");
 		params.put("LAST_TALK_TEXT_VOICE","");
 		params.put("TALK_TYPE","T");
-        params.put("TALK_ID",UUID.randomUUID().toString());
+        params.put("TALK_ID","TTD_"+UUID.randomUUID().toString());
         params.putAll(account);
 
 		httpConnctService.sendMessage(params).enqueue(new Callback<DataVo>() {

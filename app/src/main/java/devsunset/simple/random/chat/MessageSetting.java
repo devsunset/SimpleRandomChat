@@ -11,8 +11,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
@@ -25,8 +23,6 @@ import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * <PRE>
