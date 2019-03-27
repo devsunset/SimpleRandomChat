@@ -182,9 +182,9 @@ public class MessageSend extends Fragment{
 		params.put("FROM_GENDER",account.get("GENDER"));
 		params.put("FROM_LANG",account.get("LANG"));
 		params.put("LAST_TALK_TEXT",message);
-		params.put("LAST_TALK_TEXT_IMAGE","");
-		params.put("LAST_TALK_TEXT_VOICE","");
-		params.put("TALK_TYPE","T");
+		params.put("TALK_TEXT_IMAGE","");
+		params.put("TALK_TEXT_VOICE","");
+		params.put("LAST_TALK_TYPE","T");
         params.put("TALK_ID","TTD_"+UUID.randomUUID().toString());
         params.putAll(account);
 
