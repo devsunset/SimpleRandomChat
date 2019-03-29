@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
@@ -57,12 +59,16 @@ public class ChatActivity extends Activity {
 
     HttpConnectService httpConnctService = null;
 
+    @BindView(R.id.replyArea)
+    LinearLayout replyArea;
+
     @BindView(R.id.reply_message)
     EditText reply_message;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
+
     public static String APP_ID = "";
     public static String ATX_ID = "";
     public static String TO_APP_KEY = "";
@@ -132,6 +138,14 @@ public class ChatActivity extends Activity {
                         }
                         messageArrayList.add(mi);
                     }
+
+                    // 마지막 대화가 자신인 경우 숨기기
+                    if (APP_ID.equals(appTalkThread.get(appTalkThread.size()-1).getTALK_APP_ID())) {
+                        replyArea.setVisibility(View.GONE);
+                    }else{
+                        replyArea.setVisibility(View.VISIBLE);
+                    }
+
                 } else {
                     MessageItem mi = new MessageItem();
                     mi.setDrawableId(R.drawable.empty_message);
