@@ -305,7 +305,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     /**
-     * 답변 메세지 처리
+     * 최 메세지 처리
      * @param atm
      * @param att
      * @param message
@@ -356,7 +356,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     /**
-     * 최초 메세지 처리
+     * 답변 메세지 처리
      * @param att
      */
     private void saveReplyMessage(AppTalkThread att) {
@@ -369,17 +369,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // 단말에 해당 값이 존재 하는지 체크
                 if(existDataCheck !=null && !existDataCheck.isEmpty()){
 
-                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                            .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_PROCEDDING,att.getTALK_LOCAL_TIME()
-                            ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
+                    List<AppTalkThread> existDataSubCheck = DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkThreadDao().findByTalkId(att.getTALK_ID());
 
-                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                            .AppTalkThreadDao().insert(att);
+                    // TALK_ID 값이 이미 존재시 SKIP
+                    if(existDataSubCheck !=null && !existDataSubCheck.isEmpty()){
+                        Logger.d("TALK_ID EXIST Skip...");
+                    }else{
+                        DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                                .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_PROCEDDING,att.getTALK_LOCAL_TIME()
+                                ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
 
-                    if(("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                            || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
-                        sendNotification(""); // message
+                        DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                                .AppTalkThreadDao().insert(att);
+
+                        if(("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                            sendNotification(""); // message
+                        }
                     }
+
                 }
                 return null;
             }

@@ -44,6 +44,7 @@ public class MessageList extends Fragment {
 	RecyclerView mRecyclerView;
 	RecyclerView.LayoutManager mLayoutManager;
 	public static String APP_ID = "";
+	public static String APP_KEY = "";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class MessageList extends Fragment {
 		mLayoutManager = new LinearLayoutManager(getActivity());
 		mRecyclerView.setLayoutManager(mLayoutManager);
 		APP_ID = AccountInfo.getAccountInfo(getActivity()).get("APP_ID");
+		APP_KEY =  AccountInfo.getAccountInfo(getActivity()).get("APP_KEY");
 		getDatabase();
 		return v;
 	}
@@ -88,10 +90,8 @@ public class MessageList extends Fragment {
 						// COUNTRY_NAME
 						if(appTalkMain.get(i).getTALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
 							mi.setCOUNTRY_NAME(appTalkMain.get(i).getFROM_COUNTRY_NAME());
-							mi.setREPLY_APP_KEY(appTalkMain.get(i).getFROM_APP_KEY());
 						}else{
 							mi.setCOUNTRY_NAME(appTalkMain.get(i).getTO_COUNTRY_NAME());
-							mi.setREPLY_APP_KEY(appTalkMain.get(i).getTO_APP_KEY());
 						}
 						// TALK_TARGET
 						if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
@@ -100,7 +100,7 @@ public class MessageList extends Fragment {
 							mi.setTALK_TARGET("");
 						}
 						// ATX_LOCAL_TIME
-						SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd kk:mm");
+						SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd HH:mm");
 						String str = dayTime.format(new Date(Long.parseLong(appTalkMain.get(i).getATX_LOCAL_TIME())));
 						mi.setATX_LOCAL_TIME(str);
 
@@ -124,6 +124,13 @@ public class MessageList extends Fragment {
 								}
 							}
 						}
+
+						if(APP_KEY.equals(appTalkMain.get(i).getFROM_APP_KEY())){
+							mi.setREPLY_APP_KEY(appTalkMain.get(i).getTO_APP_KEY());
+						}else{
+							mi.setREPLY_APP_KEY(appTalkMain.get(i).getFROM_APP_KEY());
+						}
+
 						messageArrayList.add(mi);
 					}
 				}else{

@@ -31,6 +31,9 @@ public interface AppTalkThreadDao {
     @Query("SELECT * FROM APP_TALK_THREAD WHERE ATX_ID = :atxId")
     List<AppTalkThread> findByAtxId(String atxId);
 
+    @Query("SELECT * FROM APP_TALK_THREAD WHERE TALK_ID = :talkId")
+    List<AppTalkThread> findByTalkId(String talkId);
+
     @Insert
     void insert(AppTalkThread appTalkThread);
 

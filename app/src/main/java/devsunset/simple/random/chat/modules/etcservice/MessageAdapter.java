@@ -65,7 +65,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if(clickEventFlagVal){
              v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
         }else{
-             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
+             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_detail_row, parent, false);
         }
         return new MyViewHolder(v);
     }
@@ -80,7 +80,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if(!"NO_DATA".equals(target)){
             if(target !=null  && !"".equals(target)){
-                target = " - (You)";
+                target = " - [You]";
             }
             myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());

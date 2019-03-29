@@ -84,6 +84,10 @@ public class ChatActivity extends Activity {
         getDatabase(ATX_ID);
     }
 
+    /**
+     * message list search
+     * @param atxId
+     */
     private void getDatabase(String atxId) {
         class GetTasks extends AsyncTask<Void, Void, List<AppTalkThread>> {
             @Override
@@ -116,7 +120,7 @@ public class ChatActivity extends Activity {
                             mi.setTALK_TARGET("");
                         }
                         // ATX_LOCAL_TIME
-                        SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd kk:mm");
+                        SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd HH:mm");
                         String str = dayTime.format(new Date(Long.parseLong(appTalkThread.get(i).getTALK_LOCAL_TIME())));
                         mi.setATX_LOCAL_TIME(str);
                         // icon
@@ -229,7 +233,7 @@ public class ChatActivity extends Activity {
                             Logger.i("replyMessage Success : ");
                         }else{
                             Logger.e("replyMessage Fail : ");
-                            FBToast.infoToast(getApplicationContext(),getString(R.string.networkerror),FBToast.LENGTH_SHORT);
+                            FBToast.errorToast(getApplicationContext(),getString(R.string.networkerror),FBToast.LENGTH_SHORT);
                             InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                             inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(),0);
                             finish();
@@ -241,7 +245,7 @@ public class ChatActivity extends Activity {
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 Logger.e("replyMessage Error : "+t.getMessage());
-                FBToast.infoToast(getApplicationContext(),getString(R.string.networkerror),FBToast.LENGTH_SHORT);
+                FBToast.errorToast(getApplicationContext(),getString(R.string.networkerror),FBToast.LENGTH_SHORT);
                 InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(),0);
                 finish();
@@ -249,17 +253,29 @@ public class ChatActivity extends Activity {
         });
     }
 
+    /**
+     * reply message db insert
+     * @param att
+     */
     private void replyMessage(AppTalkThread att) {
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
 
-                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_REPLY,att.getTALK_LOCAL_TIME()
-                        ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
+                List<AppTalkThread> existDataSubCheck = DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkThreadDao().findByTalkId(att.getTALK_ID());
 
-                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                    .AppTalkThreadDao().insert(att);
+                // TALK_ID 값이 이미 존재시 SKIP
+                if(existDataSubCheck !=null && !existDataSubCheck.isEmpty()){
+                    Logger.d("TALK_ID EXIST Skip...");
+                }else{
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_REPLY,att.getTALK_LOCAL_TIME()
+                            ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
+
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkThreadDao().insert(att);
+                }
 
                 return null;
             }
