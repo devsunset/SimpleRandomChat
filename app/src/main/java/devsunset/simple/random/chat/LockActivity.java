@@ -41,7 +41,7 @@ public class LockActivity extends Activity implements OnOtpCompletionListener {
     }
 
     private void goNextIntent(){
-        Intent intent = new Intent(this, AppContent.class);
+        Intent intent = new Intent(this, MessageContent.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();

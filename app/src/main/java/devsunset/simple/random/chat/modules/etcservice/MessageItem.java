@@ -22,6 +22,7 @@ public class MessageItem {
     private String ATX_STATUS;
     private String COUNTRY_NAME;
     private String GENDER;
+    private String REPLY_APP_KEY;
     private String TALK_TEXT;
     private String TALK_TARGET;
 
@@ -71,6 +72,14 @@ public class MessageItem {
 
     public void setGENDER(String GENDER) {
         this.GENDER = GENDER;
+    }
+
+    public String getREPLY_APP_KEY() {
+        return REPLY_APP_KEY;
+    }
+
+    public void setREPLY_APP_KEY(String REPLY_APP_KEY) {
+        this.REPLY_APP_KEY = REPLY_APP_KEY;
     }
 
     public String getTALK_TEXT() {

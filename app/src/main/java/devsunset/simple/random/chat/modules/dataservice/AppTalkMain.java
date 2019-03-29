@@ -35,9 +35,9 @@ public class AppTalkMain implements Serializable {
     private String FROM_COUNTRY_NAME;
     private String FROM_GENDER;
     private String FROM_LANG;
-    private String LAST_TALK_APP_ID;
-    private String LAST_TALK_TEXT;
-    private String LAST_TALK_TYPE;
+    private String TALK_APP_ID;
+    private String TALK_TEXT;
+    private String TALK_TYPE;
     private String TO_APP_ID;
     private String TO_APP_KEY;
     private String TO_COUNTRY;
@@ -99,23 +99,21 @@ public class AppTalkMain implements Serializable {
     public void setFROM_LANG(String fROM_LANG) {
         FROM_LANG = fROM_LANG;
     }
-    public String getLAST_TALK_APP_ID() {
-        return LAST_TALK_APP_ID;
+    public String getTALK_APP_ID() {
+        return TALK_APP_ID;
     }
-    public void setLAST_TALK_APP_ID(String lAST_TALK_APP_ID) {
-        LAST_TALK_APP_ID = lAST_TALK_APP_ID;
+    public void setTALK_APP_ID(String tALK_APP_ID) {TALK_APP_ID = tALK_APP_ID; }
+    public String getTALK_TEXT() {
+        return TALK_TEXT;
     }
-    public String getLAST_TALK_TEXT() {
-        return LAST_TALK_TEXT;
+    public void setTALK_TEXT(String tALK_TEXT) {
+        TALK_TEXT = tALK_TEXT;
     }
-    public void setLAST_TALK_TEXT(String lAST_TALK_TEXT) {
-        LAST_TALK_TEXT = lAST_TALK_TEXT;
+    public String getTALK_TYPE() {
+        return TALK_TYPE;
     }
-    public String getLAST_TALK_TYPE() {
-        return LAST_TALK_TYPE;
-    }
-    public void setLAST_TALK_TYPE(String lAST_TALK_TYPE) {
-        LAST_TALK_TYPE = lAST_TALK_TYPE;
+    public void setTALK_TYPE(String tALK_TYPE) {
+        TALK_TYPE = tALK_TYPE;
     }
     public String getTO_APP_ID() {
         return TO_APP_ID;

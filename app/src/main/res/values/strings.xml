@@ -5,39 +5,31 @@
 
     <string name="app_name">Message Talk</string>
     <string name="loading">loading...</string>
-
     <string name="app_message_send">Message Send</string>
     <string name="app_message_list">Message List</string>
     <string name="app_message_setting">Setting</string>
-
     <string name="common_info_title">Content</string>
     <string name="common_ok">Ok</string>
     <string name="main_back_finish">Press the back key again to close the app.</string>
     <string name="alert_info_title">Notice</string>
     <string name="processing">Processing... Please wait.</string>
     <string name="networkerror">Network Connection Failed.</string>
-
     <string name="verification_code_subtext">Please input the verification code</string>
     <string name="verification_code">Verification Code</string>
-
     <string name="info_title">Notice</string>
     <string name="gender_choice_title">Gender Selection</string>
     <string name="gender_choice_message">Please choose your sex.</string>
-
     <string name="send">SEND</string>
     <string name="sendinput">Please enter a message.</string>
     <string name="sendresult">Send complete.</string>
-
     <string name="all">ALL</string>
     <string name="man">Man</string>
     <string name="woman">Woman</string>
     <string name="local">Local</string>
     <string name="world">World</string>
     <string name="newmessagereceive">Accept new messages</string>
-
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">Receive Message</string>
-
     <string name="alarm_title">Notification to Message Reception </string>
     <string name="alarm">Notification</string>
     <string name="atype_msg">Phone default + Pop-up notification</string>
@@ -49,7 +41,8 @@
     <string name="lockpwd_msg">Screen lock</string>
     <string name="passwordsuccess">Success - Password setup success</string>
     <string name="passwordfail">Fail - Password do not match</string>
-
-
-
+    <string name="empty_message">No reply message.</string>
+    <string name="black_list_send">Black List</string>
+    <string name="bye_send">Bye</string>
+    <string name="hide">Hide</string>
 </resources>

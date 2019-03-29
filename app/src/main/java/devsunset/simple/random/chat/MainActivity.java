@@ -43,6 +43,7 @@ import devsunset.simple.random.chat.modules.etcservice.GenderOption;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
+import devsunset.simple.random.chat.modules.utilservice.Consts;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -194,7 +195,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		String strLanguage = systemLocale.getLanguage();
 
 		HashMap<String,String> myInfo = new HashMap<String,String>();
-		myInfo.put("APP_ID","UID_"+UUID.randomUUID().toString());
+		myInfo.put("APP_ID",Consts.IDS_PRIEFIX_UID+UUID.randomUUID().toString());
 		myInfo.put("GENDER",strGender);
 		myInfo.put("COUNTRY",strCountry);
 		myInfo.put("LANG",strLanguage);

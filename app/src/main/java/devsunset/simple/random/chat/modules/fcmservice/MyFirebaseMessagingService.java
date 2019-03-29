@@ -36,6 +36,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
+import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 //import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 //import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -105,18 +106,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
                 // 최초 메세지 상태시 처리 (F : FROM , F->P  : TO )
                 if("F".equals(remoteMessage.getData().get("ATX_STATUS"))){
-                        String talkStatus = "X";
+                        String talkStatus = Consts.MESSAGE_STATUS_X;
                         HashMap<String,String> account = AccountInfo.getAccountInfo(getApplicationContext());
 
                         AppTalkMain atm = new AppTalkMain();
                         atm.setATX_ID(remoteMessage.getData().get("ATX_ID"));
                         atm.setATX_LOCAL_TIME(ctm);
                         if(account.get("APP_ID").equals(remoteMessage.getData().get("FROM_APP_ID"))){
-                            atm.setATX_STATUS("F");
-                            talkStatus = "F";
+                            atm.setATX_STATUS(Consts.MESSAGE_STATUS_FIRST);
+                            talkStatus = Consts.MESSAGE_STATUS_FIRST;
                         }else{
-                            atm.setATX_STATUS("P");
-                            talkStatus = "P";
+                            atm.setATX_STATUS(Consts.MESSAGE_STATUS_PROCEDDING);
+                            talkStatus = Consts.MESSAGE_STATUS_PROCEDDING;
                         }
                         atm.setFROM_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
                         atm.setFROM_APP_KEY(remoteMessage.getData().get("FROM_APP_KEY"));
@@ -124,9 +125,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         atm.setFROM_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
                         atm.setFROM_GENDER(remoteMessage.getData().get("FROM_GENDER"));
                         atm.setFROM_LANG(remoteMessage.getData().get("FROM_LANG"));
-                        atm.setLAST_TALK_APP_ID(remoteMessage.getData().get("LAST_TALK_APP_ID"));
-                        atm.setLAST_TALK_TEXT(remoteMessage.getData().get("LAST_TALK_TEXT"));
-                        atm.setLAST_TALK_TYPE(remoteMessage.getData().get("LAST_TALK_TYPE"));
+                        atm.setTALK_APP_ID(remoteMessage.getData().get("TALK_APP_ID"));
+                        atm.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
+                        atm.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
                         atm.setTO_APP_ID(remoteMessage.getData().get("TO_APP_ID"));
                         atm.setTO_APP_KEY(remoteMessage.getData().get("TO_APP_KEY"));
                         atm.setTO_COUNTRY(remoteMessage.getData().get("TO_COUNTRY"));
@@ -143,13 +144,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         att.setTALK_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
                         att.setTALK_GENDER(remoteMessage.getData().get("FROM_GENDER"));
                         att.setTALK_LANG(remoteMessage.getData().get("FROM_LANG"));
-                        att.setTALK_TEXT(remoteMessage.getData().get("LAST_TALK_TEXT"));
-                        //TALK_TEXT_IMAGE
-                        //TALK_TEXT_VOICE
-                        //TALK_TRANS_TEXT
-                        att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
+                        att.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
+                         att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
 
                         saveFirstMessage(atm,att,"",talkStatus);
+
+                }else if(Consts.MESSAGE_STATUS_PROCEDDING.equals(remoteMessage.getData().get("ATX_STATUS"))){
+
+                    AppTalkThread att = new AppTalkThread();
+                    att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
+                    att.setTALK_APP_ID(remoteMessage.getData().get("TALK_APP_ID"));
+                    att.setTALK_LOCAL_TIME(ctm);
+                    att.setTALK_ID(remoteMessage.getData().get("TALK_ID"));
+                    att.setTALK_COUNTRY(remoteMessage.getData().get("TALK_COUNTRY"));
+                    att.setTALK_COUNTRY_NAME(remoteMessage.getData().get("TALK_COUNTRY_NAME"));
+                    att.setTALK_GENDER(remoteMessage.getData().get("TALK_GENDER"));
+                    att.setTALK_LANG(remoteMessage.getData().get("TALK_LANG"));
+                    att.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
+                    att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
+
+                    saveReplyMessage(att);
                 }
             }else{
                 sendNotification(remoteMessage.getNotification().getBody());
@@ -291,7 +305,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     /**
-     * 최초 메세지 처리
+     * 답변 메세지 처리
      * @param atm
      * @param att
      * @param message
@@ -314,30 +328,72 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().insert(att);
 
-                    if("P".equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                    if(Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                             || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
-                            sendNotification(""); // message
+                        sendNotification(""); // message
                     }
                 }
                 return null;
             }
             @Override
             protected void onPostExecute(Void aVoid) {
-                // F : First
-                // P : Processing
-                // H : History
-                // D : Delete
-                // X : Server Status (No Found Target Data)
-                if("P".equals(talkStatus) &&
+
+                if(Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) &&
                         ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))
+                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
+                    FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
+                    fbCustomToast.setMsg(getString(R.string.default_received_message));
+                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
+                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
+                    fbCustomToast.setGravity(1);
+                    fbCustomToast.show();
+                }
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
+    }
+
+    /**
+     * 최초 메세지 처리
+     * @param att
+     */
+    private void saveReplyMessage(AppTalkThread att) {
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                List<AppTalkMain> existDataCheck = DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().findByAtxId(att.getATX_ID());
+
+                // 단말에 해당 값이 존재 하는지 체크
+                if(existDataCheck !=null && !existDataCheck.isEmpty()){
+
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_PROCEDDING,att.getTALK_LOCAL_TIME()
+                            ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
+
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkThreadDao().insert(att);
+
+                    if(("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                            || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                        sendNotification(""); // message
+                    }
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                if(("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                         || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))
                         || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
-                        FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
-                        fbCustomToast.setMsg(getString(R.string.default_received_message));
-                        fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
-                        fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
-                        fbCustomToast.setGravity(1);
-                        fbCustomToast.show();
+                    FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
+                    fbCustomToast.setMsg(getString(R.string.default_received_message));
+                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
+                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
+                    fbCustomToast.setGravity(1);
+                    fbCustomToast.show();
                 }
             }
         }

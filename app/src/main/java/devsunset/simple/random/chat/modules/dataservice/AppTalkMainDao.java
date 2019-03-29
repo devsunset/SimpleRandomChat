@@ -25,7 +25,7 @@ import java.util.List;
 @Dao
 public interface AppTalkMainDao {
 
-    @Query("SELECT * FROM APP_TALK_MAIN ORDER BY ATX_LOCAL_TIME DESC")
+    @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_STATUS NOT IN ('F','H') ORDER BY ATX_LOCAL_TIME DESC")
     List<AppTalkMain> getAll();
 
     @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_ID = :atxId")
@@ -37,15 +37,11 @@ public interface AppTalkMainDao {
     @Delete
     void delete(AppTalkMain appTalkMain);
 
-    // Example
+    @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus, ATX_LOCAL_TIME= :atxLocalTime  WHERE ATX_ID =:atxId")
+    void updateStatus(String atxStatus, String atxLocalTime, String atxId);
 
-    //@Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_ID IN (:atxIds)")
-    //List<AppTalkMain> findByAtxIds(int[] atxIds);
-
-    //@Query("SELECT * FROM APP_TALK_MAIN WHERE first_name LIKE :first AND " + "last_name LIKE :last LIMIT 1")
-    //User findByName(String first, String last);
-
-    //@Query("SELECT * FROM book " + "INNER JOIN loan ON loan.book_id = book.id " + "INNER JOIN user ON user.id = loan.user_id " + "WHERE user.name LIKE :userName")
-    //public List<Book> findBooksBorrowedByNameSync(String userName);
+    @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus, ATX_LOCAL_TIME= :atxLocalTime " +
+            ", TALK_APP_ID =:talkAppId ,TALK_TEXT= :talkText ,TALK_TYPE= :talkType WHERE ATX_ID =:atxId")
+    void updateReplySend(String atxStatus, String atxLocalTime, String talkAppId, String talkText,String talkType, String atxId);
 
 }

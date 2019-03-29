@@ -30,6 +30,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
+import devsunset.simple.random.chat.modules.utilservice.Consts;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +68,7 @@ public class MessageSend extends Fragment{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.app_message_send, container, false);
+		View v = inflater.inflate(R.layout.message_send, container, false);
 		ButterKnife.bind(this, v);
 
 		HashMap<String,String> account = AccountInfo.getAccountInfo(getContext());
@@ -172,20 +173,19 @@ public class MessageSend extends Fragment{
 		String ctm = System.currentTimeMillis()+"";
 
         HashMap<String,Object> params = new HashMap<String,Object>();
-		params.put("ATX_ID","ATX_"+UUID.randomUUID().toString());
+		params.put("ATX_ID",Consts.IDS_PRIEFIX_ATX+UUID.randomUUID().toString());
 		params.put("ATX_LOCAL_TIME",ctm);
-		params.put("ATX_STATUS","F");
+		params.put("ATX_STATUS", Consts.MESSAGE_STATUS_FIRST);
 		params.put("FROM_APP_ID",account.get("APP_ID"));
 		params.put("FROM_APP_KEY",account.get("APP_KEY"));
 		params.put("FROM_COUNTRY",account.get("COUNTRY"));
 		params.put("FROM_COUNTRY_NAME",account.get("COUNTRY_NAME"));
 		params.put("FROM_GENDER",account.get("GENDER"));
 		params.put("FROM_LANG",account.get("LANG"));
-		params.put("LAST_TALK_TEXT",message);
-		params.put("TALK_TEXT_IMAGE","");
-		params.put("TALK_TEXT_VOICE","");
-		params.put("LAST_TALK_TYPE","T");
-        params.put("TALK_ID","TTD_"+UUID.randomUUID().toString());
+		params.put("TALK_TEXT",message);
+		params.put("TALK_TYPE",Consts.MESSAGE_TYPE_TEXT);
+        params.put("TALK_ID",Consts.IDS_PRIEFIX_TTD+UUID.randomUUID().toString());
+		params.put("TALK_APP_ID",account.get("APP_ID"));
         params.putAll(account);
 
 		httpConnctService.sendMessage(params).enqueue(new Callback<DataVo>() {

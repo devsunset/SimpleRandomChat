@@ -28,8 +28,8 @@ public interface AppTalkThreadDao {
     @Query("SELECT * FROM APP_TALK_THREAD")
     List<AppTalkThread> getAll();
 
-    @Query("SELECT * FROM APP_TALK_THREAD WHERE ATX_ID IN (:atxIds)")
-    List<AppTalkThread> findByAtxIds(int[] atxIds);
+    @Query("SELECT * FROM APP_TALK_THREAD WHERE ATX_ID = :atxId")
+    List<AppTalkThread> findByAtxId(String atxId);
 
     @Insert
     void insert(AppTalkThread appTalkThread);

@@ -55,7 +55,7 @@ public class MessageSetting extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
 
-	    View v = inflater.inflate(R.layout.app_message_setting, container, false);
+	    View v = inflater.inflate(R.layout.message_setting, container, false);
 		ButterKnife.bind(this, v);
 
 		HashMap<String,String> account = AccountInfo.getAccountInfo(getContext());
@@ -122,7 +122,7 @@ public class MessageSetting extends Fragment {
 			@Override
 			public void onSwitched(ToggleableView toggleableView, boolean isOn) {
 				if(isOn){
-					Intent intent = new Intent(getActivity(), LockSetting.class);
+					Intent intent = new Intent(getActivity(), LockSettingActivity.class);
 					startActivity(intent);
 				}else{
 					HashMap<String,String> params = new HashMap<String,String>();

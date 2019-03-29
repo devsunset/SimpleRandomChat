@@ -1,5 +1,5 @@
 /*
- * @(#)LockSetting.java
+ * @(#)LockSettingActivity.java
  * Date : 2019. 3. 31.
  * Copyright: (C) 2019 by devsunset All right reserved.
  */
@@ -20,7 +20,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
 /**
  * <PRE>
- * SimpleRandomChat LockSetting
+ * SimpleRandomChat LockSettingActivity
  * </PRE>
  *
  * @author devsunset
@@ -28,7 +28,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
  * @since SimpleRandomChat 1.0
  */
 
-public class LockSetting extends Activity  {
+public class LockSettingActivity extends Activity  {
 
     @BindView(R.id.pinview1)
     Pinview pinview1;
@@ -41,7 +41,7 @@ public class LockSetting extends Activity  {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lock_setting);
+        setContentView(R.layout.lock_setting_activity);
         ButterKnife.bind(this);
 
         pinview1.setPinViewEventListener(new Pinview.PinViewEventListener() {

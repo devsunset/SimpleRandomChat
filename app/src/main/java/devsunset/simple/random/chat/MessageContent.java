@@ -1,5 +1,5 @@
 /*
- * @(#)AppContent.java
+ * @(#)MessageContent.java
  * Date : 2019. 3. 31.
  * Copyright: (C) 2019 by devsunset All right reserved.
  */
@@ -38,7 +38,7 @@ import java.util.ArrayList;
  * @since SimpleRandomChat 1.0
  */
 
-public class AppContent extends FragmentActivity {
+public class MessageContent extends FragmentActivity {
 
 
 	private final int TAB_MESSAGE_SEND = 0;
@@ -68,7 +68,7 @@ public class AppContent extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.app_content);
+		setContentView(R.layout.message_content);
 
 		//screen capture disable
 		if (Build.VERSION.SDK_INT >= 11) {

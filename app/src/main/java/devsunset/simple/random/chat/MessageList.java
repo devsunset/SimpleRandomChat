@@ -25,7 +25,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
-import devsunset.simple.random.chat.modules.etcservice.MainMessageAdapter;
+import devsunset.simple.random.chat.modules.etcservice.MessageAdapter;
 
 
 /**
@@ -51,7 +51,7 @@ public class MessageList extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.app_message_list, container, false);
+		View v = inflater.inflate(R.layout.message_list, container, false);
 		ButterKnife.bind(this, v);
 		mRecyclerView.setHasFixedSize(true);
 		mLayoutManager = new LinearLayoutManager(getActivity());
@@ -84,21 +84,23 @@ public class MessageList extends Fragment {
 						// ATX_STATUS
 						mi.setATX_STATUS(appTalkMain.get(i).getATX_STATUS());
 						// TALK_TEXT
-						mi.setTALK_TEXT(appTalkMain.get(i).getLAST_TALK_TEXT());
+						mi.setTALK_TEXT(appTalkMain.get(i).getTALK_TEXT());
 						// COUNTRY_NAME
-						if(appTalkMain.get(i).getLAST_TALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
+						if(appTalkMain.get(i).getTALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
 							mi.setCOUNTRY_NAME(appTalkMain.get(i).getFROM_COUNTRY_NAME());
+							mi.setREPLY_APP_KEY(appTalkMain.get(i).getTO_APP_KEY());
 						}else{
 							mi.setCOUNTRY_NAME(appTalkMain.get(i).getTO_COUNTRY_NAME());
+							mi.setREPLY_APP_KEY(appTalkMain.get(i).getFROM_APP_KEY());
 						}
 						// TALK_TARGET
-						if(APP_ID.equals(appTalkMain.get(i).getLAST_TALK_APP_ID())){
+						if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
 							mi.setTALK_TARGET("You");
 						}else{
 							mi.setTALK_TARGET("");
 						}
 						// ATX_LOCAL_TIME
-						SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd kk:mm:ss");
+						SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd kk:mm");
 						String str = dayTime.format(new Date(Long.parseLong(appTalkMain.get(i).getATX_LOCAL_TIME())));
 						mi.setATX_LOCAL_TIME(str);
 
@@ -108,7 +110,7 @@ public class MessageList extends Fragment {
 						}else if("D".equals(appTalkMain.get(i).getATX_STATUS())){
 							mi.setDrawableId(R.drawable.trash);
 						}else{
-							if(appTalkMain.get(i).getLAST_TALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
+							if(appTalkMain.get(i).getTALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
 								if("M".equals(appTalkMain.get(i).getFROM_GENDER())){
 									mi.setDrawableId(R.drawable.man);
 								}else{
@@ -124,12 +126,24 @@ public class MessageList extends Fragment {
 						}
 						messageArrayList.add(mi);
 					}
+				}else{
+					MessageItem mi = new MessageItem();
+					mi.setDrawableId(R.drawable.empty_message);
+					mi.setTALK_TEXT(getString(R.string.empty_message));
+					mi.setTALK_TARGET("NO_DATA");
+					messageArrayList.add(mi);
 				}
-				MainMessageAdapter myAdapter = new MainMessageAdapter(messageArrayList);
+				MessageAdapter myAdapter = new MessageAdapter(messageArrayList,true);
 				mRecyclerView.setAdapter(myAdapter);
 			}
 		}
 		GetTasks gt = new GetTasks();
 		gt.execute();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();  // Always call the superclass method first
+		getDatabase();
 	}
 }

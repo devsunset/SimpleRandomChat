@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="devsunset.simple.random.chat.AppContent"
+            android:name="devsunset.simple.random.chat.MessageContent"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -28,9 +28,13 @@
             android:windowSoftInputMode="stateAlwaysVisible"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="devsunset.simple.random.chat.LockSetting"
+            android:name="devsunset.simple.random.chat.LockSettingActivity"
             android:configChanges="orientation"
             android:windowSoftInputMode="stateAlwaysVisible"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="devsunset.simple.random.chat.ChatActivity"
+            android:configChanges="orientation"
             android:screenOrientation="portrait"/>
 
         <!-- [START firebase_service] -->
