@@ -242,28 +242,45 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		Random rnd = new Random();
 		progress.setProgress(rnd.nextInt(7)+1);
 
-		httpConnctService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
-			@Override
-			public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-				if (response.isSuccessful()) {
-					DataVo data = response.body();
-					if (data != null) {
-						showInfoDialog(data.getRESULT_DATA());
+		SharedPreferences prefx = this.getSharedPreferences("NOTICE_ALL_FLAG", this.MODE_PRIVATE);
+		long lastTime = Long.parseLong(prefx.getString("LAST_ACCESS_TIME", "1234567890"));
+		long curTime = System.currentTimeMillis();
+		long diffTime =  (curTime - lastTime) / (1000 * 60 * 60);
+
+		// 공지 사항 자주 호출 하는 것 방지 위해 12 시간 체크 로직
+		if(diffTime > 12){
+
+			httpConnctService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
+				@Override
+				public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+					if (response.isSuccessful()) {
+						DataVo data = response.body();
+						if (data != null) {
+							// NOTICE 조회 시간 갱신
+							SharedPreferences.Editor editor = prefx.edit();
+							editor.putString("LAST_ACCESS_TIME", curTime+"");
+							editor.commit();
+
+							showInfoDialog(data.getRESULT_DATA());
+						}else{
+							showInfoDialog(null);
+						}
 					}else{
-                        showInfoDialog(null);
-                    }
-				}else{
-					FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
-                    finish();
+						FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
+						finish();
+					}
 				}
-			}
-			@Override
-			public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-				Logger.e("getNoticeProcess Error : "+t.getMessage());
-				FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
-                finish();
-			}
-		});
+				@Override
+				public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+					Logger.e("getNoticeProcess Error : "+t.getMessage());
+					FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
+					finish();
+				}
+			});
+
+		}else{
+			showInfoDialog(null);
+		}
 	}
 
 	/**
@@ -278,7 +295,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 			int noticeId = Integer.parseInt((String)params.get(0).get("NOTICE_ID"));
 
 			SharedPreferences prefx = this.getSharedPreferences("ld_dont_show", this.MODE_PRIVATE);
-			prefx.getBoolean(String.valueOf(noticeId), false);
 
 			if(!prefx.getBoolean(String.valueOf(noticeId), false)){
 				Dialog dlg = new LovelyInfoDialog(this)
