@@ -88,10 +88,10 @@ public class MessageList extends Fragment {
 						// COUNTRY_NAME
 						if(appTalkMain.get(i).getTALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
 							mi.setCOUNTRY_NAME(appTalkMain.get(i).getFROM_COUNTRY_NAME());
-							mi.setREPLY_APP_KEY(appTalkMain.get(i).getTO_APP_KEY());
+							mi.setREPLY_APP_KEY(appTalkMain.get(i).getFROM_APP_KEY());
 						}else{
 							mi.setCOUNTRY_NAME(appTalkMain.get(i).getTO_COUNTRY_NAME());
-							mi.setREPLY_APP_KEY(appTalkMain.get(i).getFROM_APP_KEY());
+							mi.setREPLY_APP_KEY(appTalkMain.get(i).getTO_APP_KEY());
 						}
 						// TALK_TARGET
 						if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
@@ -140,6 +140,7 @@ public class MessageList extends Fragment {
 		GetTasks gt = new GetTasks();
 		gt.execute();
 	}
+
 
 	@Override
 	public void onResume() {

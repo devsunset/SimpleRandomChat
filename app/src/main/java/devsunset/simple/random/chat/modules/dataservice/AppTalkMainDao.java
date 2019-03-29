@@ -37,6 +37,9 @@ public interface AppTalkMainDao {
     @Delete
     void delete(AppTalkMain appTalkMain);
 
+    @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus WHERE ATX_ID =:atxId")
+    void readTalkMainStatus(String atxStatus, String atxId);
+
     @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus, ATX_LOCAL_TIME= :atxLocalTime  WHERE ATX_ID =:atxId")
     void updateStatus(String atxStatus, String atxLocalTime, String atxId);
 

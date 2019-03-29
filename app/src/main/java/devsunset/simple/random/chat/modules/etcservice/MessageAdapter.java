@@ -7,6 +7,7 @@ package devsunset.simple.random.chat.modules.etcservice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 
 import devsunset.simple.random.chat.ChatActivity;
 import devsunset.simple.random.chat.R;
+import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
+import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 /**
  * <PRE>
@@ -58,7 +61,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_row, parent, false);
+        View v =  null;
+        if(clickEventFlagVal){
+             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
+        }else{
+             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
+        }
         return new MyViewHolder(v);
     }
 
@@ -97,6 +105,9 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 if(clickEventFlagVal){
                     if(MessageItemArrayList.get(position).getATX_ID() !=null){
                         Context context = v.getContext();
+
+                        readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_ID());
+
                         Intent intent = new Intent(context, ChatActivity.class);
                         intent.putExtra("ATX_ID",MessageItemArrayList.get(position).getATX_ID());
                         intent.putExtra("REPLY_APP_KEY",MessageItemArrayList.get(position).getREPLY_APP_KEY());
@@ -105,6 +116,24 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }
         });
+    }
+
+    private void readTalkMainStatus(Context ctx,String atxId) {
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                DatabaseClient.getInstance(ctx).getAppDataBase()
+                        .AppTalkMainDao().readTalkMainStatus(Consts.MESSAGE_STATUS_REPLY,atxId);
+
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
     }
 
 

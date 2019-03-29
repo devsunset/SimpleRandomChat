@@ -200,6 +200,8 @@ public class ChatActivity extends Activity {
         params.put("TALK_GENDER",account.get("GENDER"));
         params.put("TALK_LANG",account.get("LANG"));
         params.put("TALK_TEXT",message);
+        params.put("TALK_TEXT_IMAGE","");
+        params.put("TALK_TEXT_VOICE","");
         params.put("TALK_TYPE",Consts.MESSAGE_TYPE_TEXT);
 
         params.put("APP_ID",account.get("APP_ID"));
