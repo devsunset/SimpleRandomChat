@@ -1,5 +1,5 @@
 /*
- * @(#)MessageAdapter.java
+ * @(#)MessageMainAdapter.java
  * Date : 2019. 3. 31.
  * Copyright: (C) 2019 by devsunset All right reserved.
  */
@@ -25,16 +25,14 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 /**
  * <PRE>
- * SimpleRandomChat MessageAdapter
+ * SimpleRandomChat MessageMainAdapter
  * </PRE>
  *
  * @author devsunset
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
-
-    boolean clickEventFlagVal = true;
+public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView ivPicture;
@@ -54,19 +52,13 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private ArrayList<MessageItem> MessageItemArrayList;
-    public MessageAdapter(ArrayList<MessageItem> MessageItemArrayList,boolean clickEventFlag){
-        clickEventFlagVal = clickEventFlag;
+    public MessageMainAdapter(ArrayList<MessageItem> MessageItemArrayList){
         this.MessageItemArrayList = MessageItemArrayList;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v =  null;
-        if(clickEventFlagVal){
-             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
-        }else{
-             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_detail_row, parent, false);
-        }
+        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -101,18 +93,15 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(MessageItemArrayList.get(position).getATX_ID() !=null){
+                    Context context = v.getContext();
 
-                if(clickEventFlagVal){
-                    if(MessageItemArrayList.get(position).getATX_ID() !=null){
-                        Context context = v.getContext();
+                    readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_ID());
 
-                        readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_ID());
-
-                        Intent intent = new Intent(context, ChatActivity.class);
-                        intent.putExtra("ATX_ID",MessageItemArrayList.get(position).getATX_ID());
-                        intent.putExtra("REPLY_APP_KEY",MessageItemArrayList.get(position).getREPLY_APP_KEY());
-                        context.startActivity(intent);
-                    }
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    intent.putExtra("ATX_ID",MessageItemArrayList.get(position).getATX_ID());
+                    intent.putExtra("REPLY_APP_KEY",MessageItemArrayList.get(position).getREPLY_APP_KEY());
+                    context.startActivity(intent);
                 }
             }
         });
@@ -135,7 +124,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         SaveTask st = new SaveTask();
         st.execute();
     }
-
 
     @Override
     public int getItemCount() {

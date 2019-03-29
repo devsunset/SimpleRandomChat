@@ -181,14 +181,6 @@ public class AccountInfo {
             result = true;
         }
 
-        /*
-            // Delete example
-            SharedPreferences pref =  context.getSharedPreferences("SRC_PREF", context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.remove("APP_ID");
-            editor.commit();
-         */
-
         return result;
     }
 

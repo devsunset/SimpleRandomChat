@@ -25,7 +25,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
-import devsunset.simple.random.chat.modules.etcservice.MessageAdapter;
+import devsunset.simple.random.chat.modules.etcservice.MessageMainAdapter;
 
 
 /**
@@ -140,7 +140,7 @@ public class MessageList extends Fragment {
 					mi.setTALK_TARGET("NO_DATA");
 					messageArrayList.add(mi);
 				}
-				MessageAdapter myAdapter = new MessageAdapter(messageArrayList,true);
+				MessageMainAdapter myAdapter = new MessageMainAdapter(messageArrayList);
 				mRecyclerView.setAdapter(myAdapter);
 			}
 		}

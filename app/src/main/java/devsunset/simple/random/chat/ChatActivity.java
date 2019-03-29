@@ -31,7 +31,8 @@ import butterknife.OnClick;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
-import devsunset.simple.random.chat.modules.etcservice.MessageAdapter;
+import devsunset.simple.random.chat.modules.etcservice.MessageDetailAdapter;
+import devsunset.simple.random.chat.modules.etcservice.MessageMainAdapter;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
@@ -138,8 +139,10 @@ public class ChatActivity extends Activity {
                     mi.setTALK_TARGET("NO_DATA");
                     messageArrayList.add(mi);
                 }
-                MessageAdapter myAdapter = new MessageAdapter(messageArrayList,false);
+                MessageDetailAdapter myAdapter = new MessageDetailAdapter(messageArrayList);
                 mRecyclerView.setAdapter(myAdapter);
+                mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
+
             }
         }
         GetTasks gt = new GetTasks();
