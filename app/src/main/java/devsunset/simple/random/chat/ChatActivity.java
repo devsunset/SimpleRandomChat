@@ -245,7 +245,7 @@ public class ChatActivity extends Activity {
                 params.put("TALK_APP_ID", account.get("APP_ID"));
                 params.put("TO_APP_KEY", TO_APP_KEY);
 
-                httpConnctService.byeMessage(params).enqueue(new Callback<DataVo>() {
+                httpConnctService.requstBlackList(params).enqueue(new Callback<DataVo>() {
                     @Override
                     public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                         if (response.isSuccessful()) {
