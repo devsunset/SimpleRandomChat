@@ -69,6 +69,7 @@ dependencies {
     implementation 'com.github.GoodieBag:Pinview:v1.3'
     //dialog
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
+    implementation 'com.github.sd6352051:NiftyDialogEffects:v1.0.3'
     //room
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"

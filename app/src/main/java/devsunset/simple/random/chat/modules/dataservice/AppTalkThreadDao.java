@@ -37,6 +37,6 @@ public interface AppTalkThreadDao {
     @Insert
     void insert(AppTalkThread appTalkThread);
 
-    @Delete
-    void delete(AppTalkThread appTalkThread);
+    @Query("DELETE FROM APP_TALK_THREAD WHERE ATX_ID =:atxId")
+    void deleteByAtxId(String atxId);
 }

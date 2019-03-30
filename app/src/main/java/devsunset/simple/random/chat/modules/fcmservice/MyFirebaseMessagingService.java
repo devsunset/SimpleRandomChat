@@ -101,56 +101,57 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getData() != null) {
 
-            if( remoteMessage.getData().get("ATX_STATUS") !=null && !"".equals( remoteMessage.getData().get("ATX_STATUS"))){
+            if (remoteMessage.getData().get("ATX_STATUS") != null && !"".equals(remoteMessage.getData().get("ATX_STATUS"))) {
 
-                String ctm = System.currentTimeMillis()+"";
+                String ctm = System.currentTimeMillis() + "";
 
                 // 최초 메세지 상태시 처리 (F : FROM , F->P  : TO )
-                if("F".equals(remoteMessage.getData().get("ATX_STATUS"))){
-                        String talkStatus = Consts.MESSAGE_STATUS_X;
-                        HashMap<String,String> account = AccountInfo.getAccountInfo(getApplicationContext());
+                if ("F".equals(remoteMessage.getData().get("ATX_STATUS"))) {
+                    String talkStatus = Consts.MESSAGE_STATUS_X;
+                    HashMap<String, String> account = AccountInfo.getAccountInfo(getApplicationContext());
 
-                        AppTalkMain atm = new AppTalkMain();
-                        atm.setATX_ID(remoteMessage.getData().get("ATX_ID"));
-                        atm.setATX_LOCAL_TIME(ctm);
-                        if(account.get("APP_ID").equals(remoteMessage.getData().get("FROM_APP_ID"))){
-                            atm.setATX_STATUS(Consts.MESSAGE_STATUS_FIRST);
-                            talkStatus = Consts.MESSAGE_STATUS_FIRST;
-                        }else{
-                            atm.setATX_STATUS(Consts.MESSAGE_STATUS_PROCEDDING);
-                            talkStatus = Consts.MESSAGE_STATUS_PROCEDDING;
-                        }
-                        atm.setFROM_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
-                        atm.setFROM_APP_KEY(remoteMessage.getData().get("FROM_APP_KEY"));
-                        atm.setFROM_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
-                        atm.setFROM_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
-                        atm.setFROM_GENDER(remoteMessage.getData().get("FROM_GENDER"));
-                        atm.setFROM_LANG(remoteMessage.getData().get("FROM_LANG"));
-                        atm.setTALK_APP_ID(remoteMessage.getData().get("TALK_APP_ID"));
-                        atm.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
-                        atm.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
-                        atm.setTO_APP_ID(remoteMessage.getData().get("TO_APP_ID"));
-                        atm.setTO_APP_KEY(remoteMessage.getData().get("TO_APP_KEY"));
-                        atm.setTO_COUNTRY(remoteMessage.getData().get("TO_COUNTRY"));
-                        atm.setTO_COUNTRY_NAME(remoteMessage.getData().get("TO_COUNTRY_NAME"));
-                        atm.setTO_GENDER(remoteMessage.getData().get("TO_GENDER"));
-                        atm.setTO_LANG(remoteMessage.getData().get("TO_LANG"));
+                    AppTalkMain atm = new AppTalkMain();
+                    atm.setATX_ID(remoteMessage.getData().get("ATX_ID"));
+                    atm.setATX_LOCAL_TIME(ctm);
+                    if (account.get("APP_ID").equals(remoteMessage.getData().get("FROM_APP_ID"))) {
+                        atm.setATX_STATUS(Consts.MESSAGE_STATUS_FIRST);
+                        talkStatus = Consts.MESSAGE_STATUS_FIRST;
+                    } else {
+                        atm.setATX_STATUS(Consts.MESSAGE_STATUS_PROCEDDING);
+                        talkStatus = Consts.MESSAGE_STATUS_PROCEDDING;
+                    }
+                    atm.setFROM_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
+                    atm.setFROM_APP_KEY(remoteMessage.getData().get("FROM_APP_KEY"));
+                    atm.setFROM_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
+                    atm.setFROM_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
+                    atm.setFROM_GENDER(remoteMessage.getData().get("FROM_GENDER"));
+                    atm.setFROM_LANG(remoteMessage.getData().get("FROM_LANG"));
+                    atm.setTALK_APP_ID(remoteMessage.getData().get("TALK_APP_ID"));
+                    atm.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
+                    atm.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
+                    atm.setTO_APP_ID(remoteMessage.getData().get("TO_APP_ID"));
+                    atm.setTO_APP_KEY(remoteMessage.getData().get("TO_APP_KEY"));
+                    atm.setTO_COUNTRY(remoteMessage.getData().get("TO_COUNTRY"));
+                    atm.setTO_COUNTRY_NAME(remoteMessage.getData().get("TO_COUNTRY_NAME"));
+                    atm.setTO_GENDER(remoteMessage.getData().get("TO_GENDER"));
+                    atm.setTO_LANG(remoteMessage.getData().get("TO_LANG"));
 
-                        AppTalkThread att = new AppTalkThread();
-                        att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
-                        att.setTALK_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
-                        att.setTALK_LOCAL_TIME(ctm);
-                        att.setTALK_ID(remoteMessage.getData().get("TALK_ID"));
-                        att.setTALK_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
-                        att.setTALK_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
-                        att.setTALK_GENDER(remoteMessage.getData().get("FROM_GENDER"));
-                        att.setTALK_LANG(remoteMessage.getData().get("FROM_LANG"));
-                        att.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
-                         att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
+                    AppTalkThread att = new AppTalkThread();
+                    att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
+                    att.setTALK_APP_ID(remoteMessage.getData().get("FROM_APP_ID"));
+                    att.setTALK_LOCAL_TIME(ctm);
+                    att.setTALK_ID(remoteMessage.getData().get("TALK_ID"));
+                    att.setTALK_COUNTRY(remoteMessage.getData().get("FROM_COUNTRY"));
+                    att.setTALK_COUNTRY_NAME(remoteMessage.getData().get("FROM_COUNTRY_NAME"));
+                    att.setTALK_GENDER(remoteMessage.getData().get("FROM_GENDER"));
+                    att.setTALK_LANG(remoteMessage.getData().get("FROM_LANG"));
+                    att.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
+                    att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
 
-                        saveFirstMessage(atm,att,"",talkStatus);
+                    saveFirstMessage(atm, att, "", talkStatus);
 
-                }else if(Consts.MESSAGE_STATUS_PROCEDDING.equals(remoteMessage.getData().get("ATX_STATUS"))){
+                    // Reply Message
+                } else if (Consts.MESSAGE_STATUS_PROCEDDING.equals(remoteMessage.getData().get("ATX_STATUS"))) {
 
                     AppTalkThread att = new AppTalkThread();
                     att.setATX_ID(remoteMessage.getData().get("ATX_ID"));
@@ -165,11 +166,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
 
                     saveReplyMessage(att);
+
+                    // Delete Message
+                } else if (Consts.MESSAGE_STATUS_DELETE.equals(remoteMessage.getData().get("ATX_STATUS"))) {
+
+                    saveDeleteMessage(remoteMessage.getData().get("ATX_ID"));
                 }
-            }else{
+            } else {
                 sendNotification(remoteMessage.getNotification().getBody());
             }
-        }else if (remoteMessage.getData() == null) {
+        } else if (remoteMessage.getData() == null) {
             sendNotification(remoteMessage.getNotification().getBody());
         }
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -179,6 +185,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     // [START on_new_token]
+
     /**
      * Called if InstanceID token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the InstanceID token
@@ -220,16 +227,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     /**
      * Persist token to third-party servers.
-     *
+     * <p>
      * Modify this method to associate the user's FCM InstanceID token with any server-side account
      * maintained by your application.
      *
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        HashMap<String,String> myInfo = new HashMap<String,String>();
-        myInfo.put("APP_KEY",token);
-        AccountInfo.setAccountInfo(this,myInfo);
+        HashMap<String, String> myInfo = new HashMap<String, String>();
+        myInfo.put("APP_KEY", token);
+        AccountInfo.setAccountInfo(this, myInfo);
     }
 
     /**
@@ -240,14 +247,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void sendNotification(String messageBody) {
         String channelId = getString(R.string.default_notification_channel_id);
 
-        Intent  intent = new Intent(this, LockActivity.class);
+        Intent intent = new Intent(this, LockActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        Bitmap mLargeIcon = BitmapFactory.decodeResource(getResources(),R.drawable.ic_stat_ic_notification);
+        Bitmap mLargeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_stat_ic_notification);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))){
+        if ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))) {
             NotificationCompat.Builder notificationBuilder =
                     new NotificationCompat.Builder(this, channelId)
                             .setSmallIcon(R.drawable.ic_stat_ic_notification)
@@ -274,7 +281,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
 
-        }else if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))){
+        } else if ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))) {
             Notification notification;
             NotificationCompat.Builder mBuilder;
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -282,7 +289,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel notificationChannel = new NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH);
                 //Disabling vibration!
-                notificationChannel.setVibrationPattern(new long[]{ 0 });
+                notificationChannel.setVibrationPattern(new long[]{0});
                 notificationChannel.enableVibration(true);
                 notificationChannel.setSound(null, null);
                 notificationManager.createNotificationChannel(notificationChannel);
@@ -290,7 +297,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else {
                 mBuilder = new NotificationCompat.Builder(this);
                 mBuilder.setVibrate(new long[]{0L});
-                mBuilder.setSound(null,1);
+                mBuilder.setSound(null, 1);
             }
 
             mBuilder.setContentTitle(getString(R.string.default_received_message))
@@ -307,12 +314,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     /**
      * 최 메세지 처리
+     *
      * @param atm
      * @param att
      * @param message
      * @param talkStatus
      */
-    private void saveFirstMessage(AppTalkMain atm, AppTalkThread att,String message,String talkStatus) {
+    private void saveFirstMessage(AppTalkMain atm, AppTalkThread att, String message, String talkStatus) {
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -320,33 +328,34 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .AppTalkMainDao().findByAtxId(atm.getATX_ID());
 
                 // 방어코딩 서버에서 FROM - TO 동일한지 확인할수 있는 값이 없는 관계로 단말에서 예외처리
-                if(existDataCheck !=null && !existDataCheck.isEmpty()){
+                if (existDataCheck != null && !existDataCheck.isEmpty()) {
                     Logger.d("First Message FROM == TO Skip...");
-                }else{
+                } else {
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkMainDao().insert(atm);
 
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().insert(att);
 
-                    if(Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                            || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                    if (Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                            || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))) {
                         sendNotification(""); // message
                     }
                 }
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
 
-                if(Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) &&
+                if (Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) &&
                         ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                                 || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))
-                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
+                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))) {
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
-                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
-                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
+                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher));
+                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_gradient));
                     fbCustomToast.setGravity(1);
                     fbCustomToast.show();
                 }
@@ -361,6 +370,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     /**
      * 답변 메세지 처리
+     *
      * @param att
      */
     private void saveReplyMessage(AppTalkThread att) {
@@ -371,24 +381,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .AppTalkMainDao().findByAtxId(att.getATX_ID());
 
                 // 단말에 해당 값이 존재 하는지 체크
-                if(existDataCheck !=null && !existDataCheck.isEmpty()){
+                if (existDataCheck != null && !existDataCheck.isEmpty()) {
 
                     List<AppTalkThread> existDataSubCheck = DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().findByTalkId(att.getTALK_ID());
 
                     // TALK_ID 값이 이미 존재시 SKIP
-                    if(existDataSubCheck !=null && !existDataSubCheck.isEmpty()){
+                    if (existDataSubCheck != null && !existDataSubCheck.isEmpty()) {
                         Logger.d("TALK_ID EXIST Skip...");
-                    }else{
+                    } else {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                                .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_PROCEDDING,att.getTALK_LOCAL_TIME()
-                                ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
+                                .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_PROCEDDING, att.getTALK_LOCAL_TIME()
+                                , att.getTALK_APP_ID(), att.getTALK_TEXT(), att.getTALK_TYPE(), att.getATX_ID());
 
                         DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                                 .AppTalkThreadDao().insert(att);
 
-                        if(("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))){
+                        if (("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))) {
                             sendNotification(""); // message
                         }
                     }
@@ -396,15 +406,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
-                if(("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                if (("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                         || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))
-                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))){
+                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))) {
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
-                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_launcher));
-                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.bg_gradient));
+                    fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher));
+                    fbCustomToast.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_gradient));
                     fbCustomToast.setGravity(1);
                     fbCustomToast.show();
                 }
@@ -417,8 +428,42 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         st.execute();
     }
 
+
+    /**
+     * 삭제 메세지 처리
+     *
+     * @param atxId
+     */
+    private void saveDeleteMessage(String atxId) {
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                List<AppTalkMain> existDataCheck = DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().findByAtxId(atxId);
+
+                // 단말에 해당 값이 존재 하는지 체크
+                if (existDataCheck != null && !existDataCheck.isEmpty()) {
+
+                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                            .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_DELETE,atxId);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                //EventBus Call
+                BusProvider.getInstance().post("PUSH_RECEIVE");
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
+    }
+
     /**
      * Service Background 여부 판단
+     *
      * @param context
      * @return
      */

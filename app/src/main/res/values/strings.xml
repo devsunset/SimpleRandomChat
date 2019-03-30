@@ -42,7 +42,13 @@
     <string name="passwordsuccess">Success - Password setup success</string>
     <string name="passwordfail">Fail - Password do not match</string>
     <string name="empty_message">No reply message.</string>
-    <string name="black_list_send">Black List</string>
+    <string name="black_list_send">Black List Regist</string>
     <string name="bye_send">Bye</string>
     <string name="hide">Hide</string>
+    <string name="hide_message">Hide from message list</string>
+    <string name="hide_message_desc">Hidden in the message list.\nWhen the other party sends you a reply, it will show up again in the list.</string>
+    <string name="bye_message">Delete message</string>
+    <string name="bye_message_desc">Deletes the message and no longer receives the message.\nData will not be recovered, so decide carefully</string>
+    <string name="black_list_message">Black List Regist</string>
+    <string name="black_list_message_desc">If you send us a spam or bullshit message, please report it.\nAfter the report, the message will be deleted.</string>
 </resources>

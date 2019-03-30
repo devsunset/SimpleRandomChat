@@ -113,7 +113,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             protected Void doInBackground(Void... voids) {
 
                 DatabaseClient.getInstance(ctx).getAppDataBase()
-                        .AppTalkMainDao().readTalkMainStatus(Consts.MESSAGE_STATUS_REPLY,atxId);
+                        .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_REPLY,atxId);
 
                 return null;
             }

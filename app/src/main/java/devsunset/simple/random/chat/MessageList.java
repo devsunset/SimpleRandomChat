@@ -70,20 +70,26 @@ public class MessageList extends Fragment {
 		APP_ID = AccountInfo.getAccountInfo(getActivity()).get("APP_ID");
 		APP_KEY =  AccountInfo.getAccountInfo(getActivity()).get("APP_KEY");
 
-		getDatabase();
+		//답변한 메세지 목록에서 숨기기
+		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
+			getDatabase(APP_ID);
+		}else{
+			getDatabase("___NO___");
+		}
 
 		return v;
 	}
 
-	private void getDatabase() {
+	private void getDatabase(String talkAppId) {
 		class GetTasks extends AsyncTask<Void, Void, List<AppTalkMain>> {
+
 			@Override
 			protected List<AppTalkMain> doInBackground(Void... voids) {
 				List<AppTalkMain> taskList = DatabaseClient
 						.getInstance(getActivity())
 						.getAppDataBase()
 						.AppTalkMainDao()
-						.getAll();
+						.getAll(talkAppId);
 				return taskList;
 			}
 			@Override
@@ -164,7 +170,14 @@ public class MessageList extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();  // Always call the superclass method first
-		getDatabase();
+
+		//답변한 메세지 목록에서 숨기기
+		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
+			getDatabase(APP_ID);
+		}else{
+			getDatabase("___NO___");
+		}
+
 	}
 
 	@Override
@@ -177,7 +190,14 @@ public class MessageList extends Fragment {
 	@Subscribe
 	public void receiveMessageReloadMessageList(String event) {
 		Logger.i("receiveMessageReloadMessageList process... ");
-		getDatabase();
+
+		//답변한 메세지 목록에서 숨기기
+		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
+			getDatabase(APP_ID);
+		}else{
+			getDatabase("___NO___");
+		}
+
 	}
 
 }

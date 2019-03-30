@@ -48,4 +48,6 @@ public class Consts {
     public static final String IDS_PRIEFIX_ATX = "ATX_";
     // TTD
     public static final String IDS_PRIEFIX_TTD = "TTD_";
+    // ERROR
+    public static final String IDS_PRIEFIX_ERR = "ERR_";
 }

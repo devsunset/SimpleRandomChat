@@ -81,13 +81,13 @@ public interface HttpConnectService {
     Call<DataVo> retryMessage(@FieldMap HashMap<String, Object> param);
 
     /**
-     * Good Bye Message
+     * Bye Message
      * @param param
      * @return
      */
     @FormUrlEncoded
-    @POST("goodbyeMessage")
-    Call<DataVo> goodbyeMessage(@FieldMap HashMap<String, Object> param);
+    @POST("byeMessage")
+    Call<DataVo> byeMessage(@FieldMap HashMap<String, Object> param);
 
     /**
      * Get Image Data

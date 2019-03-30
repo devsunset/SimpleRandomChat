@@ -25,8 +25,8 @@ import java.util.List;
 @Dao
 public interface AppTalkMainDao {
 
-    @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_STATUS NOT IN ('F','H') ORDER BY ATX_LOCAL_TIME DESC")
-    List<AppTalkMain> getAll();
+    @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_STATUS NOT IN ('F','H') AND TALK_APP_ID != :talkAppId ORDER BY ATX_LOCAL_TIME DESC")
+    List<AppTalkMain> getAll(String talkAppId);
 
     @Query("SELECT * FROM APP_TALK_MAIN WHERE ATX_ID = :atxId")
     List<AppTalkMain> findByAtxId(String atxId);
@@ -34,14 +34,11 @@ public interface AppTalkMainDao {
     @Insert
     void insert(AppTalkMain appTalkMain);
 
-    @Delete
-    void delete(AppTalkMain appTalkMain);
+    @Query("DELETE FROM APP_TALK_MAIN WHERE ATX_ID =:atxId")
+    void deleteByAtxId(String atxId);
 
     @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus WHERE ATX_ID =:atxId")
-    void readTalkMainStatus(String atxStatus, String atxId);
-
-    @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus, ATX_LOCAL_TIME= :atxLocalTime  WHERE ATX_ID =:atxId")
-    void updateStatus(String atxStatus, String atxLocalTime, String atxId);
+    void updateStatus(String atxStatus, String atxId);
 
     @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus, ATX_LOCAL_TIME= :atxLocalTime " +
             ", TALK_APP_ID =:talkAppId ,TALK_TEXT= :talkText ,TALK_TYPE= :talkType WHERE ATX_ID =:atxId")

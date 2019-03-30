@@ -59,7 +59,11 @@ import retrofit2.Response;
  */
 
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
+
+	//Thread.UncaughtExceptionHandler mUncaughtExceptionHandler;
+
 	HttpConnectService httpConnctService = null;
+
 	private LovelySaveStateHandler saveStateHandler;
 	private  int INIT_CHECK = 0;
 
@@ -68,6 +72,10 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
+		//mUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+		//Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandlerApplication());
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
 		ButterKnife.bind(this);
@@ -326,4 +334,65 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 		startActivity(intent);
 		finish();
 	}
+
+
+	/**
+	 * 비 정상 로그 처리
+	 */
+	/*
+	class UncaughtExceptionHandlerApplication implements Thread.UncaughtExceptionHandler {
+
+		@Override
+		public void uncaughtException(Thread t, Throwable e) {
+			Logger.d("error", t.getName()+" : "+getStackTrace(e));
+
+			if(httpConnctService !=null){
+				HashMap<String,String> account =  AccountInfo.getAccountInfo(getApplicationContext());
+
+				HashMap<String,Object> params = new  HashMap<String,Object>();
+				params.put("ERROR_ID",Consts.IDS_PRIEFIX_ERR+UUID.randomUUID().toString());
+				params.put("ERROR_APP_ID",account.get("APP_ID"));
+				params.put("ERROR_COUNTRY",account.get("COUNTRY"));
+				params.put("ERROR_COUNTRY_NAME",account.get("COUNTRY_NAME"));
+				params.put("ERROR_GENDER",account.get("GENDER"));
+				params.put("ERROR_LANG",account.get("LANG"));
+				params.put("ERROR_TEXT",getStackTrace(e));
+
+				httpConnctService.errorStackTrace(params).enqueue(new Callback<DataVo>() {
+					@Override
+					public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+						FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
+						android.os.Process.killProcess(android.os.Process.myPid());
+						System.exit(10);
+					}
+					@Override
+					public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+						Logger.e("getNoticeProcess Error : " + t.getMessage());
+						FBToast.infoToast(MainActivity.this,getString(R.string.networkerror),FBToast.LENGTH_SHORT);
+						android.os.Process.killProcess(android.os.Process.myPid());
+						System.exit(10);
+					}
+				});
+
+			}
+
+		}
+
+		private String getStackTrace(Throwable th){
+			final Writer result = new StringWriter();
+			final PrintWriter printWriter = new PrintWriter(result);
+
+			Throwable cause = th;
+			while(cause!=null){
+				cause.printStackTrace(printWriter);
+				cause = cause.getCause();
+			}
+
+			final String stacktraceAsString = result.toString();
+			printWriter.close();
+
+			return stacktraceAsString;
+		}
+	}
+	*/
 }

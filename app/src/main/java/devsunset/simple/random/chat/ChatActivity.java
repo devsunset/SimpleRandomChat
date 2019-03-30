@@ -14,9 +14,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
 import com.tfb.fbtoast.FBToast;
@@ -61,6 +65,9 @@ public class ChatActivity extends Activity {
 
     HttpConnectService httpConnctService = null;
 
+    @BindView(R.id.btnHide)
+    Button btnHide;
+
     @BindView(R.id.replyArea)
     LinearLayout replyArea;
 
@@ -69,11 +76,14 @@ public class ChatActivity extends Activity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
     RecyclerView.LayoutManager mLayoutManager;
 
     public static String APP_ID = "";
     public static String ATX_ID = "";
     public static String TO_APP_KEY = "";
+
+    NiftyDialogBuilder dialogBuilder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +96,12 @@ public class ChatActivity extends Activity {
 
         httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
+        dialogBuilder = NiftyDialogBuilder.getInstance(this);
+
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
         APP_ID = AccountInfo.getAccountInfo(this).get("APP_ID");
 
         Intent intent = getIntent();
@@ -100,6 +113,7 @@ public class ChatActivity extends Activity {
 
     /**
      * message list search
+     *
      * @param atxId
      */
     private void getDatabase(String atxId) {
@@ -147,10 +161,12 @@ public class ChatActivity extends Activity {
                     }
 
                     // 마지막 대화가 자신인 경우 숨기기
-                    if (APP_ID.equals(appTalkThread.get(appTalkThread.size()-1).getTALK_APP_ID())) {
+                    if (APP_ID.equals(appTalkThread.get(appTalkThread.size() - 1).getTALK_APP_ID())) {
                         replyArea.setVisibility(View.GONE);
-                    }else{
+                        btnHide.setVisibility(View.VISIBLE);
+                    } else {
                         replyArea.setVisibility(View.VISIBLE);
+                        btnHide.setVisibility(View.GONE);
                     }
 
                 } else {
@@ -174,8 +190,88 @@ public class ChatActivity extends Activity {
      * black List send button click
      */
     @OnClick(R.id.btnBlackListSend)
-    void onBtnBlackLIstClicked() {
-        FBToast.infoToast(this,"To-Do Black List",FBToast.LENGTH_SHORT);
+    void onBtnBlackListClicked() {
+        dialogBuilder.withTitle(getString(R.string.black_list_message))
+                .withTitleColor("#FFFFFF")                                  
+                .withDividerColor("#11000000")                              
+                .withMessage(getString(R.string.black_list_message_desc))
+                .withMessageColor("#FFFFFFFF")
+                .withDialogColor("#FFE74C3C")
+                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                .withDuration(700)                                          
+                .withEffect(Effectstype.Shake)                              
+                .withButton1Text("CANCEL")
+                .withButton2Text("OK")
+                .isCancelableOnTouchOutside(true)
+                //.setCustomView(R.layout.custom_view,v.getContext())
+                .setButton1Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                })
+                .setButton2Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        blackListSendProcess();
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * Black List 등록
+     */
+    public void blackListSendProcess() {
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkThreadDao().deleteByAtxId(ATX_ID);
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().deleteByAtxId(ATX_ID);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                HashMap<String, String> account = AccountInfo.getAccountInfo(getApplicationContext());
+                HashMap<String, Object> params = new HashMap<String, Object>();
+                params.put("ATX_ID", ATX_ID);
+                params.put("TALK_APP_ID", account.get("APP_ID"));
+                params.put("TO_APP_KEY", TO_APP_KEY);
+
+                httpConnctService.byeMessage(params).enqueue(new Callback<DataVo>() {
+                    @Override
+                    public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                        if (response.isSuccessful()) {
+                            DataVo data = response.body();
+                            if ("S".equals(data.getRESULT_CODE())) {
+                                Logger.i("blackListSendProcess Success");
+                            }else{
+                                Logger.e("blackListSendProcess Fail");
+                            }
+                        }else{
+                            Logger.e("blackListSendProcess Fail");
+                        }
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                        Logger.e("blackListSendProcess Fail");
+                        finish();
+                    }
+                });
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
     }
 
     /**
@@ -183,7 +279,93 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnByeSend)
     void onBtnByeSendClicked() {
-        FBToast.infoToast(this,"To-Do Bye",FBToast.LENGTH_SHORT);
+
+        if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))){
+            byeSendProcess();
+        }else{
+            dialogBuilder.withTitle(getString(R.string.bye_message))
+                    .withTitleColor("#FFFFFF")
+                    .withDividerColor("#11000000")
+                    .withMessage(getString(R.string.bye_message_desc))
+                    .withMessageColor("#FFFFFFFF")
+                    .withDialogColor("#009688")
+                    .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                    .withDuration(700)
+                    .withEffect(Effectstype.SlideBottom)
+                    .withButton1Text("CANCEL")
+                    .withButton2Text("OK")
+                    .isCancelableOnTouchOutside(true)
+                    //.setCustomView(R.layout.custom_view,v.getContext())
+                    .setButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    })
+                    .setButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            byeSendProcess();
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    /**
+     * 메세지 삭제
+     */
+    public void byeSendProcess() {
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkThreadDao().deleteByAtxId(ATX_ID);
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().deleteByAtxId(ATX_ID);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+
+                HashMap<String, String> account = AccountInfo.getAccountInfo(getApplicationContext());
+                HashMap<String, Object> params = new HashMap<String, Object>();
+                params.put("ATX_ID", ATX_ID);
+                params.put("TALK_APP_ID", account.get("APP_ID"));
+                params.put("TO_APP_KEY", TO_APP_KEY);
+
+                httpConnctService.byeMessage(params).enqueue(new Callback<DataVo>() {
+                    @Override
+                    public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
+                        if (response.isSuccessful()) {
+                            DataVo data = response.body();
+                            if ("S".equals(data.getRESULT_CODE())) {
+                                Logger.i("byeSendProcess Success");
+                            }else{
+                                Logger.e("byeSendProcess Fail");
+                            }
+                        }else{
+                            Logger.e("byeSendProcess Fail");
+                        }
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                        Logger.e("byeSendProcess Fail");
+                        finish();
+                    }
+                });
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
     }
 
     /**
@@ -191,7 +373,55 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnHide)
     void onBtnHideClicked() {
-        FBToast.infoToast(this,"To-Do Hide",FBToast.LENGTH_SHORT);
+        dialogBuilder.withTitle(getString(R.string.hide_message))
+                .withTitleColor("#FFFFFF")                                  
+                .withDividerColor("#11000000")                              
+                .withMessage(getString(R.string.hide_message_desc))
+                .withMessageColor("#FFFFFFFF")                                
+                .withDialogColor("#3869b8")                                
+                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                .withDuration(700)                                          
+                .withEffect(Effectstype.Slidetop)                              
+                .withButton1Text("CANCEL")                                   
+                .withButton2Text("OK")                                       
+                .isCancelableOnTouchOutside(true)                              
+                //.setCustomView(R.layout.custom_view,v.getContext())       
+                .setButton1Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                })
+                .setButton2Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideProcess();
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * 메세지 숨기기
+     */
+    public void hideProcess() {
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_HIDE,ATX_ID);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                finish();
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
     }
 
     /**
@@ -202,38 +432,38 @@ public class ChatActivity extends Activity {
 
         String message = reply_message.getText().toString();
 
-        if (reply_message.getText().toString().trim().length() == 0 ) {
-            FBToast.infoToast(this,getString(R.string.sendinput),FBToast.LENGTH_SHORT);
+        if (reply_message.getText().toString().trim().length() == 0) {
+            FBToast.infoToast(this, getString(R.string.sendinput), FBToast.LENGTH_SHORT);
             return;
         } else {
             reply_message.setText("");
         }
 
         // 메세지 내용 최대 500자 제한
-        if(message.length() >= 500){
-            message = message.substring(0,500)+" ...";
+        if (message.length() >= 500) {
+            message = message.substring(0, 500) + " ...";
         }
 
-        HashMap<String,String> account = AccountInfo.getAccountInfo(this);
-        String ctm = System.currentTimeMillis()+"";
+        HashMap<String, String> account = AccountInfo.getAccountInfo(this);
+        String ctm = System.currentTimeMillis() + "";
         String talkId = UUID.randomUUID().toString();
 
-        HashMap<String,Object> params = new HashMap<String,Object>();
-        params.put("ATX_ID",ATX_ID);
-        params.put("TALK_APP_ID",account.get("APP_ID"));
-        params.put("ATX_LOCAL_TIME",ctm);
-        params.put("TALK_ID",Consts.IDS_PRIEFIX_TTD + talkId);
-        params.put("TALK_COUNTRY",account.get("COUNTRY"));
-        params.put("TALK_COUNTRY_NAME",account.get("COUNTRY_NAME"));
-        params.put("TALK_GENDER",account.get("GENDER"));
-        params.put("TALK_LANG",account.get("LANG"));
-        params.put("TALK_TEXT",message);
-        params.put("TALK_TEXT_IMAGE","");
-        params.put("TALK_TEXT_VOICE","");
-        params.put("TALK_TYPE",Consts.MESSAGE_TYPE_TEXT);
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("ATX_ID", ATX_ID);
+        params.put("TALK_APP_ID", account.get("APP_ID"));
+        params.put("ATX_LOCAL_TIME", ctm);
+        params.put("TALK_ID", Consts.IDS_PRIEFIX_TTD + talkId);
+        params.put("TALK_COUNTRY", account.get("COUNTRY"));
+        params.put("TALK_COUNTRY_NAME", account.get("COUNTRY_NAME"));
+        params.put("TALK_GENDER", account.get("GENDER"));
+        params.put("TALK_LANG", account.get("LANG"));
+        params.put("TALK_TEXT", message);
+        params.put("TALK_TEXT_IMAGE", "");
+        params.put("TALK_TEXT_VOICE", "");
+        params.put("TALK_TYPE", Consts.MESSAGE_TYPE_TEXT);
 
-        params.put("APP_ID",account.get("APP_ID"));
-        params.put("TO_APP_KEY",TO_APP_KEY);
+        params.put("APP_ID", account.get("APP_ID"));
+        params.put("TO_APP_KEY", TO_APP_KEY);
 
         httpConnctService.replyMessage(params).enqueue(new Callback<DataVo>() {
             @Override
@@ -241,25 +471,25 @@ public class ChatActivity extends Activity {
                 if (response.isSuccessful()) {
                     DataVo data = response.body();
                     if (data != null) {
-                        if("S".equals(data.getRESULT_CODE())){
+                        if ("S".equals(data.getRESULT_CODE())) {
                             AppTalkThread att = new AppTalkThread();
                             att.setATX_ID(ATX_ID);
                             att.setTALK_APP_ID(account.get("APP_ID"));
                             att.setTALK_LOCAL_TIME(ctm);
-                            att.setTALK_ID("TTD_"+ talkId);
+                            att.setTALK_ID("TTD_" + talkId);
                             att.setTALK_COUNTRY(account.get("COUNTRY"));
                             att.setTALK_COUNTRY_NAME(account.get("COUNTRY_NAME"));
                             att.setTALK_GENDER(account.get("GENDER"));
                             att.setTALK_LANG(account.get("LANG"));
-                            att.setTALK_TEXT((String)params.get("TALK_TEXT"));
+                            att.setTALK_TEXT((String) params.get("TALK_TEXT"));
                             att.setTALK_TYPE(Consts.MESSAGE_TYPE_TEXT);
                             replyMessage(att);
-                            Logger.i("replyMessage Success : ");
-                        }else{
-                            Logger.e("replyMessage Fail : ");
-                            FBToast.errorToast(getApplicationContext(),getString(R.string.networkerror),FBToast.LENGTH_SHORT);
-                            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                            inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(),0);
+                            Logger.i("replyMessage Success");
+                        } else {
+                            Logger.e("replyMessage Fail");
+                            FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                             finish();
                         }
                     }
@@ -268,10 +498,10 @@ public class ChatActivity extends Activity {
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
-                Logger.e("replyMessage Error : "+t.getMessage());
-                FBToast.errorToast(getApplicationContext(),getString(R.string.networkerror),FBToast.LENGTH_SHORT);
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(),0);
+                Logger.e("replyMessage Error : " + t.getMessage());
+                FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                 finish();
             }
         });
@@ -279,6 +509,7 @@ public class ChatActivity extends Activity {
 
     /**
      * reply message db insert
+     *
      * @param att
      */
     private void replyMessage(AppTalkThread att) {
@@ -290,12 +521,12 @@ public class ChatActivity extends Activity {
                         .AppTalkThreadDao().findByTalkId(att.getTALK_ID());
 
                 // TALK_ID 값이 이미 존재시 SKIP
-                if(existDataSubCheck !=null && !existDataSubCheck.isEmpty()){
+                if (existDataSubCheck != null && !existDataSubCheck.isEmpty()) {
                     Logger.d("TALK_ID EXIST Skip...");
-                }else{
+                } else {
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                            .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_REPLY,att.getTALK_LOCAL_TIME()
-                            ,att.getTALK_APP_ID(),att.getTALK_TEXT(),att.getTALK_TYPE(),att.getATX_ID());
+                            .AppTalkMainDao().updateReplySend(Consts.MESSAGE_STATUS_REPLY, att.getTALK_LOCAL_TIME()
+                            , att.getTALK_APP_ID(), att.getTALK_TEXT(), att.getTALK_TYPE(), att.getATX_ID());
 
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().insert(att);
@@ -303,11 +534,12 @@ public class ChatActivity extends Activity {
 
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
-                FBToast.infoToast(getApplicationContext(),getString(R.string.sendresult),FBToast.LENGTH_SHORT);
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(),0);
+                FBToast.infoToast(getApplicationContext(), getString(R.string.sendresult), FBToast.LENGTH_SHORT);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                 finish();
             }
         }
@@ -317,7 +549,7 @@ public class ChatActivity extends Activity {
 
     @Override
     public void onDestroy() {
-        // Always unregister when an object no longer should be on the bus.
+        // Always unregister when an object no longer should be on the bus.a
         BusProvider.getInstance().unregister(this);
         super.onDestroy();
     }
