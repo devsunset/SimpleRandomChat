@@ -36,6 +36,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
+import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 //import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -349,6 +350,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     fbCustomToast.setGravity(1);
                     fbCustomToast.show();
                 }
+
+                //EventBus Call
+                BusProvider.getInstance().post("PUSH_RECEIVE");
             }
         }
         SaveTask st = new SaveTask();
@@ -404,6 +408,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     fbCustomToast.setGravity(1);
                     fbCustomToast.show();
                 }
+
+                //EventBus Call
+                BusProvider.getInstance().post("PUSH_RECEIVE");
             }
         }
         SaveTask st = new SaveTask();

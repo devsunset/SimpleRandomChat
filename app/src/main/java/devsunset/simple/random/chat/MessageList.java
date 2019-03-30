@@ -14,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
+import com.squareup.otto.Subscribe;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +29,7 @@ import devsunset.simple.random.chat.modules.dataservice.AppTalkMain;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
 import devsunset.simple.random.chat.modules.etcservice.MessageMainAdapter;
+import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 
 
 /**
@@ -52,14 +56,22 @@ public class MessageList extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+
 		View v = inflater.inflate(R.layout.message_list, container, false);
+
 		ButterKnife.bind(this, v);
+
+		//Event Bus 등록
+		BusProvider.getInstance().register(this);
+
 		mRecyclerView.setHasFixedSize(true);
 		mLayoutManager = new LinearLayoutManager(getActivity());
 		mRecyclerView.setLayoutManager(mLayoutManager);
 		APP_ID = AccountInfo.getAccountInfo(getActivity()).get("APP_ID");
 		APP_KEY =  AccountInfo.getAccountInfo(getActivity()).get("APP_KEY");
+
 		getDatabase();
+
 		return v;
 	}
 
@@ -154,4 +166,18 @@ public class MessageList extends Fragment {
 		super.onResume();  // Always call the superclass method first
 		getDatabase();
 	}
+
+	@Override
+	public void onDestroy() {
+		// Always unregister when an object no longer should be on the bus.
+		BusProvider.getInstance().unregister(this);
+		super.onDestroy();
+	}
+
+	@Subscribe
+	public void receiveMessageReloadMessageList(String event) {
+		Logger.i("receiveMessageReloadMessageList process... ");
+		getDatabase();
+	}
+
 }

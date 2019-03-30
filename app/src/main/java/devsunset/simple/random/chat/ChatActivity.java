@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.orhanobut.logger.Logger;
+import com.squareup.otto.Subscribe;
 import com.tfb.fbtoast.FBToast;
 
 import java.text.SimpleDateFormat;
@@ -36,6 +37,7 @@ import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.etcservice.MessageDetailAdapter;
 import devsunset.simple.random.chat.modules.etcservice.MessageMainAdapter;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
+import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectClient;
 import devsunset.simple.random.chat.modules.httpservice.HttpConnectService;
@@ -77,8 +79,13 @@ public class ChatActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_activity);
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
         ButterKnife.bind(this);
+
+        //Event Bus 등록
+        BusProvider.getInstance().register(this);
+
+        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -307,4 +314,18 @@ public class ChatActivity extends Activity {
         SaveTask st = new SaveTask();
         st.execute();
     }
+
+    @Override
+    public void onDestroy() {
+        // Always unregister when an object no longer should be on the bus.
+        BusProvider.getInstance().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe
+    public void receiveMessageReloadMessageList(String event) {
+        Logger.i("receiveMessageReloadMessageList process... ");
+        getDatabase(ATX_ID);
+    }
+
 }
