@@ -65,6 +65,9 @@ public class ChatActivity extends Activity {
 
     HttpConnectService httpConnctService = null;
 
+    @BindView(R.id.btnBlackListSend)
+    Button btnBlackListSend;
+
     @BindView(R.id.btnHide)
     Button btnHide;
 
@@ -81,6 +84,7 @@ public class ChatActivity extends Activity {
 
     public static String APP_ID = "";
     public static String ATX_ID = "";
+    public static String ATX_STATUS = "";
     public static String TO_APP_KEY = "";
 
     NiftyDialogBuilder dialogBuilder = null;
@@ -106,6 +110,7 @@ public class ChatActivity extends Activity {
 
         Intent intent = getIntent();
         ATX_ID = intent.getStringExtra("ATX_ID");
+        ATX_STATUS = intent.getStringExtra("ATX_STATUS");
         TO_APP_KEY = intent.getStringExtra("REPLY_APP_KEY");
 
         getDatabase(ATX_ID);
@@ -169,12 +174,26 @@ public class ChatActivity extends Activity {
                         btnHide.setVisibility(View.GONE);
                     }
 
+                    if(Consts.MESSAGE_STATUS_DELETE.equals(ATX_STATUS)){
+                        replyArea.setVisibility(View.GONE);
+                        btnHide.setVisibility(View.GONE);
+                    }
+
+                    if(appTalkThread.size() == 1 && APP_ID.equals(appTalkThread.get(0).getTALK_APP_ID())){
+                        replyArea.setVisibility(View.GONE);
+                        btnBlackListSend.setVisibility(View.GONE);
+                    }
+
                 } else {
                     MessageItem mi = new MessageItem();
                     mi.setDrawableId(R.drawable.empty_message);
                     mi.setTALK_TEXT(getString(R.string.empty_message));
                     mi.setTALK_TARGET("NO_DATA");
                     messageArrayList.add(mi);
+
+                    replyArea.setVisibility(View.GONE);
+                    btnHide.setVisibility(View.GONE);
+                    btnBlackListSend.setVisibility(View.GONE);
                 }
                 MessageDetailAdapter myAdapter = new MessageDetailAdapter(messageArrayList);
                 mRecyclerView.setAdapter(myAdapter);
@@ -198,7 +217,7 @@ public class ChatActivity extends Activity {
                 .withMessageColor("#FFFFFFFF")
                 .withDialogColor("#FFE74C3C")
                 .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                .withDuration(700)                                          
+                .withDuration(700)
                 .withEffect(Effectstype.Shake)                              
                 .withButton1Text("CANCEL")
                 .withButton2Text("OK")
@@ -241,6 +260,7 @@ public class ChatActivity extends Activity {
             protected void onPostExecute(Void aVoid) {
                 HashMap<String, String> account = AccountInfo.getAccountInfo(getApplicationContext());
                 HashMap<String, Object> params = new HashMap<String, Object>();
+                params.put("BLA_ID", Consts.IDS_PRIEFIX_BLA+UUID.randomUUID().toString());
                 params.put("ATX_ID", ATX_ID);
                 params.put("TALK_APP_ID", account.get("APP_ID"));
                 params.put("TO_APP_KEY", TO_APP_KEY);
@@ -290,7 +310,7 @@ public class ChatActivity extends Activity {
                     .withMessageColor("#FFFFFFFF")
                     .withDialogColor("#009688")
                     .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                    .withDuration(700)
+                    .withDuration(500)
                     .withEffect(Effectstype.SlideBottom)
                     .withButton1Text("CANCEL")
                     .withButton2Text("OK")
@@ -380,7 +400,7 @@ public class ChatActivity extends Activity {
                 .withMessageColor("#FFFFFFFF")                                
                 .withDialogColor("#3869b8")                                
                 .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                .withDuration(700)                                          
+                .withDuration(500)
                 .withEffect(Effectstype.Slidetop)                              
                 .withButton1Text("CANCEL")                                   
                 .withButton2Text("OK")                                       

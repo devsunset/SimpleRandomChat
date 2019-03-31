@@ -50,4 +50,6 @@ public class Consts {
     public static final String IDS_PRIEFIX_TTD = "TTD_";
     // ERROR
     public static final String IDS_PRIEFIX_ERR = "ERR_";
+    // BLACK LIST
+    public static final String IDS_PRIEFIX_BLA = "BLA_";
 }

@@ -96,10 +96,14 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 if(MessageItemArrayList.get(position).getATX_ID() !=null){
                     Context context = v.getContext();
 
-                    readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_ID());
+                    // 삭제 상태인 경우 갱신 안함
+                    if(!Consts.MESSAGE_STATUS_DELETE.equals(MessageItemArrayList.get(position).getATX_ID())){
+                        readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_STATUS());
+                    }
 
                     Intent intent = new Intent(context, ChatActivity.class);
                     intent.putExtra("ATX_ID",MessageItemArrayList.get(position).getATX_ID());
+                    intent.putExtra("ATX_STATUS",MessageItemArrayList.get(position).getATX_STATUS());
                     intent.putExtra("REPLY_APP_KEY",MessageItemArrayList.get(position).getREPLY_APP_KEY());
                     context.startActivity(intent);
                 }
