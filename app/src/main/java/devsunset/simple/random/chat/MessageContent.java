@@ -7,6 +7,7 @@ package devsunset.simple.random.chat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,14 +41,12 @@ import java.util.ArrayList;
 
 public class MessageContent extends FragmentActivity {
 
-
 	private final int TAB_MESSAGE_SEND = 0;
 	private final int TAB_MESSAGE_LIST = 1;
 	private final int TAB_MESSAGE_SETTING = 2;
 
 	FragmentManager fm;
 	FragmentTransaction tran;
-
 
 	private RelativeLayout llTab1 = null;
 	private RelativeLayout llTab2 = null;
@@ -93,8 +92,13 @@ public class MessageContent extends FragmentActivity {
 		llTab2.setOnClickListener(mOnClickListener);
 		llTab3.setOnClickListener(mOnClickListener);
 
-        setCurrentItem(TAB_MESSAGE_SEND);
 
+		Intent intent = getIntent();
+		if("Y".equals(intent.getStringExtra("PUSH_CALL_FLAG"))){
+			setCurrentItem(TAB_MESSAGE_LIST);
+		}else{
+			setCurrentItem(TAB_MESSAGE_SEND);
+		}
 
 		// Initialize the Mobile Ads SDK.
 		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
@@ -113,7 +117,6 @@ public class MessageContent extends FragmentActivity {
 		// Start loading the ad in the background.
 		adView.loadAd(adRequest);
 	}
-
 
 
 	// ---------------------------------------------------------------------------------------------
@@ -137,7 +140,6 @@ public class MessageContent extends FragmentActivity {
 				tran.commit();
 				break;
 		}
-
 	}
 
 	public void setTab(int position) {

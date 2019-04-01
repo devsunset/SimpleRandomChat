@@ -6,6 +6,7 @@
 package devsunset.simple.random.chat;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 
@@ -43,6 +44,11 @@ public class LockSettingActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lock_setting_activity);
         ButterKnife.bind(this);
+
+        //screen capture disable
+        if (Build.VERSION.SDK_INT >= 11) {
+            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
 
         pinview1.setPinViewEventListener(new Pinview.PinViewEventListener() {
             @Override

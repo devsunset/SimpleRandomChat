@@ -7,6 +7,7 @@ package devsunset.simple.random.chat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.mukesh.OnOtpCompletionListener;
@@ -28,9 +29,20 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 
 public class LockActivity extends Activity implements OnOtpCompletionListener {
     private OtpView otpView;
+    public String PUSH_CALL_FLAG = "N";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        if("Y".equals(intent.getStringExtra("PUSH_CALL_FLAG"))){
+            PUSH_CALL_FLAG = "Y";
+        }
+
+        //screen capture disable
+        if (Build.VERSION.SDK_INT >= 11) {
+            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
 
         if(!"Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_LOCK_YN"))){
             goNextIntent();
@@ -42,6 +54,7 @@ public class LockActivity extends Activity implements OnOtpCompletionListener {
 
     private void goNextIntent(){
         Intent intent = new Intent(this, MessageContent.class);
+        intent.putExtra("PUSH_CALL_FLAG",PUSH_CALL_FLAG);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();
@@ -61,6 +74,7 @@ public class LockActivity extends Activity implements OnOtpCompletionListener {
         }else{
             FBToast.infoToast(LockActivity.this,"Auth Fail",FBToast.LENGTH_SHORT);
             Intent intent = getIntent();
+            intent.putExtra("PUSH_CALL_FLAG",PUSH_CALL_FLAG);
             finish();
             startActivity(intent);
         }

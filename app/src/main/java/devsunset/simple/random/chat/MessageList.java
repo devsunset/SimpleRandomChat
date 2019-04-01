@@ -113,7 +113,7 @@ public class MessageList extends Fragment {
 						}
 						// TALK_TARGET
 						if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
-							mi.setTALK_TARGET("You");
+							mi.setTALK_TARGET("Me");
 						}else{
 							mi.setTALK_TARGET("");
 						}

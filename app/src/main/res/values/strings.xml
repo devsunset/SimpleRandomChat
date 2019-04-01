@@ -5,8 +5,8 @@
 
     <string name="app_name">Message Talk</string>
     <string name="loading">loading...</string>
-    <string name="app_message_send">Message Send</string>
-    <string name="app_message_list">Message List</string>
+    <string name="app_message_send">Send</string>
+    <string name="app_message_list">List</string>
     <string name="app_message_setting">Setting</string>
     <string name="common_info_title">Content</string>
     <string name="common_ok">Ok</string>

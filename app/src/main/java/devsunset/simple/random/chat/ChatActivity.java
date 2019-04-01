@@ -8,6 +8,7 @@ package devsunset.simple.random.chat;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -94,6 +95,11 @@ public class ChatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_activity);
         ButterKnife.bind(this);
+
+        //screen capture disable
+        if (Build.VERSION.SDK_INT >= 11) {
+            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
 
         //Event Bus 등록
         BusProvider.getInstance().register(this);
@@ -226,7 +232,7 @@ public class ChatActivity extends Activity {
                 .setButton1Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
+                        dialogBuilder.dismiss();
                     }
                 })
                 .setButton2Click(new View.OnClickListener() {
@@ -319,7 +325,7 @@ public class ChatActivity extends Activity {
                     .setButton1Click(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            finish();
+                            dialogBuilder.dismiss();
                         }
                     })
                     .setButton2Click(new View.OnClickListener() {
@@ -409,7 +415,7 @@ public class ChatActivity extends Activity {
                 .setButton1Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
+                        dialogBuilder.dismiss();
                     }
                 })
                 .setButton2Click(new View.OnClickListener() {

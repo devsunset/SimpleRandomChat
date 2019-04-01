@@ -48,7 +48,7 @@
     <string name="hide_message">메세지 목록에서 숨기기</string>
     <string name="hide_message_desc">메세지 목록에서 숨김 처리를 합니다.\n답장을 받으면 목록에 다시 보이게 됩니다.</string>
     <string name="bye_message">메세지 삭제하기</string>
-    <string name="bye_message_desc">메세지를 삭제 하고 더 이상 메세지 받지 않음.\n데이터 복구가 되지 않으니 신중히 결정 하세요.</string>
+    <string name="bye_message_desc">메세지 목록에서 해당 메세지를 삭제 처리 합니다.\n데이터 복구가 되지 않으니 신중히 결정 하세요.</string>
     <string name="black_list_message">신고하기</string>
     <string name="black_list_message_desc">광고 스팸 및 불 건전 한 메세지를 보내온다면 신고를 부탁드립니다.\n신고 후 해당 메세지는 삭제 처리 됩니다.</string>
 </resources>

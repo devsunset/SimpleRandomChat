@@ -72,7 +72,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         if(!"NO_DATA".equals(target)){
             if(target !=null  && !"".equals(target)){
-                target = " - [You]";
+                target = " - Me";
             }
             myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());
@@ -97,8 +97,8 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     Context context = v.getContext();
 
                     // 삭제 상태인 경우 갱신 안함
-                    if(!Consts.MESSAGE_STATUS_DELETE.equals(MessageItemArrayList.get(position).getATX_ID())){
-                        readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_STATUS());
+                    if(!Consts.MESSAGE_STATUS_DELETE.equals(MessageItemArrayList.get(position).getATX_STATUS())){
+                        readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_ID());
                     }
 
                     Intent intent = new Intent(context, ChatActivity.class);

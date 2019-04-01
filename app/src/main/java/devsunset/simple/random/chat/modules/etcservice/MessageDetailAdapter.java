@@ -72,7 +72,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         if(!"NO_DATA".equals(target)){
             if(target !=null  && !"".equals(target)){
-                target = " - [You]";
+                target = " - Me";
             }
             myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#00c4a6</color>
 
     <!-- ============================== -->
     <!-- Common Color -->
@@ -28,7 +28,7 @@
     <color name="common_table_label">#f2f2f2</color>
     <color name="common_table_line_gray">#c4d0e5</color>
     <color name="install_header">#d8f6fe</color>
-    <color name="system_header">#ffdbc3</color>
+    <color name="system_header">#F8E0F7</color>
 
     <color name="indigo">#3F51B5</color>
     <color name="teal">#009688</color>
@@ -53,10 +53,10 @@
     <drawable name="blue">#0000FF</drawable>
     <drawable name="transparent">#00000000</drawable>
 
-    <drawable name="empty_message_bg">#FF9933</drawable>
-    <drawable name="newmessage_bg">#009688</drawable>
+    <drawable name="empty_message_bg">#F3E2A9</drawable>
+    <drawable name="newmessage_bg">#D8F6CE</drawable>
     <drawable name="man_bg">#d8f6fe</drawable>
-    <drawable name="woman_bg">#ffdbc3</drawable>
+    <drawable name="woman_bg">#F8E0F7</drawable>
     <drawable name="trash_bg">#D3D3D3</drawable>
 
 

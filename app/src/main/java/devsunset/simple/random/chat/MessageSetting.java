@@ -16,13 +16,12 @@ import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
 import com.github.angads25.toggle.widget.LabeledSwitch;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
+import lib.kingja.switchbutton.SwitchMultiButton;
 
 /**
  * <PRE>
@@ -37,7 +36,7 @@ import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 public class MessageSetting extends Fragment {
 
 	@BindView(R.id.toogleAlarm)
-	ToggleSwitch toogleAlarm;
+	SwitchMultiButton toogleAlarm;
 
 	@BindView(R.id.byeconfirm)
 	LabeledSwitch switchByConfirm;
@@ -60,22 +59,16 @@ public class MessageSetting extends Fragment {
 
 		HashMap<String,String> account = AccountInfo.getAccountInfo(getContext());
 
-		ArrayList<String> labels = new ArrayList<String>();
-		labels.add("A");
-		labels.add("B");
-		labels.add("C");
-		labels.add("D");
-		toogleAlarm.setLabels(labels);
-
+		toogleAlarm.setText("A","B","C","D");
 
 		if("Y".equals(account.get("SET_ALARM_YN"))){
-			toogleAlarm.setCheckedTogglePosition(0);
+			toogleAlarm.setSelectedTab(0);
 		}else if("Y".equals(account.get("SET_ALARM_NOTI_YN"))){
-			toogleAlarm.setCheckedTogglePosition(1);
+			toogleAlarm.setSelectedTab(1);
 		}else if("Y".equals(account.get("SET_ALARM_POPUP_YN"))){
-			toogleAlarm.setCheckedTogglePosition(2);
+			toogleAlarm.setSelectedTab(2);
 		}else{
-			toogleAlarm.setCheckedTogglePosition(3);
+			toogleAlarm.setSelectedTab(3);
 		}
 
 		if("Y".equals(account.get("SET_BYE_CONFIRM_YN"))){
@@ -96,13 +89,12 @@ public class MessageSetting extends Fragment {
 			switchLockPwd.setOn(false);
 		}
 
-		toogleAlarm.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
+		toogleAlarm.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
 			@Override
-			public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+			public void onSwitch(int position, String tabText) {
 				appInfoSetting();
 			}
 		});
-
 
 		switchByConfirm.setOnToggledListener(new OnToggledListener() {
 			@Override
@@ -154,7 +146,7 @@ public class MessageSetting extends Fragment {
 	 */
 	private void appInfoSetting(){
 		HashMap<String,String> params = new HashMap<String,String>();
-		int positionAlarm = toogleAlarm.getCheckedTogglePosition();
+		int positionAlarm = toogleAlarm.getSelectedTab();
 
 		if(positionAlarm == 0){
 			params.put("SET_ALARM_YN","Y");
@@ -173,7 +165,6 @@ public class MessageSetting extends Fragment {
 			params.put("SET_ALARM_NOTI_YN","N");
 			params.put("SET_ALARM_POPUP_YN","N");
 		}
-
 
 		if(switchByConfirm.isOn()){
 			params.put("SET_BYE_CONFIRM_YN","Y");

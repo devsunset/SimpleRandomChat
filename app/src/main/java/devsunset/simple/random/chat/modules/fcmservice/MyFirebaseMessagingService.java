@@ -5,12 +5,10 @@
  */
 package devsunset.simple.random.chat.modules.fcmservice;
 
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,6 +28,7 @@ import com.tfb.fbtoast.FBCustomToast;
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.internal.Utils;
 import devsunset.simple.random.chat.LockActivity;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
@@ -38,6 +37,7 @@ import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
+import devsunset.simple.random.chat.modules.utilservice.Util;
 
 //import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 //import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -248,6 +248,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String channelId = getString(R.string.default_notification_channel_id);
 
         Intent intent = new Intent(this, LockActivity.class);
+        intent.putExtra("PUSH_CALL_FLAG","Y");
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -337,7 +338,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().insert(att);
 
-                    if (Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                    if (Util.isAppIsInBackground(getApplicationContext()) && Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                             || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))) {
                         sendNotification(""); // message
                     }
@@ -397,12 +398,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                                 .AppTalkThreadDao().insert(att);
 
-                        if (("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                        if (Util.isAppIsInBackground(getApplicationContext()) && ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
                                 || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))) {
                             sendNotification(""); // message
                         }
                     }
-
                 }
                 return null;
             }
@@ -445,8 +445,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // 단말에 해당 값이 존재 하는지 체크
                 if (existDataCheck != null && !existDataCheck.isEmpty()) {
 
-                    DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                            .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_DELETE,atxId);
+                    if(Consts.MESSAGE_STATUS_FIRST.equals(existDataCheck.get(0).getATX_STATUS())){
+                        DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                                .AppTalkThreadDao().deleteByAtxId(atxId);
+
+                        DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                                .AppTalkMainDao().deleteByAtxId(atxId);
+                    }else{
+                        DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                                .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_DELETE,atxId);
+                    }
                 }
                 return null;
             }
@@ -459,35 +467,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         SaveTask st = new SaveTask();
         st.execute();
-    }
-
-    /**
-     * Service Background 여부 판단
-     *
-     * @param context
-     * @return
-     */
-    private boolean isAppIsInBackground(Context context) {
-        boolean isInBackground = true;
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-            List<ActivityManager.RunningAppProcessInfo> runningProcesses = am.getRunningAppProcesses();
-            for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
-                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                    for (String activeProcess : processInfo.pkgList) {
-                        if (activeProcess.equals(context.getPackageName())) {
-                            isInBackground = false;
-                        }
-                    }
-                }
-            }
-        } else {
-            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
-            ComponentName componentInfo = taskInfo.get(0).topActivity;
-            if (componentInfo.getPackageName().equals(context.getPackageName())) {
-                isInBackground = false;
-            }
-        }
-        return isInBackground;
     }
 }
