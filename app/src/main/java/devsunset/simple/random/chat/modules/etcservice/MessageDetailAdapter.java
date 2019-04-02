@@ -7,11 +7,12 @@ package devsunset.simple.random.chat.modules.etcservice;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,8 +20,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import devsunset.simple.random.chat.ChatActivity;
+import devsunset.simple.random.chat.MessageContent;
 import devsunset.simple.random.chat.R;
-import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
+import devsunset.simple.random.chat.WebViewActivity;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 /**
@@ -34,12 +36,15 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  */
 public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static String MY_LANG = "";
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder  {
         ImageView ivPicture;
         TextView tv_talk_text;
         TextView tv_countryName_talk_target;
         TextView tv_atx_local_time;
         LinearLayout list_item_rows;
+        Button btnTranslation;
 
         MyViewHolder(View view){
             super(view);
@@ -48,12 +53,14 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             tv_countryName_talk_target = view.findViewById(R.id.tv_countryName_talk_target);
             tv_atx_local_time = view.findViewById(R.id.tv_atx_local_time);
             list_item_rows = view.findViewById(R.id.list_item_rows);
+            btnTranslation = view.findViewById(R.id.btnTranslation);
         }
     }
 
     private ArrayList<MessageItem> MessageItemArrayList;
-    public MessageDetailAdapter(ArrayList<MessageItem> MessageItemArrayList){
+    public MessageDetailAdapter(ArrayList<MessageItem> MessageItemArrayList,String lang){
         this.MessageItemArrayList = MessageItemArrayList;
+        MY_LANG = lang;
     }
 
     @Override
@@ -76,6 +83,12 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());
+
+            if(MY_LANG.equals(MessageItemArrayList.get(position).getTALK_LANG())){
+                myViewHolder.btnTranslation.setVisibility(View.GONE);
+            }else{
+                myViewHolder.btnTranslation.setVisibility(View.VISIBLE);
+            }
         }
 
         if(MessageItemArrayList.get(position).drawableId == R.drawable.empty_message) {
@@ -89,8 +102,28 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.trash){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.light_gray);
         }
-    }
 
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MessageItemArrayList.get(position).getATX_ID() !=null){
+                    if(!MY_LANG.equals(MessageItemArrayList.get(position).getTALK_LANG())){
+                        Context context = v.getContext();
+                        String value = MessageItemArrayList.get(position).getTALK_TEXT();
+                        /*
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value)));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        context.startActivity(intent);
+                        */
+                        Intent intent = new Intent(context, WebViewActivity.class);
+                        intent.putExtra("URL_ADDRESS","https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        context.startActivity(intent);
+                    }
+                }
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {

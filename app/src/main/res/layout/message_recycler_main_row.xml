@@ -52,10 +52,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
+                <Button
+                    android:id="@+id/btnTranslation"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/translation"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/tv_atx_local_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:textStyle="bold"
                     android:text="" />
 

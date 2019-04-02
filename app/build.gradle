@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 28
@@ -15,7 +16,7 @@ android {
     buildTypes {
         debug {
             debuggable true
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -52,9 +53,7 @@ dependencies {
         exclude module: 'support-v4'
     }
     //retrofit & okhttp3
-    implementation('com.squareup.retrofit2:retrofit:2.5.0') {
-        exclude module: 'okhttp'
-    }
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
@@ -65,8 +64,12 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
     //firebase core
     implementation 'com.google.firebase:firebase-core:16.0.7'
-    // Add dependency
+    //friebase crashlytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    //firebase performance
+    implementation 'com.google.firebase:firebase-perf:16.2.3'
+    //firebase remoteconfig
+    implementation 'com.google.firebase:firebase-config:16.3.0'
     //firebase fcm
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     //firebase ads

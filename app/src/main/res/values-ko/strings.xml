@@ -26,7 +26,7 @@
     <string name="man">남자</string>
     <string name="woman">여자</string>
     <string name="local">국내</string>
-    <string name="world">해외</string>
+    <string name="world">World(+국내)</string>
     <string name="newmessagereceive">새로운 메세지 받기</string>
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">메세지 도착</string>
@@ -42,7 +42,7 @@
     <string name="passwordsuccess">비밀번호가 정상적으로 설정 되었습니다.</string>
     <string name="passwordfail">비밀 번호가 일치 하지 않습니다.</string>
     <string name="empty_message">답장 받은 메세지가 없습니다.</string>
-    <string name="black_list_send">Black List Regist</string>
+    <string name="black_list_send">신고</string>
     <string name="bye_send">삭제</string>
     <string name="hide">숨김</string>
     <string name="hide_message">메세지 목록에서 숨기기</string>

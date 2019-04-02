@@ -44,28 +44,36 @@
                     android:id="@+id/tv_countryName_talk_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="" />
+                    android:text=""
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
+                <Button
+                    android:id="@+id/btnTranslation"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/translation"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/tv_atx_local_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="" />
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_talk_text"
-                android:layout_gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:paddingTop="2dp"
                 android:textSize="7pt"
                 android:textStyle="bold" />

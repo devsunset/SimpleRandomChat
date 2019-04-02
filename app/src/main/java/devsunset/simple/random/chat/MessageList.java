@@ -122,6 +122,9 @@ public class MessageList extends Fragment {
 						String str = dayTime.format(new Date(Long.parseLong(appTalkMain.get(i).getATX_LOCAL_TIME())));
 						mi.setATX_LOCAL_TIME(str);
 
+						mi.setFROM_LANG(appTalkMain.get(i).getFROM_LANG());
+						mi.setTO_LANG(appTalkMain.get(i).getTO_LANG());
+
 						// icon
 						if("P".equals(appTalkMain.get(i).getATX_STATUS())){
 							mi.setDrawableId(R.drawable.new_message);

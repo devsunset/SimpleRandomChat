@@ -26,7 +26,7 @@
     <string name="man">Man</string>
     <string name="woman">Woman</string>
     <string name="local">Local</string>
-    <string name="world">World</string>
+    <string name="world">World(+Local)</string>
     <string name="newmessagereceive">Accept new messages</string>
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">Receive Message</string>
@@ -42,8 +42,8 @@
     <string name="passwordsuccess">Success - Password setup success</string>
     <string name="passwordfail">Fail - Password do not match</string>
     <string name="empty_message">No reply message.</string>
-    <string name="black_list_send">Black List Regist</string>
-    <string name="bye_send">Bye</string>
+    <string name="black_list_send">Black List</string>
+    <string name="bye_send">Delete</string>
     <string name="hide">Hide</string>
     <string name="hide_message">Hide from message list</string>
     <string name="hide_message_desc">Hidden in the message list.\nWhen the other party sends you a reply, it will show up again in the list.</string>

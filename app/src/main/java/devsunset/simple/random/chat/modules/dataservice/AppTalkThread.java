@@ -37,7 +37,6 @@ public class AppTalkThread  implements Serializable {
     private String TALK_TEXT;
     private String TALK_TEXT_IMAGE;
     private String TALK_TEXT_VOICE;
-    private String TALK_TRANS_TEXT;
     private String TALK_TYPE;
 
     public String getATX_ID() {
@@ -105,12 +104,6 @@ public class AppTalkThread  implements Serializable {
     }
     public void setTALK_TEXT_VOICE(String tALK_TEXT_VOICE) {
         TALK_TEXT_VOICE = tALK_TEXT_VOICE;
-    }
-    public String getTALK_TRANS_TEXT() {
-        return TALK_TRANS_TEXT;
-    }
-    public void setTALK_TRANS_TEXT(String tALK_TRANS_TEXT) {
-        TALK_TRANS_TEXT = tALK_TRANS_TEXT;
     }
     public String getTALK_TYPE() {
         return TALK_TYPE;

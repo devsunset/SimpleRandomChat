@@ -21,10 +21,13 @@ public class MessageItem {
     private String ATX_LOCAL_TIME;
     private String ATX_STATUS;
     private String COUNTRY_NAME;
+    private String FROM_LANG;
     private String GENDER;
     private String REPLY_APP_KEY;
+    private String TALK_LANG;
     private String TALK_TEXT;
     private String TALK_TARGET;
+    private String TO_LANG;
 
     public int getDrawableId() {
         return drawableId;
@@ -66,6 +69,14 @@ public class MessageItem {
         this.COUNTRY_NAME = COUNTRY_NAME;
     }
 
+    public String getFROM_LANG() {
+        return FROM_LANG;
+    }
+
+    public void setFROM_LANG(String FROM_LANG) {
+        this.FROM_LANG = FROM_LANG;
+    }
+
     public String getGENDER() {
         return GENDER;
     }
@@ -82,6 +93,14 @@ public class MessageItem {
         this.REPLY_APP_KEY = REPLY_APP_KEY;
     }
 
+    public String getTALK_LANG() {
+        return TALK_LANG;
+    }
+
+    public void setTALK_LANG(String TALK_LANG) {
+        this.TALK_LANG = TALK_LANG;
+    }
+
     public String getTALK_TEXT() {
         return TALK_TEXT;
     }
@@ -96,5 +115,13 @@ public class MessageItem {
 
     public void setTALK_TARGET(String TALK_TARGET) {
         this.TALK_TARGET = TALK_TARGET;
+    }
+
+    public String getTO_LANG() {
+        return TO_LANG;
+    }
+
+    public void setTO_LANG(String TO_LANG) {
+        this.TO_LANG = TO_LANG;
     }
 }

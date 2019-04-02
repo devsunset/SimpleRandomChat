@@ -86,6 +86,7 @@ public class ChatActivity extends Activity {
     public static String APP_ID = "";
     public static String ATX_ID = "";
     public static String ATX_STATUS = "";
+    public static String MY_LANG = "";
     public static String TO_APP_KEY = "";
 
     NiftyDialogBuilder dialogBuilder = null;
@@ -113,6 +114,7 @@ public class ChatActivity extends Activity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         APP_ID = AccountInfo.getAccountInfo(this).get("APP_ID");
+        MY_LANG = AccountInfo.getAccountInfo(this).get("LANG");
 
         Intent intent = getIntent();
         ATX_ID = intent.getStringExtra("ATX_ID");
@@ -152,6 +154,8 @@ public class ChatActivity extends Activity {
                         mi.setTALK_TEXT(appTalkThread.get(i).getTALK_TEXT());
                         // COUNTRY_NAME
                         mi.setCOUNTRY_NAME(appTalkThread.get(i).getTALK_COUNTRY_NAME());
+                        // TALK_LANG
+                        mi.setTALK_LANG(appTalkThread.get(i).getTALK_LANG());
                         // TALK_TARGET
                         if (APP_ID.equals(appTalkThread.get(i).getTALK_APP_ID())) {
                             mi.setTALK_TARGET("You");
@@ -201,7 +205,7 @@ public class ChatActivity extends Activity {
                     btnHide.setVisibility(View.GONE);
                     btnBlackListSend.setVisibility(View.GONE);
                 }
-                MessageDetailAdapter myAdapter = new MessageDetailAdapter(messageArrayList);
+                MessageDetailAdapter myAdapter = new MessageDetailAdapter(messageArrayList,MY_LANG);
                 mRecyclerView.setAdapter(myAdapter);
                 mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
 
@@ -314,7 +318,7 @@ public class ChatActivity extends Activity {
                     .withDividerColor("#11000000")
                     .withMessage(getString(R.string.bye_message_desc))
                     .withMessageColor("#FFFFFFFF")
-                    .withDialogColor("#009688")
+                    .withDialogColor("#4db849")
                     .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                     .withDuration(500)
                     .withEffect(Effectstype.SlideBottom)
@@ -404,7 +408,7 @@ public class ChatActivity extends Activity {
                 .withDividerColor("#11000000")                              
                 .withMessage(getString(R.string.hide_message_desc))
                 .withMessageColor("#FFFFFFFF")                                
-                .withDialogColor("#3869b8")                                
+                .withDialogColor("#3F51B5")
                 .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                 .withDuration(500)
                 .withEffect(Effectstype.Slidetop)                              

@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView tv_countryName_talk_target;
         TextView tv_atx_local_time;
         LinearLayout list_item_rows;
+        Button btnTranslation;
 
         MyViewHolder(View view){
             super(view);
@@ -48,6 +50,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tv_countryName_talk_target = view.findViewById(R.id.tv_countryName_talk_target);
             tv_atx_local_time = view.findViewById(R.id.tv_atx_local_time);
             list_item_rows = view.findViewById(R.id.list_item_rows);
+            btnTranslation = view.findViewById(R.id.btnTranslation);
         }
     }
 
@@ -76,6 +79,14 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
             myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());
+        }
+
+        if(!"NO_DATA".equals(MessageItemArrayList.get(position).getTALK_TARGET())){
+            if(MessageItemArrayList.get(position).getFROM_LANG().equals(MessageItemArrayList.get(position).getTO_LANG())){
+                myViewHolder.btnTranslation.setVisibility(View.GONE);
+            }else{
+                myViewHolder.btnTranslation.setVisibility(View.VISIBLE);
+            }
         }
 
         if(MessageItemArrayList.get(position).drawableId == R.drawable.empty_message) {

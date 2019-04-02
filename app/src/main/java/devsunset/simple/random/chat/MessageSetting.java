@@ -6,6 +6,7 @@
 package devsunset.simple.random.chat;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import lib.kingja.switchbutton.SwitchMultiButton;
 
@@ -179,5 +181,16 @@ public class MessageSetting extends Fragment {
 		}
 
 		AccountInfo.setAccountInfo(getContext(),params);
+	}
+
+	/**
+	 * message send button click
+	 */
+	@OnClick(R.id.btnLicense)
+	void onBtnLicenseClicked() {
+		Intent intent = new Intent(getContext(), WebViewActivity.class);
+		intent.putExtra("URL_ADDRESS","file:///android_asset/www/index.html");
+		intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		startActivity(intent);
 	}
 }
