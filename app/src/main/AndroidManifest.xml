@@ -41,6 +41,19 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name="devsunset.simple.random.chat.SampleActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="devsunset.simple.random.chat.ResultActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <!-- [START firebase_service] -->
         <service android:name=".modules.fcmservice.MyFirebaseMessagingService">
             <intent-filter>
@@ -58,7 +71,10 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

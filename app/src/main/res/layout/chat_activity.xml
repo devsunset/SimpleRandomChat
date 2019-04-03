@@ -64,6 +64,12 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
+        <Button
+            android:id="@+id/btnAttach"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_attach"/>
+
         <EditText
             android:id="@+id/reply_message"
             style="@style/edittext_new"

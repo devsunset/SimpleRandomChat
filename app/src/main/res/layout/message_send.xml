@@ -22,7 +22,7 @@
 
             <lib.kingja.switchbutton.SwitchMultiButton
                 android:id="@+id/toogleTargetGender"
-                android:layout_width="200dp"
+                android:layout_width="170dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:padding="4dp"

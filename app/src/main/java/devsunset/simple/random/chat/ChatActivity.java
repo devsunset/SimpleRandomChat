@@ -5,14 +5,21 @@
  */
 package devsunset.simple.random.chat;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,10 +29,14 @@ import android.widget.Toast;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
 import com.tfb.fbtoast.FBToast;
+import com.yalantis.ucrop.UCrop;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +47,9 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
+import cafe.adriel.androidaudiorecorder.model.AudioChannel;
+import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
@@ -50,6 +64,7 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Url;
 
 
 /**
@@ -403,32 +418,36 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnHide)
     void onBtnHideClicked() {
-        dialogBuilder.withTitle(getString(R.string.hide_message))
-                .withTitleColor("#FFFFFF")                                  
-                .withDividerColor("#11000000")                              
-                .withMessage(getString(R.string.hide_message_desc))
-                .withMessageColor("#FFFFFFFF")                                
-                .withDialogColor("#3F51B5")
-                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                .withDuration(500)
-                .withEffect(Effectstype.Slidetop)                              
-                .withButton1Text("CANCEL")                                   
-                .withButton2Text("OK")                                       
-                .isCancelableOnTouchOutside(true)                              
-                //.setCustomView(R.layout.custom_view,v.getContext())       
-                .setButton1Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogBuilder.dismiss();
-                    }
-                })
-                .setButton2Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        hideProcess();
-                    }
-                })
-                .show();
+        if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))){
+            hideProcess();
+        }else{
+            dialogBuilder.withTitle(getString(R.string.hide_message))
+                    .withTitleColor("#FFFFFF")
+                    .withDividerColor("#11000000")
+                    .withMessage(getString(R.string.hide_message_desc))
+                    .withMessageColor("#FFFFFFFF")
+                    .withDialogColor("#3F51B5")
+                    .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                    .withDuration(500)
+                    .withEffect(Effectstype.Slidetop)
+                    .withButton1Text("CANCEL")
+                    .withButton2Text("OK")
+                    .isCancelableOnTouchOutside(true)
+                    //.setCustomView(R.layout.custom_view,v.getContext())
+                    .setButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogBuilder.dismiss();
+                        }
+                    })
+                    .setButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            hideProcess();
+                        }
+                    })
+                    .show();
+        }
     }
 
     /**
@@ -575,6 +594,84 @@ public class ChatActivity extends Activity {
         }
         SaveTask st = new SaveTask();
         st.execute();
+    }
+
+
+    /**
+     * attach button
+     *
+     */
+    @OnClick(R.id.btnAttach)
+    void onBtnAttachClicked() {
+        FBToast.infoToast(getApplicationContext(), "Attach", FBToast.LENGTH_SHORT);
+        // 권한 획득
+        // Multiple permissions:
+        String[] permissions = {Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
+            @Override
+            public void onGranted() {
+                //callAudioRecord();
+                //callImageSelect();
+                Intent intent = new Intent(getApplicationContext(), SampleActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+             }
+            @Override
+            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                finish();
+            }
+        });
+    }
+
+    public void callAudioRecord(){
+        String filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
+        int color = getResources().getColor(R.color.colorPrimaryDark);
+        int requestCode = 0;
+        AndroidAudioRecorder.with(this)
+                // Required
+                .setFilePath(filePath)
+                .setColor(color)
+                .setRequestCode(requestCode)
+
+                // Optional
+                .setSource(cafe.adriel.androidaudiorecorder.model.AudioSource.MIC)
+                .setChannel(AudioChannel.STEREO)
+                .setSampleRate(AudioSampleRate.HZ_48000)
+                .setAutoStart(true)
+                .setKeepDisplayOn(true)
+
+                // Start recording
+                .record();
+    }
+
+    public void callImageSelect(){
+
+        Uri sourceUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/DCIM/Camera", "1552632514766.jpg"));
+
+        Uri destinationUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "IMG_" + System.currentTimeMillis()));
+
+        UCrop.of(sourceUri, destinationUri)
+                .withAspectRatio(16, 9)
+                .withMaxResultSize(120, 120)
+                .start(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                // Great! User has recorded and saved the audio file
+            } else if (resultCode == RESULT_CANCELED) {
+                // Oops! User has canceled the recording
+            }
+        }
+
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            final Uri resultUri = UCrop.getOutput(data);
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+        }
     }
 
     @Override

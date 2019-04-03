@@ -12,6 +12,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * <PRE>
  * SimpleRandomChat WebViewActivity
@@ -32,6 +35,7 @@ public class WebViewActivity extends Activity{
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_activity);
+        ButterKnife.bind(this);
 
 
         mWebView = (WebView)findViewById(R.id.webview_area);
@@ -41,5 +45,10 @@ public class WebViewActivity extends Activity{
 
         Intent intent = getIntent();
         mWebView.loadUrl(intent.getStringExtra("URL_ADDRESS"));
+    }
+
+    @OnClick(R.id.btnBack)
+    void onBtnBackClicked() {
+        finish();
     }
 }

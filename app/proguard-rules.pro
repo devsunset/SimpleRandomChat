@@ -44,3 +44,7 @@
 #-dontoptimize #없애면 난독화 X
 #-dontobfuscate #없애면 최적화 X
 #-keepresourcexmlattributenames manifest/** #없애면 manifest 난독화 X
+
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
