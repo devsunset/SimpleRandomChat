@@ -29,6 +29,8 @@ import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
+import devsunset.simple.random.chat.modules.utilservice.Consts;
+
 /**
  * <PRE>
  * SimpleRandomChat App Content Tab
@@ -70,7 +72,7 @@ public class MessageContent extends FragmentActivity {
 		setContentView(R.layout.message_content);
 
 		//screen capture disable
-		if (Build.VERSION.SDK_INT >= 11) {
+		if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
 			getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
 		}
 

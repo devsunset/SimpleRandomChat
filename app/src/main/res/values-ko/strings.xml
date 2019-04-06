@@ -5,6 +5,7 @@
 
     <string name="app_name">메시톡</string>
     <string name="loading">loading...</string>
+    <string name="loadingwait">loading... 잠시만 기다려 주세요.</string>
     <string name="app_message_send">메세지 전송</string>
     <string name="app_message_list">메세지 목록</string>
     <string name="app_message_setting">설정</string>
@@ -51,43 +52,11 @@
     <string name="bye_message_desc">메세지 목록에서 해당 메세지를 삭제 처리 합니다.\n데이터 복구가 되지 않으니 신중히 결정 하세요.</string>
     <string name="black_list_message">신고하기</string>
     <string name="black_list_message_desc">광고 스팸 및 불 건전 한 메세지를 보내온다면 신고를 부탁드립니다.\n신고 후 해당 메세지는 삭제 처리 됩니다.</string>
+    <string name="cancel">취소</string>
+    <string name="choosefile">오디오 파일이나 이미지 파일 중\n한 개를 선택해 주세요.</string>
+    <string name="limitfilesize">최대 1M 용량의 파일만 첨부 가능 합니다.</string>
+    <string name="downfileerror">첨부 파일 유효 다운로드 기간이 만료 되었습니다.</string>
+    <string name="replay">다시 들으시려면 클릭 하세요.</string>
 
-
-
-    <string name="label_sample">sample</string>
-    <string name="label_aspect_ratio">Aspect ratio</string>
-    <string name="label_dynamic">Dynamic</string>
-    <string name="label_image_source">Image source</string>
-    <string name="label_square">Square</string>
-    <string name="label_max_cropped_image_size">Max cropped image size</string>
-    <string name="label_compression_settings">Compression settings</string>
-    <string name="label_ui">UI</string>
-    <string name="label_width">Width</string>
-    <string name="label_height">Height</string>
-    <string name="label_resize_image_to_max_size">Resize image to max size</string>
-    <string name="label_hide_bottom_ui_controls">Hide bottom UI controls</string>
-    <string name="label_freestyle_crop">Freestyle crop</string>
-    <string name="label_select_picture">Select Picture</string>
-    <string name="label_cancel">Cancel</string>
-    <string name="label_ok">OK</string>
-    <string name="notification_image_saved">Image saved</string>
-    <string name="notification_image_saved_click_to_preview">Image saved. Click to preview.</string>
-    <string name="menu_download">Download</string>
-    <string name="button_pick_amp_crop"><![CDATA[Pick & Crop]]></string>
-    <string name="button_crop_random_image">Crop random image</string>
-    <string name="description_cropped_image">Cropped image</string>
-    <string name="format_crop_result_d_d">Crop Result (%1$dx%2$d)</string>
-    <string name="format_quality_d">Quality: %d</string>
-    <string name="format_d_d_px">%1$dx%2$d px</string>
-    <string name="format_max_cropped_image_size">Max cropped image size cannot be less then %d</string>
-    <string name="permission_title_rationale">Permission needed</string>
-    <string name="permission_read_storage_rationale">Storage read permission is needed to pick files.</string>
-    <string name="permission_write_storage_rationale">Storage write permission is needed to save the image.</string>
-    <string name="toast_cannot_retrieve_selected_image">Cannot retrieve selected image</string>
-    <string name="toast_cannot_retrieve_cropped_image">Cannot retrieve cropped image</string>
-    <string name="toast_unexpected_error">Unexpected error</string>
-    <string name="file_provider_authorities">com.yalantis.ucrop.provider</string>
-    <string name="channel_name">ucrop_chanel</string>
-    <string name="channel_description">ucrop result image</string>
 
 </resources>

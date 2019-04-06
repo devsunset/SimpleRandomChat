@@ -100,6 +100,7 @@
                         android:layout_marginRight="@dimen/textbox_horizontal_margin"
                         android:background="#f2f2f2"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:text="@string/alarm" />
 
                 </LinearLayout>
@@ -171,6 +172,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/textbox_horizontal_margin"
                         android:background="#f2f2f2"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="A Type" />
 
@@ -196,6 +198,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="@string/atype_msg" />
 
@@ -235,6 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/textbox_horizontal_margin"
+                        android:textStyle="bold"
                         android:background="#f2f2f2"
                         android:gravity="center"
                         android:text="B Type" />
@@ -261,6 +265,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="@string/btype_msg" />
 
@@ -300,6 +305,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/textbox_horizontal_margin"
+                        android:textStyle="bold"
                         android:background="#f2f2f2"
                         android:gravity="center"
                         android:text="C Type" />
@@ -326,6 +332,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="@string/ctype_msg" />
 
@@ -365,6 +372,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/textbox_horizontal_margin"
+                        android:textStyle="bold"
                         android:background="#f2f2f2"
                         android:gravity="center"
                         android:text="D Type" />
@@ -391,6 +399,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:text="@string/dtype_msg" />
 
@@ -446,6 +455,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:gravity="center"
                         android:paddingLeft="5dp"
                         android:text="@string/byconfirm_msg" />
@@ -502,6 +512,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:paddingLeft="5dp"
                         android:gravity="center"
                         android:text="@string/replynewmessagehide_msg" />
@@ -558,6 +569,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textStyle="bold"
                         android:paddingLeft="5dp"
                         android:gravity="center"
                         android:text="@string/lockpwd_msg" />
@@ -606,8 +618,10 @@
                     <Button
                         android:id="@+id/btnLicense"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/btn_selector_common"
                         android:gravity="center"
+                        android:layout_margin="5dp"
                         android:text="   Open Source License   " />
 
                 </LinearLayout>

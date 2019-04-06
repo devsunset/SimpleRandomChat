@@ -26,7 +26,10 @@ public class MessageItem {
     private String REPLY_APP_KEY;
     private String TALK_LANG;
     private String TALK_TEXT;
+    private String TALK_TEXT_IMAGE;
+    private String TALK_TEXT_VOICE;
     private String TALK_TARGET;
+    private String TALK_TYPE;
     private String TO_LANG;
 
     public int getDrawableId() {
@@ -109,12 +112,36 @@ public class MessageItem {
         this.TALK_TEXT = TALK_TEXT;
     }
 
+    public String getTALK_TEXT_IMAGE() {
+        return TALK_TEXT_IMAGE;
+    }
+
+    public void setTALK_TEXT_IMAGE(String TALK_TEXT_IMAGE) {
+        this.TALK_TEXT_IMAGE = TALK_TEXT_IMAGE;
+    }
+
+    public String getTALK_TEXT_VOICE() {
+        return TALK_TEXT_VOICE;
+    }
+
+    public void setTALK_TEXT_VOICE(String TALK_TEXT_VOICE) {
+        this.TALK_TEXT_VOICE = TALK_TEXT_VOICE;
+    }
+
     public String getTALK_TARGET() {
         return TALK_TARGET;
     }
 
     public void setTALK_TARGET(String TALK_TARGET) {
         this.TALK_TARGET = TALK_TARGET;
+    }
+
+    public String getTALK_TYPE() {
+        return TALK_TYPE;
+    }
+
+    public void setTALK_TYPE(String TALK_TYPE) {
+        this.TALK_TYPE = TALK_TYPE;
     }
 
     public String getTO_LANG() {

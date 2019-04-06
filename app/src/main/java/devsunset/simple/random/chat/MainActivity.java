@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         ButterKnife.bind(this);
 
         //screen capture disable
-        if (Build.VERSION.SDK_INT >= 11) {
+        if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
 

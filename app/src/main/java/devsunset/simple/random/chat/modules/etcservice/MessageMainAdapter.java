@@ -42,6 +42,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView tv_atx_local_time;
         LinearLayout list_item_rows;
         Button btnTranslation;
+        ImageView ivTalkTypeVoiceImage;
 
         MyViewHolder(View view){
             super(view);
@@ -51,6 +52,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tv_atx_local_time = view.findViewById(R.id.tv_atx_local_time);
             list_item_rows = view.findViewById(R.id.list_item_rows);
             btnTranslation = view.findViewById(R.id.btnTranslation);
+            ivTalkTypeVoiceImage= view.findViewById(R.id.ivTalkTypeVoiceImage);
         }
     }
 
@@ -86,6 +88,16 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 myViewHolder.btnTranslation.setVisibility(View.GONE);
             }else{
                 myViewHolder.btnTranslation.setVisibility(View.VISIBLE);
+            }
+
+            if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.GONE);
+            }else  if(Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_image);
+                myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
+            }else{
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_microphone);
+                myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
             }
         }
 

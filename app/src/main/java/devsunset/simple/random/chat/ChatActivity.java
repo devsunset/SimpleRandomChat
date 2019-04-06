@@ -5,38 +5,26 @@
  */
 package devsunset.simple.random.chat;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
-import com.nabinbhandari.android.permissions.PermissionHandler;
-import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
 import com.tfb.fbtoast.FBToast;
-import com.yalantis.ucrop.UCrop;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,14 +35,10 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
-import cafe.adriel.androidaudiorecorder.model.AudioChannel;
-import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.etcservice.MessageDetailAdapter;
-import devsunset.simple.random.chat.modules.etcservice.MessageMainAdapter;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
 import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
@@ -64,7 +48,6 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Url;
 
 
 /**
@@ -104,6 +87,8 @@ public class ChatActivity extends Activity {
     public static String MY_LANG = "";
     public static String TO_APP_KEY = "";
 
+    public static boolean EXECUTE_ACTION = false;
+
     NiftyDialogBuilder dialogBuilder = null;
 
     @Override
@@ -113,7 +98,7 @@ public class ChatActivity extends Activity {
         ButterKnife.bind(this);
 
         //screen capture disable
-        if (Build.VERSION.SDK_INT >= 11) {
+        if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
 
@@ -167,10 +152,16 @@ public class ChatActivity extends Activity {
                         mi.setATX_ID(appTalkThread.get(i).getATX_ID());
                         // TALK_TEXT
                         mi.setTALK_TEXT(appTalkThread.get(i).getTALK_TEXT());
+                        // TALK_TEXT_VOICE
+                        mi.setTALK_TEXT_VOICE(appTalkThread.get(i).getTALK_TEXT_VOICE());
+                        // TALK_TEXT_IMAGE
+                        mi.setTALK_TEXT_IMAGE(appTalkThread.get(i).getTALK_TEXT_IMAGE());
                         // COUNTRY_NAME
                         mi.setCOUNTRY_NAME(appTalkThread.get(i).getTALK_COUNTRY_NAME());
                         // TALK_LANG
                         mi.setTALK_LANG(appTalkThread.get(i).getTALK_LANG());
+                        // TALK_TYPE
+                        mi.setTALK_TYPE((appTalkThread.get(i).getTALK_TYPE()));
                         // TALK_TARGET
                         if (APP_ID.equals(appTalkThread.get(i).getTALK_APP_ID())) {
                             mi.setTALK_TARGET("You");
@@ -493,6 +484,12 @@ public class ChatActivity extends Activity {
             message = message.substring(0, 500) + " ...";
         }
 
+        if(EXECUTE_ACTION){
+            return;
+        }
+
+        EXECUTE_ACTION = true;
+
         HashMap<String, String> account = AccountInfo.getAccountInfo(this);
         String ctm = System.currentTimeMillis() + "";
         String talkId = UUID.randomUUID().toString();
@@ -535,6 +532,7 @@ public class ChatActivity extends Activity {
                             replyMessage(att);
                             Logger.i("replyMessage Success");
                         } else {
+                            EXECUTE_ACTION = false;
                             Logger.e("replyMessage Fail");
                             FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
                             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -547,6 +545,7 @@ public class ChatActivity extends Activity {
 
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                EXECUTE_ACTION = false;
                 Logger.e("replyMessage Error : " + t.getMessage());
                 FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -586,6 +585,7 @@ public class ChatActivity extends Activity {
 
             @Override
             protected void onPostExecute(Void aVoid) {
+                EXECUTE_ACTION = false;
                 FBToast.infoToast(getApplicationContext(), getString(R.string.sendresult), FBToast.LENGTH_SHORT);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
@@ -603,75 +603,16 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnAttach)
     void onBtnAttachClicked() {
-        FBToast.infoToast(getApplicationContext(), "Attach", FBToast.LENGTH_SHORT);
-        // 권한 획득
-        // Multiple permissions:
-        String[] permissions = {Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-        Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
-            @Override
-            public void onGranted() {
-                //callAudioRecord();
-                //callImageSelect();
-                Intent intent = new Intent(getApplicationContext(), SampleActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-             }
-            @Override
-            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                finish();
-            }
-        });
+        Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
+        intent.putExtra("ATX_ID",ATX_ID);
+        intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 
-    public void callAudioRecord(){
-        String filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
-        int color = getResources().getColor(R.color.colorPrimaryDark);
-        int requestCode = 0;
-        AndroidAudioRecorder.with(this)
-                // Required
-                .setFilePath(filePath)
-                .setColor(color)
-                .setRequestCode(requestCode)
-
-                // Optional
-                .setSource(cafe.adriel.androidaudiorecorder.model.AudioSource.MIC)
-                .setChannel(AudioChannel.STEREO)
-                .setSampleRate(AudioSampleRate.HZ_48000)
-                .setAutoStart(true)
-                .setKeepDisplayOn(true)
-
-                // Start recording
-                .record();
-    }
-
-    public void callImageSelect(){
-
-        Uri sourceUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory()+"/DCIM/Camera", "1552632514766.jpg"));
-
-        Uri destinationUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "IMG_" + System.currentTimeMillis()));
-
-        UCrop.of(sourceUri, destinationUri)
-                .withAspectRatio(16, 9)
-                .withMaxResultSize(120, 120)
-                .start(this);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
-            if (resultCode == RESULT_OK) {
-                // Great! User has recorded and saved the audio file
-            } else if (resultCode == RESULT_CANCELED) {
-                // Oops! User has canceled the recording
-            }
-        }
-
-        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            final Uri resultUri = UCrop.getOutput(data);
-        } else if (resultCode == UCrop.RESULT_ERROR) {
-            final Throwable cropError = UCrop.getError(data);
-        }
+    @OnClick(R.id.btnBack)
+    void onBtnBackClicked() {
+        finish();
     }
 
     @Override

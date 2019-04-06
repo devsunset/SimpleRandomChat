@@ -163,6 +163,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     att.setTALK_GENDER(remoteMessage.getData().get("TALK_GENDER"));
                     att.setTALK_LANG(remoteMessage.getData().get("TALK_LANG"));
                     att.setTALK_TEXT(remoteMessage.getData().get("TALK_TEXT"));
+                    att.setTALK_TEXT_IMAGE(remoteMessage.getData().get("TALK_TEXT_IMAGE"));
+                    att.setTALK_TEXT_VOICE(remoteMessage.getData().get("TALK_TEXT_VOICE"));
                     att.setTALK_TYPE(remoteMessage.getData().get("TALK_TYPE"));
 
                     saveReplyMessage(att);

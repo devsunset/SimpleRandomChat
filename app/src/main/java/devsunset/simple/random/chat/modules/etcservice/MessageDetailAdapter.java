@@ -17,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 
 import devsunset.simple.random.chat.ChatActivity;
+import devsunset.simple.random.chat.ChatDownloadActivity;
 import devsunset.simple.random.chat.MessageContent;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.WebViewActivity;
@@ -45,6 +48,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView tv_atx_local_time;
         LinearLayout list_item_rows;
         Button btnTranslation;
+        ImageView ivTalkTypeVoiceImage;
 
         MyViewHolder(View view){
             super(view);
@@ -54,6 +58,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             tv_atx_local_time = view.findViewById(R.id.tv_atx_local_time);
             list_item_rows = view.findViewById(R.id.list_item_rows);
             btnTranslation = view.findViewById(R.id.btnTranslation);
+            ivTalkTypeVoiceImage= view.findViewById(R.id.ivTalkTypeVoiceImage);
         }
     }
 
@@ -89,6 +94,16 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             }else{
                 myViewHolder.btnTranslation.setVisibility(View.VISIBLE);
             }
+
+            if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.GONE);
+            }else  if(Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_image);
+                myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
+            }else{
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_microphone);
+                myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
+            }
         }
 
         if(MessageItemArrayList.get(position).drawableId == R.drawable.empty_message) {
@@ -107,16 +122,25 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             @Override
             public void onClick(View v) {
                 if(MessageItemArrayList.get(position).getATX_ID() !=null){
-                    if(!MY_LANG.equals(MessageItemArrayList.get(position).getTALK_LANG())){
-                        Context context = v.getContext();
-                        String value = MessageItemArrayList.get(position).getTALK_TEXT();
+                    Context context = v.getContext();
+                    if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                        if(!MY_LANG.equals(MessageItemArrayList.get(position).getTALK_LANG())){
+                            String value = MessageItemArrayList.get(position).getTALK_TEXT();
                         /*
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value)));
                         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         context.startActivity(intent);
                         */
-                        Intent intent = new Intent(context, WebViewActivity.class);
-                        intent.putExtra("URL_ADDRESS","https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value));
+                            Intent intent = new Intent(context, WebViewActivity.class);
+                            intent.putExtra("URL_ADDRESS","https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            context.startActivity(intent);
+                        }
+                    }else {
+                        Intent intent = new Intent(context, ChatDownloadActivity.class);
+                        intent.putExtra("TALK_TYPE",MessageItemArrayList.get(position).getTALK_TYPE());
+                        intent.putExtra("TALK_TEXT_VOICE",MessageItemArrayList.get(position).getTALK_TEXT_VOICE());
+                        intent.putExtra("TALK_TEXT_IMAGE",MessageItemArrayList.get(position).getTALK_TEXT_IMAGE());
                         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         context.startActivity(intent);
                     }

@@ -17,6 +17,9 @@ package devsunset.simple.random.chat.modules.utilservice;
 
 public class Consts {
 
+    // screen capture disable
+    public static final boolean SCREEN_CAPTURE_DISABLE = false;
+
     // MESSAGE STATUS
     // F : First
     public static final String MESSAGE_STATUS_FIRST = "F";

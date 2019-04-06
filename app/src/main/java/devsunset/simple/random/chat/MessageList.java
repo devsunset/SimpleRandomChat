@@ -124,6 +124,7 @@ public class MessageList extends Fragment {
 
 						mi.setFROM_LANG(appTalkMain.get(i).getFROM_LANG());
 						mi.setTO_LANG(appTalkMain.get(i).getTO_LANG());
+						mi.setTALK_TYPE(appTalkMain.get(i).getTALK_TYPE());
 
 						// icon
 						if("P".equals(appTalkMain.get(i).getATX_STATUS())){

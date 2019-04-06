@@ -15,6 +15,7 @@ import com.mukesh.OtpView;
 import com.tfb.fbtoast.FBToast;
 
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
+import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 /**
  * <PRE>
@@ -39,15 +40,16 @@ public class LockActivity extends Activity implements OnOtpCompletionListener {
             PUSH_CALL_FLAG = "Y";
         }
 
-        //screen capture disable
-        if (Build.VERSION.SDK_INT >= 11) {
-            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
-        }
-
         if(!"Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_LOCK_YN"))){
             goNextIntent();
         }
         setContentView(R.layout.lock_activity);
+
+        //screen capture disable
+        if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
+            getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
         initializeUi();
         setListeners();
     }

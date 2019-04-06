@@ -18,6 +18,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
+import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 /**
  * <PRE>
@@ -46,7 +47,7 @@ public class LockSettingActivity extends Activity  {
         ButterKnife.bind(this);
 
         //screen capture disable
-        if (Build.VERSION.SDK_INT >= 11) {
+        if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
 

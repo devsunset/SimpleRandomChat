@@ -12,6 +12,14 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_marginLeft="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/btn_back"/>
+
         <View
             android:layout_width="20dp"
             android:layout_height="wrap_content"
@@ -19,21 +27,24 @@
 
         <Button
             android:id="@+id/btnBlackListSend"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_selector_common"
             android:text="@string/black_list_send" />
 
         <Button
             android:id="@+id/btnByeSend"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_selector_common"
             android:text="@string/bye_send" />
 
         <Button
             android:id="@+id/btnHide"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:text="@string/hide"
+            android:background="@drawable/btn_selector_common"
             android:visibility="gone" />
 
     </LinearLayout>
@@ -83,6 +94,7 @@
         android:id="@+id/btnReplyMessageSend"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_selector_common"
         android:text="@string/send" />
 
     </LinearLayout>
