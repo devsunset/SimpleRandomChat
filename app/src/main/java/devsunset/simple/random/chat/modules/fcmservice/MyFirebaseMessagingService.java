@@ -350,11 +350,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-
                 if (Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) &&
-                        ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))
-                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))) {
+                        (   "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                         || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))
+                         || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))
+                        )){
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
                     fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher));
@@ -411,9 +411,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                if (("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN")))
-                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))) {
+                if ((   "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                        || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))
+                        || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))
+                    )) {
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
                     fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher));

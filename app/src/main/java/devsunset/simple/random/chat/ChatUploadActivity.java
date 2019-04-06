@@ -113,8 +113,6 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
     public static boolean EXECUTE_ACTION = false;
 
-    public static boolean ADS_LOAD = true;
-
     private RewardedVideoAd mRewardedVideoAd;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -160,8 +158,6 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     public void onRewarded(RewardItem reward) {
         //Toast.makeText(this, "onRewarded! currency: " + reward.getType() + "  amount: " +
         //        reward.getAmount(), Toast.LENGTH_SHORT).show();
-
-        ADS_LOAD = false;
         initContent();
     }
 
@@ -173,7 +169,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     @Override
     public void onRewardedVideoAdClosed() {
         //Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-        if(ADS_LOAD){
+        if(uploadbuttonarea.getVisibility() == View.GONE){
             finish();
         }
     }
@@ -210,22 +206,10 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     }
 
     private void initContent(){
-        // 권한 획득
-        // Multiple permissions:
-        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-        Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
-            @Override
-            public void onGranted() {
-                cleaAudio();
-                clearImage();
-                fileClear();
-                uploadbuttonarea.setVisibility(View.VISIBLE);
-            }
-            @Override
-            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                finish();
-            }
-        });
+        cleaAudio();
+        clearImage();
+        fileClear();
+        uploadbuttonarea.setVisibility(View.VISIBLE);
     }
 
     private void dirCheck() {
@@ -237,46 +221,41 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
     @OnClick(R.id.btnAudio)
     void onBtnAudioClicked() {
+        if(uploadbuttonarea.getVisibility() == View.VISIBLE){
+            dirCheck();
+            cleaAudio();
+            clearImage();
 
-        if(ADS_LOAD){
-            return;
+            String filePath = Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+AUDIO_FILE_NAME;
+            int color = getResources().getColor(R.color.content_bg);
+            AndroidAudioRecorder.with(this)
+                    // Required
+                    .setFilePath(filePath)
+                    .setColor(color)
+                    .setRequestCode(PICK_AUDIO_REQUEST)
+                    // Optional
+                    .setSource(cafe.adriel.androidaudiorecorder.model.AudioSource.MIC)
+                    .setChannel(AudioChannel.MONO)
+                    .setSampleRate(AudioSampleRate.HZ_8000)
+                    .setAutoStart(true)
+                    .setKeepDisplayOn(true)
+                    // Start recording
+                    .record();
         }
-
-        dirCheck();
-        cleaAudio();
-        clearImage();
-
-        String filePath = Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+AUDIO_FILE_NAME;
-        int color = getResources().getColor(R.color.content_bg);
-        AndroidAudioRecorder.with(this)
-                // Required
-                .setFilePath(filePath)
-                .setColor(color)
-                .setRequestCode(PICK_AUDIO_REQUEST)
-                // Optional
-                .setSource(cafe.adriel.androidaudiorecorder.model.AudioSource.MIC)
-                .setChannel(AudioChannel.MONO)
-                .setSampleRate(AudioSampleRate.HZ_8000)
-                .setAutoStart(true)
-                .setKeepDisplayOn(true)
-                // Start recording
-                .record();
     }
 
     @OnClick(R.id.btnImage)
     void onBtnImageClicked() {
+        if(uploadbuttonarea.getVisibility() == View.VISIBLE){
+            dirCheck();
+            cleaAudio();
+            clearImage();
 
-        if(ADS_LOAD){
-            return;
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+
         }
-
-        dirCheck();
-        cleaAudio();
-        clearImage();
-
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
     @Override
@@ -419,6 +398,8 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             }
             UPLOAD_FILE_NAME = IMAGE_FILE_NAME;
         }
+
+        //FBToast.infoToast(getApplicationContext(), " EXECUTE_ACTION : "+EXECUTE_ACTION, FBToast.LENGTH_SHORT);
 
         if(EXECUTE_ACTION){
             return;
