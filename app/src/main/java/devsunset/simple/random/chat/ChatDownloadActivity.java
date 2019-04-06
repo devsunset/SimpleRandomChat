@@ -199,6 +199,12 @@ public class ChatDownloadActivity extends Activity {
     @OnClick(R.id.btnAudio)
     void onBtnAudioClicked() {
         if((new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE)).exists()){
+
+            if(mediaPlayer !=null){
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
+
             mediaPlayer = new MediaPlayer();
             try{
                 loadingText.setVisibility(View.GONE);
@@ -219,10 +225,13 @@ public class ChatDownloadActivity extends Activity {
 
     @Override protected void onDestroy() {
         super.onDestroy();
-        fileClear();
+
 
         if(mediaPlayer !=null){
+            mediaPlayer.stop();
             mediaPlayer.release();
         }
+
+        fileClear();
     }
 }

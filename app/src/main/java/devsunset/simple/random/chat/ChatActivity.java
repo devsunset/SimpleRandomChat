@@ -5,7 +5,9 @@
  */
 package devsunset.simple.random.chat;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -21,6 +23,8 @@ import android.widget.LinearLayout;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
 import com.tfb.fbtoast.FBToast;
@@ -603,11 +607,23 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnAttach)
     void onBtnAttachClicked() {
-        Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
-        intent.putExtra("ATX_ID",ATX_ID);
-        intent.putExtra("TO_APP_KEY",TO_APP_KEY);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        // 권한 획득
+        // Multiple permissions:
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
+            @Override
+            public void onGranted() {
+                Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
+                intent.putExtra("ATX_ID",ATX_ID);
+                intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+            @Override
+            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                finish();
+            }
+        });
     }
 
     @OnClick(R.id.btnBack)
