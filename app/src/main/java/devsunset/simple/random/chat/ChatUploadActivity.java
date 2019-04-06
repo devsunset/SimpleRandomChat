@@ -554,7 +554,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                EXECUTE_ACTION = true;
+                EXECUTE_ACTION = false;
                 //EventBus Call
                 BusProvider.getInstance().post("SERVICE_CALL");
                 finish();
