@@ -385,17 +385,18 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         // 파일 용량 체크
         if(audioCheck){
             String tmp = tv_audio_desc.getText().toString();
-           if(tmp.indexOf("MB") > -1 || tmp.indexOf("GB") > -1 || tmp.indexOf("TB") > -1){
+           if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB") ){
                     FBToast.errorToast(getApplicationContext(), getString(R.string.limitfilesize), FBToast.LENGTH_SHORT);
                     return;
            }
             UPLOAD_FILE_NAME = AUDIO_FILE_NAME;
         }else{
-            String tmp = compressedSizeTextView.getText().toString();
-            if(tmp.indexOf("MB") > -1 || tmp.indexOf("GB") > -1 || tmp.indexOf("TB") > -1){
-                FBToast.errorToast(getApplicationContext(), getString(R.string.limitfilesize), FBToast.LENGTH_SHORT);
-                return;
-            }
+            //image size check skips
+            //String tmp = compressedSizeTextView.getText().toString();
+            //if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB")){
+            //    FBToast.errorToast(getApplicationContext(), getString(R.string.limitfilesize), FBToast.LENGTH_SHORT);
+            //    return;
+            //}
             UPLOAD_FILE_NAME = IMAGE_FILE_NAME;
         }
 
