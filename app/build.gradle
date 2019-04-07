@@ -104,4 +104,5 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0'
     //Photo View
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
 }
