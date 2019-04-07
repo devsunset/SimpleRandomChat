@@ -276,7 +276,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             if (data == null) {
                 clearImage();
-                FBToast.errorToast(getApplicationContext(), "Failed to open picture!", FBToast.LENGTH_SHORT);
+                FBToast.errorToast(getApplicationContext(), getString(R.string.faileopenpicture), FBToast.LENGTH_SHORT);
                 return;
             }
             try {
@@ -286,7 +286,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             } catch (IOException e) {
                 clearImage();
                 e.printStackTrace();
-                FBToast.errorToast(getApplicationContext(), "Failed to open picture!", FBToast.LENGTH_SHORT);
+                FBToast.errorToast(getApplicationContext(), getString(R.string.faileopenpicture), FBToast.LENGTH_SHORT);
             }
         }
     }
@@ -294,7 +294,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     public void customCompressImage() {
         if (actualImage == null) {
             clearImage();
-            FBToast.infoToast(getApplicationContext(), "Please choose an image!", FBToast.LENGTH_SHORT);
+            FBToast.infoToast(getApplicationContext(), getString(R.string.choosepicture), FBToast.LENGTH_SHORT);
         } else {
             // Compress image in main thread using custom Compressor
             try {
@@ -314,7 +314,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
             } catch (IOException e) {
                 e.printStackTrace();
-                FBToast.errorToast(getApplicationContext(), "Failed to open picture!", FBToast.LENGTH_SHORT);
+                FBToast.errorToast(getApplicationContext(), getString(R.string.faileopenpicture), FBToast.LENGTH_SHORT);
             }
         }
     }

@@ -54,8 +54,10 @@
     <string name="black_list_message_desc">If you send us a spam or bullshit message, please report it.\nAfter the report, the message will be deleted.</string>
     <string name="cancel">Cancel</string>
     <string name="choosefile">Please select either an audio file or an image file.</string>
-    <string name="limitfilesize">Only files with up to 1M capacity can be attached.</string>
+    <string name="limitfilesize">Audio File - Only files with up to 1M capacity can be attached.</string>
     <string name="downfileerror">The valid download period for the attachment has expired.</string>
     <string name="replay">Click to listen again.</string>
+    <string name="faileopenpicture">Failed to open picture.</string>
+    <string name="choosepicture">Please choose an image.</string>
 
 </resources>

@@ -53,10 +53,15 @@
     <string name="black_list_message">신고하기</string>
     <string name="black_list_message_desc">광고 스팸 및 불 건전 한 메세지를 보내온다면 신고를 부탁드립니다.\n신고 후 해당 메세지는 삭제 처리 됩니다.</string>
     <string name="cancel">취소</string>
-    <string name="choosefile">오디오 파일이나 이미지 파일 중\n한 개를 선택해 주세요.</string>
-    <string name="limitfilesize">최대 1M 용량의 파일만 첨부 가능 합니다.</string>
+    <string name="choosefile">음성 파일이나 이미지 파일 중\n한 개를 선택해 주세요.</string>
+    <string name="limitfilesize">음성 파일은 최대 1M 용량의 파일만 첨부 가능 합니다.</string>
     <string name="downfileerror">첨부 파일 유효 다운로드 기간이 만료 되었습니다.</string>
     <string name="replay">다시 들으시려면 클릭 하세요.</string>
+    <string name="faileopenpicture">사진 파일 불러오는 처리에 문제가 발생 했습니다.</string>
+    <string name="choosepicture">사진을 선택해 주세요.</string>
+
+
+
 
 
 </resources>
