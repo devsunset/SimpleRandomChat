@@ -41,14 +41,19 @@ import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class MessageList extends Fragment {
 
 	@BindView(R.id.recycler_view)
 	RecyclerView mRecyclerView;
-	RecyclerView.LayoutManager mLayoutManager;
-	public static String APP_ID = "";
-	public static String APP_KEY = "";
+	private RecyclerView.LayoutManager mLayoutManager;
+	private static String APP_ID = "";
+	private static String APP_KEY = "";
+
+	// newInstance constructor for creating fragment with arguments
+	public static MessageList newInstance() {
+		MessageList fragment = new MessageList();
+		return fragment;
+	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,7 +75,7 @@ public class MessageList extends Fragment {
 		APP_ID = AccountInfo.getAccountInfo(getActivity()).get("APP_ID");
 		APP_KEY =  AccountInfo.getAccountInfo(getActivity()).get("APP_KEY");
 
-		//답변한 메세지 목록에서 숨기기
+		//답변한 메시지 목록에서 숨기기
 		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
 			getDatabase(APP_ID);
 		}else{
@@ -80,6 +85,10 @@ public class MessageList extends Fragment {
 		return v;
 	}
 
+	/**
+	 * 메시지 Main 목록 조회
+	 * @param talkAppId
+	 */
 	private void getDatabase(String talkAppId) {
 		class GetTasks extends AsyncTask<Void, Void, List<AppTalkMain>> {
 
@@ -175,13 +184,12 @@ public class MessageList extends Fragment {
 	public void onResume() {
 		super.onResume();  // Always call the superclass method first
 
-		//답변한 메세지 목록에서 숨기기
+		//답변한 메시지 목록에서 숨기기
 		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
 			getDatabase(APP_ID);
 		}else{
 			getDatabase("___NO___");
 		}
-
 	}
 
 	@Override
@@ -191,17 +199,19 @@ public class MessageList extends Fragment {
 		super.onDestroy();
 	}
 
+	/**
+	 * Push 수신 시 목록 갱신 처리
+	 * @param event
+	 */
 	@Subscribe
 	public void receiveMessageReloadMessageList(String event) {
 		Logger.i("receiveMessageReloadMessageList process... ");
 
-		//답변한 메세지 목록에서 숨기기
+		//답변한 메시지 목록에서 숨기기
 		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
 			getDatabase(APP_ID);
 		}else{
 			getDatabase("___NO___");
 		}
-
 	}
-
 }

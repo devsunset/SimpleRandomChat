@@ -26,8 +26,6 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-
 public class WebViewActivity extends Activity{
 
     private WebView mWebView;
@@ -43,7 +41,7 @@ public class WebViewActivity extends Activity{
         if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
-        mWebView = (WebView)findViewById(R.id.webview_area);
+        mWebView = findViewById(R.id.webview_area);
         mWebView.setWebViewClient(new WebViewClient());
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);

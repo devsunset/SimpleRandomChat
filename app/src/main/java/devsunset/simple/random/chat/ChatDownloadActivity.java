@@ -15,10 +15,12 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
@@ -27,13 +29,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
+import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,8 +54,6 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-
 public class ChatDownloadActivity extends Activity {
 
     @BindView(R.id.btnAudio)
@@ -68,13 +71,22 @@ public class ChatDownloadActivity extends Activity {
     @BindView(R.id.replayText)
     TextView replayText;
 
+    @BindView(R.id.playArea)
+    LinearLayout playArea;
 
-    public static String TALK_TYPE = "";
-    public static String TALK_TEXT_VOICE = "";
-    public static String TALK_TEXT_IMAGE = "";
+    private static String TALK_TYPE = "";
+    private static String TALK_TEXT_VOICE = "";
+    private static String TALK_TEXT_IMAGE = "";
 
-    MediaPlayer mediaPlayer = null;
+    private KProgressHUD hud;
 
+    private MediaPlayer mediaPlayer = null;
+    private final Handler myHandler = new Handler();
+    private double startTime = 0;
+    private double finalTime = 0;
+
+    private TextView tx1,tx2;
+    private SeekBar seekbar;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +110,11 @@ public class ChatDownloadActivity extends Activity {
             view_image.setVisibility(View.VISIBLE);
         }
 
+        tx1 = findViewById(R.id.txtCurrentLength);
+        tx2 = findViewById(R.id.textAllLength);
+        seekbar = findViewById(R.id.seekBar);
+        seekbar.setClickable(false);
+
         // 권한 획득
         // Multiple permissions:
         String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -114,83 +131,129 @@ public class ChatDownloadActivity extends Activity {
         });
     }
 
+    private final Runnable UpdateSongTime = new Runnable() {
+        public void run() {
+            try{
+                if(mediaPlayer !=null){
+                    startTime = mediaPlayer.getCurrentPosition();
+                    tx1.setText(String.format("%d sec",TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
+                    seekbar.setProgress((int)startTime);
+                    myHandler.postDelayed(this, 100);
+                }
+            }catch(Exception e){
+                Logger.e("UpdateSongTime : " + e.getMessage());
+            }
+        }
+    };
+
+    /**
+     * directory check
+     */
     private void dirCheck() {
         File dir = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
         if(!dir.exists()){
+            //noinspection ResultOfMethodCallIgnored
             dir.mkdirs();
         }
     }
 
-    public void getData(){
+    /**
+     * attach data search
+     */
+    private void getData(){
 
-        String destSource = "";
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(getResources().getColor(R.color.progress))
+                .setAnimationSpeed(2)
+                .show();
+
+        String destSource;
+        String fileName;
 
         if(Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)){
             destSource = "audio/"+TALK_TEXT_VOICE;
+            fileName = TALK_TEXT_VOICE;
         }else{
             destSource = "images/"+TALK_TEXT_IMAGE;
+            fileName = TALK_TEXT_IMAGE;
         }
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference gsReference = storage.getReferenceFromUrl("gs://src-server.appspot.com/"+destSource);
+        long lastTime = Long.parseLong(fileName.substring(0,fileName.indexOf('_')));
+        long curTime = System.currentTimeMillis();
+        long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
 
-        if(Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)){
-            File localFile =  null;
-            try{
-                localFile = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE);
-                gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        replayText.setVisibility(View.VISIBLE);
-                        mediaPlayer = new MediaPlayer();
-                        try{
-                            loadingText.setVisibility(View.GONE);
-                            FileInputStream MyFile = new FileInputStream(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE));
-                            mediaPlayer.setDataSource(MyFile.getFD());
-                            mediaPlayer.prepare();
-                            mediaPlayer.start();
-                        }catch(Exception e) {
-                            FBToast.infoToast(getApplicationContext(), getString(R.string.downfileerror), FBToast.LENGTH_SHORT);
+        if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
+            hud.dismiss();
+            loadingText.setVisibility(View.GONE);
+            FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+        }else{
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://src-server.appspot.com/"+destSource);
+
+            if(Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)){
+                File localFile;
+                try{
+                    localFile = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE);
+                    gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            try{
+                                hud.dismiss();
+                                loadingText.setVisibility(View.GONE);
+                                replayText.setVisibility(View.VISIBLE);
+                                playArea.setVisibility(View.VISIBLE);
+                                onBtnAudioClicked();
+                            }catch(Exception e) {
+                                FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                            }
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            hud.dismiss();
+                            loadingText.setVisibility(View.GONE);
+                            FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                        }
+                    });
+
+                }catch(Exception e){
+                    loadingText.setVisibility(View.GONE);
+                    FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                }
+            }else{
+                final long ONE_MEGABYTE = 1024 * 1024;
+                gsReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        hud.dismiss();
+                        btnImage.setVisibility(View.GONE);
+                        loadingText.setVisibility(View.GONE);
+                        // Convert bytes data into a Bitmap
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        view_image.setImageBitmap(bmp);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
+                        hud.dismiss();
                         loadingText.setVisibility(View.GONE);
-                        FBToast.infoToast(getApplicationContext(), getString(R.string.downfileerror), FBToast.LENGTH_SHORT);
+                        FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
                     }
                 });
-
-            }catch(Exception e){
-                loadingText.setVisibility(View.GONE);
-                FBToast.infoToast(getApplicationContext(), getString(R.string.downfileerror), FBToast.LENGTH_SHORT);
             }
-        }else{
-            final long ONE_MEGABYTE = 1024 * 1024;
-            gsReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    btnImage.setVisibility(View.GONE);
-                    loadingText.setVisibility(View.GONE);
-                    // Convert bytes data into a Bitmap
-                    Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    view_image.setImageBitmap(bmp);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    loadingText.setVisibility(View.GONE);
-                    FBToast.infoToast(getApplicationContext(), getString(R.string.downfileerror), FBToast.LENGTH_SHORT);
-                }
-            });
         }
     }
 
-    public void fileClear(){
+    /**
+     * temp file clear
+     */
+    private void fileClear(){
         File file = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
         File[] files = file.listFiles();
         if(files !=null && files.length > 0){
             for( int i=0; i<files.length; i++){
+                //noinspection ResultOfMethodCallIgnored
                 files[i].delete();
             }
         }
@@ -199,21 +262,28 @@ public class ChatDownloadActivity extends Activity {
     @OnClick(R.id.btnAudio)
     void onBtnAudioClicked() {
         if((new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE)).exists()){
-
-            if(mediaPlayer !=null){
-                mediaPlayer.stop();
-                mediaPlayer.release();
-            }
-
-            mediaPlayer = new MediaPlayer();
             try{
-                loadingText.setVisibility(View.GONE);
+                if(mediaPlayer !=null){
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
+
+                mediaPlayer = new MediaPlayer();
+
                 FileInputStream MyFile = new FileInputStream(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE));
                 mediaPlayer.setDataSource(MyFile.getFD());
                 mediaPlayer.prepare();
                 mediaPlayer.start();
+
+                finalTime = mediaPlayer.getDuration();
+                startTime = mediaPlayer.getCurrentPosition();
+                seekbar.setMax((int) finalTime);
+                tx2.setText(String.format("%d sec", TimeUnit.MILLISECONDS.toSeconds((long) finalTime)));
+                tx1.setText(String.format("%d sec", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
+                seekbar.setProgress((int)startTime);
+                myHandler.postDelayed(UpdateSongTime,100);
             }catch(Exception e) {
-                FBToast.infoToast(getApplicationContext(), getString(R.string.downfileerror), FBToast.LENGTH_SHORT);
+                FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
             }
         }
     }
@@ -226,11 +296,15 @@ public class ChatDownloadActivity extends Activity {
     @Override protected void onDestroy() {
         super.onDestroy();
 
-        if(mediaPlayer !=null){
-            mediaPlayer.stop();
-            mediaPlayer.release();
+        try{
+            if(mediaPlayer !=null){
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
+        }catch(Exception e){
+            Logger.e("mediaPlayer onDestory : " + e.getMessage());
+        }finally {
+            fileClear();
         }
-
-        fileClear();
     }
 }

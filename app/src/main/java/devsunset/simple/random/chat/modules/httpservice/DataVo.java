@@ -17,7 +17,6 @@ import java.util.List;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class DataVo {
 
 

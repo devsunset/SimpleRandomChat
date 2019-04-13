@@ -35,14 +35,14 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  */
 public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivPicture;
-        TextView tv_talk_text;
-        TextView tv_countryName_talk_target;
-        TextView tv_atx_local_time;
-        LinearLayout list_item_rows;
-        Button btnTranslation;
-        ImageView ivTalkTypeVoiceImage;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        final ImageView ivPicture;
+        final TextView tv_talk_text;
+        final TextView tv_countryName_talk_target;
+        final TextView tv_atx_local_time;
+        final LinearLayout list_item_rows;
+        final Button btnTranslation;
+        final ImageView ivTalkTypeVoiceImage;
 
         MyViewHolder(View view){
             super(view);
@@ -56,7 +56,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private ArrayList<MessageItem> MessageItemArrayList;
+    private final ArrayList<MessageItem> MessageItemArrayList;
     public MessageMainAdapter(ArrayList<MessageItem> MessageItemArrayList){
         this.MessageItemArrayList = MessageItemArrayList;
     }

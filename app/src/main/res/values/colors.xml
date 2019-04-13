@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#00c4a6</color>
 
     <!-- ============================== -->
@@ -9,56 +7,33 @@
     <!-- ============================== -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="gray">#808080</color>
-    <color name="dark_gray">#222222</color>
     <color name="light_gray">#D3D3D3</color>
-    <color name="red">#FF0000</color>
-    <color name="blue">#0000FF</color>
-    <color name="transparent">#00000000</color>
-    <color name="content_bg">#3869b8</color>
-    <color name="tab_enable1">#e18745</color>
-    <color name="tab_enable2">#4db849</color>
-    <color name="tab_enable3">#e18745</color>
+    <color name="content_bg">#FFFFFF</color>
+    <color name="tab_enable1">#000000</color>
+    <color name="tab_enable2">#000000</color>
+    <color name="tab_enable3">#000000</color>
     <color name="tab_disable">#D7D7D7</color>
-    <color name="tab_background">#d8eff0</color>
     <color name="tab_text_disable">#000000</color>
     <color name="tab_bg">#FFFFFF</color>
     <color name="common_table_line">#009688</color>
 
-    <color name="common_table_label">#f2f2f2</color>
-    <color name="common_table_line_gray">#c4d0e5</color>
     <color name="install_header">#d8f6fe</color>
-    <color name="system_header">#F8E0F7</color>
 
     <color name="indigo">#3F51B5</color>
-    <color name="teal">#009688</color>
-    <color name="darkDeepOrange">#E64A19</color>
     <color name="darkGreen">#388E3C</color>
-    <color name="darkBlueGrey">#455A64</color>
-    <color name="darkRed">#D32F2F</color>
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#727272</color>
+    <color name="progress">#4db849</color>
 
     <!-- ============================== -->
     <!-- Common Drawable -->
     <!-- ============================== -->
-    <drawable name="black">#000000</drawable>
-    <drawable name="white">#FFFFFF</drawable>
-    <drawable name="white_smoke">#F5F5F5</drawable>
-    <drawable name="gray">#808080</drawable>
-    <drawable name="dark_gray">#222222</drawable>
     <drawable name="light_gray">#D3D3D3</drawable>
-    <drawable name="orange">#FF9933</drawable>
-    <drawable name="red">#FF0000</drawable>
-    <drawable name="blue">#0000FF</drawable>
-    <drawable name="transparent">#00000000</drawable>
 
-    <drawable name="empty_message_bg">#F3E2A9</drawable>
+    <drawable name="empty_message_bg">#FFFFFF</drawable>
     <drawable name="newmessage_bg">#D8F6CE</drawable>
     <drawable name="man_bg">#d8f6fe</drawable>
     <drawable name="woman_bg">#F8E0F7</drawable>
-    <drawable name="trash_bg">#D3D3D3</drawable>
-
 
 
 </resources>

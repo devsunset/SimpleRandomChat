@@ -46,12 +46,12 @@ public class GenderAdapter extends ArrayAdapter<GenderOption> {
     }
 
     private static final class ViewHolder {
-        TextView gender_description;
-        TextView gender_value;
+        final TextView gender_description;
+        final TextView gender_value;
 
-        public ViewHolder(View v) {
-            gender_description = (TextView) v.findViewById(R.id.gender_description);
-            gender_value = (TextView) v.findViewById(R.id.gender_value);
+        ViewHolder(View v) {
+            gender_description = v.findViewById(R.id.gender_description);
+            gender_value = v.findViewById(R.id.gender_value);
         }
     }
 }

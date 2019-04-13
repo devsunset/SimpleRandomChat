@@ -6,7 +6,6 @@
 package devsunset.simple.random.chat.modules.dataservice;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
@@ -21,7 +20,6 @@ import java.util.List;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 @Dao
 public interface AppTalkThreadDao {
 
@@ -39,4 +37,7 @@ public interface AppTalkThreadDao {
 
     @Query("DELETE FROM APP_TALK_THREAD WHERE ATX_ID =:atxId")
     void deleteByAtxId(String atxId);
+
+    @Query("DELETE fROM APP_TALK_THREAD WHERE ATX_ID IN ( SELECT ATX_ID FROM APP_TALK_MAIN WHERE ATX_STATUS = :atxStatus AND ATX_LOCAL_TIME  < :cttm )")
+    void deleteByCttm(String atxStatus , String cttm);
 }

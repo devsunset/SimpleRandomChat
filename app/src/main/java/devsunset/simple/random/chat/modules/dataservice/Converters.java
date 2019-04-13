@@ -18,8 +18,7 @@ import java.sql.Date;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-public class Converters {
+class Converters {
     @TypeConverter
     public static Date fromTimestamp(Long value) {
         return value == null ? null : new Date(value);

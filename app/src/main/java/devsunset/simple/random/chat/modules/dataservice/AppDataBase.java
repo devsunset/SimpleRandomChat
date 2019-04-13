@@ -18,7 +18,6 @@ import android.arch.persistence.room.TypeConverters;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 @Database(version = 1, exportSchema = false, entities = {AppTalkMain.class, AppTalkThread.class})
 @TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {

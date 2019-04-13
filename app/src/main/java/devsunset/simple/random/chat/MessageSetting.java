@@ -6,7 +6,6 @@
 package devsunset.simple.random.chat;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +15,7 @@ import android.view.ViewGroup;
 import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
 import com.github.angads25.toggle.widget.LabeledSwitch;
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.util.HashMap;
 
@@ -34,11 +34,13 @@ import lib.kingja.switchbutton.SwitchMultiButton;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class MessageSetting extends Fragment {
 
 	@BindView(R.id.toogleAlarm)
 	SwitchMultiButton toogleAlarm;
+
+	@BindView(R.id.newMessageRecived)
+	LabeledSwitch switchNewMessageReceive;
 
 	@BindView(R.id.byeconfirm)
 	LabeledSwitch switchByConfirm;
@@ -48,6 +50,12 @@ public class MessageSetting extends Fragment {
 
 	@BindView(R.id.lockPwd)
 	LabeledSwitch switchLockPwd;
+
+	// newInstance constructor for creating fragment with arguments
+	public static MessageSetting newInstance() {
+		MessageSetting fragment = new MessageSetting();
+		return fragment;
+	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,6 +81,12 @@ public class MessageSetting extends Fragment {
 			toogleAlarm.setSelectedTab(3);
 		}
 
+		if ("Y".equals(account.get("SET_NEW_RECEIVE_YN"))) {
+			switchNewMessageReceive.setOn(true);
+		} else {
+			switchNewMessageReceive.setOn(false);
+		}
+
 		if("Y".equals(account.get("SET_BYE_CONFIRM_YN"))){
 			switchByConfirm.setOn(true);
 		}else{
@@ -94,6 +108,13 @@ public class MessageSetting extends Fragment {
 		toogleAlarm.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
 			@Override
 			public void onSwitch(int position, String tabText) {
+				appInfoSetting();
+			}
+		});
+
+		switchNewMessageReceive.setOnToggledListener(new OnToggledListener() {
+			@Override
+			public void onSwitched(ToggleableView toggleableView, boolean isOn) {
 				appInfoSetting();
 			}
 		});
@@ -168,6 +189,12 @@ public class MessageSetting extends Fragment {
 			params.put("SET_ALARM_POPUP_YN","N");
 		}
 
+		if (switchNewMessageReceive.isOn()) {
+			params.put("SET_NEW_RECEIVE_YN", "Y");
+		} else {
+			params.put("SET_NEW_RECEIVE_YN", "N");
+		}
+
 		if(switchByConfirm.isOn()){
 			params.put("SET_BYE_CONFIRM_YN","Y");
 		}else{
@@ -184,7 +211,7 @@ public class MessageSetting extends Fragment {
 	}
 
 	/**
-	 * message send button click
+	 * Open Source License button click
 	 */
 	@OnClick(R.id.btnLicense)
 	void onBtnLicenseClicked() {
@@ -192,5 +219,14 @@ public class MessageSetting extends Fragment {
 		intent.putExtra("URL_ADDRESS","file:///android_asset/www/index.html");
 		intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		startActivity(intent);
+	}
+
+	/**
+	 * Google License button click
+	 */
+	@OnClick(R.id.btnLicenseGoogle)
+	void onBtnLicenseGoogleClicked() {
+		// When the user selects an option to see the licenses:
+		startActivity(new Intent(getContext(), OssLicensesMenuActivity.class));
 	}
 }

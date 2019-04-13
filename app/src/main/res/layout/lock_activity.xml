@@ -19,8 +19,8 @@
         android:layout_marginTop="72dp"
         android:padding="16dp"
         android:text="@string/verification_code"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:text="@string/verification_code_subtext"
         android:textAlignment="center"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
     <com.mukesh.OtpView
         android:id="@+id/otp_view"
@@ -37,10 +38,10 @@
         android:layout_marginTop="70dp"
         android:inputType="numberPassword"
         android:itemBackground="@drawable/bg_otp_item"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:hideLineWhenFilled="true"
         app:itemCount="4"
         app:itemSpacing="5dp"
-        app:lineColor="@color/white"
+        app:lineColor="@color/black"
         app:viewType="line" />
 </LinearLayout>

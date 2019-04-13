@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import android.widget.LinearLayout;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
@@ -63,10 +66,9 @@ import retrofit2.Response;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class ChatActivity extends Activity {
 
-    HttpConnectService httpConnctService = null;
+    private HttpConnectService httpConnectService = null;
 
     @BindView(R.id.btnBlackListSend)
     Button btnBlackListSend;
@@ -83,17 +85,20 @@ public class ChatActivity extends Activity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    public static String APP_ID = "";
-    public static String ATX_ID = "";
-    public static String ATX_STATUS = "";
-    public static String MY_LANG = "";
-    public static String TO_APP_KEY = "";
+    private static String APP_ID = "";
+    private static String ATX_ID = "";
+    private static String ATX_STATUS = "";
+    private static String MY_LANG = "";
+    private static String TO_APP_KEY = "";
 
-    public static boolean EXECUTE_ACTION = false;
+    private static boolean EXECUTE_ACTION = false;
 
-    NiftyDialogBuilder dialogBuilder = null;
+    private KProgressHUD hud;
+
+    private NiftyDialogBuilder dialogBuilder = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +114,7 @@ public class ChatActivity extends Activity {
         //Event Bus 등록
         BusProvider.getInstance().register(this);
 
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+        httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
         dialogBuilder = NiftyDialogBuilder.getInstance(this);
 
@@ -124,6 +129,8 @@ public class ChatActivity extends Activity {
         ATX_ID = intent.getStringExtra("ATX_ID");
         ATX_STATUS = intent.getStringExtra("ATX_STATUS");
         TO_APP_KEY = intent.getStringExtra("REPLY_APP_KEY");
+
+        reply_message.setFilters(new InputFilter[]{EMOJI_FILTER});
 
         getDatabase(ATX_ID);
     }
@@ -235,10 +242,10 @@ public class ChatActivity extends Activity {
                 .withDividerColor("#11000000")                              
                 .withMessage(getString(R.string.black_list_message_desc))
                 .withMessageColor("#FFFFFFFF")
-                .withDialogColor("#FFE74C3C")
+                .withDialogColor("#3F51B5")
                 .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                 .withDuration(700)
-                .withEffect(Effectstype.Shake)                              
+                .withEffect(Effectstype.Slidetop)
                 .withButton1Text("CANCEL")
                 .withButton2Text("OK")
                 .isCancelableOnTouchOutside(true)
@@ -261,7 +268,13 @@ public class ChatActivity extends Activity {
     /**
      * Black List 등록
      */
-    public void blackListSendProcess() {
+    private void blackListSendProcess() {
+
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(getResources().getColor(R.color.progress))
+                .setAnimationSpeed(2)
+                .show();
 
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
@@ -285,7 +298,7 @@ public class ChatActivity extends Activity {
                 params.put("TALK_APP_ID", account.get("APP_ID"));
                 params.put("TO_APP_KEY", TO_APP_KEY);
 
-                httpConnctService.requstBlackList(params).enqueue(new Callback<DataVo>() {
+                httpConnectService.requstBlackList(params).enqueue(new Callback<DataVo>() {
                     @Override
                     public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                         if (response.isSuccessful()) {
@@ -298,12 +311,13 @@ public class ChatActivity extends Activity {
                         }else{
                             Logger.e("blackListSendProcess Fail");
                         }
-
+                        hud.dismiss();
                         finish();
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                        hud.dismiss();
                         Logger.e("blackListSendProcess Fail");
                         finish();
                     }
@@ -328,10 +342,10 @@ public class ChatActivity extends Activity {
                     .withDividerColor("#11000000")
                     .withMessage(getString(R.string.bye_message_desc))
                     .withMessageColor("#FFFFFFFF")
-                    .withDialogColor("#4db849")
+                    .withDialogColor("#3F51B5")
                     .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                     .withDuration(500)
-                    .withEffect(Effectstype.SlideBottom)
+                    .withEffect(Effectstype.Slidetop)
                     .withButton1Text("CANCEL")
                     .withButton2Text("OK")
                     .isCancelableOnTouchOutside(true)
@@ -353,9 +367,15 @@ public class ChatActivity extends Activity {
     }
 
     /**
-     * 메세지 삭제
+     * 메시지 삭제
      */
-    public void byeSendProcess() {
+    private void byeSendProcess() {
+
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(getResources().getColor(R.color.progress))
+                .setAnimationSpeed(2)
+                .show();
 
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
@@ -379,10 +399,10 @@ public class ChatActivity extends Activity {
                 params.put("TALK_APP_ID", account.get("APP_ID"));
                 params.put("TO_APP_KEY", TO_APP_KEY);
 
-                httpConnctService.byeMessage(params).enqueue(new Callback<DataVo>() {
+                httpConnectService.byeMessage(params).enqueue(new Callback<DataVo>() {
                     @Override
                     public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                        if (response.isSuccessful()) {
+                       if (response.isSuccessful()) {
                             DataVo data = response.body();
                             if ("S".equals(data.getRESULT_CODE())) {
                                 Logger.i("byeSendProcess Success");
@@ -392,12 +412,13 @@ public class ChatActivity extends Activity {
                         }else{
                             Logger.e("byeSendProcess Fail");
                         }
-
+                        hud.dismiss();
                         finish();
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
+                        hud.dismiss();
                         Logger.e("byeSendProcess Fail");
                         finish();
                     }
@@ -446,9 +467,16 @@ public class ChatActivity extends Activity {
     }
 
     /**
-     * 메세지 숨기기
+     * 메시지 숨기기
      */
-    public void hideProcess() {
+    private void hideProcess() {
+
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(getResources().getColor(R.color.progress))
+                .setAnimationSpeed(2)
+                .show();
+
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -461,6 +489,7 @@ public class ChatActivity extends Activity {
 
             @Override
             protected void onPostExecute(Void aVoid) {
+                hud.dismiss();
                 finish();
             }
         }
@@ -477,13 +506,13 @@ public class ChatActivity extends Activity {
         String message = reply_message.getText().toString();
 
         if (reply_message.getText().toString().trim().length() == 0) {
-            FBToast.infoToast(this, getString(R.string.sendinput), FBToast.LENGTH_SHORT);
+            FBToast.infoToast(this, getString(R.string.send_input), FBToast.LENGTH_SHORT);
             return;
         } else {
             reply_message.setText("");
         }
 
-        // 메세지 내용 최대 500자 제한
+        // 메시지 내용 최대 500자 제한
         if (message.length() >= 500) {
             message = message.substring(0, 500) + " ...";
         }
@@ -493,6 +522,12 @@ public class ChatActivity extends Activity {
         }
 
         EXECUTE_ACTION = true;
+
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(getResources().getColor(R.color.progress))
+                .setAnimationSpeed(2)
+                .show();
 
         HashMap<String, String> account = AccountInfo.getAccountInfo(this);
         String ctm = System.currentTimeMillis() + "";
@@ -515,7 +550,7 @@ public class ChatActivity extends Activity {
         params.put("APP_ID", account.get("APP_ID"));
         params.put("TO_APP_KEY", TO_APP_KEY);
 
-        httpConnctService.replyMessage(params).enqueue(new Callback<DataVo>() {
+        httpConnectService.replyMessage(params).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
@@ -537,10 +572,11 @@ public class ChatActivity extends Activity {
                             Logger.i("replyMessage Success");
                         } else {
                             EXECUTE_ACTION = false;
+                            hud.dismiss();
                             Logger.e("replyMessage Fail");
-                            FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
-                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                            inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
+                            FBToast.errorToast(getApplicationContext(), getString(R.string.network_error), FBToast.LENGTH_SHORT);
+//                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//                            inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                             finish();
                         }
                     }
@@ -550,8 +586,9 @@ public class ChatActivity extends Activity {
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 EXECUTE_ACTION = false;
+                hud.dismiss();
                 Logger.e("replyMessage Error : " + t.getMessage());
-                FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                FBToast.errorToast(getApplicationContext(), getString(R.string.network_error), FBToast.LENGTH_SHORT);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                 finish();
@@ -590,7 +627,8 @@ public class ChatActivity extends Activity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 EXECUTE_ACTION = false;
-                FBToast.infoToast(getApplicationContext(), getString(R.string.sendresult), FBToast.LENGTH_SHORT);
+                hud.dismiss();
+                FBToast.infoToast(getApplicationContext(), getString(R.string.send_result), FBToast.LENGTH_SHORT);
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                 finish();
@@ -638,10 +676,27 @@ public class ChatActivity extends Activity {
         super.onDestroy();
     }
 
+    /**
+     * Push 수신 시 목록 갱신 처리
+     * @param event
+     */
     @Subscribe
     public void receiveMessageReloadMessageList(String event) {
         Logger.i("receiveMessageReloadMessageList process... ");
         getDatabase(ATX_ID);
     }
+
+    public static InputFilter EMOJI_FILTER = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            for (int index = start; index < end; index++) {
+                int type = Character.getType(source.charAt(index));
+                if (type == Character.SURROGATE) {
+                    return "";
+                }
+            }
+            return null;
+        }
+    };
 
 }

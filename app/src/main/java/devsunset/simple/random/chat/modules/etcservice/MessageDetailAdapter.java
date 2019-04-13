@@ -17,13 +17,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.storage.StorageReference;
+import com.tfb.fbtoast.FBToast;
 
 import java.util.ArrayList;
 
-import devsunset.simple.random.chat.ChatActivity;
 import devsunset.simple.random.chat.ChatDownloadActivity;
-import devsunset.simple.random.chat.MessageContent;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.WebViewActivity;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
@@ -37,18 +35,18 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static String MY_LANG = "";
+    private static String MY_LANG = "";
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder  {
-        ImageView ivPicture;
-        TextView tv_talk_text;
-        TextView tv_countryName_talk_target;
-        TextView tv_atx_local_time;
-        LinearLayout list_item_rows;
-        Button btnTranslation;
-        ImageView ivTalkTypeVoiceImage;
+    static class MyViewHolder extends RecyclerView.ViewHolder  {
+        final ImageView ivPicture;
+        final TextView tv_talk_text;
+        final TextView tv_countryName_talk_target;
+        final TextView tv_atx_local_time;
+        final LinearLayout list_item_rows;
+        final Button btnTranslation;
+        final ImageView ivTalkTypeVoiceImage;
 
         MyViewHolder(View view){
             super(view);
@@ -62,7 +60,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    private ArrayList<MessageItem> MessageItemArrayList;
+    private final ArrayList<MessageItem> MessageItemArrayList;
     public MessageDetailAdapter(ArrayList<MessageItem> MessageItemArrayList,String lang){
         this.MessageItemArrayList = MessageItemArrayList;
         MY_LANG = lang;
@@ -137,12 +135,37 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
                             context.startActivity(intent);
                         }
                     }else {
-                        Intent intent = new Intent(context, ChatDownloadActivity.class);
-                        intent.putExtra("TALK_TYPE",MessageItemArrayList.get(position).getTALK_TYPE());
-                        intent.putExtra("TALK_TEXT_VOICE",MessageItemArrayList.get(position).getTALK_TEXT_VOICE());
-                        intent.putExtra("TALK_TEXT_IMAGE",MessageItemArrayList.get(position).getTALK_TEXT_IMAGE());
-                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        context.startActivity(intent);
+                        if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                            Intent intent = new Intent(context, ChatDownloadActivity.class);
+                            intent.putExtra("TALK_TYPE",MessageItemArrayList.get(position).getTALK_TYPE());
+                            intent.putExtra("TALK_TEXT_VOICE",MessageItemArrayList.get(position).getTALK_TEXT_VOICE());
+                            intent.putExtra("TALK_TEXT_IMAGE",MessageItemArrayList.get(position).getTALK_TEXT_IMAGE());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            context.startActivity(intent);
+                        }else{
+                            String fileName;
+
+                            if(Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+                                fileName = MessageItemArrayList.get(position).getTALK_TEXT_IMAGE();
+                            }else{
+                                fileName = MessageItemArrayList.get(position).getTALK_TEXT_VOICE();
+                            }
+
+                            long lastTime = Long.parseLong(fileName.substring(0,fileName.indexOf('_')));
+                            long curTime = System.currentTimeMillis();
+                            long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
+
+                            if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
+                                FBToast.infoToast(context,context.getApplicationContext().getResources().getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                            }else{
+                                Intent intent = new Intent(context, ChatDownloadActivity.class);
+                                intent.putExtra("TALK_TYPE",MessageItemArrayList.get(position).getTALK_TYPE());
+                                intent.putExtra("TALK_TEXT_VOICE",MessageItemArrayList.get(position).getTALK_TEXT_VOICE());
+                                intent.putExtra("TALK_TEXT_IMAGE",MessageItemArrayList.get(position).getTALK_TEXT_IMAGE());
+                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                context.startActivity(intent);
+                            }
+                        }
                     }
                 }
             }

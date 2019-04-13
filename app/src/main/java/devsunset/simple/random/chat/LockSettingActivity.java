@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
 
@@ -29,7 +30,6 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class LockSettingActivity extends Activity  {
 
     @BindView(R.id.pinview1)
@@ -38,8 +38,8 @@ public class LockSettingActivity extends Activity  {
     @BindView(R.id.pinview2)
     Pinview pinview2;
 
-    String password = "";
-    String passwordConfirm = "";
+    private String password = "";
+    private String passwordConfirm = "";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,16 +75,21 @@ public class LockSettingActivity extends Activity  {
                     params.put("SET_LOCK_YN","Y");
                     params.put("SET_LOCK_PWD",passwordConfirm);
                     AccountInfo.setAccountInfo(getApplicationContext(),params);
-                    FBToast.successToast(getApplicationContext(),getString(R.string.passwordsuccess),FBToast.LENGTH_SHORT);
+                    FBToast.successToast(getApplicationContext(),getString(R.string.password_success),FBToast.LENGTH_SHORT);
                     finish();
                 }else{
                     params.put("SET_LOCK_YN","N");
                     params.put("SET_LOCK_PWD","-");
                     AccountInfo.setAccountInfo(getApplicationContext(),params);
-                    FBToast.errorToast(getApplicationContext(),getString(R.string.passwordfail),FBToast.LENGTH_SHORT);
+                    FBToast.errorToast(getApplicationContext(),getString(R.string.password_fail),FBToast.LENGTH_SHORT);
                     finish();
                 }
             }
         });
+    }
+
+    @OnClick(R.id.btnBack)
+    void onBtnBackClicked() {
+        finish();
     }
 }

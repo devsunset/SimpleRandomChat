@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@color/content_bg"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:background="@color/black"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/ad_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id" />
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
+        android:layout_margin="1dp"
         android:orientation="horizontal"
         android:padding="@dimen/contents_margin">
 
@@ -36,15 +36,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/tab_bg"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/lTab1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:orientation="horizontal"
-                android:paddingBottom="5dip" >
+                android:paddingBottom="5dip">
 
                 <TextView
                     android:id="@+id/tv_tab1"
@@ -52,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_message_send"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -59,8 +59,8 @@
                 android:id="@+id/v_line_tab1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tab_line_height"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:background="@color/tab_enable1" />
         </RelativeLayout>
 
@@ -70,15 +70,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/tab_bg"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/lTab2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:orientation="horizontal"
-                android:paddingBottom="5dip" >
+                android:paddingBottom="5dip">
 
                 <TextView
                     android:id="@+id/tv_tab2"
@@ -86,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_message_list"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -93,8 +93,8 @@
                 android:id="@+id/v_line_tab2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tab_line_height"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:background="@color/tab_disable" />
         </RelativeLayout>
 
@@ -104,15 +104,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/tab_bg"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/lTab3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:orientation="horizontal"
-                android:paddingBottom="5dip" >
+                android:paddingBottom="5dip">
 
                 <TextView
                     android:id="@+id/tv_tab3"
@@ -120,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_message_setting"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -127,16 +127,16 @@
                 android:id="@+id/v_line_tab3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tab_line_height"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:background="@color/tab_disable" />
         </RelativeLayout>
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/main_frame"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

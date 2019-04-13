@@ -20,7 +20,6 @@ import java.io.Serializable;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 @Entity(tableName = "APP_TALK_THREAD")
 public class AppTalkThread  implements Serializable {
 

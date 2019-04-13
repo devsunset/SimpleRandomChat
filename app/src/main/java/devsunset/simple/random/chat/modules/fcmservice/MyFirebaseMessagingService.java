@@ -28,7 +28,6 @@ import com.tfb.fbtoast.FBCustomToast;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.internal.Utils;
 import devsunset.simple.random.chat.LockActivity;
 import devsunset.simple.random.chat.R;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
@@ -52,8 +51,6 @@ import devsunset.simple.random.chat.modules.utilservice.Util;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     /**
      * Called when message is received.
@@ -105,9 +102,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
                 String ctm = System.currentTimeMillis() + "";
 
-                // 최초 메세지 상태시 처리 (F : FROM , F->P  : TO )
+                // 최초 메시지 상태시 처리 (F : FROM , F->P  : TO )
                 if ("F".equals(remoteMessage.getData().get("ATX_STATUS"))) {
-                    String talkStatus = Consts.MESSAGE_STATUS_X;
+                    String talkStatus;
                     HashMap<String, String> account = AccountInfo.getAccountInfo(getApplicationContext());
 
                     AppTalkMain atm = new AppTalkMain();
@@ -177,7 +174,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else {
                 sendNotification(remoteMessage.getNotification().getBody());
             }
-        } else if (remoteMessage.getData() == null) {
+        } else {
             sendNotification(remoteMessage.getNotification().getBody());
         }
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -246,6 +243,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
+    @SuppressWarnings("deprecation")
     private void sendNotification(String messageBody) {
         String channelId = getString(R.string.default_notification_channel_id);
 
@@ -316,7 +314,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     /**
-     * 최 메세지 처리
+     * 최초 메시지 처리
      *
      * @param atm
      * @param att
@@ -372,7 +370,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     /**
-     * 답변 메세지 처리
+     * 답변 메시지 처리
      *
      * @param att
      */
@@ -433,7 +431,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     /**
-     * 삭제 메세지 처리
+     * 삭제 메시지 처리
      *
      * @param atxId
      */

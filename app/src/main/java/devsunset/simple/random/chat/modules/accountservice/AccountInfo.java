@@ -29,7 +29,6 @@ import retrofit2.Response;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class AccountInfo {
 
     /**
@@ -40,7 +39,7 @@ public class AccountInfo {
     public static HashMap<String,String> getAccountInfo(Context context){
 
         HashMap<String,String> accountInfo = new HashMap<String,String>();
-        SharedPreferences pref = context.getSharedPreferences("SRC_PREF", context.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences("SRC_PREF", Context.MODE_PRIVATE);
 
         accountInfo.put("APP_ID",pref.getString("APP_ID", "-"));
         accountInfo.put("APP_KEY",pref.getString("APP_KEY", "-"));
@@ -64,7 +63,7 @@ public class AccountInfo {
     }
 
     /**
-     * Set Accunt Info
+     * Set Account Info
      * @param context
      * @param accountInfo
      * @return
@@ -73,94 +72,94 @@ public class AccountInfo {
 
         boolean result = false;
 
-        if(accountInfo !=null && !accountInfo.isEmpty() && accountInfo.size() > 0){
+        if(accountInfo !=null && !accountInfo.isEmpty()){
 
-            SharedPreferences pref = context.getSharedPreferences("SRC_PREF", context.MODE_PRIVATE);
+            SharedPreferences pref = context.getSharedPreferences("SRC_PREF", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
 
             if(accountInfo.containsKey("APP_ID") && !"".equals(accountInfo.get("APP_ID"))){
-                editor.putString("APP_ID", accountInfo.get("APP_ID").toString());
+                editor.putString("APP_ID", accountInfo.get("APP_ID"));
             }
 
             if(accountInfo.containsKey("APP_KEY") && !"".equals(accountInfo.get("APP_KEY"))){
-                editor.putString("APP_KEY", accountInfo.get("APP_KEY").toString());
+                editor.putString("APP_KEY", accountInfo.get("APP_KEY"));
             }
 
             if(accountInfo.containsKey("APP_PHONE") && !"".equals(accountInfo.get("APP_PHONE"))){
-                editor.putString("APP_PHONE", accountInfo.get("APP_PHONE").toString());
+                editor.putString("APP_PHONE", accountInfo.get("APP_PHONE"));
             }
 
             if(accountInfo.containsKey("APP_VER") && !"".equals(accountInfo.get("APP_VER"))){
-                editor.putString("APP_VER", accountInfo.get("APP_VER").toString());
+                editor.putString("APP_VER", accountInfo.get("APP_VER"));
             }
 
             if(accountInfo.containsKey("COUNTRY") && !"".equals(accountInfo.get("COUNTRY"))){
-                editor.putString("COUNTRY", accountInfo.get("COUNTRY").toString());
-                editor.putString("COUNTRY_NAME", getContryName(accountInfo.get("COUNTRY").toString()));
+                editor.putString("COUNTRY", accountInfo.get("COUNTRY"));
+                editor.putString("COUNTRY_NAME", getCountryName(accountInfo.get("COUNTRY")));
             }
 
             if(accountInfo.containsKey("GENDER") && !"".equals(accountInfo.get("GENDER"))){
-                editor.putString("GENDER", accountInfo.get("GENDER").toString());
+                editor.putString("GENDER", accountInfo.get("GENDER"));
             }
 
             if(accountInfo.containsKey("LANG") && !"".equals(accountInfo.get("LANG"))){
-                editor.putString("LANG", accountInfo.get("LANG").toString());
+                editor.putString("LANG", accountInfo.get("LANG"));
             }
 
             if(accountInfo.containsKey("SET_ALARM_YN") && !"".equals(accountInfo.get("SET_ALARM_YN"))){
-                editor.putString("SET_ALARM_YN", accountInfo.get("SET_ALARM_YN").toString());
+                editor.putString("SET_ALARM_YN", accountInfo.get("SET_ALARM_YN"));
             }
 
             if(accountInfo.containsKey("SET_ALARM_NOTI_YN") && !"".equals(accountInfo.get("SET_ALARM_NOTI_YN"))){
-                editor.putString("SET_ALARM_NOTI_YN", accountInfo.get("SET_ALARM_NOTI_YN").toString());
+                editor.putString("SET_ALARM_NOTI_YN", accountInfo.get("SET_ALARM_NOTI_YN"));
             }
 
             if(accountInfo.containsKey("SET_ALARM_POPUP_YN") && !"".equals(accountInfo.get("SET_ALARM_POPUP_YN"))){
-                editor.putString("SET_ALARM_POPUP_YN", accountInfo.get("SET_ALARM_POPUP_YN").toString());
+                editor.putString("SET_ALARM_POPUP_YN", accountInfo.get("SET_ALARM_POPUP_YN"));
             }
 
             if(accountInfo.containsKey("SET_BYE_CONFIRM_YN") && !"".equals(accountInfo.get("SET_BYE_CONFIRM_YN"))){
-                editor.putString("SET_BYE_CONFIRM_YN", accountInfo.get("SET_BYE_CONFIRM_YN").toString());
+                editor.putString("SET_BYE_CONFIRM_YN", accountInfo.get("SET_BYE_CONFIRM_YN"));
             }
 
             if(accountInfo.containsKey("SET_LOCK_PWD") && !"".equals(accountInfo.get("SET_LOCK_PWD"))){
-                editor.putString("SET_LOCK_PWD", accountInfo.get("SET_LOCK_PWD").toString());
+                editor.putString("SET_LOCK_PWD", accountInfo.get("SET_LOCK_PWD"));
             }
 
             if(accountInfo.containsKey("SET_LOCK_YN") && !"".equals(accountInfo.get("SET_LOCK_YN"))){
-                editor.putString("SET_LOCK_YN", accountInfo.get("SET_LOCK_YN").toString());
+                editor.putString("SET_LOCK_YN", accountInfo.get("SET_LOCK_YN"));
             }
 
             if(accountInfo.containsKey("SET_NEW_RECEIVE_YN") && !"".equals(accountInfo.get("SET_NEW_RECEIVE_YN"))){
-                editor.putString("SET_NEW_RECEIVE_YN", accountInfo.get("SET_NEW_RECEIVE_YN").toString());
+                editor.putString("SET_NEW_RECEIVE_YN", accountInfo.get("SET_NEW_RECEIVE_YN"));
             }
 
             if(accountInfo.containsKey("SET_SEND_COUNTRY") && !"".equals(accountInfo.get("SET_SEND_COUNTRY"))){
-                editor.putString("SET_SEND_COUNTRY", accountInfo.get("SET_SEND_COUNTRY").toString());
+                editor.putString("SET_SEND_COUNTRY", accountInfo.get("SET_SEND_COUNTRY"));
             }
 
             if(accountInfo.containsKey("SET_SEND_GENDER") && !"".equals(accountInfo.get("SET_SEND_GENDER"))){
-                editor.putString("SET_SEND_GENDER", accountInfo.get("SET_SEND_GENDER").toString());
+                editor.putString("SET_SEND_GENDER", accountInfo.get("SET_SEND_GENDER"));
             }
 
             if(accountInfo.containsKey("SET_SEND_LIST_HIDE_YN") && !"".equals(accountInfo.get("SET_SEND_LIST_HIDE_YN"))){
-                editor.putString("SET_SEND_LIST_HIDE_YN", accountInfo.get("SET_SEND_LIST_HIDE_YN").toString());
+                editor.putString("SET_SEND_LIST_HIDE_YN", accountInfo.get("SET_SEND_LIST_HIDE_YN"));
             }
 
-            editor.commit();
+            editor.apply();
 
 
-            // LOCAL 설정 SERVER와 동기화 처리
+            // LOCAL 설정 SERVER  동기화 처리
             if(!accountInfo.containsKey("INITIALIZE") || !"Y".equals(accountInfo.get("INITIALIZE"))){
-                HttpConnectService httpConnctService =  HttpConnectClient.getClient().create(HttpConnectService.class);
+                HttpConnectService httpConnectService =  HttpConnectClient.getClient().create(HttpConnectService.class);
 
-                httpConnctService.appInfoUpdate(AccountInfo.getAccountInfo(context)).enqueue(new Callback<DataVo>() {
+                httpConnectService.appInfoUpdate(AccountInfo.getAccountInfo(context)).enqueue(new Callback<DataVo>() {
                     @Override
                     public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                         if (response.isSuccessful()) {
                             DataVo data = response.body();
                             if (data != null) {
-                                if("S" == data.getRESULT_CODE()){
+                                if("S".equals(data.getRESULT_CODE())){
                                     Logger.i("appInfoUpdate Success ");
                                 }else{
                                     Logger.e("appInfoUpdate Error : "+data.getRESULT_MESSAGE());
@@ -189,7 +188,7 @@ public class AccountInfo {
      * @param country
      * @return
      */
-    public static String getContryName (String country){
+    private static String getCountryName(String country){
 
         String countryName = "World";
 

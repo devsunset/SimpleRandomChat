@@ -14,7 +14,6 @@ package devsunset.simple.random.chat.modules.utilservice;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class Consts {
 
     // screen capture disable
@@ -31,9 +30,6 @@ public class Consts {
     public static final String MESSAGE_STATUS_HIDE = "H";
     // D : Delete
     public static final String MESSAGE_STATUS_DELETE = "D";
-    // X : Server Status (No Found Target Data)
-    public static final String MESSAGE_STATUS_X = "X";
-
 
     // MESSAGE TYPE
     // T : TEXT
@@ -51,8 +47,15 @@ public class Consts {
     public static final String IDS_PRIEFIX_ATX = "ATX_";
     // TTD
     public static final String IDS_PRIEFIX_TTD = "TTD_";
-    // ERROR
-    public static final String IDS_PRIEFIX_ERR = "ERR_";
     // BLACK LIST
     public static final String IDS_PRIEFIX_BLA = "BLA_";
+
+    // Data Clean Day
+    public static final int DATA_CLEAN_DAY = 15;
+
+    // App Access Period
+    public static final int APP_ACCESS_PERIOD = 3;
+
+    // Attach File Download Period
+    public static final int ATTACH_FILE_MAX_PERIOD = 2;
 }

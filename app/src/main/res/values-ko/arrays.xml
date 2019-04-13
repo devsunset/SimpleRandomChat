@@ -4,9 +4,6 @@
     <!-- ========================================== -->
     <!-- array_item -->
     <!-- ========================================== -->
-    <string-array name="example_array">
-        <item>[선택]</item>
-    </string-array>
 
     <string-array name="gender">
         <item>남성%M</item>

@@ -26,11 +26,9 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-
 public class LockActivity extends Activity implements OnOtpCompletionListener {
     private OtpView otpView;
-    public String PUSH_CALL_FLAG = "N";
+    private String PUSH_CALL_FLAG = "N";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +52,9 @@ public class LockActivity extends Activity implements OnOtpCompletionListener {
         setListeners();
     }
 
+    /**
+     * Message Content Intent call
+     */
     private void goNextIntent(){
         Intent intent = new Intent(this, MessageContent.class);
         intent.putExtra("PUSH_CALL_FLAG",PUSH_CALL_FLAG);

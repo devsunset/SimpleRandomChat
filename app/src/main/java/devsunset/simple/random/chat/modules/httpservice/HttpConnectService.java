@@ -21,7 +21,6 @@ import retrofit2.http.POST;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public interface HttpConnectService {
 
     String URL = "https://src-server.firebaseapp.com/";
@@ -72,15 +71,6 @@ public interface HttpConnectService {
     Call<DataVo> replyMessage(@FieldMap HashMap<String, Object> param);
 
     /**
-     * Retry Message
-     * @param param
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("retryMessage")
-    Call<DataVo> retryMessage(@FieldMap HashMap<String, Object> param);
-
-    /**
      * Bye Message
      * @param param
      * @return
@@ -90,24 +80,6 @@ public interface HttpConnectService {
     Call<DataVo> byeMessage(@FieldMap HashMap<String, Object> param);
 
     /**
-     * Get Image Data
-     * @param param
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("getImageData")
-    Call<DataVo> getImageData(@FieldMap HashMap<String, Object> param);
-
-    /**
-     * Get Voice Data
-     * @param param
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("getVoiceData")
-    Call<DataVo> getVoiceData(@FieldMap HashMap<String, Object> param);
-
-    /**
      * Request Black List
      * @param param
      * @return
@@ -115,25 +87,6 @@ public interface HttpConnectService {
     @FormUrlEncoded
     @POST("requstBlackList")
     Call<DataVo> requstBlackList(@FieldMap HashMap<String, Object> param);
-
-    /**
-     * Request Voc
-     * @param param
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("requestVoc")
-    Call<DataVo> requestVoc(@FieldMap HashMap<String, Object> param);
-
-    /**
-     * Error Stack Trace
-     * @param param
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("errorStackTrace")
-    Call<DataVo> errorStackTrace(@FieldMap HashMap<String, Object> param);
-
 
     /**
      * GET 방식

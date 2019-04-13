@@ -3,32 +3,29 @@
     <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
-    <string name="app_name">메시톡</string>
-    <string name="loading">loading...</string>
-    <string name="loadingwait">loading... 잠시만 기다려 주세요.</string>
+    <string name="app_name">Signal</string>
+    <string name="loading">Loading...</string>
+    <string name="loading_wait">Loading... 잠시만 기다려 주세요.</string>
+    <string name="notice_text">단말의 어떠한 개인정보도 요청 하거나 서버에 저장 하지 않습니다.\n\n\n음성,이미지 전송 기능 사용 시에만 권한 요청 확인 후 파일 처리를 위해 내부 Storge를 사용 후 삭제 처리 합니다.</string>
     <string name="app_message_send">메세지 전송</string>
     <string name="app_message_list">메세지 목록</string>
     <string name="app_message_setting">설정</string>
-    <string name="common_info_title">내용</string>
-    <string name="common_ok">확인</string>
     <string name="main_back_finish">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다 </string>
-    <string name="alert_info_title">알림</string>
-    <string name="processing">처리 중입니다. 잠시만 기다려 주세요.</string>
-    <string name="networkerror">네트워크 연결에 실패 하였습니다</string>
+    <string name="network_error">네트워크 연결에 실패 하였습니다</string>
     <string name="verification_code_subtext">화면 잠금 비밀 번호를 입력하세요</string>
     <string name="verification_code">비밀번호</string>
     <string name="info_title">알림</string>
     <string name="gender_choice_title">성별 선택</string>
     <string name="gender_choice_message">성별을 선택해 주세요.</string>
     <string name="send">전송</string>
-    <string name="sendinput">메세지를 입력해 주세요.</string>
-    <string name="sendresult">메세지를 보냈습니다.</string>
+    <string name="send_input">메세지를 입력해 주세요.</string>
+    <string name="send_result">메세지를 보냈습니다.</string>
     <string name="all">전체</string>
     <string name="man">남자</string>
     <string name="woman">여자</string>
     <string name="local">국내</string>
     <string name="world">World(+국내)</string>
-    <string name="newmessagereceive">새로운 메세지 받기</string>
+    <string name="new_message_receive">새로운 메세지 받기</string>
     <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
     <string name="default_received_message">메세지 도착</string>
     <string name="alarm_title">메세지 수신 알림 설정</string>
@@ -38,10 +35,10 @@
     <string name="ctype_msg">팝업 알림</string>
     <string name="dtype_msg">알림 없음</string>
     <string name="byconfirm_msg">삭제 .숨김 시 물어보지 않기</string>
-    <string name="replynewmessagehide_msg">답변한 메세지 목록에서 숨기기</string>
-    <string name="lockpwd_msg">화면 잠금</string>
-    <string name="passwordsuccess">비밀번호가 정상적으로 설정 되었습니다.</string>
-    <string name="passwordfail">비밀 번호가 일치 하지 않습니다.</string>
+    <string name="reply_new_message_hide_msg">답변한 메세지 목록에서 숨기기</string>
+    <string name="lock_pwd_msg">화면 잠금</string>
+    <string name="password_success">비밀번호가 정상적으로 설정 되었습니다.</string>
+    <string name="password_fail">비밀 번호가 일치 하지 않습니다.</string>
     <string name="empty_message">답장 받은 메세지가 없습니다.</string>
     <string name="black_list_send">신고</string>
     <string name="bye_send">삭제</string>
@@ -51,17 +48,14 @@
     <string name="bye_message">메세지 삭제하기</string>
     <string name="bye_message_desc">메세지 목록에서 해당 메세지를 삭제 처리 합니다.\n데이터 복구가 되지 않으니 신중히 결정 하세요.</string>
     <string name="black_list_message">신고하기</string>
-    <string name="black_list_message_desc">광고 스팸 및 불 건전 한 메세지를 보내온다면 신고를 부탁드립니다.\n신고 후 해당 메세지는 삭제 처리 됩니다.</string>
+    <string name="black_list_message_desc">광고 스팸 및 불 건전 한 메시지를 보내온다면 신고를 부탁드립니다.\n신고 후 해당 메세지는 삭제 처리 됩니다.</string>
     <string name="cancel">취소</string>
-    <string name="choosefile">음성 파일이나 이미지 파일 중\n한 개를 선택해 주세요.</string>
-    <string name="limitfilesize">음성 파일은 최대 1M 용량의 파일만 첨부 가능 합니다.</string>
-    <string name="downfileerror">첨부 파일 유효 다운로드 기간이 만료 되었습니다.</string>
+    <string name="choose_file">음성 파일이나 이미지 파일 중\n한 개를 선택해 주세요.</string>
+    <string name="limit_file_size">음성 파일은 최대 1M 용량의 파일만 첨부 가능 합니다.</string>
+    <string name="down_file_error">첨부 파일 유효 다운로드 기간이 만료 되어 데이타가 삭제 처리 되었습니다.</string>
     <string name="replay">다시 들으시려면 클릭 하세요.</string>
-    <string name="faileopenpicture">사진 파일 불러오는 처리에 문제가 발생 했습니다.</string>
-    <string name="choosepicture">사진을 선택해 주세요.</string>
-
-
-
-
+    <string name="faile_open_picture">사진 파일 불러오는 처리에 문제가 발생 했습니다.</string>
+    <string name="choose_picture">사진을 선택해 주세요.</string>
+    <string name="ads_noti_msg">광고가 끝나면 사진, 음성 파일 보내기 기능을 사용 하실 수 있습니다. </string>
 
 </resources>

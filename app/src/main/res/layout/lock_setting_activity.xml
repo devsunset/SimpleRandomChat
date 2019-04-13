@@ -4,19 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/content_bg"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="#E6F8E0"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text="@string/app_name"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:paddingLeft="30dp"
         android:paddingTop="50dp"
-        android:textSize="15pt"
-        android:text="Password"/>
+        android:text="Password"
+        android:textColor="@color/black"
+        android:textSize="12pt" />
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/pinview1"
@@ -32,12 +55,13 @@
         app:pinWidth="40dp" />
 
     <TextView
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="15pt"
-        android:text="Password Confirm"/>
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:text="Password Confirm"
+        android:textColor="@color/black"
+        android:textSize="12pt" />
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/pinview2"

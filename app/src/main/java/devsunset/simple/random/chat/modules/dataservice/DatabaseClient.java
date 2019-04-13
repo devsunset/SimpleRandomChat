@@ -17,15 +17,13 @@ import android.content.Context;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-
 public class DatabaseClient {
 
-    private Context mCtx;
+    private final Context mCtx;
     private static DatabaseClient mInstance;
 
     //our app database object
-    private AppDataBase appDataBase;
+    private final AppDataBase appDataBase;
 
     private DatabaseClient(Context mCtx) {
         this.mCtx = mCtx;

@@ -15,7 +15,9 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -26,8 +28,6 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-
-import java.util.ArrayList;
 
 import devsunset.simple.random.chat.modules.utilservice.Consts;
 
@@ -40,15 +40,13 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class MessageContent extends FragmentActivity {
 
-	private final int TAB_MESSAGE_SEND = 0;
-	private final int TAB_MESSAGE_LIST = 1;
-	private final int TAB_MESSAGE_SETTING = 2;
+	ViewPager vpPager = null;
 
-	FragmentManager fm;
-	FragmentTransaction tran;
+	private final static int TAB_MESSAGE_SEND = 0;
+	private final static int TAB_MESSAGE_LIST = 1;
+	private final static int TAB_MESSAGE_SETTING = 2;
 
 	private RelativeLayout llTab1 = null;
 	private RelativeLayout llTab2 = null;
@@ -60,9 +58,9 @@ public class MessageContent extends FragmentActivity {
 	private TextView tvTab2 = null;
 	private TextView tvTab3 = null;
 
-	private ArrayList<Fragment> list = null;
+	private boolean boolBackKeyPressFlag = false;
 
-	public boolean boolBackKeyPressFlag = false;
+	FragmentPagerAdapter adapterViewPager;
 
 	private AdView adView;
 	
@@ -76,19 +74,55 @@ public class MessageContent extends FragmentActivity {
 			getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
 		}
 
-		llTab1 = (RelativeLayout) findViewById(R.id.ll_tab1);
-		llTab2 = (RelativeLayout) findViewById(R.id.ll_tab2);
-		llTab3 = (RelativeLayout) findViewById(R.id.ll_tab3);
+		vpPager = (ViewPager) findViewById(R.id.vpPager);
+		adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+		vpPager.setAdapter(adapterViewPager);
+		vpPager.setOffscreenPageLimit(3);
+		vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+		{
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+			{
+				Log.d("ITPANGPANG","onPageScrolled : "+position);
+			}
+
+			@Override
+			public void onPageSelected(int position)
+			{
+				setTab(position);
+				setCurrentItem(position);
+				if (position == 0) {
+					try {
+						InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.showSoftInput(getCurrentFocus(),0);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state)
+			{
+				Log.d("ITPANGPANG","onPageScrollStateChanged : "+state);
+			}
+		});
+
+
+		llTab1 = findViewById(R.id.ll_tab1);
+		llTab2 = findViewById(R.id.ll_tab2);
+		llTab3 = findViewById(R.id.ll_tab3);
 		
 		vTab1 = findViewById(R.id.v_line_tab1);
 		vTab2 = findViewById(R.id.v_line_tab2);
 		vTab3 = findViewById(R.id.v_line_tab3);
 		
-		tvTab1 = (TextView) findViewById(R.id.tv_tab1);
-		tvTab2 = (TextView) findViewById(R.id.tv_tab2);
-		tvTab3 = (TextView) findViewById(R.id.tv_tab3);
-
-		initFragments();
+		tvTab1 = findViewById(R.id.tv_tab1);
+		tvTab2 = findViewById(R.id.tv_tab2);
+		tvTab3 = findViewById(R.id.tv_tab3);
 
 		llTab1.setOnClickListener(mOnClickListener);
 		llTab2.setOnClickListener(mOnClickListener);
@@ -120,45 +154,9 @@ public class MessageContent extends FragmentActivity {
 		adView.loadAd(adRequest);
 	}
 
-
-	// ---------------------------------------------------------------------------------------------
-	// public methods
-	// ---------------------------------------------------------------------------------------------
-	public void setCurrentItem(int position) {
-		setTab(position);
-		fm = getSupportFragmentManager();
-		tran = fm.beginTransaction();
-		switch (position){
-			case 0:
-				tran.replace(R.id.main_frame, list.get(0));
-				tran.commit();
-				break;
-			case 1:
-				tran.replace(R.id.main_frame, list.get(1));
-				tran.commit();
-				break;
-			case 2:
-				tran.replace(R.id.main_frame, list.get(2));
-				tran.commit();
-				break;
-		}
-	}
-
-	public void setTab(int position) {
+	private void setTab(int position) {
 		clearEnable();
 		enableLine(position);
-	}
-
-	// ---------------------------------------------------------------------------------------------
-	// private methods
-	// ---------------------------------------------------------------------------------------------
-	private void initFragments() {
-		list = new ArrayList<Fragment>();
-		list.add(new MessageSend());
-		list.add(new MessageList());
-		list.add(new MessageSetting());
-
-		enableLine(TAB_MESSAGE_SEND);
 	}
 
 	private void enableLine(int position) {
@@ -172,21 +170,11 @@ public class MessageContent extends FragmentActivity {
 			int enable2 = getResources().getColor(R.color.tab_enable2);
 			vTab2.setBackgroundColor(enable2);
 			tvTab2.setTextColor(enable2);
-			View view = this.getCurrentFocus();
-			if (view!= null) {
-				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-			}
 			break;
 		case TAB_MESSAGE_SETTING:
 			int enable3 = getResources().getColor(R.color.tab_enable3);
 			vTab3.setBackgroundColor(enable3);
 			tvTab3.setTextColor(enable3);
-			View viewx = this.getCurrentFocus();
-			if (viewx!= null) {
-				InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(viewx.getWindowToken(), 0);
-			}
 			break;
 		}
 	}
@@ -202,10 +190,7 @@ public class MessageContent extends FragmentActivity {
 		tvTab3.setTextColor(disableText);
 	}
 
-	// ---------------------------------------------------------------------------------------------
-	// Listener
-	// ---------------------------------------------------------------------------------------------
-	View.OnClickListener mOnClickListener = new View.OnClickListener() {
+	private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -222,8 +207,59 @@ public class MessageContent extends FragmentActivity {
 		}
 	};
 
+    private void setCurrentItem(int position) {
+        setTab(position);
+        switch (position){
+            case 0:
+				vpPager.setCurrentItem(position);
+                break;
+            case 1:
+				vpPager.setCurrentItem(position);
+                break;
+            case 2:
+				vpPager.setCurrentItem(position);
+                break;
+        }
+    }
+
+	public  class MyPagerAdapter extends FragmentPagerAdapter {
+		private  int NUM_ITEMS = 3;
+
+		public MyPagerAdapter(FragmentManager fragmentManager) {
+			super(fragmentManager);
+		}
+
+		// Returns total number of pages
+		@Override
+		public int getCount() {
+			return NUM_ITEMS;
+		}
+
+		// Returns the fragment to display for that page
+		@Override
+		public Fragment getItem(int position) {
+			switch (position) {
+				case TAB_MESSAGE_SEND:
+					return MessageSend.newInstance();
+				case TAB_MESSAGE_LIST:
+					return MessageList.newInstance();
+				case TAB_MESSAGE_SETTING:
+					return MessageSetting.newInstance();
+				default:
+					return null;
+			}
+		}
+
+		// Returns the page title for the top indicator
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return "Page " + position;
+		}
+
+	}
+
 	// ---------------------------------------------------------------------------------------------
-	// inner class
+	// back key press
 	// ---------------------------------------------------------------------------------------------
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if( keyCode == KeyEvent.KEYCODE_BACK ){
@@ -234,11 +270,12 @@ public class MessageContent extends FragmentActivity {
 				return true;
 			}
 		}
-		
+
 		return super.onKeyDown(keyCode, event);
 	}
-	
+
 	@SuppressLint("HandlerLeak")
+	private final
 	Handler mKillBackKeyHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {

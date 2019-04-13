@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 android {
     compileSdkVersion 28
@@ -77,6 +78,8 @@ dependencies {
     //firebase cloud storage
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
+    //firebase license
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
     //logger
     implementation 'com.orhanobut:logger:2.2.0'
     //toast
@@ -104,5 +107,7 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0'
     //Photo View
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    //KProgressHUD
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 
 }

@@ -5,9 +5,7 @@
  */
 package devsunset.simple.random.chat;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,17 +15,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
@@ -37,17 +30,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.nabinbhandari.android.permissions.PermissionHandler;
-import com.nabinbhandari.android.permissions.Permissions;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -81,8 +70,6 @@ import retrofit2.Response;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
-
 public class ChatUploadActivity extends Activity implements RewardedVideoAdListener {
 
     @BindView(R.id.tv_audio_desc)
@@ -97,7 +84,13 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     @BindView(R.id.uploadbuttonarea)
     LinearLayout uploadbuttonarea;
 
-    HttpConnectService httpConnctService = null;
+    @BindView(R.id.loadingpage)
+    LinearLayout loadingpage;
+
+    @BindView(R.id.uploadpage)
+    LinearLayout uploadpage;
+
+    private HttpConnectService httpConnectService = null;
 
     private File actualImage;
     private File compressedImage;
@@ -105,13 +98,15 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     private static final int PICK_AUDIO_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    public static  String AUDIO_FILE_NAME = "";
-    public static  String IMAGE_FILE_NAME = "";
+    private static  String AUDIO_FILE_NAME = "";
+    private static  String IMAGE_FILE_NAME = "";
 
-    public static String ATX_ID = "";
-    public static String TO_APP_KEY = "";
+    private static String ATX_ID = "";
+    private static String TO_APP_KEY = "";
 
-    public static boolean EXECUTE_ACTION = false;
+    private static boolean EXECUTE_ACTION = false;
+
+    private KProgressHUD hud;
 
     private RewardedVideoAd mRewardedVideoAd;
 
@@ -125,16 +120,13 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
 
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+        httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
         Intent intent = getIntent();
         ATX_ID = intent.getStringExtra("ATX_ID");
         TO_APP_KEY = intent.getStringExtra("TO_APP_KEY");
 
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-
-        String ctm = format.format(date) + "";
+        String ctm = System.currentTimeMillis() + "";
         String uid = UUID.randomUUID().toString();
 
         AUDIO_FILE_NAME = ctm+"_"+uid+".mp3";
@@ -170,6 +162,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     public void onRewardedVideoAdClosed() {
         //Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
         if(uploadbuttonarea.getVisibility() == View.GONE){
+            FBToast.successToast(getApplicationContext(), getString(R.string.ads_noti_msg), FBToast.LENGTH_SHORT);
             finish();
         }
     }
@@ -205,16 +198,25 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         //Toast.makeText(this, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * init content
+     */
     private void initContent(){
         cleaAudio();
         clearImage();
         fileClear();
+        loadingpage.setVisibility(View.GONE);
         uploadbuttonarea.setVisibility(View.VISIBLE);
+        uploadpage.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * directory check
+     */
     private void dirCheck() {
         File dir = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
         if(!dir.exists()){
+            //noinspection ResultOfMethodCallIgnored
             dir.mkdirs();
         }
     }
@@ -276,7 +278,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             if (data == null) {
                 clearImage();
-                FBToast.errorToast(getApplicationContext(), getString(R.string.faileopenpicture), FBToast.LENGTH_SHORT);
+                FBToast.errorToast(getApplicationContext(), getString(R.string.faile_open_picture), FBToast.LENGTH_SHORT);
                 return;
             }
             try {
@@ -285,16 +287,19 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
                 customCompressImage();
             } catch (IOException e) {
                 clearImage();
-                e.printStackTrace();
-                FBToast.errorToast(getApplicationContext(), getString(R.string.faileopenpicture), FBToast.LENGTH_SHORT);
+                Logger.e("IOException : " + e.getMessage());
+                FBToast.errorToast(getApplicationContext(), getString(R.string.faile_open_picture), FBToast.LENGTH_SHORT);
             }
         }
     }
 
-    public void customCompressImage() {
+    /**
+     * image compress
+     */
+    private void customCompressImage() {
         if (actualImage == null) {
             clearImage();
-            FBToast.infoToast(getApplicationContext(), getString(R.string.choosepicture), FBToast.LENGTH_SHORT);
+            FBToast.infoToast(getApplicationContext(), getString(R.string.choose_picture), FBToast.LENGTH_SHORT);
         } else {
             // Compress image in main thread using custom Compressor
             try {
@@ -308,32 +313,47 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
                         .compressToFile(actualImage);
 
                 // 이름 변경
+                //noinspection ResultOfMethodCallIgnored
                 compressedImage.renameTo(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+IMAGE_FILE_NAME));
 
                 setCompressedImage();
 
             } catch (IOException e) {
-                e.printStackTrace();
-                FBToast.errorToast(getApplicationContext(), getString(R.string.faileopenpicture), FBToast.LENGTH_SHORT);
+                Logger.e("IOException : " + e.getMessage());
+                FBToast.errorToast(getApplicationContext(), getString(R.string.faile_open_picture), FBToast.LENGTH_SHORT);
             }
         }
     }
 
+    /**
+     * audio init
+     */
     private void cleaAudio() {
         tv_audio_desc.setText("Audio File Size : 0 B");
     }
 
+    /**
+     * image init
+     */
     private void clearImage() {
         compressedImageView.setImageDrawable(null);
         compressedSizeTextView.setText("Image File Size : 0 B");
     }
 
+    /**
+     * image view
+     */
     private void setCompressedImage() {
         compressedImageView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+IMAGE_FILE_NAME));
         compressedSizeTextView.setText(String.format("Image File Size : %s", getReadableFileSize(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+IMAGE_FILE_NAME).length())));
     }
 
-    public String getReadableFileSize(long size) {
+    /**
+     * get file data size
+     * @param size
+     * @return
+     */
+    private String getReadableFileSize(long size) {
         if (size <= 0) {
             return "0";
         }
@@ -342,13 +362,17 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
-    public void fileClear(){
+    /**
+     * temp file clear
+     */
+    private void fileClear(){
         dirCheck();
 
         File file = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
         File[] files = file.listFiles();
         if(files !=null && files.length > 0){
             for( int i=0; i<files.length; i++){
+                //noinspection ResultOfMethodCallIgnored
                 files[i].delete();
             }
         }
@@ -363,16 +387,16 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     void onBtnReplyAudioImageMessageSendClicked() {
 
         // 파일 선택 여부 체크
-        if("Audio File Size : 0 B".equals(tv_audio_desc.getText()) && "Image File Size : 0 B".equals(compressedSizeTextView.getText())){
-            FBToast.infoToast(getApplicationContext(), getString(R.string.choosefile), FBToast.LENGTH_SHORT);
+        if("Audio File Size : 0 B".equals(tv_audio_desc.getText().toString()) && "Image File Size : 0 B".equals(compressedSizeTextView.getText().toString())){
+            FBToast.infoToast(getApplicationContext(), getString(R.string.choose_file), FBToast.LENGTH_SHORT);
             return;
         }
 
         // Audio or Image 여부 체크
-        boolean audioCheck = true;
-        String childPath = "audio";
+        boolean audioCheck;
+        String childPath;
 
-        if(!"Audio File Size : 0 B".equals(tv_audio_desc.getText())){
+        if(!"Audio File Size : 0 B".equals(tv_audio_desc.getText().toString())){
             audioCheck = true;
             childPath = "audio";
         }else{
@@ -380,13 +404,13 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             childPath = "images";
         }
 
-        String UPLOAD_FILE_NAME = "";
+        String UPLOAD_FILE_NAME;
 
         // 파일 용량 체크
         if(audioCheck){
             String tmp = tv_audio_desc.getText().toString();
            if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB") ){
-                    FBToast.errorToast(getApplicationContext(), getString(R.string.limitfilesize), FBToast.LENGTH_SHORT);
+                    FBToast.errorToast(getApplicationContext(), getString(R.string.limit_file_size), FBToast.LENGTH_SHORT);
                     return;
            }
             UPLOAD_FILE_NAME = AUDIO_FILE_NAME;
@@ -408,13 +432,19 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
         EXECUTE_ACTION = true;
 
-        FBToast.infoToast(getApplicationContext(), getString(R.string.processing), FBToast.LENGTH_SHORT);
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setBackgroundColor(getResources().getColor(R.color.progress))
+                .setAnimationSpeed(2)
+                .show();
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference mountainsRef = storageRef.child(UPLOAD_FILE_NAME);
         StorageReference mountainImagesRef = storageRef.child(childPath+"/"+UPLOAD_FILE_NAME);
+        //noinspection ResultOfMethodCallIgnored
         mountainsRef.getName().equals(mountainImagesRef.getName());
+        //noinspection ResultOfMethodCallIgnored
         mountainsRef.getPath().equals(mountainImagesRef.getPath());
 
         Uri file = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+UPLOAD_FILE_NAME));
@@ -426,7 +456,8 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             @Override
             public void onFailure(@NonNull Exception exception) {
                 EXECUTE_ACTION = false;
-                FBToast.errorToast(getApplicationContext(), getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                hud.dismiss();
+                FBToast.errorToast(getApplicationContext(), getString(R.string.network_error), FBToast.LENGTH_SHORT);
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -440,6 +471,11 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         });
     }
 
+    /**
+     * reply message send
+     * @param type
+     * @param fileName
+     */
     private void replyMessageSend(String type,String fileName) {
         HashMap<String, String> account = AccountInfo.getAccountInfo(this);
         String ctm = System.currentTimeMillis() + "";
@@ -467,7 +503,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         params.put("APP_ID", account.get("APP_ID"));
         params.put("TO_APP_KEY", TO_APP_KEY);
 
-        httpConnctService.replyMessage(params).enqueue(new Callback<DataVo>() {
+        httpConnectService.replyMessage(params).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
@@ -500,6 +536,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 EXECUTE_ACTION = false;
+                hud.dismiss();
                 Logger.e("replyMessage Error : " + t.getMessage());
                 finish();
             }
@@ -537,6 +574,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             @Override
             protected void onPostExecute(Void aVoid) {
                 EXECUTE_ACTION = false;
+                hud.dismiss();
                 //EventBus Call
                 BusProvider.getInstance().post("SERVICE_CALL");
                 finish();
@@ -544,6 +582,11 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         }
         SaveTask st = new SaveTask();
         st.execute();
+    }
+
+    @OnClick(R.id.btnBackTop)
+    void onBtnBackTopClicked() {
+        finish();
     }
 
     @OnClick(R.id.btnBack)

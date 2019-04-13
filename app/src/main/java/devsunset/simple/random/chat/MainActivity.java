@@ -5,23 +5,19 @@
  */
 package devsunset.simple.random.chat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.telephony.PhoneNumberUtils;
-import android.telephony.TelephonyManager;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
-import com.nabinbhandari.android.permissions.PermissionHandler;
-import com.nabinbhandari.android.permissions.Permissions;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
@@ -38,6 +34,7 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
+import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
 import devsunset.simple.random.chat.modules.etcservice.GenderAdapter;
 import devsunset.simple.random.chat.modules.etcservice.GenderOption;
 import devsunset.simple.random.chat.modules.httpservice.DataVo;
@@ -57,10 +54,9 @@ import retrofit2.Response;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
-    HttpConnectService httpConnctService = null;
+    private HttpConnectService httpConnectService = null;
 
     private LovelySaveStateHandler saveStateHandler;
     private int INIT_CHECK = 0;
@@ -80,72 +76,72 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
 
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+        httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
         saveStateHandler = new LovelySaveStateHandler();
         progress.setProgress(2);
 
-        // 권한 획득
-        //Single permission:
-        Permissions.check(this/*context*/, Manifest.permission.READ_PHONE_STATE, null, new PermissionHandler() {
-            @Override
-            public void onGranted() {
-                int step = 0;
-                String phoneNumber = "";
-                TelephonyManager telephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                try {
-                    if (telephony.getLine1Number() != null) {
-                        phoneNumber = telephony.getLine1Number();
-                        step = 1;
-                    } else {
-                        if (telephony.getSimSerialNumber() != null) {
-                            phoneNumber = telephony.getSimSerialNumber();
-                            step = 2;
+        /*
+            // 권한 획득 (PHONE NUMBER SKIP)
+            Permissions.check(this, Manifest.permission.READ_PHONE_STATE, null, new PermissionHandler() {
+                @Override
+                public void onGranted() {
+                    int step = 0;
+                    String phoneNumber = "";
+                    TelephonyManager telephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                    try {
+                        if (telephony.getLine1Number() != null) {
+                            phoneNumber = telephony.getLine1Number();
+                            step = 1;
+                        } else {
+                            if (telephony.getSimSerialNumber() != null) {
+                                phoneNumber = telephony.getSimSerialNumber();
+                                step = 2;
+                            }
                         }
+                    } catch (SecurityException e) {
+                        finish();
+                    } catch (Exception e) {
+                        finish();
                     }
-                } catch (SecurityException e) {
+
+                    if (step == 1 && phoneNumber.startsWith("+82")) {
+                        phoneNumber = phoneNumber.replace("+82", "0");
+                    }
+
+                    if (step == 1) {
+                        phoneNumber = PhoneNumberUtils.formatNumber(phoneNumber);
+                    }
+
+                    if (step == 0) {
+                        phoneNumber = "XXX";
+                    }
+
+                    HashMap<String, String> myInfo = new HashMap<String, String>();
+                    myInfo.put("APP_PHONE", phoneNumber);
+                    myInfo.put("INITIALIZE", "Y");
+                    AccountInfo.setAccountInfo(getApplicationContext(), myInfo);
+
+                    //최초 설치 여부 확인
+                    if ("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))) {
+                        showGenderChoiceDialog();
+                    } else {
+                        getNoticeProcess();
+                    }
+                }
+
+                @Override
+                public void onDenied(Context context, ArrayList<String> deniedPermissions) {
                     finish();
-                } catch (Exception e) {
-                    finish();
                 }
+            });
+        */
 
-                if (step == 1 && phoneNumber.startsWith("+82")) {
-                    phoneNumber = phoneNumber.replace("+82", "0");
-                }
-
-                if (step == 1) {
-                    phoneNumber = PhoneNumberUtils.formatNumber(phoneNumber);
-                }
-
-                if (step == 0) {
-                    phoneNumber = "XXX";
-                }
-
-                HashMap<String, String> myInfo = new HashMap<String, String>();
-                myInfo.put("APP_PHONE", phoneNumber);
-                myInfo.put("INITIALIZE", "Y");
-                AccountInfo.setAccountInfo(getApplicationContext(), myInfo);
-
-                //최초 설치 여부 확인
-                if ("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))) {
-                    showGenderChoiceDialog();
-                } else {
-                    getNoticeProcess();
-                }
-            }
-
-            @Override
-            public void onDenied(Context context, ArrayList<String> deniedPermissions) {
-                finish();
-            }
-        });
-
-//		Multiple permissions:
-//		String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-//		Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
-//			@Override
-//			public void onGranted() {
-//			}
-//		});
+        //최초 설치 여부 확인
+        if ("-".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("APP_ID"))) {
+            showGenderChoiceDialog();
+        } else {
+            getNoticeProcess();
+        }
     }
 
     /**
@@ -208,7 +204,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         AccountInfo.setAccountInfo(getApplicationContext(), myInfo);
 
         // 서버에 계정 생성 호출
-        httpConnctService.appInfoInit(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
+        httpConnectService.appInfoInit(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
@@ -218,13 +214,13 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                             getNoticeProcess();
                         } else {
                             Logger.e("appInfoInit Fail : " + data.getRESULT_MESSAGE());
-                            FBToast.infoToast(MainActivity.this, getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                            FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
                             finish();
                         }
                     }
                 } else {
                     Logger.e("appInfoInit Fail : " + response.isSuccessful());
-                    FBToast.infoToast(MainActivity.this, getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                    FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
                     finish();
                 }
                 progress.setProgress(4);
@@ -233,7 +229,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 Logger.e("appInfoInit Error : " + t.getMessage());
-                FBToast.infoToast(MainActivity.this, getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
                 finish();
             }
         });
@@ -247,15 +243,16 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         Random rnd = new Random();
         progress.setProgress(rnd.nextInt(7) + 1);
 
-        SharedPreferences prefx = this.getSharedPreferences("NOTICE_ALL_FLAG", this.MODE_PRIVATE);
+        SharedPreferences prefx = this.getSharedPreferences("NOTICE_ALL_FLAG", MODE_PRIVATE);
         long lastTime = Long.parseLong(prefx.getString("LAST_ACCESS_TIME", "1234567890"));
         long curTime = System.currentTimeMillis();
         long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
 
-        // 공지 사항 자주 호출 하는 것 방지 위해 12 시간 체크 로직
-        if (diffTime > 12) {
+        if (diffTime > Consts.APP_ACCESS_PERIOD) {
 
-            httpConnctService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
+            dataClean();
+
+            httpConnectService.appNotice(AccountInfo.getAccountInfo(getApplicationContext())).enqueue(new Callback<DataVo>() {
                 @Override
                 public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                     if (response.isSuccessful()) {
@@ -264,14 +261,13 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                             // NOTICE 조회 시간 갱신
                             SharedPreferences.Editor editor = prefx.edit();
                             editor.putString("LAST_ACCESS_TIME", curTime + "");
-                            editor.commit();
-
+                            editor.apply();
                             showInfoDialog(data.getRESULT_DATA());
                         } else {
                             showInfoDialog(null);
                         }
                     } else {
-                        FBToast.infoToast(MainActivity.this, getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                        FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
                         finish();
                     }
                 }
@@ -279,14 +275,40 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 @Override
                 public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                     Logger.e("getNoticeProcess Error : " + t.getMessage());
-                    FBToast.infoToast(MainActivity.this, getString(R.string.networkerror), FBToast.LENGTH_SHORT);
+                    FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
                     finish();
                 }
             });
-
         } else {
             showInfoDialog(null);
         }
+    }
+
+    /**
+     * Old Data Clean
+     */
+    private void dataClean() {
+
+        class SaveTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                String cttm =  (System.currentTimeMillis() - (Consts.DATA_CLEAN_DAY * 24 * 60 * 60 * 1000))+"";
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkThreadDao().deleteByCttm(Consts.MESSAGE_STATUS_FIRST,cttm);
+
+                DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
+                        .AppTalkMainDao().deleteByCttm(Consts.MESSAGE_STATUS_FIRST,cttm);
+
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                //SKIP
+            }
+        }
+        SaveTask st = new SaveTask();
+        st.execute();
     }
 
     /**
@@ -297,33 +319,63 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     private void showInfoDialog(List<HashMap<String, Object>> params) {
         progress.setProgress(10);
 
-        if (params != null && !params.isEmpty() && params.size() > 0 && !params.get(0).containsKey("EMPTY_DATA")) {
-            CharSequence cs = new StringBuffer((String) params.get(0).get("NOTICE_TXT"));
-            int noticeId = Integer.parseInt((String) params.get(0).get("NOTICE_ID"));
+        CharSequence cs = new StringBuffer(getString(R.string.notice_text));
+        int noticeId = 1; // FIX
 
-            SharedPreferences prefx = this.getSharedPreferences("ld_dont_show", this.MODE_PRIVATE);
+        SharedPreferences prefx = this.getSharedPreferences("ld_dont_show", MODE_PRIVATE);
 
-            if (!prefx.getBoolean(String.valueOf(noticeId), false)) {
-                Dialog dlg = new LovelyInfoDialog(this)
-                        .setTopColorRes(R.color.indigo)
-                        .setIcon(R.drawable.ic_info_outline_white_36dp)
-                        .setInstanceStateHandler(1, saveStateHandler)
-                        .setNotShowAgainOptionEnabled(noticeId)
-                        .setNotShowAgainOptionChecked(true)
-                        .setTitle(R.string.info_title)
-                        .setMessage(cs)
-                        .show();
+        if (!prefx.getBoolean(String.valueOf(noticeId), false)) {
+            Dialog dlg = new LovelyInfoDialog(this)
+                    .setTopColorRes(R.color.indigo)
+                    .setIcon(R.drawable.ic_info_outline_white_36dp)
+                    .setInstanceStateHandler(1, saveStateHandler)
+                    .setNotShowAgainOptionEnabled(noticeId)
+                    .setNotShowAgainOptionChecked(true)
+                    .setTitle(R.string.info_title)
+                    .setMessage(cs)
+                    .show();
 
-                dlg.setOnDismissListener(dialog -> {
-                    initActivity();
-                });
-            } else {
+            dlg.setOnDismissListener(dialog -> {
                 initActivity();
-            }
+            });
         } else {
             initActivity();
         }
     }
+
+    /*
+        // NOTICE SKIP
+        private void showInfoDialog(List<HashMap<String, Object>> params) {
+            progress.setProgress(10);
+
+            if (params != null && !params.isEmpty() && params.size() > 0 && !params.get(0).containsKey("EMPTY_DATA")) {
+                CharSequence cs = new StringBuffer((String) params.get(0).get("NOTICE_TXT"));
+                int noticeId = Integer.parseInt((String) params.get(0).get("NOTICE_ID"));
+
+                SharedPreferences prefx = this.getSharedPreferences("ld_dont_show", this.MODE_PRIVATE);
+
+                if (!prefx.getBoolean(String.valueOf(noticeId), false)) {
+                    Dialog dlg = new LovelyInfoDialog(this)
+                            .setTopColorRes(R.color.indigo)
+                            .setIcon(R.drawable.ic_info_outline_white_36dp)
+                            .setInstanceStateHandler(1, saveStateHandler)
+                            .setNotShowAgainOptionEnabled(noticeId)
+                            .setNotShowAgainOptionChecked(true)
+                            .setTitle(R.string.info_title)
+                            .setMessage(cs)
+                            .show();
+
+                    dlg.setOnDismissListener(dialog -> {
+                        initActivity();
+                    });
+                } else {
+                    initActivity();
+                }
+            } else {
+                initActivity();
+            }
+        }
+    */
 
     /**
      * Lock 화면으로 이동 처리

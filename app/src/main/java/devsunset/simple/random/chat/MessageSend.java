@@ -5,17 +5,19 @@
  */
 package devsunset.simple.random.chat;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.github.angads25.toggle.interfaces.OnToggledListener;
-import com.github.angads25.toggle.model.ToggleableView;
-import com.github.angads25.toggle.widget.LabeledSwitch;
 import com.orhanobut.logger.Logger;
 import com.tfb.fbtoast.FBToast;
 
@@ -44,10 +46,9 @@ import retrofit2.Response;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-
 public class MessageSend extends Fragment {
 
-    HttpConnectService httpConnctService = null;
+    private HttpConnectService httpConnectService = null;
 
     @BindView(R.id.chat_message)
     EditText chat_message;
@@ -58,12 +59,15 @@ public class MessageSend extends Fragment {
     @BindView(R.id.toogleTargetCountry)
     SwitchMultiButton toogleTargetCountry;
 
-    @BindView(R.id.newMessageRecived)
-    LabeledSwitch switchNewMessageReceive;
+    // newInstance constructor for creating fragment with arguments
+    public static MessageSend newInstance() {
+        MessageSend fragment = new MessageSend();
+        return fragment;
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        httpConnctService = HttpConnectClient.getClient().create(HttpConnectService.class);
+        httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
     }
 
     @Override
@@ -90,12 +94,6 @@ public class MessageSend extends Fragment {
             toogleTargetCountry.setSelectedTab(1);
         }
 
-        if ("Y".equals(account.get("SET_NEW_RECEIVE_YN"))) {
-            switchNewMessageReceive.setOn(true);
-        } else {
-            switchNewMessageReceive.setOn(false);
-        }
-
         toogleTargetGender.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
             @Override
             public void onSwitch(int position, String tabText) {
@@ -110,12 +108,14 @@ public class MessageSend extends Fragment {
             }
         });
 
-        switchNewMessageReceive.setOnToggledListener(new OnToggledListener() {
+        chat_message.postDelayed(new Runnable() {
             @Override
-            public void onSwitched(ToggleableView toggleableView, boolean isOn) {
-                appInfoSetting();
+            public void run() {
+                chat_message.requestFocus();
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(chat_message,0);
             }
-        });
+        }, 300);
 
         return v;
     }
@@ -142,12 +142,6 @@ public class MessageSend extends Fragment {
             params.put("SET_SEND_COUNTRY", "W");
         }
 
-        if (switchNewMessageReceive.isOn()) {
-            params.put("SET_NEW_RECEIVE_YN", "Y");
-        } else {
-            params.put("SET_NEW_RECEIVE_YN", "N");
-        }
-
         AccountInfo.setAccountInfo(getContext(), params);
     }
 
@@ -157,20 +151,34 @@ public class MessageSend extends Fragment {
     @OnClick(R.id.btnMessageRandomSend)
     void onBtnMessageRandomSendClicked() {
 
+        SharedPreferences prefx = getActivity().getSharedPreferences("MESSAGE_SEND_PERIOD", getActivity().MODE_PRIVATE);
+
         String message = chat_message.getText().toString();
 
         if (chat_message.getText().toString().trim().length() == 0) {
-            FBToast.infoToast(getContext(), getString(R.string.sendinput), FBToast.LENGTH_SHORT);
+            FBToast.infoToast(getContext(), getString(R.string.send_input), FBToast.LENGTH_SHORT);
             return;
         } else {
-            FBToast.infoToast(getContext(), getString(R.string.sendresult), FBToast.LENGTH_SHORT);
+            FBToast.infoToast(getContext(), getString(R.string.send_result), FBToast.LENGTH_SHORT);
             chat_message.setText("");
         }
 
-        // 메세지 내용 최대 500자 제한
+        // 메시지 내용 최대 500자 제한
         if (message.length() >= 500) {
             message = message.substring(0, 500) + " ...";
         }
+
+        long lastTime = Long.parseLong(prefx.getString("LAST_SEND_TIME", "1234567890"));
+        long curTime = System.currentTimeMillis();
+        long diffTime = (curTime - lastTime) / (1000);
+        // 메시지 복사/붙이기로  호출 하는 내역 방지 -  (5초 내로 계속 보내면 SKIP 처리)
+        if (diffTime < 5) {
+            return;
+        }
+
+        SharedPreferences.Editor editor = prefx.edit();
+        editor.putString("LAST_SEND_TIME", curTime + "");
+        editor.apply();
 
         HashMap<String, String> account = AccountInfo.getAccountInfo(getContext());
         String ctm = System.currentTimeMillis() + "";
@@ -191,7 +199,7 @@ public class MessageSend extends Fragment {
         params.put("TALK_APP_ID", account.get("APP_ID"));
         params.putAll(account);
 
-        httpConnctService.sendMessage(params).enqueue(new Callback<DataVo>() {
+        httpConnectService.sendMessage(params).enqueue(new Callback<DataVo>() {
             @Override
             public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
                 if (response.isSuccessful()) {
