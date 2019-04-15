@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="app_name">Signal</string>
+    <string name="loading">Laden ...</string>
+    <string name="loading_wait">Laden ... Bitte warten.</string>
+    <string name="notice_text">Fordern Sie keine persönlichen Informationen vom Terminal an und speichern Sie sie nicht auf dem Server. \n\n\nUm die Sprach- und Bildübertragungsfunktion zu verwenden, Verarbeiten Sie es.</string>
+    <string name="app_message_send">Senden</string>
+    <string name="app_message_list">Liste</string>
+    <string name="app_message_setting">Einstellungen</string>
+    <string name="main_back_finish">\"Zurück\", um den Vorgang wieder zu beenden</string>
+    <string name="network_error">Netzwerkverbindung fehlgeschlagen</string>
+    <string name="verification_code_subtext">Geben Sie Ihr Kennwort für die Bildschirmsperre ein</string>
+    <string name="verification_code">Passwort</string>
+    <string name="info_title">Hinweis</string>
+    <string name="gender_choice_title">Wählen Sie das Geschlecht aus</string>
+    <string name="gender_choice_message">Bitte wählen Sie gender aus</string>
+    <string name="send">Senden</string>
+    <string name="send_input">Bitte geben Sie Ihre Nachricht ein</string>
+    <string name="send_result">Nachricht gesendet</string>
+    <string name="all">ALL</string>
+    <string name="man">Man</string>
+    <string name="woman">Frau</string>
+    <string name="local">Local</string>
+    <string name="world">World</string>
+    <string name="new_message_receive">Empfang einer neuen Nachricht</string>
+    <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
+    <string name="default_received_message">Ankunft der Nachricht</string>
+    <string name="alarm_title">Benachrichtigungsbenachrichtigungen festlegen</string>
+    <string name="alarm">Benachrichtigungstyp</string>
+    <string name="atype_msg">Benachrichtigung über Terminaleinstellungen und Popupbenachrichtigung</string>
+    <string name="btype_msg">Benachrichtigung beenden (stumm, ohne Vibration) + Popup-Benachrichtigung</string>
+    <string name="ctype_msg">Popup-Benachrichtigung</string>
+    <string name="dtype_msg">Keine Benachrichtigungen</string>
+    <string name="byconfirm_msg">Löschen, nicht fragen, ob sie ausgeblendet sind</string>
+    <string name="reply_new_message_hide_msg">Aus Liste der Antworten ausblenden</string>
+    <string name="lock_pwd_msg">Bildschirm sperren</string>
+    <string name="password_success">Das Passwort wurde erfolgreich festgelegt.</string>
+    <string name="password_fail">Passwörter stimmen nicht mit</string>überein
+    <string name="empty_message">Keine Antworten erhalten</string>
+    <string name="black_list_send">Bericht</string>
+    <string name="bye_send">Löschen</string>
+    <string name="hide">versteckt</string>
+    <string name="hide_message">Aus Liste der Nachrichten ausblenden</string>
+    <string name="hide_message_desc">Blendet die Nachrichtenliste aus. \nWenn Sie die Antwort erhalten, wird sie erneut in der Liste angezeigt.</string>
+    <string name="bye_message">Löschen von Nachrichten</string>
+    <string name="bye_message_desc">Löscht die Nachricht aus der Nachrichtenliste. \nEs handelt sich nicht um eine Datenwiederherstellung. Entscheiden Sie sich daher sorgfältig.</string>
+    <string name="black_list_message">Bericht</string>
+    <string name="black_list_message_desc">Wenn Sie uns Spam- und Sperrmeldungen senden, melden Sie dies bitte. \nDie Nachricht wird gelöscht, nachdem Sie sie gemeldet haben.</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="choose_file">Bitte wählen Sie eine Ihrer Sprach- oder Bilddateien aus.</string>
+    <string name="limit_file_size">Sprachdateien können nur an Dateien mit einer Größe von bis zu 1 MB angehängt werden.</string>
+    <string name="down_file_error">Die Daten wurden aufgrund des Ablaufs des gültigen Download-Zeitraums des Anhangs gelöscht.</string>
+    <string name="replay">Klicken Sie hier, um erneut zu hören</string>
+    <string name="faile_open_picture">Beim Import der Fotodatei ist ein Problem aufgetreten.</string>
+    <string name="choose_picture">Bitte wählen Sie ein Foto aus</string>
+    <string name="ads_noti_msg">Wenn Ihre Anzeigen fertig sind, können Sie die Funktion "Fotos und Sprachdateien senden" verwenden.</string>
+
+</resources>

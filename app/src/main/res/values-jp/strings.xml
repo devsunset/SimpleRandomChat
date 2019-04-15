@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="app_name">Signal</string>
+    <string name="loading">Loading ...</string>
+    <string name="loading_wait">Loading ...しばらくお待ちください。</string>
+    <string name="notice_text">端末の個人情報も要求したり、サーバーに保存されません。\n\n\n音声、画像転送機能の使用時にのみアクセス許可を要求確認後、ファイルを処理するための内部Storgeを使用した後、削除処理します。</string>
+    <string name="app_message_send">送信</string>
+    <string name="app_message_list">リスト</string>
+    <string name="app_message_setting">設定</string>
+    <string name="main_back_finish">\'戻る\'ボタンをもう一度押すと終了します</string>
+    <string name="network_error">ネットワーク接続に失敗しました</string>
+    <string name="verification_code_subtext">画面ロックのパスワードを入力してください</string>
+    <string name="verification_code">パスワード</string>
+    <string name="info_title">通知</string>
+    <string name="gender_choice_title">性別の選択</string>
+    <string name="gender_choice_message">性別を選択してください。</string>
+    <string name="send">送信</string>
+    <string name="send_input">メッセージを入力してください。</string>
+    <string name="send_result">メッセージを送った。</string>
+    <string name="all">ALL</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="local">Local</string>
+    <string name="world">World</string>
+    <string name="new_message_receive">新しいメッセージを受信</string>
+    <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
+    <string name="default_received_message">メッセージの到着</string>
+    <string name="alarm_title">メッセージを受信通知設定</string>
+    <string name="alarm">通知Type</string>
+    <string name="atype_msg">端末の設定の通知+ポップアップ通知</string>
+    <string name="btype_msg">端末の通知（無音、無振動）+ポップアップ通知</string>
+    <string name="ctype_msg">ポップアップ通知</string>
+    <string name="dtype_msg">通知なし</string>
+    <string name="byconfirm_msg">削除します。隠し時聞いていない</string>
+    <string name="reply_new_message_hide_msg">回答したメッセージ一覧に表示</string>
+    <string name="lock_pwd_msg">画面ロック</string>
+    <string name="password_success">パスワードが正常に設定されました。</string>
+    <string name="password_fail">パスワードが一致しません。</string>
+    <string name="empty_message">返信受信したメッセージがありません。</string>
+    <string name="black_list_send">申告</string>
+    <string name="bye_send">削除</string>
+    <string name="hide">非表示</string>
+    <string name="hide_message">メッセージ一覧に表示</string>
+    <string name="hide_message_desc">メッセージのリストから非表示処理をします。\n返事を受け取るリストに再び見えるようになります。</string>
+    <string name="bye_message">メッセージを削除する</string>
+    <string name="bye_message_desc">メッセージリストからメッセージを削除処理します。\nデータ復旧ができませんので慎重に決定します。</string>
+    <string name="black_list_message">を報告する</string>
+    <string name="black_list_message_desc">広告スパムと呼ば健全なメッセージを送ってきた場合、申告をお願いします。\n申告し、そのメッセージは削除処理されます。</string>
+    <string name="cancel">キャンセル</string>
+    <string name="choose_file">音声ファイルや画像ファイルの\n一本を選んでください。</string>
+    <string name="limit_file_size">音声ファイルは最大1M容量​​のファイルのみ添付できます。</string>
+    <string name="down_file_error">添付ファイルの有効ダウンロード期間が切れてデータが削除処理されました。</string>
+    <string name="replay">もう一度聞くにはクリックしてください。</string>
+    <string name="faile_open_picture">写真ファイルロード処理に問題が発生しました。</string>
+    <string name="choose_picture">写真を選択してください。</string>
+    <string name="ads_noti_msg">広告が終わると写真、音声ファイルの送信機能を使用することができます。</string>
+
+</resources>

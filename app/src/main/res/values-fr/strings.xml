@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="app_name">Signal</string>
+    <string name="loading">Chargement ...</string>
+    <string name="loading_wait">Chargement en cours ... Veuillez patienter.</string>
+    <string name="notice_text">Ne demandez aucune information personnelle au terminal et ne la stockez pas sur le serveur. \n\n\nPour utiliser les fonctions de transmission de la voix et de l\"image, Traitez-le.</string>
+    <string name="app_message_send">Soumettre</string>
+    <string name="app_message_list">Liste</string>
+    <string name="app_message_setting">Paramètres</string>
+    <string name="main_back_finish">Appuyez à nouveau sur le bouton Retour pour quitter</string>
+    <string name="network_error">La connexion réseau a échoué</string>
+    <string name="verification_code_subtext">Entrez votre mot de passe de verrouillage d\"écran</string>
+    <string name="verification_code">Mot de passe</string>
+    <string name="info_title">Avis</string>
+    <string name="gender_choice_title">Sélectionnez le sexe</string>
+    <string name="gender_choice_message">Veuillez sélectionner le sexe</string>
+    <string name="send">Envoyer</string>
+    <string name="send_input">Veuillez entrer votre message</string>
+    <string name="send_result">message envoyé</string>
+    <string name="all">ALL</string>
+    <string name="man">Man</string>
+    <string name="woman">Femme</string>
+    <string name="local">Local</string>
+    <string name="world">Monde</string>
+    <string name="new_message_receive">Réception d\"un nouveau message</string>
+    <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
+    <string name="default_received_message">Arrivée du message</string>
+    <string name="alarm_title">Définir les notifications de message</string>
+    <string name="alarm">Type de notification</string>
+    <string name="atype_msg">Notification de préférence du terminal + notification Popup</string>
+    <string name="btype_msg">Notification de fin (silencieuse, non vibratoire) + notification contextuelle</string>
+    <string name="ctype_msg">Notification contextuelle</string>
+    <string name="dtype_msg">Pas de notifications</string>
+    <string name="byconfirm_msg">Supprimer, ne pas demander masqué</string>
+    <string name="reply_new_message_hide_msg">Masquer de la liste des réponses</string>
+    <string name="lock_pwd_msg">Écran verrouillé</string>
+    <string name="password_success">Le mot de passe a été défini avec succès.</string>
+    <string name="password_fail">Les mots de passe ne correspondent pas</string>
+    <string name="empty_message">Aucune réponse reçue</string>
+    <string name="black_list_send">Rapport</string>
+    <string name="bye_send">Supprimer</string>
+    <string name="hide">caché</string>
+    <string name="hide_message">Masquer de la liste de messages</string>
+    <string name="hide_message_desc">Masque la liste des messages. \nLorsque vous recevez la réponse, elle apparaît à nouveau dans la liste.</string>
+    <string name="bye_message">Suppression de messages</string>
+    <string name="bye_message_desc">Supprime le message de la liste des messages. \nIl ne s\"agit pas d\"une récupération de données, décidez-vous donc avec soin.</string>
+    <string name="black_list_message">Rapport</string>
+    <string name="black_list_message_desc">Si vous nous envoyez du spam et des messages volumineux, signalez-le. \nLe message sera supprimé après l\"avoir signalé.</string>
+    <string name="cancel">Annuler</string>
+    <string name="choose_file">Veuillez sélectionner l\"un de vos fichiers audio ou image.</string>
+    <string name="limit_file_size">Les fichiers vocaux ne peuvent être attachés qu\"à des fichiers d\"une taille maximale de 1M.</string>
+    <string name="down_file_error">Les données ont été supprimées en raison de l\"expiration de la période de téléchargement valide de la pièce jointe</string>
+    <string name="replay">Cliquez pour entendre à nouveau</string>
+    <string name="faile_open_picture">Un problème est survenu lors de l\"importation du fichier photo</string>
+    <string name="choose_picture">Veuillez sélectionner une photo</string>
+    <string name="ads_noti_msg">Lorsque vos annonces sont terminées, vous pouvez utiliser la fonctionnalité Envoyer des photos et des fichiers vocaux.</string>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <!-- ========================================== -->
+    <!-- array_item -->
+    <!-- ========================================== -->
+
+    <string-array name="gender">
+        <item>Man%M</item>
+        <item>Woman%W</item>
+    </string-array>
+
+</resources>
