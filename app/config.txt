@@ -454,7 +454,7 @@
 }
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_list.xml:9
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:77
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:83
 -keep class android.support.v7.widget.RecyclerView {
     <init>(android.content.Context,android.util.AttributeSet);
 }

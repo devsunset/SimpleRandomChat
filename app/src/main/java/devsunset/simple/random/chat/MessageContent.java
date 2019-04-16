@@ -31,6 +31,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
 
 /**
@@ -107,6 +108,11 @@ public class MessageContent extends FragmentActivity {
 				} else {
 					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+				}
+
+				if (position == 1) {
+					//EventBus Call
+					BusProvider.getInstance().post("LIST_REFRESH");
 				}
 			}
 

@@ -89,7 +89,7 @@ public class MessageList extends Fragment {
 	 * 메시지 Main 목록 조회
 	 * @param talkAppId
 	 */
-	private void getDatabase(String talkAppId) {
+	public void getDatabase(String talkAppId) {
 		class GetTasks extends AsyncTask<Void, Void, List<AppTalkMain>> {
 
 			@Override
