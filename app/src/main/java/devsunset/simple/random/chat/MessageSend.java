@@ -10,16 +10,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
-import com.tfb.fbtoast.FBToast;
+
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -158,10 +157,10 @@ public class MessageSend extends Fragment {
         String message = chat_message.getText().toString();
 
         if (chat_message.getText().toString().trim().length() == 0) {
-            FBToast.infoToast(getContext(), getString(R.string.send_input), FBToast.LENGTH_SHORT);
+            Toast.makeText(getContext(), getString(R.string.send_input), Toast.LENGTH_SHORT).show();
             return;
         } else {
-            FBToast.infoToast(getContext(), getString(R.string.send_result), FBToast.LENGTH_SHORT);
+            Toast.makeText(getContext(), getString(R.string.send_result), Toast.LENGTH_SHORT).show();
             chat_message.setText("");
         }
 

@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
@@ -32,7 +33,6 @@ import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
 import com.squareup.otto.Subscribe;
-import com.tfb.fbtoast.FBToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class ChatActivity extends Activity {
     private HttpConnectService httpConnectService = null;
 
     @BindView(R.id.btnBlackListSend)
-    Button btnBlackListSend;
+    TextView btnBlackListSend;
 
     @BindView(R.id.btnHide)
     TextView btnHide;
@@ -163,7 +163,6 @@ public class ChatActivity extends Activity {
                 ArrayList<MessageItem> messageArrayList = new ArrayList<MessageItem>();
                 if (appTalkThread != null && !appTalkThread.isEmpty()) {
                     for (int i = 0; i < appTalkThread.size(); i++) {
-
                         MessageItem mi = new MessageItem();
                         // ATX_ID
                         mi.setATX_ID(appTalkThread.get(i).getATX_ID());
@@ -181,7 +180,7 @@ public class ChatActivity extends Activity {
                         mi.setTALK_TYPE((appTalkThread.get(i).getTALK_TYPE()));
                         // TALK_TARGET
                         if (APP_ID.equals(appTalkThread.get(i).getTALK_APP_ID())) {
-                            mi.setTALK_TARGET("You");
+                            mi.setTALK_TARGET("Me");
                         } else {
                             mi.setTALK_TARGET("");
                         }
@@ -191,9 +190,17 @@ public class ChatActivity extends Activity {
                         mi.setATX_LOCAL_TIME(str);
                         // icon
                         if ("M".equals(appTalkThread.get(i).getTALK_GENDER())) {
-                            mi.setDrawableId(R.drawable.man);
+                            if (APP_ID.equals(appTalkThread.get(i).getTALK_APP_ID())) {
+                                mi.setDrawableId(R.drawable.man_me);
+                            } else {
+                                mi.setDrawableId(R.drawable.man);
+                            }
                         } else {
-                            mi.setDrawableId(R.drawable.woman);
+                            if (APP_ID.equals(appTalkThread.get(i).getTALK_APP_ID())) {
+                                mi.setDrawableId(R.drawable.woman_me);
+                            } else {
+                                mi.setDrawableId(R.drawable.woman);
+                            }
                         }
                         messageArrayList.add(mi);
                     }
@@ -512,7 +519,7 @@ public class ChatActivity extends Activity {
         String message = reply_message.getText().toString();
 
         if (reply_message.getText().toString().trim().length() == 0) {
-            FBToast.infoToast(this, getString(R.string.send_input), FBToast.LENGTH_SHORT);
+            Toast.makeText(this, getString(R.string.send_input), Toast.LENGTH_SHORT).show();
             return;
         } else {
             reply_message.setText("");
@@ -580,7 +587,7 @@ public class ChatActivity extends Activity {
                             EXECUTE_ACTION = false;
                             hud.dismiss();
                             Logger.e("replyMessage Fail");
-                            FBToast.errorToast(getApplicationContext(), getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), getString(R.string.network_error), Toast.LENGTH_SHORT).show();
 //                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 //                            inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                             finish();
@@ -594,7 +601,7 @@ public class ChatActivity extends Activity {
                 EXECUTE_ACTION = false;
                 hud.dismiss();
                 Logger.e("replyMessage Error : " + t.getMessage());
-                FBToast.errorToast(getApplicationContext(), getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                 finish();
@@ -634,7 +641,7 @@ public class ChatActivity extends Activity {
             protected void onPostExecute(Void aVoid) {
                 EXECUTE_ACTION = false;
                 hud.dismiss();
-                FBToast.infoToast(getApplicationContext(), getString(R.string.send_result), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.send_result), Toast.LENGTH_SHORT).show();
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(reply_message.getWindowToken(), 0);
                 finish();

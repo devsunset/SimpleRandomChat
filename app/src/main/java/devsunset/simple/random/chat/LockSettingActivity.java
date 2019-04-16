@@ -10,10 +10,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.goodiebag.pinview.Pinview;
-import com.tfb.fbtoast.FBToast;
-
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -81,13 +80,13 @@ public class LockSettingActivity extends Activity  {
                     params.put("SET_LOCK_YN","Y");
                     params.put("SET_LOCK_PWD",passwordConfirm);
                     AccountInfo.setAccountInfo(getApplicationContext(),params);
-                    FBToast.successToast(getApplicationContext(),getString(R.string.password_success),FBToast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), getString(R.string.password_success), Toast.LENGTH_SHORT).show();
                     finish();
                 }else{
                     params.put("SET_LOCK_YN","N");
                     params.put("SET_LOCK_PWD","-");
                     AccountInfo.setAccountInfo(getApplicationContext(),params);
-                    FBToast.errorToast(getApplicationContext(),getString(R.string.password_fail),FBToast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),getString(R.string.password_fail),Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

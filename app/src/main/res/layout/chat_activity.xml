@@ -34,19 +34,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
+        <TextView
             android:id="@+id/btnBlackListSend"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_selector_common"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/black_list_send"
-            android:visibility="gone" />
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/btnByeSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/bye_send"
             android:textColor="@color/white"
@@ -57,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/hide"
             android:textColor="@color/white"

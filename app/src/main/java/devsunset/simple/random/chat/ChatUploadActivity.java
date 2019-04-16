@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -33,7 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.logger.Logger;
-import com.tfb.fbtoast.FBToast;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -167,7 +168,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     public void onRewardedVideoAdClosed() {
         //Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
         if(uploadbuttonarea.getVisibility() == View.GONE){
-            FBToast.successToast(getApplicationContext(), getString(R.string.ads_noti_msg), FBToast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), getString(R.string.ads_noti_msg), Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -283,7 +284,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             if (data == null) {
                 clearImage();
-                FBToast.errorToast(getApplicationContext(), getString(R.string.faile_open_picture), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.faile_open_picture), Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
@@ -293,7 +294,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             } catch (IOException e) {
                 clearImage();
                 Logger.e("IOException : " + e.getMessage());
-                FBToast.errorToast(getApplicationContext(), getString(R.string.faile_open_picture), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.faile_open_picture), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -304,7 +305,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     private void customCompressImage() {
         if (actualImage == null) {
             clearImage();
-            FBToast.infoToast(getApplicationContext(), getString(R.string.choose_picture), FBToast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), getString(R.string.choose_picture), Toast.LENGTH_SHORT).show();
         } else {
             // Compress image in main thread using custom Compressor
             try {
@@ -325,7 +326,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
             } catch (IOException e) {
                 Logger.e("IOException : " + e.getMessage());
-                FBToast.errorToast(getApplicationContext(), getString(R.string.faile_open_picture), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.faile_open_picture), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -388,7 +389,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
         // 파일 선택 여부 체크
         if("Audio File Size : 0 B".equals(tv_audio_desc.getText().toString()) && "Image File Size : 0 B".equals(compressedSizeTextView.getText().toString())){
-            FBToast.infoToast(getApplicationContext(), getString(R.string.choose_file), FBToast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), getString(R.string.choose_file), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -410,7 +411,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         if(audioCheck){
             String tmp = tv_audio_desc.getText().toString();
            if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB") ){
-                    FBToast.errorToast(getApplicationContext(), getString(R.string.limit_file_size), FBToast.LENGTH_SHORT);
+               Toast.makeText(getApplicationContext(), getString(R.string.limit_file_size), Toast.LENGTH_SHORT).show();
                     return;
            }
             UPLOAD_FILE_NAME = AUDIO_FILE_NAME;
@@ -418,13 +419,13 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             //image size check skips
             //String tmp = compressedSizeTextView.getText().toString();
             //if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB")){
-            //    FBToast.errorToast(getApplicationContext(), getString(R.string.limitfilesize), FBToast.LENGTH_SHORT);
+            //    Toast.makeText(getApplicationContext(), getString(R.string.limitfilesize), Toast.LENGTH_SHORT).show();
             //    return;
             //}
             UPLOAD_FILE_NAME = IMAGE_FILE_NAME;
         }
 
-        //FBToast.infoToast(getApplicationContext(), " EXECUTE_ACTION : "+EXECUTE_ACTION, FBToast.LENGTH_SHORT);
+        //Toast.makeText(getApplicationContext(), " EXECUTE_ACTION : "+EXECUTE_ACTION, Toast.LENGTH_SHORT).show();
 
         if(EXECUTE_ACTION){
             return;
@@ -457,7 +458,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             public void onFailure(@NonNull Exception exception) {
                 EXECUTE_ACTION = false;
                 hud.dismiss();
-                FBToast.errorToast(getApplicationContext(), getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.network_error), Toast.LENGTH_SHORT).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

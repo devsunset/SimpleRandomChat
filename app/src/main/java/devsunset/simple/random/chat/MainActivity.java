@@ -17,10 +17,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.logger.Logger;
-import com.tfb.fbtoast.FBToast;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 import com.yarolegovich.lovelydialog.LovelySaveStateHandler;
@@ -165,7 +164,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
         dlg.setOnDismissListener(dialog -> {
             if (INIT_CHECK == 0) {
-                FBToast.infoToast(MainActivity.this, getString(R.string.gender_choice_message), FBToast.LENGTH_SHORT);
+                Toast.makeText(MainActivity.this, getString(R.string.gender_choice_message), Toast.LENGTH_SHORT).show();
                 showGenderChoiceDialog();
             }
         });
@@ -219,13 +218,13 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                             getNoticeProcess();
                         } else {
                             Logger.e("appInfoInit Fail : " + data.getRESULT_MESSAGE());
-                            FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                            Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                 } else {
                     Logger.e("appInfoInit Fail : " + response.isSuccessful());
-                    FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 progress.setProgress(4);
@@ -234,7 +233,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 Logger.e("appInfoInit Error : " + t.getMessage());
-                FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -272,7 +271,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                             showInfoDialog(null);
                         }
                     } else {
-                        FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                        Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
@@ -280,7 +279,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 @Override
                 public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                     Logger.e("getNoticeProcess Error : " + t.getMessage());
-                    FBToast.infoToast(MainActivity.this, getString(R.string.network_error), FBToast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });

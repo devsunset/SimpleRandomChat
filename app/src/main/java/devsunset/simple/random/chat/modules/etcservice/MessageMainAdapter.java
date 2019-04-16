@@ -79,7 +79,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if(target !=null  && !"".equals(target)){
                 target = " - Me";
             }
-            myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
+            myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME());
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());
         }
 
@@ -107,7 +107,11 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.newmessage_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.man){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.man_bg);
+        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.man_me){
+            myViewHolder.list_item_rows.setBackgroundResource(R.drawable.man_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman){
+            myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
+        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman_me){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.trash){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.delete_bg);

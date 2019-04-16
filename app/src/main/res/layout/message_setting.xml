@@ -73,7 +73,7 @@
                         app:disableColor="@color/white"
                         app:selectedColor="#636EFF"
                         app:strokeRadius="0dp"
-                        app:strokeWidth="0dp"
+                        app:strokeWidth="1dp"
                         app:textSize="18dp" />
 
                 </LinearLayout>
@@ -603,8 +603,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="Open Source Licenses"
-                        android:textSize="8pt"
-                        android:textStyle="bold" />
+                        android:textSize="8pt"/>
 
                     <View
                         android:layout_width="0dp"
@@ -664,8 +663,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="Developed  by devsunset - Design by Happy jin"
-                        android:textSize="8pt"
-                        android:textStyle="bold" />
+                        android:textSize="6pt"/>
 
                     <View
                         android:layout_width="0dp"

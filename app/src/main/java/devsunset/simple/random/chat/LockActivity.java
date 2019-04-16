@@ -10,9 +10,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.goodiebag.pinview.Pinview;
-import com.tfb.fbtoast.FBToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,7 +65,7 @@ public class LockActivity extends Activity{
                 if((AccountInfo.getAccountInfo(getApplicationContext()).get("SET_LOCK_PWD")+"").equals(pinviewValue.getValue())){
                     goNextIntent();
                 }else{
-                    FBToast.infoToast(LockActivity.this,"Auth Fail",FBToast.LENGTH_SHORT);
+                    Toast.makeText(LockActivity.this,"Auth Fail",Toast.LENGTH_SHORT).show();
                     Intent intent = getIntent();
                     intent.putExtra("PUSH_CALL_FLAG",PUSH_CALL_FLAG);
                     finish();

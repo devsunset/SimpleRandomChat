@@ -106,7 +106,6 @@ public class MessageList extends Fragment {
 				ArrayList<MessageItem> messageArrayList = new ArrayList<MessageItem>();
 				if(appTalkMain !=null && !appTalkMain.isEmpty()){
 					for(int i=0;i<appTalkMain.size();i++){
-
 						MessageItem mi = new MessageItem();
 						// ATX_ID
 						mi.setATX_ID(appTalkMain.get(i).getATX_ID());
@@ -143,15 +142,31 @@ public class MessageList extends Fragment {
 						}else{
 							if(appTalkMain.get(i).getTALK_APP_ID().equals(appTalkMain.get(i).getFROM_APP_ID())){
 								if("M".equals(appTalkMain.get(i).getFROM_GENDER())){
-									mi.setDrawableId(R.drawable.man);
+									if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
+										mi.setDrawableId(R.drawable.man_me);
+									}else{
+										mi.setDrawableId(R.drawable.man);
+									}
 								}else{
-									mi.setDrawableId(R.drawable.woman);
+									if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
+										mi.setDrawableId(R.drawable.woman_me);
+									}else{
+										mi.setDrawableId(R.drawable.woman);
+									}
 								}
 							}else{
 								if("M".equals(appTalkMain.get(i).getTO_GENDER())){
-									mi.setDrawableId(R.drawable.man);
+									if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
+										mi.setDrawableId(R.drawable.man_me);
+									}else{
+										mi.setDrawableId(R.drawable.man);
+									}
 								}else{
-									mi.setDrawableId(R.drawable.woman);
+									if(APP_ID.equals(appTalkMain.get(i).getTALK_APP_ID())){
+										mi.setDrawableId(R.drawable.woman_me);
+									}else{
+										mi.setDrawableId(R.drawable.woman);
+									}
 								}
 							}
 						}

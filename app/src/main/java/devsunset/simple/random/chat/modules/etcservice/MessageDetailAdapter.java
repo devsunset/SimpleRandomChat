@@ -16,8 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.tfb.fbtoast.FBToast;
 
 import java.util.ArrayList;
 
@@ -84,7 +84,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             if(target !=null  && !"".equals(target)){
                 target = " - Me";
             }
-            myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME()+target);
+            myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME());
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());
 
             if(MY_LANG.equals(MessageItemArrayList.get(position).getTALK_LANG())){
@@ -110,7 +110,11 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.newmessage_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.man){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.man_bg);
+        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.man_me){
+            myViewHolder.list_item_rows.setBackgroundResource(R.drawable.man_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman){
+            myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
+        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman_me){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.trash){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.delete_bg);
@@ -124,11 +128,11 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
                     if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
                         if(!MY_LANG.equals(MessageItemArrayList.get(position).getTALK_LANG())){
                             String value = MessageItemArrayList.get(position).getTALK_TEXT();
-                        /*
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value)));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        context.startActivity(intent);
-                        */
+                            /*
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value)));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            context.startActivity(intent);
+                            */
                             Intent intent = new Intent(context, WebViewActivity.class);
                             intent.putExtra("URL_ADDRESS","https://translate.google.com/#view=home&op=translate&sl="+MessageItemArrayList.get(position).getTALK_LANG()+"&tl="+MY_LANG+"&text="+Uri.encode(value));
                             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -156,7 +160,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
                             long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
 
                             if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
-                                FBToast.infoToast(context,context.getApplicationContext().getResources().getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                                Toast.makeText(context,context.getApplicationContext().getResources().getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                             }else{
                                 Intent intent = new Intent(context, ChatDownloadActivity.class);
                                 intent.putExtra("TALK_TYPE",MessageItemArrayList.get(position).getTALK_TYPE());

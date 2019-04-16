@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,7 +35,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
-import com.tfb.fbtoast.FBToast;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -191,7 +192,7 @@ public class ChatDownloadActivity extends Activity {
         if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
             hud.dismiss();
             loadingText.setVisibility(View.GONE);
-            FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
         }else{
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference gsReference = storage.getReferenceFromUrl("gs://src-server.appspot.com/"+destSource);
@@ -210,7 +211,7 @@ public class ChatDownloadActivity extends Activity {
                                 playArea.setVisibility(View.VISIBLE);
                                 onBtnAudioClicked();
                             }catch(Exception e) {
-                                FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                                Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -218,13 +219,13 @@ public class ChatDownloadActivity extends Activity {
                         public void onFailure(@NonNull Exception exception) {
                             hud.dismiss();
                             loadingText.setVisibility(View.GONE);
-                            FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 }catch(Exception e){
                     loadingText.setVisibility(View.GONE);
-                    FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                 }
             }else{
                 final long ONE_MEGABYTE = 1024 * 1024;
@@ -243,7 +244,7 @@ public class ChatDownloadActivity extends Activity {
                     public void onFailure(@NonNull Exception exception) {
                         hud.dismiss();
                         loadingText.setVisibility(View.GONE);
-                        FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                        Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -288,7 +289,7 @@ public class ChatDownloadActivity extends Activity {
                 seekbar.setProgress((int)startTime);
                 myHandler.postDelayed(UpdateSongTime,100);
             }catch(Exception e) {
-                FBToast.infoToast(getApplicationContext(), getString(R.string.down_file_error), FBToast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
             }
         }
     }
