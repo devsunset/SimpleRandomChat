@@ -5,12 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="3dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingBottom="6dp"
+            android:text="@string/alarm_title"
+            android:textSize="8pt"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +29,7 @@
             android:baselineAligned="false"
             android:orientation="horizontal" />
 
-        <!-- 0 Row  Title-->
+        <!--1 Notification-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,8 +45,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -48,76 +57,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/install_header"
-                    android:gravity="left"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/textbox_horizontal_margin"
-                    android:paddingRight="@dimen/textbox_horizontal_margin">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingStart="5dp"
-                        android:text="@string/alarm_title"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- 1 Row  ALARM-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_table_line"
-            android:orientation="vertical"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#f2f2f2"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/textbox_horizontal_margin"
-                        android:background="#f2f2f2"
-                        android:gravity="center"
-                        android:text="@string/alarm"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/common_table_line"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
                     android:background="#ffffff"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
@@ -127,19 +68,19 @@
                         android:layout_width="250dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
-                        android:background="@color/light_gray"
+                        android:background="@color/white"
                         android:padding="4dp"
                         app:disableColor="@color/white"
-                        app:selectedColor="#ff0099cc"
+                        app:selectedColor="#636EFF"
                         app:strokeRadius="0dp"
                         app:strokeWidth="0dp"
-                        app:textSize="14sp" />
+                        app:textSize="18dp" />
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 2 Row  A Type -->
+        <!-- 2 A Type -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,276 +96,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#f2f2f2"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/textbox_horizontal_margin"
-                        android:background="#f2f2f2"
-                        android:gravity="center"
-                        android:text="A Type"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/common_table_line"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:background="#ffffff"
-                    android:gravity="left"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/textbox_horizontal_margin"
-                    android:paddingRight="@dimen/textbox_horizontal_margin">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/atype_msg"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- 3 Row  B Type-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_table_line"
-            android:orientation="vertical"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#f2f2f2"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/textbox_horizontal_margin"
-                        android:background="#f2f2f2"
-                        android:gravity="center"
-                        android:text="B Type"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/common_table_line"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:background="#ffffff"
-                    android:gravity="left"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/textbox_horizontal_margin"
-                    android:paddingRight="@dimen/textbox_horizontal_margin">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/btype_msg"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- 4 Row  C Type-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_table_line"
-            android:orientation="vertical"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#f2f2f2"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/textbox_horizontal_margin"
-                        android:background="#f2f2f2"
-                        android:gravity="center"
-                        android:text="C Type"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/common_table_line"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:background="#ffffff"
-                    android:gravity="left"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/textbox_horizontal_margin"
-                    android:paddingRight="@dimen/textbox_horizontal_margin">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/ctype_msg"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- 5 Row  D Type-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_table_line"
-            android:orientation="vertical"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#f2f2f2"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/textbox_horizontal_margin"
-                        android:background="#f2f2f2"
-                        android:gravity="center"
-                        android:text="D Type"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/common_table_line"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:background="#ffffff"
-                    android:gravity="left"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/textbox_horizontal_margin"
-                    android:paddingRight="@dimen/textbox_horizontal_margin">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/dtype_msg"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- 6 Row bye confirm -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_table_line"
-            android:orientation="vertical"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:paddingBottom="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:gravity="center_vertical"
-                android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -442,15 +114,241 @@
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
 
-                    <com.github.angads25.toggle.widget.LabeledSwitch
-                        android:id="@+id/newMessageRecived"
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="14sp"
-                        app:colorBorder="#00c4a6"
-                        app:colorOn="#00c4a6"
-                        app:on="false" />
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="A Type"
+                        android:textSize="8pt" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/atype_msg"
+                        android:textSize="8pt" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 3 B Type -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_table_line"
+            android:orientation="vertical"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/table_row_height"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/common_table_line"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/textbox_horizontal_margin"
+                    android:paddingRight="@dimen/textbox_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="B Type"
+                        android:textSize="8pt" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/btype_msg"
+                        android:textSize="8pt" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 4 C Type -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_table_line"
+            android:orientation="vertical"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/table_row_height"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/common_table_line"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/textbox_horizontal_margin"
+                    android:paddingRight="@dimen/textbox_horizontal_margin">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="C Type"
+                        android:textSize="8pt" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/ctype_msg"
+                        android:textSize="8pt" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 5 D Type-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_table_line"
+            android:orientation="vertical"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/table_row_height"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/common_table_line"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/textbox_horizontal_margin"
+                    android:paddingRight="@dimen/textbox_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="D Type"
+                        android:textSize="8pt" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/dtype_msg"
+                        android:textSize="8pt" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 6 New Message -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_table_line"
+            android:orientation="vertical"
+            android:paddingLeft="2dp"
+            android:paddingTop="5dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/table_row_height"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/common_table_line"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/textbox_horizontal_margin"
+                    android:paddingRight="@dimen/textbox_horizontal_margin">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -458,7 +356,22 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/new_message_receive"
-                        android:textStyle="bold" />
+                        android:textSize="8pt" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.github.angads25.toggle.widget.LabeledSwitch
+                        android:id="@+id/newMessageRecived"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="16dp"
+                        app:colorBorder="#636EFF"
+                        app:colorOn="#636EFF"
+                        app:on="false" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -480,8 +393,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -499,23 +411,29 @@
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
 
-                    <com.github.angads25.toggle.widget.LabeledSwitch
-                        android:id="@+id/byeconfirm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="14sp"
-                        app:colorBorder="#00c4a6"
-                        app:colorOn="#00c4a6"
-                        app:on="false" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/byconfirm_msg"
-                        android:textStyle="bold" />
+                        android:textSize="8pt" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.github.angads25.toggle.widget.LabeledSwitch
+                        android:id="@+id/byeconfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="16dp"
+                        app:colorBorder="#636EFF"
+                        app:colorOn="#636EFF"
+                        app:on="false" />
+
 
                 </LinearLayout>
             </LinearLayout>
@@ -537,8 +455,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -556,23 +473,29 @@
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
 
-                    <com.github.angads25.toggle.widget.LabeledSwitch
-                        android:id="@+id/replymessagehide"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="14sp"
-                        app:colorBorder="#00c4a6"
-                        app:colorOn="#00c4a6"
-                        app:on="false" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/reply_new_message_hide_msg"
-                        android:textStyle="bold" />
+                        android:textSize="8pt" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.github.angads25.toggle.widget.LabeledSwitch
+                        android:id="@+id/replymessagehide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="16dp"
+                        app:colorBorder="#636EFF"
+                        app:colorOn="#636EFF"
+                        app:on="false" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -594,8 +517,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -613,15 +535,6 @@
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
 
-                    <com.github.angads25.toggle.widget.LabeledSwitch
-                        android:id="@+id/lockPwd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="14sp"
-                        app:colorBorder="#00c4a6"
-                        app:colorOn="#00c4a6"
-                        app:on="false" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -629,13 +542,28 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/lock_pwd_msg"
-                        android:textStyle="bold" />
+                        android:textSize="8pt" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <com.github.angads25.toggle.widget.LabeledSwitch
+                        android:id="@+id/lockPwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="16dp"
+                        app:colorBorder="#636EFF"
+                        app:colorOn="#636EFF"
+                        app:on="false" />
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 10 Row password -->
+        <!-- 10 Row License -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -651,8 +579,7 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/table_row_height"
-                android:orientation="horizontal"
-                android:weightSum="10">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="1dp"
@@ -670,23 +597,80 @@
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
 
-                    <Button
-                        android:id="@+id/btnLicense"
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/btn_selector_common"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="   SIMPLE Licenses   " />
+                        android:paddingStart="5dp"
+                        android:text="Open Source Licenses"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                     <Button
                         android:id="@+id/btnLicenseGoogle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/btn_selector_common"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="   ALL Licenses   " />
+                        android:text=">"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- 11 Row  write -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_table_line"
+            android:orientation="vertical"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/table_row_height"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/common_table_line"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/textbox_horizontal_margin"
+                    android:paddingRight="@dimen/textbox_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="Developed  by devsunset - Design by Happy jin"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                 </LinearLayout>
             </LinearLayout>

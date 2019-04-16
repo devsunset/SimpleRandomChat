@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -74,6 +75,10 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         //screen capture disable
         if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
         }
 
         httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
@@ -150,10 +155,10 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     private void showGenderChoiceDialog() {
         ArrayAdapter<GenderOption> adapter = new GenderAdapter(this, loadGenderOptions());
         Dialog dlg = new LovelyChoiceDialog(this)
-                .setTopColorRes(R.color.darkGreen)
+                .setTopColorRes(R.color.baseColor)
                 .setTitle(R.string.gender_choice_title)
                 .setInstanceStateHandler(2, saveStateHandler)
-                .setIcon(R.drawable.ic_assignment_white_36dp)
+                .setIcon(R.drawable.welcome)
                 .setMessage(R.string.gender_choice_message)
                 .setItems(adapter, (position, item) -> setAppInitProcess(item.gender_value))
                 .show();
@@ -248,7 +253,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         long curTime = System.currentTimeMillis();
         long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
 
-        if (diffTime > Consts.APP_ACCESS_PERIOD) {
+        if (true || diffTime > Consts.APP_ACCESS_PERIOD) {
 
             dataClean();
 
@@ -326,8 +331,8 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
         if (!prefx.getBoolean(String.valueOf(noticeId), false)) {
             Dialog dlg = new LovelyInfoDialog(this)
-                    .setTopColorRes(R.color.indigo)
-                    .setIcon(R.drawable.ic_info_outline_white_36dp)
+                    .setTopColorRes(R.color.baseColor)
+                    .setIcon(R.drawable.welcome)
                     .setInstanceStateHandler(1, saveStateHandler)
                     .setNotShowAgainOptionEnabled(noticeId)
                     .setNotShowAgainOptionChecked(true)

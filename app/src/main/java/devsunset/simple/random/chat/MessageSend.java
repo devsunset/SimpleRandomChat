@@ -75,8 +75,10 @@ public class MessageSend extends Fragment {
         View v = inflater.inflate(R.layout.message_send, container, false);
         ButterKnife.bind(this, v);
 
-        toogleTargetGender.setText(getString(R.string.all),getString(R.string.man),getString(R.string.woman));
-        toogleTargetCountry.setText(getString(R.string.local),getString(R.string.world));
+        //toogleTargetGender.setText(getString(R.string.all),getString(R.string.man),getString(R.string.woman));
+        //toogleTargetCountry.setText(getString(R.string.local),getString(R.string.world));
+        toogleTargetGender.setText("ALL","Man","Woman");
+        toogleTargetCountry.setText("Local","World");
 
         HashMap<String, String> account = AccountInfo.getAccountInfo(getContext());
 

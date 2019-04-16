@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -118,6 +119,10 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         //screen capture disable
         if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
         }
 
         httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
@@ -376,11 +381,6 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
                 files[i].delete();
             }
         }
-    }
-
-    @OnClick(R.id.btnCancel)
-    void onBtnCancelClicked() {
-            finish();
     }
 
     @OnClick(R.id.btnReplyAudioImageMessageSend)

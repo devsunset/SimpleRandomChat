@@ -7,6 +7,7 @@ package devsunset.simple.random.chat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebSettings;
@@ -41,6 +42,11 @@ public class WebViewActivity extends Activity{
         if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
+
         mWebView = findViewById(R.id.webview_area);
         mWebView.setWebViewClient(new WebViewClient());
         mWebSettings = mWebView.getSettings();

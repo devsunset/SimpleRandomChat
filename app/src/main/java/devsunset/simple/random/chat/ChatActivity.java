@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
@@ -74,7 +76,7 @@ public class ChatActivity extends Activity {
     Button btnBlackListSend;
 
     @BindView(R.id.btnHide)
-    Button btnHide;
+    TextView btnHide;
 
     @BindView(R.id.replyArea)
     LinearLayout replyArea;
@@ -109,6 +111,10 @@ public class ChatActivity extends Activity {
         //screen capture disable
         if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
         }
 
         //Event Bus 등록
@@ -238,11 +244,11 @@ public class ChatActivity extends Activity {
     @OnClick(R.id.btnBlackListSend)
     void onBtnBlackListClicked() {
         dialogBuilder.withTitle(getString(R.string.black_list_message))
-                .withTitleColor("#FFFFFF")                                  
-                .withDividerColor("#11000000")                              
+                .withTitleColor("#636EFF")
+                .withDividerColor("#FFFFFF")
                 .withMessage(getString(R.string.black_list_message_desc))
-                .withMessageColor("#FFFFFFFF")
-                .withDialogColor("#3F51B5")
+                .withMessageColor("#000000")
+                .withDialogColor("#FFFFFF")
                 .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                 .withDuration(700)
                 .withEffect(Effectstype.Slidetop)
@@ -338,11 +344,11 @@ public class ChatActivity extends Activity {
             byeSendProcess();
         }else{
             dialogBuilder.withTitle(getString(R.string.bye_message))
-                    .withTitleColor("#FFFFFF")
-                    .withDividerColor("#11000000")
+                    .withTitleColor("#636EFF")
+                    .withDividerColor("#FFFFFF")
                     .withMessage(getString(R.string.bye_message_desc))
-                    .withMessageColor("#FFFFFFFF")
-                    .withDialogColor("#3F51B5")
+                    .withMessageColor("#000000")
+                    .withDialogColor("#FFFFFF")
                     .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                     .withDuration(500)
                     .withEffect(Effectstype.Slidetop)
@@ -438,11 +444,11 @@ public class ChatActivity extends Activity {
             hideProcess();
         }else{
             dialogBuilder.withTitle(getString(R.string.hide_message))
-                    .withTitleColor("#FFFFFF")
-                    .withDividerColor("#11000000")
+                    .withTitleColor("#636EFF")
+                    .withDividerColor("#FFFFFF")
                     .withMessage(getString(R.string.hide_message_desc))
-                    .withMessageColor("#FFFFFFFF")
-                    .withDialogColor("#3F51B5")
+                    .withMessageColor("#000000")
+                    .withDialogColor("#FFFFFF")
                     .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
                     .withDuration(500)
                     .withEffect(Effectstype.Slidetop)

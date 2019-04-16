@@ -6,6 +6,7 @@
 package devsunset.simple.random.chat;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
@@ -51,10 +52,15 @@ public class LockSettingActivity extends Activity  {
             getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
         }
 
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
+
         pinview1.setPinViewEventListener(new Pinview.PinViewEventListener() {
             @Override
             public void onDataEntered(Pinview pinview, boolean fromUser) {
                 password = pinview.getValue();
+                pinview2.requestFocus();
             }
         });
 
@@ -90,6 +96,9 @@ public class LockSettingActivity extends Activity  {
 
     @OnClick(R.id.btnBack)
     void onBtnBackClicked() {
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(),0);
+
         finish();
     }
 }

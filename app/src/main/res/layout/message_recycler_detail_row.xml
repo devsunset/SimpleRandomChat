@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="2dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginEnd="2dp"
-    android:layout_marginRight="2dp"
-    android:layout_marginBottom="1dp"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="5dp">
+    android:layout_marginLeft="6dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginBottom="3dp"
+    android:background="@drawable/card_item_bg"
+    android:padding="2dp">
 
     <LinearLayout
         android:id="@+id/list_item_rows"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:background="@color/install_header"
         android:gravity="center_vertical"
+        android:minHeight="80dp"
         android:orientation="horizontal"
         android:paddingTop="2dp">
 
@@ -33,14 +31,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="18dp"
+                android:layout_height="19dp"
                 android:layout_gravity="top"
+                android:paddingTop="3dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -48,6 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:textColor="#6290FF"
+                    android:textSize="6pt"
                     android:textStyle="bold" />
 
                 <View
@@ -67,17 +68,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
-                    android:text=""
-                    android:textStyle="bold" />
+                    android:paddingRight="10dp"
+                    android:textSize="6pt"
+                    android:text="" />
 
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivTalkTypeVoiceImage"
-                android:layout_marginTop="5dp"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:visibility="gone"/>
+                android:layout_marginTop="5dp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_talk_text"
@@ -90,7 +92,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>

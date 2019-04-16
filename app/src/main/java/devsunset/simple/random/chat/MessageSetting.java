@@ -211,17 +211,6 @@ public class MessageSetting extends Fragment {
 	}
 
 	/**
-	 * Open Source License button click
-	 */
-	@OnClick(R.id.btnLicense)
-	void onBtnLicenseClicked() {
-		Intent intent = new Intent(getContext(), WebViewActivity.class);
-		intent.putExtra("URL_ADDRESS","file:///android_asset/www/index.html");
-		intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		startActivity(intent);
-	}
-
-	/**
 	 * Google License button click
 	 */
 	@OnClick(R.id.btnLicenseGoogle)

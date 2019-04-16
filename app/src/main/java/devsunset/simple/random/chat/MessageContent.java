@@ -8,6 +8,8 @@ package devsunset.simple.random.chat;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,6 +74,10 @@ public class MessageContent extends FragmentActivity {
 		//screen capture disable
 		if (Consts.SCREEN_CAPTURE_DISABLE && Build.VERSION.SDK_INT >= 11) {
 			getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE, android.view.WindowManager.LayoutParams.FLAG_SECURE);
+		}
+
+		if (Build.VERSION.SDK_INT >= 21) {
+			getWindow().setStatusBarColor(Color.BLACK);
 		}
 
 		vpPager = (ViewPager) findViewById(R.id.vpPager);
@@ -164,17 +170,29 @@ public class MessageContent extends FragmentActivity {
 		case TAB_MESSAGE_SEND:
 			int enable1 = getResources().getColor(R.color.tab_enable1);
 			vTab1.setBackgroundColor(enable1);
+			vTab1.setVisibility(View.VISIBLE);
+			vTab2.setVisibility(View.GONE);
+			vTab3.setVisibility(View.GONE);
 			tvTab1.setTextColor(enable1);
+			tvTab1.setTypeface(null, Typeface.BOLD);
 			break;
 		case TAB_MESSAGE_LIST:
 			int enable2 = getResources().getColor(R.color.tab_enable2);
 			vTab2.setBackgroundColor(enable2);
+			vTab1.setVisibility(View.GONE);
+			vTab2.setVisibility(View.VISIBLE);
+			vTab3.setVisibility(View.GONE);
 			tvTab2.setTextColor(enable2);
+			tvTab2.setTypeface(null, Typeface.BOLD);
 			break;
 		case TAB_MESSAGE_SETTING:
 			int enable3 = getResources().getColor(R.color.tab_enable3);
 			vTab3.setBackgroundColor(enable3);
+			vTab1.setVisibility(View.GONE);
+			vTab2.setVisibility(View.GONE);
+			vTab3.setVisibility(View.VISIBLE);
 			tvTab3.setTextColor(enable3);
+			tvTab3.setTypeface(null, Typeface.BOLD);
 			break;
 		}
 	}
@@ -188,6 +206,10 @@ public class MessageContent extends FragmentActivity {
 		tvTab1.setTextColor(disableText);
 		tvTab2.setTextColor(disableText);
 		tvTab3.setTextColor(disableText);
+
+		tvTab1.setTypeface(null, Typeface.NORMAL);
+		tvTab2.setTypeface(null, Typeface.NORMAL);
+		tvTab3.setTypeface(null, Typeface.NORMAL);
 	}
 
 	private final View.OnClickListener mOnClickListener = new View.OnClickListener() {

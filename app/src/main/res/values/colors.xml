@@ -8,14 +8,15 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="light_gray">#D3D3D3</color>
-    <color name="content_bg">#F5F5F5</color>
-    <color name="tab_enable1">#000000</color>
-    <color name="tab_enable2">#000000</color>
-    <color name="tab_enable3">#000000</color>
-    <color name="tab_disable">#D7D7D7</color>
-    <color name="tab_text_disable">#000000</color>
+    <color name="content_bg">#F7F7F7</color>
+    <color name="baseColor">#636EFF</color>
+    <color name="tab_enable1">#636EFF</color>
+    <color name="tab_enable2">#636EFF</color>
+    <color name="tab_enable3">#636EFF</color>
+    <color name="tab_disable">#929BAE</color>
+    <color name="tab_text_disable">#141D31</color>
     <color name="tab_bg">#FFFFFF</color>
-    <color name="common_table_line">#009688</color>
+    <color name="common_table_line">#D2D2D2</color>
 
     <color name="install_header">#d8f6fe</color>
 
@@ -23,7 +24,7 @@
     <color name="darkGreen">#388E3C</color>
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#727272</color>
-    <color name="progress">#4db849</color>
+    <color name="progress">#636EFF</color>
 
     <!-- ============================== -->
     <!-- Common Drawable -->
@@ -31,9 +32,10 @@
     <drawable name="light_gray">#D3D3D3</drawable>
 
     <drawable name="empty_message_bg">#FFFFFF</drawable>
-    <drawable name="newmessage_bg">#D8F6CE</drawable>
-    <drawable name="man_bg">#d8f6fe</drawable>
-    <drawable name="woman_bg">#F8E0F7</drawable>
+    <drawable name="newmessage_bg">#FFFBED</drawable>
+    <drawable name="man_bg">#FFFFFF</drawable>
+    <drawable name="woman_bg">#FFFFFF</drawable>
+    <drawable name="delete_bg">#EBECED</drawable>
 
 
 </resources>

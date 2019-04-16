@@ -13,14 +13,19 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="devsunset.simple.random.chat.LockActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/app_logo" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:padding="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/verification_code"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="18dp"
         android:textStyle="bold" />
 
     <TextView
@@ -29,19 +34,18 @@
         android:text="@string/verification_code_subtext"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="15dp" />
 
-    <com.mukesh.OtpView
-        android:id="@+id/otp_view"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_marginTop="70dp"
-        android:inputType="numberPassword"
-        android:itemBackground="@drawable/bg_otp_item"
-        android:textColor="@android:color/black"
-        app:hideLineWhenFilled="true"
-        app:itemCount="4"
-        app:itemSpacing="5dp"
-        app:lineColor="@color/black"
-        app:viewType="line" />
+    <com.goodiebag.pinview.Pinview
+        android:id="@+id/pinview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cursorVisible="false"
+        app:hint="0"
+        app:inputType="number"
+        app:password="true"
+        app:pinBackground="@drawable/lock_drawable"
+        app:pinHeight="40dp"
+        app:pinLength="4"
+        app:pinWidth="40dp" />
 </LinearLayout>

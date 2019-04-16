@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@color/black"
         android:orientation="horizontal">
 
@@ -26,9 +26,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
-        android:layout_margin="1dp"
         android:orientation="horizontal"
-        android:padding="@dimen/contents_margin">
+        android:paddingTop="@dimen/contents_margin"
+        android:paddingLeft="@dimen/contents_margin"
+        android:paddingRight="@dimen/contents_margin">
 
         <RelativeLayout
             android:id="@+id/ll_tab1"
@@ -50,9 +51,7 @@
                     style="@style/black_font_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_message_send"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:text="@string/app_message_send" />
             </LinearLayout>
 
             <View
@@ -84,9 +83,7 @@
                     style="@style/black_font_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_message_list"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:text="@string/app_message_list" />
             </LinearLayout>
 
             <View
@@ -118,9 +115,7 @@
                     style="@style/black_font_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_message_setting"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:text="@string/app_message_setting" />
             </LinearLayout>
 
             <View
@@ -131,8 +126,16 @@
                 android:layout_alignParentBottom="true"
                 android:background="@color/tab_disable" />
         </RelativeLayout>
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="#D2D2D2" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpPager"

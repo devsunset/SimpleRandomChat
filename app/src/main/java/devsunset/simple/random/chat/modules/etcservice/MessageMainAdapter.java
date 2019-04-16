@@ -110,7 +110,7 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman){
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
         } else if(MessageItemArrayList.get(position).drawableId == R.drawable.trash){
-            myViewHolder.list_item_rows.setBackgroundResource(R.drawable.light_gray);
+            myViewHolder.list_item_rows.setBackgroundResource(R.drawable.delete_bg);
         }
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

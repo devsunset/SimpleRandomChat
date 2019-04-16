@@ -35,15 +35,18 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="18dp"
+                android:layout_height="19dp"
                 android:layout_gravity="top"
+                android:paddingTop="3dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_countryName_talk_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#6290FF"
                     android:text=""
+                    android:textSize="6pt"
                     android:textStyle="bold" />
 
                 <View
@@ -62,9 +65,10 @@
                     android:id="@+id/tv_atx_local_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="6pt"
                     android:paddingLeft="10dp"
-                    android:text=""
-                    android:textStyle="bold" />
+                    android:paddingRight="10dp"
+                    android:text="" />
 
             </LinearLayout>
 
