@@ -120,6 +120,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="A Type"
+                        android:textStyle="bold"
                         android:textSize="8pt" />
 
                     <View
@@ -179,6 +180,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="B Type"
+                        android:textStyle="bold"
                         android:textSize="8pt" />
 
 
@@ -239,6 +241,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="C Type"
+                        android:textStyle="bold"
                         android:textSize="8pt" />
 
                     <View
@@ -298,6 +301,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="D Type"
+                        android:textStyle="bold"
                         android:textSize="8pt" />
 
                     <View

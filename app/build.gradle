@@ -105,5 +105,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     //KProgressHUD
     implementation 'com.kaopiz:kprogresshud:1.2.0'
+    //cropper
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
 
 }

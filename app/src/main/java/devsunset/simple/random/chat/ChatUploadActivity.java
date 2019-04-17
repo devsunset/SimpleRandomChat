@@ -35,7 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.logger.Logger;
-
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
 import java.io.IOException;
@@ -268,11 +268,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             dirCheck();
             cleaAudio();
             clearImage();
-
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
-
+            CropImage.startPickImageActivity(this);
         }
     }
 
@@ -291,23 +287,25 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             }
         }
 
-        //Image
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
-            if (data == null) {
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    clearImage();
+                    Uri imageUri = CropImage.getPickImageResultUri(this, data);
+                    tv_audio_desc.setVisibility(View.GONE);
+                    btnAudio.setVisibility(View.GONE);
+                    actualImage = Util.from(this, imageUri);
+                    customCompressImage();
+                } catch (IOException e) {
+                    clearImage();
+                    Logger.e("IOException : " + e.getMessage());
+                    Toast.makeText(getApplicationContext(), getString(R.string.faile_open_picture), Toast.LENGTH_SHORT).show();
+                }
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 clearImage();
                 Toast.makeText(getApplicationContext(), getString(R.string.faile_open_picture), Toast.LENGTH_SHORT).show();
                 return;
-            }
-            try {
-                clearImage();
-                tv_audio_desc.setVisibility(View.GONE);
-                btnAudio.setVisibility(View.GONE);
-                actualImage = Util.from(this, data.getData());
-                customCompressImage();
-            } catch (IOException e) {
-                clearImage();
-                Logger.e("IOException : " + e.getMessage());
-                Toast.makeText(getApplicationContext(), getString(R.string.faile_open_picture), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -423,10 +421,10 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         // 파일 용량 체크
         if(audioCheck){
             String tmp = tv_audio_desc.getText().toString();
-           if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB") ){
-               Toast.makeText(getApplicationContext(), getString(R.string.limit_file_size), Toast.LENGTH_SHORT).show();
-                    return;
-           }
+            if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB") ){
+                Toast.makeText(getApplicationContext(), getString(R.string.limit_file_size), Toast.LENGTH_SHORT).show();
+                return;
+            }
             UPLOAD_FILE_NAME = AUDIO_FILE_NAME;
         }else{
             //image size check skips
