@@ -16,18 +16,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
-import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
@@ -47,6 +42,7 @@ import butterknife.OnClick;
 import devsunset.simple.random.chat.modules.accountservice.AccountInfo;
 import devsunset.simple.random.chat.modules.dataservice.AppTalkThread;
 import devsunset.simple.random.chat.modules.dataservice.DatabaseClient;
+import devsunset.simple.random.chat.modules.etcservice.CustomDialog;
 import devsunset.simple.random.chat.modules.etcservice.MessageDetailAdapter;
 import devsunset.simple.random.chat.modules.etcservice.MessageItem;
 import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
@@ -95,11 +91,13 @@ public class ChatActivity extends Activity {
     private static String MY_LANG = "";
     private static String TO_APP_KEY = "";
 
+    public static int BLACK_LIST = 1;
+    public static int BYE_SEND = 2;
+    public static int HIDE = 3;
+
     private static boolean EXECUTE_ACTION = false;
 
     private KProgressHUD hud;
-
-    private NiftyDialogBuilder dialogBuilder = null;
 
 
     @Override
@@ -122,8 +120,6 @@ public class ChatActivity extends Activity {
 
         httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
-        dialogBuilder = NiftyDialogBuilder.getInstance(this);
-
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -135,8 +131,6 @@ public class ChatActivity extends Activity {
         ATX_ID = intent.getStringExtra("ATX_ID");
         ATX_STATUS = intent.getStringExtra("ATX_STATUS");
         TO_APP_KEY = intent.getStringExtra("REPLY_APP_KEY");
-
-        reply_message.setFilters(new InputFilter[]{EMOJI_FILTER});
 
         getDatabase(ATX_ID);
     }
@@ -250,38 +244,14 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnBlackListSend)
     void onBtnBlackListClicked() {
-        dialogBuilder.withTitle(getString(R.string.black_list_message))
-                .withTitleColor("#636EFF")
-                .withDividerColor("#FFFFFF")
-                .withMessage(getString(R.string.black_list_message_desc))
-                .withMessageColor("#000000")
-                .withDialogColor("#FFFFFF")
-                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                .withDuration(700)
-                .withEffect(Effectstype.Slidetop)
-                .withButton1Text("CANCEL")
-                .withButton2Text("OK")
-                .isCancelableOnTouchOutside(true)
-                //.setCustomView(R.layout.custom_view,v.getContext())
-                .setButton1Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogBuilder.dismiss();
-                    }
-                })
-                .setButton2Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        blackListSendProcess();
-                    }
-                })
-                .show();
+        CustomDialog customDialog = new CustomDialog(ChatActivity.this);
+        customDialog.callFunction(getString(R.string.black_list_message),getString(R.string.black_list_message_desc),BLACK_LIST,this);
     }
 
     /**
      * Black List 등록
      */
-    private void blackListSendProcess() {
+    private void blackListProcess() {
 
         hud = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -350,32 +320,8 @@ public class ChatActivity extends Activity {
         if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))){
             byeSendProcess();
         }else{
-            dialogBuilder.withTitle(getString(R.string.bye_message))
-                    .withTitleColor("#636EFF")
-                    .withDividerColor("#FFFFFF")
-                    .withMessage(getString(R.string.bye_message_desc))
-                    .withMessageColor("#000000")
-                    .withDialogColor("#FFFFFF")
-                    .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                    .withDuration(500)
-                    .withEffect(Effectstype.Slidetop)
-                    .withButton1Text("CANCEL")
-                    .withButton2Text("OK")
-                    .isCancelableOnTouchOutside(true)
-                    //.setCustomView(R.layout.custom_view,v.getContext())
-                    .setButton1Click(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialogBuilder.dismiss();
-                        }
-                    })
-                    .setButton2Click(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            byeSendProcess();
-                        }
-                    })
-                    .show();
+            CustomDialog customDialog = new CustomDialog(ChatActivity.this);
+            customDialog.callFunction(getString(R.string.bye_message),getString(R.string.bye_message_desc),BYE_SEND,this);
         }
     }
 
@@ -450,32 +396,8 @@ public class ChatActivity extends Activity {
         if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))){
             hideProcess();
         }else{
-            dialogBuilder.withTitle(getString(R.string.hide_message))
-                    .withTitleColor("#636EFF")
-                    .withDividerColor("#FFFFFF")
-                    .withMessage(getString(R.string.hide_message_desc))
-                    .withMessageColor("#000000")
-                    .withDialogColor("#FFFFFF")
-                    .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
-                    .withDuration(500)
-                    .withEffect(Effectstype.Slidetop)
-                    .withButton1Text("CANCEL")
-                    .withButton2Text("OK")
-                    .isCancelableOnTouchOutside(true)
-                    //.setCustomView(R.layout.custom_view,v.getContext())
-                    .setButton1Click(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialogBuilder.dismiss();
-                        }
-                    })
-                    .setButton2Click(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            hideProcess();
-                        }
-                    })
-                    .show();
+            CustomDialog customDialog = new CustomDialog(ChatActivity.this);
+            customDialog.callFunction(getString(R.string.hide_message),getString(R.string.hide_message_desc),HIDE,this);
         }
     }
 
@@ -508,6 +430,20 @@ public class ChatActivity extends Activity {
         }
         SaveTask st = new SaveTask();
         st.execute();
+    }
+
+    /**
+     * Custom Dialog return hahdler
+     * @param type
+     */
+    public void callReturn(int type){
+        if(type == BLACK_LIST){
+            blackListProcess();
+        }else if(type == BYE_SEND){
+            byeSendProcess();
+        }else if(type == HIDE){
+            hideProcess();
+        }
     }
 
     /**
@@ -651,7 +587,6 @@ public class ChatActivity extends Activity {
         st.execute();
     }
 
-
     /**
      * attach button
      *
@@ -698,18 +633,4 @@ public class ChatActivity extends Activity {
         Logger.i("receiveMessageReloadMessageList process... ");
         getDatabase(ATX_ID);
     }
-
-    public static InputFilter EMOJI_FILTER = new InputFilter() {
-        @Override
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-            for (int index = start; index < end; index++) {
-                int type = Character.getType(source.charAt(index));
-                if (type == Character.SURROGATE) {
-                    return "";
-                }
-            }
-            return null;
-        }
-    };
-
 }

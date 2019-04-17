@@ -106,8 +106,12 @@ public class MessageContent extends FragmentActivity {
 						e.printStackTrace();
 					}
 				} else {
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+					try {
+						InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 
 				if (position == 1) {

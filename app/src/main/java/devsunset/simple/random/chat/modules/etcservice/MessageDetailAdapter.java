@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.util.ArrayList;
 
 import devsunset.simple.random.chat.ChatDownloadActivity;
@@ -96,10 +95,10 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
             if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.GONE);
             }else  if(Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
-                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_image);
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.ic_camera);
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
             }else{
-                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_microphone);
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.ic_audio);
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
             }
         }
@@ -157,7 +156,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                             long lastTime = Long.parseLong(fileName.substring(0,fileName.indexOf('_')));
                             long curTime = System.currentTimeMillis();
-                            long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
+                            long diffTime = (curTime - lastTime) / (1000 * 60 * 60 * 24);
 
                             if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
                                 Toast.makeText(context,context.getApplicationContext().getResources().getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();

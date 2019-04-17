@@ -93,10 +93,10 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.GONE);
             }else  if(Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
-                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_image);
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.ic_camera);
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
             }else{
-                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.btn_microphone);
+                myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.ic_audio);
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
             }
         }

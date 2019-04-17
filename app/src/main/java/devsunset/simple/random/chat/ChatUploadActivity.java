@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -92,6 +93,12 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
     @BindView(R.id.uploadpage)
     LinearLayout uploadpage;
 
+    @BindView(R.id.btnAudio)
+    Button btnAudio;
+
+    @BindView(R.id.imageArea)
+    LinearLayout imageArea;
+
     private HttpConnectService httpConnectService = null;
 
     private File actualImage;
@@ -138,13 +145,16 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         AUDIO_FILE_NAME = ctm+"_"+uid+".mp3";
         IMAGE_FILE_NAME = ctm+"_"+uid+".jpg";
 
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        /*
+            // Ads Skip
+            MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+            // Use an activity context to get the rewarded video instance.
+            mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+            mRewardedVideoAd.setRewardedVideoAdListener(this);
+            loadRewardedVideoAd();
+        */
 
-        // Use an activity context to get the rewarded video instance.
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
-
-        loadRewardedVideoAd();
+        initContent();
     }
 
     private void loadRewardedVideoAd() {
@@ -235,7 +245,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             clearImage();
 
             String filePath = Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+AUDIO_FILE_NAME;
-            int color = getResources().getColor(R.color.content_bg);
+            int color = getResources().getColor(R.color.baseColor);
             AndroidAudioRecorder.with(this)
                     // Required
                     .setFilePath(filePath)
@@ -274,6 +284,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 cleaAudio();
+                imageArea.setVisibility(View.GONE);
                 tv_audio_desc.setText("Audio File Size : "+String.format("%s", getReadableFileSize(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+AUDIO_FILE_NAME).length())));
             } else if (resultCode == RESULT_CANCELED) {
                 cleaAudio();
@@ -289,6 +300,8 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             }
             try {
                 clearImage();
+                tv_audio_desc.setVisibility(View.GONE);
+                btnAudio.setVisibility(View.GONE);
                 actualImage = Util.from(this, data.getData());
                 customCompressImage();
             } catch (IOException e) {
@@ -568,7 +581,6 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
                     DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                             .AppTalkThreadDao().insert(att);
                 }
-
                 return null;
             }
 
@@ -597,19 +609,19 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
     @Override
     public void onResume() {
-        mRewardedVideoAd.resume(this);
+        //mRewardedVideoAd.resume(this);
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        mRewardedVideoAd.pause(this);
+        //mRewardedVideoAd.pause(this);
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        mRewardedVideoAd.destroy(this);
+        //mRewardedVideoAd.destroy(this);
         super.onDestroy();
         fileClear();
     }

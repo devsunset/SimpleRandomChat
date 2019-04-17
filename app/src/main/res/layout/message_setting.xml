@@ -603,19 +603,21 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="Open Source Licenses"
-                        android:textSize="8pt"/>
+                        android:textSize="8pt" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/btnLicenseGoogle"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="16dp"
+                        android:layout_height="26dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/btn_next"
                         android:gravity="center"
-                        android:text=">"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -663,7 +665,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="Developed  by devsunset - Design by Happy jin"
-                        android:textSize="6pt"/>
+                        android:textSize="6pt" />
 
                     <View
                         android:layout_width="0dp"

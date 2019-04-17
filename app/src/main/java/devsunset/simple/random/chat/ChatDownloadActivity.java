@@ -36,7 +36,6 @@ import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.orhanobut.logger.Logger;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -187,7 +186,7 @@ public class ChatDownloadActivity extends Activity {
 
         long lastTime = Long.parseLong(fileName.substring(0,fileName.indexOf('_')));
         long curTime = System.currentTimeMillis();
-        long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
+        long diffTime = (curTime - lastTime) / (1000 * 60 * 60 * 24);
 
         if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
             hud.dismiss();

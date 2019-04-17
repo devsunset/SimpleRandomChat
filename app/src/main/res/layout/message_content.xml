@@ -27,8 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
         android:orientation="horizontal"
-        android:paddingTop="@dimen/contents_margin"
         android:paddingLeft="@dimen/contents_margin"
+        android:paddingTop="@dimen/contents_margin"
         android:paddingRight="@dimen/contents_margin">
 
         <RelativeLayout
@@ -51,7 +51,7 @@
                     style="@style/black_font_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_message_send" />
+                    android:text="SEND" />
             </LinearLayout>
 
             <View
@@ -83,7 +83,7 @@
                     style="@style/black_font_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_message_list" />
+                    android:text="LIST" />
             </LinearLayout>
 
             <View
@@ -115,7 +115,7 @@
                     style="@style/black_font_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_message_setting" />
+                    android:text="SETTING" />
             </LinearLayout>
 
             <View

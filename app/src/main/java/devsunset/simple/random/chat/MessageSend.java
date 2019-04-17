@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
-
 import java.util.HashMap;
 import java.util.UUID;
 

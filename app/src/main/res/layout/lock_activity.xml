@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/verification_code"
-        android:textColor="@android:color/black"
+        android:textColor="#D1D1D1"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/verification_code_subtext"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="#D1D1D1"
         android:textSize="15dp" />
 
     <com.goodiebag.pinview.Pinview
