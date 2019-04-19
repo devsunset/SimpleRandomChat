@@ -21,6 +21,7 @@ buildscript {
         classpath 'com.google.firebase:firebase-plugins:1.2.0'
         classpath 'com.google.android.gms:oss-licenses-plugin:0.9.4'
     }
+
 }
 
 allprojects {
@@ -29,11 +30,11 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
         maven { url 'https://kotlin.bintray.com/kotlinx/' }
-        maven {
-            url 'https://maven.google.com/'
-        }
+        maven { url 'https://maven.google.com/' }
     }
 }
+
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
