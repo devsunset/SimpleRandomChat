@@ -218,13 +218,13 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                             getNoticeProcess();
                         } else {
                             Logger.e("appInfoInit Fail : " + data.getRESULT_MESSAGE());
-                            Toast.makeText(MainActivity.this, getString(R.string.network_error)+" ddddd "+data.getRESULT_CODE(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
                 } else {
                     Logger.e("appInfoInit Fail : " + response.isSuccessful());
-                    Toast.makeText(MainActivity.this, getString(R.string.network_error)+"b", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 progress.setProgress(4);
@@ -233,7 +233,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             @Override
             public void onFailure(@NonNull Call<DataVo> call, @NonNull Throwable t) {
                 Logger.e("appInfoInit Error : " + t.getMessage());
-                Toast.makeText(MainActivity.this, getString(R.string.network_error)+"C", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
