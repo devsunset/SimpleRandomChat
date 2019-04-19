@@ -161,62 +161,64 @@
 #-keepresourcexmlattributenames manifest/** #없애면 manifest 난독화 X
 
 -keep class androidx.appcompat.widget.** { *; }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:139
--keep class cafe.adriel.androidaudiorecorder.AudioRecorderActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:90
--keep class com.crashlytics.android.CrashlyticsInitProvider { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:203
--keep class com.google.android.gms.ads.AdActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:199
--keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:153
--keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:167
--keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:148
--keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:163
--keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:135
--keep class com.google.android.gms.oss.licenses.OssLicensesActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:132
--keep class com.google.android.gms.oss.licenses.OssLicensesMenuActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:101
--keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:173
--keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:185
--keep class com.google.firebase.iid.FirebaseInstanceIdService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:124
--keep class com.google.firebase.messaging.FirebaseMessagingService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:95
--keep class com.google.firebase.perf.provider.FirebasePerfProvider { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:193
--keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:136
--keep class com.nabinbhandari.android.permissions.PermissionsActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:71
--keep class com.theartofdev.edmodo.cropper.CropImageActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:55
--keep class devsunset.simple.random.chat.ChatActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:67
--keep class devsunset.simple.random.chat.ChatDownloadActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:63
--keep class devsunset.simple.random.chat.ChatUploadActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:47
--keep class devsunset.simple.random.chat.LockActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:51
--keep class devsunset.simple.random.chat.LockSettingActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:36
--keep class devsunset.simple.random.chat.MainActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:43
--keep class devsunset.simple.random.chat.MessageContent { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:59
--keep class devsunset.simple.random.chat.WebViewActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:76
--keep class devsunset.simple.random.chat.modules.fcmservice.MyFirebaseMessagingService { <init>(); }
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:26
--keep class devsunset.simple.random.chat.whateverString { <init>(); }
+-keep class android.support.multidex.MultiDexApplication { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:26
+-keep class android.support.v4.app.CoreComponentFactory { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:141
+-keep class cafe.adriel.androidaudiorecorder.AudioRecorderActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:92
+-keep class com.crashlytics.android.CrashlyticsInitProvider { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:205
+-keep class com.google.android.gms.ads.AdActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:201
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:155
+-keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:169
+-keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:150
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:165
+-keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:137
+-keep class com.google.android.gms.oss.licenses.OssLicensesActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:134
+-keep class com.google.android.gms.oss.licenses.OssLicensesMenuActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:103
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:175
+-keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:187
+-keep class com.google.firebase.iid.FirebaseInstanceIdService { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:126
+-keep class com.google.firebase.messaging.FirebaseMessagingService { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:97
+-keep class com.google.firebase.perf.provider.FirebasePerfProvider { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:195
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:138
+-keep class com.nabinbhandari.android.permissions.PermissionsActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:73
+-keep class com.theartofdev.edmodo.cropper.CropImageActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:57
+-keep class devsunset.simple.random.chat.ChatActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:69
+-keep class devsunset.simple.random.chat.ChatDownloadActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:65
+-keep class devsunset.simple.random.chat.ChatUploadActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:49
+-keep class devsunset.simple.random.chat.LockActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:53
+-keep class devsunset.simple.random.chat.LockSettingActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:38
+-keep class devsunset.simple.random.chat.MainActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:45
+-keep class devsunset.simple.random.chat.MessageContent { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:61
+-keep class devsunset.simple.random.chat.WebViewActivity { <init>(); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:78
+-keep class devsunset.simple.random.chat.modules.fcmservice.MyFirebaseMessagingService { <init>(); }
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_content.xml:143
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
@@ -275,7 +277,7 @@
 -keep class android.support.v7.widget.FitWindowsLinearLayout { <init>(...); }
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_list.xml:9
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:83
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:84
 -keep class android.support.v7.widget.RecyclerView { <init>(...); }
 
 # Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_search_view.xml:75

@@ -682,6 +682,11 @@ public class ChatActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
+        finish();
+    }
+
     @Override
     public void onDestroy() {
         // Always unregister when an object no longer should be on the bus.a
@@ -695,7 +700,7 @@ public class ChatActivity extends Activity {
      */
     @Subscribe
     public void receiveMessageReloadMessageList(String event) {
-        Logger.i("receiveMessageReloadMessageList process... ");
+        Logger.i("receiveMessageReloadMessageList process... :  "+event);
         getDatabase(ATX_ID);
     }
 }
