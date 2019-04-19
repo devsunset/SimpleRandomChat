@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -23,6 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
@@ -99,6 +104,8 @@ public class ChatActivity extends Activity {
 
     private KProgressHUD hud;
 
+    // Ads Full Screen
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +140,23 @@ public class ChatActivity extends Activity {
         TO_APP_KEY = intent.getStringExtra("REPLY_APP_KEY");
 
         getDatabase(ATX_ID);
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, Consts.ADS_APP_ID);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(Consts.ADS_FULL_SCREEN_ID);
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).build());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, Consts.ADS_APP_ID);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(Consts.ADS_FULL_SCREEN_ID);
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).build());
     }
 
     /**
@@ -599,11 +623,46 @@ public class ChatActivity extends Activity {
         Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
             @Override
             public void onGranted() {
-                Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
-                intent.putExtra("ATX_ID",ATX_ID);
-                intent.putExtra("TO_APP_KEY",TO_APP_KEY);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+
+
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+
+                    mInterstitialAd.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdLoaded() {
+                            // Code to be executed when an ad finishes loading.
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(int errorCode) {
+                            // Code to be executed when an ad request fails.
+                        }
+
+                        @Override
+                        public void onAdOpened() {
+                            // Code to be executed when the ad is displayed.
+                        }
+
+                        @Override
+                        public void onAdLeftApplication() {
+                            // Code to be executed when the user has left the app.
+                        }
+
+                        @Override
+                        public void onAdClosed() {
+                            // Code to be executed when the interstitial ad is closed.
+                            Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
+                            intent.putExtra("ATX_ID",ATX_ID);
+                            intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
+                        }
+                    });
+
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                }
             }
             @Override
             public void onDenied(Context context, ArrayList<String> deniedPermissions) {
@@ -611,6 +670,7 @@ public class ChatActivity extends Activity {
             }
         });
     }
+
 
     @OnClick(R.id.btnBack)
     void onBtnBackClicked() {

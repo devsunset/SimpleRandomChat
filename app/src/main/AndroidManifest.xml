@@ -61,9 +61,10 @@
         <!-- [END firebase_service] -->
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- REAL AdMob App ID: ca-app-pub-9759848654197811~5194135401 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-9759848654197811~5194135401" />
 
     </application>
 

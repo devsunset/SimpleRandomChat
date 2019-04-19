@@ -9,17 +9,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:gravity="center"
         android:background="@color/black"
         android:orientation="horizontal">
 
+        <!-- Sample ID : ca-app-pub-3940256099942544/6300978111 -->
+        <!-- REAL ID : ca-app-pub-9759848654197811/5549358623 -->
         <com.google.android.gms.ads.AdView
             android:id="@+id/ad_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id" />
+            ads:adUnitId="ca-app-pub-9759848654197811/5549358623">
+        </com.google.android.gms.ads.AdView>
+
 
     </LinearLayout>
 
@@ -46,12 +52,11 @@
                 android:orientation="horizontal"
                 android:paddingBottom="5dip">
 
-                <TextView
+                <ImageView
                     android:id="@+id/tv_tab1"
-                    style="@style/black_font_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SEND" />
+                    android:layout_width="28dp"
+                    android:layout_height="27dp"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
             <View
@@ -78,12 +83,11 @@
                 android:orientation="horizontal"
                 android:paddingBottom="5dip">
 
-                <TextView
+                <ImageView
                     android:id="@+id/tv_tab2"
-                    style="@style/black_font_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LIST" />
+                    android:layout_width="28dp"
+                    android:layout_height="27dp"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
             <View
@@ -110,12 +114,11 @@
                 android:orientation="horizontal"
                 android:paddingBottom="5dip">
 
-                <TextView
+                <ImageView
                     android:id="@+id/tv_tab3"
-                    style="@style/black_font_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SETTING" />
+                    android:layout_width="28dp"
+                    android:layout_height="27dp"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
             <View

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
-        <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-
         <string name="app_name">Signal</string>
         <string name="loading">Loading …</string>
         <string name="loading_wait">Loading … Please wait.</string>
@@ -20,19 +17,19 @@
         <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
         <string name="default_received_message">Message arrival</string>
         <string name="alarm_title">Set message notifications</string>
-        <string name="atype_msg">Terminal preference notification + Popup notification</string>
-        <string name="btype_msg">End notification (silent, non-vibration) + popup notification</string>
-        <string name="ctype_msg">Pop-up notification</string>
+        <string name="atype_msg">Notification + Pop-Up</string>
+        <string name="btype_msg">Notification (silent,non-vibration) + Pop-Up</string>
+        <string name="ctype_msg">Pop-Up</string>
         <string name="dtype_msg">No notifications</string>
-        <string name="byconfirm_msg">Delete, do not ask when hidden</string>
-        <string name="reply_new_message_hide_msg">Hide from list of replies</string>
+        <string name="byconfirm_msg">Do not ask when delete or hide</string>
+        <string name="reply_new_message_hide_msg">Hide from the response completion list</string>
         <string name="lock_pwd_msg">Lock screen</string>
         <string name="password_success">The password has been successfully set.</string>
         <string name="password_fail">Passwords do not match</string>
         <string name="empty_message">No replies received</string>
         <string name="black_list_send">Report</string>
         <string name="bye_send">Delete</string>
-        <string name="hide">hidden</string>
+        <string name="hide">Hidden</string>
         <string name="hide_message">Hide from message list</string>
         <string name="hide_message_desc">Hides the message list. \nWhen you receive the reply, it will be shown again in the list.</string>
         <string name="bye_message">Deleting messages</string>
@@ -46,5 +43,4 @@
         <string name="faile_open_picture">There was a problem with the import of the photo file</string>
         <string name="choose_picture">Please select a photo</string>
         <string name="ads_noti_msg">When your ads are finished, you can use the Send Photos and Voice Files feature.</string>
-
 </resources>

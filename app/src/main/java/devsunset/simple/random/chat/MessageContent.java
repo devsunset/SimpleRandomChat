@@ -23,13 +23,16 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.orhanobut.logger.Logger;
 
 import devsunset.simple.random.chat.modules.eventbusservice.BusProvider;
 import devsunset.simple.random.chat.modules.utilservice.Consts;
@@ -57,9 +60,9 @@ public class MessageContent extends FragmentActivity {
 	private View vTab1 = null;
 	private View vTab2 = null;
 	private View vTab3 = null;
-	private TextView tvTab1 = null;
-	private TextView tvTab2 = null;
-	private TextView tvTab3 = null;
+	private ImageView tvTab1 = null;
+	private ImageView tvTab2 = null;
+	private ImageView tvTab3 = null;
 
 	private boolean boolBackKeyPressFlag = false;
 
@@ -127,7 +130,6 @@ public class MessageContent extends FragmentActivity {
 			}
 		});
 
-
 		llTab1 = findViewById(R.id.ll_tab1);
 		llTab2 = findViewById(R.id.ll_tab2);
 		llTab3 = findViewById(R.id.ll_tab3);
@@ -153,7 +155,7 @@ public class MessageContent extends FragmentActivity {
 		}
 
 		// Initialize the Mobile Ads SDK.
-		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+		MobileAds.initialize(this, Consts.ADS_APP_ID);
 
 		// Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
 		// values/strings.xml.
@@ -164,6 +166,7 @@ public class MessageContent extends FragmentActivity {
 		// "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
 		AdRequest adRequest = new AdRequest.Builder()
 				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+				.addTestDevice(Consts.ADS_TEST_ID)
 				.build();
 
 		// Start loading the ad in the background.
@@ -183,8 +186,7 @@ public class MessageContent extends FragmentActivity {
 			vTab1.setVisibility(View.VISIBLE);
 			vTab2.setVisibility(View.GONE);
 			vTab3.setVisibility(View.GONE);
-			tvTab1.setTextColor(enable1);
-			tvTab1.setTypeface(null, Typeface.BOLD);
+			tvTab1.setBackgroundResource(R.drawable.ic_send_on);
 			break;
 		case TAB_MESSAGE_LIST:
 			int enable2 = getResources().getColor(R.color.tab_enable2);
@@ -192,8 +194,7 @@ public class MessageContent extends FragmentActivity {
 			vTab1.setVisibility(View.GONE);
 			vTab2.setVisibility(View.VISIBLE);
 			vTab3.setVisibility(View.GONE);
-			tvTab2.setTextColor(enable2);
-			tvTab2.setTypeface(null, Typeface.BOLD);
+			tvTab2.setBackgroundResource(R.drawable.ic_list_on);
 			break;
 		case TAB_MESSAGE_SETTING:
 			int enable3 = getResources().getColor(R.color.tab_enable3);
@@ -201,25 +202,21 @@ public class MessageContent extends FragmentActivity {
 			vTab1.setVisibility(View.GONE);
 			vTab2.setVisibility(View.GONE);
 			vTab3.setVisibility(View.VISIBLE);
-			tvTab3.setTextColor(enable3);
-			tvTab3.setTypeface(null, Typeface.BOLD);
+			tvTab3.setBackgroundResource(R.drawable.ic_settings_on);
 			break;
 		}
 	}
 
 	private void clearEnable() {
 		int disableLine = getResources().getColor(R.color.tab_disable);
-		int disableText = getResources().getColor(R.color.tab_text_disable);
+
 		vTab1.setBackgroundColor(disableLine);
 		vTab2.setBackgroundColor(disableLine);
 		vTab3.setBackgroundColor(disableLine);
-		tvTab1.setTextColor(disableText);
-		tvTab2.setTextColor(disableText);
-		tvTab3.setTextColor(disableText);
 
-		tvTab1.setTypeface(null, Typeface.NORMAL);
-		tvTab2.setTypeface(null, Typeface.NORMAL);
-		tvTab3.setTypeface(null, Typeface.NORMAL);
+		tvTab1.setBackgroundResource(R.drawable.ic_send_off);
+		tvTab2.setBackgroundResource(R.drawable.ic_list_off);
+		tvTab3.setBackgroundResource(R.drawable.ic_settings_off);
 	}
 
 	private final View.OnClickListener mOnClickListener = new View.OnClickListener() {

@@ -108,14 +108,14 @@ public class MessageSend extends Fragment {
             }
         });
 
-        chat_message.postDelayed(new Runnable() {
+       /* chat_message.postDelayed(new Runnable() {
             @Override
             public void run() {
                 chat_message.requestFocus();
                 InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(chat_message,0);
             }
-        }, 300);
+        }, 300);*/
 
         return v;
     }

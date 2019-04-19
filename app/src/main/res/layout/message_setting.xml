@@ -133,7 +133,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/atype_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
 
                 </LinearLayout>
@@ -194,7 +194,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/btype_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -254,7 +254,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/ctype_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
 
                 </LinearLayout>
@@ -314,7 +314,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/dtype_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -360,7 +360,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/new_message_receive"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                     <View
                         android:layout_width="0dp"
@@ -421,7 +421,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/byconfirm_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                     <View
                         android:layout_width="0dp"
@@ -483,7 +483,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/reply_new_message_hide_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
 
                     <View
@@ -546,7 +546,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="@string/lock_pwd_msg"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                     <View
                         android:layout_width="0dp"
@@ -573,6 +573,7 @@
             android:layout_height="wrap_content"
             android:background="@color/common_table_line"
             android:orientation="vertical"
+            android:paddingTop="5dp"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:paddingBottom="2dp">
@@ -607,7 +608,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="Open Source Licenses"
-                        android:textSize="8pt" />
+                        android:textSize="7pt" />
 
                     <View
                         android:layout_width="0dp"
@@ -627,7 +628,6 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
 
         <!-- 11 Row  write -->
         <LinearLayout
@@ -669,7 +669,7 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="Developed  by devsunset - Design by Happy jin"
-                        android:textSize="6pt" />
+                        android:textSize="7pt" />
 
                     <View
                         android:layout_width="0dp"

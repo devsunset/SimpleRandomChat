@@ -6,8 +6,8 @@
     <!-- ========================================== -->
 
     <string-array name="gender">
-        <item>Man%M</item>
-        <item>Woman%W</item>
+        <item>남자%M</item>
+        <item>여자%W</item>
     </string-array>
 
 </resources>

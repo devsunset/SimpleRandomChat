@@ -17,7 +17,7 @@ package devsunset.simple.random.chat.modules.utilservice;
 public class Consts {
 
     // screen capture disable
-    public static final boolean SCREEN_CAPTURE_DISABLE = false;
+    public static final boolean SCREEN_CAPTURE_DISABLE = true;
 
     // MESSAGE STATUS
     // F : First
@@ -54,8 +54,26 @@ public class Consts {
     public static final int DATA_CLEAN_DAY = 15;
 
     // App Access Period
-    public static final int APP_ACCESS_PERIOD = 3;
+    public static final int APP_ACCESS_PERIOD = 1;
 
     // Attach File Download Period
     public static final int ATTACH_FILE_MAX_PERIOD = 2;
+
+    // Ads ADS_APP_ID
+    // Sample - ca-app-pub-3940256099942544~3347511713
+    // REAL - ca-app-pub-9759848654197811~5194135401
+    public static final String ADS_APP_ID = "ca-app-pub-9759848654197811~5194135401";
+
+    // Ads ADS_FULL_SCREEN_ID
+    // Sample - ca-app-pub-3940256099942544/1033173712
+    // REAL - ca-app-pub-9759848654197811/2348480216
+    public static final String ADS_FULL_SCREEN_ID = "ca-app-pub-9759848654197811/2348480216";
+
+    // Ads ADS_REWARD_VIDEO_ID (사용 안함)
+    // Sample - ca-app-pub-3940256099942544/5224354917
+    // public static final String ADS_REWARD_VIDEO_ID = "ca-app-pub-3940256099942544/5224354917";
+
+    // Ads TEST ID
+    public static final String ADS_TEST_ID = "8ADEEDFFEE385A12C9690826C657C0ED";
+
 }

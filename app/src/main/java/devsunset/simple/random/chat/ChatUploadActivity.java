@@ -23,11 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -73,7 +68,8 @@ import retrofit2.Response;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-public class ChatUploadActivity extends Activity implements RewardedVideoAdListener {
+public class ChatUploadActivity extends Activity {
+    //public class ChatUploadActivity extends Activity implements RewardedVideoAdListener {
 
     @BindView(R.id.tv_audio_desc)
     TextView tv_audio_desc;
@@ -117,7 +113,8 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
     private KProgressHUD hud;
 
-    private RewardedVideoAd mRewardedVideoAd;
+    // Ads video
+    //private RewardedVideoAd mRewardedVideoAd;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +144,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
 
         /*
             // Ads Skip
-            MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+		    MobileAds.initialize(this, Consts.ADS_APP_ID);
             // Use an activity context to get the rewarded video instance.
             mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
             mRewardedVideoAd.setRewardedVideoAdListener(this);
@@ -157,62 +154,65 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
         initContent();
     }
 
-    private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",
-                new AdRequest.Builder().build());
-    }
-
-    @Override
-    public void onRewarded(RewardItem reward) {
-        //Toast.makeText(this, "onRewarded! currency: " + reward.getType() + "  amount: " +
-        //        reward.getAmount(), Toast.LENGTH_SHORT).show();
-        initContent();
-    }
-
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-        //Toast.makeText(this, "onRewardedVideoAdLeftApplication",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdClosed() {
-        //Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-        if(uploadbuttonarea.getVisibility() == View.GONE){
-            Toast.makeText(getApplicationContext(), getString(R.string.ads_noti_msg), Toast.LENGTH_SHORT).show();
-            finish();
+    /*
+        // Ads Skip
+        private void loadRewardedVideoAd() {
+            mRewardedVideoAd.loadAd(Consts.ADS_REWARD_VIDEO_ID,
+                    new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).build());
         }
-    }
 
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int errorCode) {
-        //Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
-        if (mRewardedVideoAd.isLoaded()) {
-            mRewardedVideoAd.show();
+        @Override
+        public void onRewarded(RewardItem reward) {
+            //Toast.makeText(this, "onRewarded! currency: " + reward.getType() + "  amount: " +
+            //        reward.getAmount(), Toast.LENGTH_SHORT).show();
+            initContent();
         }
-    }
 
-    @Override
-    public void onRewardedVideoAdLoaded() {
-        //Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-        if (mRewardedVideoAd.isLoaded()) {
-            mRewardedVideoAd.show();
+        @Override
+        public void onRewardedVideoAdLeftApplication() {
+            //Toast.makeText(this, "onRewardedVideoAdLeftApplication",Toast.LENGTH_SHORT).show();
         }
-    }
 
-    @Override
-    public void onRewardedVideoAdOpened() {
-        //Toast.makeText(this, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
-    }
+        @Override
+        public void onRewardedVideoAdClosed() {
+            //Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
+            if(uploadbuttonarea.getVisibility() == View.GONE){
+                Toast.makeText(getApplicationContext(), getString(R.string.ads_noti_msg), Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
 
-    @Override
-    public void onRewardedVideoStarted() {
-        //Toast.makeText(this, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
-    }
+        @Override
+        public void onRewardedVideoAdFailedToLoad(int errorCode) {
+            //Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();
+            if (mRewardedVideoAd.isLoaded()) {
+                mRewardedVideoAd.show();
+            }
+        }
 
-    @Override
-    public void onRewardedVideoCompleted() {
-        //Toast.makeText(this, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show();
-    }
+        @Override
+        public void onRewardedVideoAdLoaded() {
+            //Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
+            if (mRewardedVideoAd.isLoaded()) {
+                mRewardedVideoAd.show();
+            }
+        }
+
+        @Override
+        public void onRewardedVideoAdOpened() {
+            //Toast.makeText(this, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRewardedVideoStarted() {
+            //Toast.makeText(this, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRewardedVideoCompleted() {
+            //Toast.makeText(this, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show();
+        }
+    */
 
     /**
      * init content
@@ -291,6 +291,7 @@ public class ChatUploadActivity extends Activity implements RewardedVideoAdListe
             if (resultCode == RESULT_OK) {
                 try {
                     clearImage();
+                    compressedImageView.setVisibility(View.VISIBLE);
                     Uri imageUri = CropImage.getPickImageResultUri(this, data);
                     tv_audio_desc.setVisibility(View.GONE);
                     btnAudio.setVisibility(View.GONE);
