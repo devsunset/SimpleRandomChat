@@ -167,6 +167,7 @@ public class MessageContent extends FragmentActivity {
 		AdRequest adRequest = new AdRequest.Builder()
 				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
 				.addTestDevice(Consts.ADS_TEST_ID)
+				.addTestDevice(Consts.ADS_TEST_SUB_ID)
 				.build();
 
 		// Start loading the ad in the background.

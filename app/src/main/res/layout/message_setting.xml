@@ -594,6 +594,7 @@
                     android:orientation="horizontal" />
 
                 <LinearLayout
+                    android:id="@+id/btnLicenseGoogle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#ffffff"
@@ -615,8 +616,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
-                    <ImageButton
-                        android:id="@+id/btnLicenseGoogle"
+                    <ImageView
                         android:layout_width="16dp"
                         android:layout_height="26dp"
                         android:layout_marginTop="10dp"

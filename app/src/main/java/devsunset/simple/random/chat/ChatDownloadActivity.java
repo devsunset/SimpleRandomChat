@@ -298,6 +298,11 @@ public class ChatDownloadActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
+        finish();
+    }
+
     @Override protected void onDestroy() {
         super.onDestroy();
 
@@ -312,4 +317,6 @@ public class ChatDownloadActivity extends Activity {
             fileClear();
         }
     }
+
+
 }

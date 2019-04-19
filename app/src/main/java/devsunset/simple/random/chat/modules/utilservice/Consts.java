@@ -76,4 +76,6 @@ public class Consts {
     // Ads TEST ID
     public static final String ADS_TEST_ID = "8ADEEDFFEE385A12C9690826C657C0ED";
 
+    // Ads TEST SUB ID
+    public static final String ADS_TEST_SUB_ID = "C97C8E914168C5BCBAA709B1985675B6";
 }

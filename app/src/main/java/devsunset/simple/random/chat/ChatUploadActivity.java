@@ -158,7 +158,7 @@ public class ChatUploadActivity extends Activity {
         // Ads Skip
         private void loadRewardedVideoAd() {
             mRewardedVideoAd.loadAd(Consts.ADS_REWARD_VIDEO_ID,
-                    new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).build());
+                    new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).addTestDevice(Consts.ADS_TEST_SUB_ID).build());
         }
 
         @Override
@@ -598,6 +598,11 @@ public class ChatUploadActivity extends Activity {
 
     @OnClick(R.id.btnBackTop)
     void onBtnBackTopClicked() {
+        finish();
+    }
+
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
         finish();
     }
 

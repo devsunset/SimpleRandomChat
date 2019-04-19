@@ -145,7 +145,7 @@ public class ChatActivity extends Activity {
         MobileAds.initialize(this, Consts.ADS_APP_ID);
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(Consts.ADS_FULL_SCREEN_ID);
-        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).addTestDevice(Consts.ADS_TEST_SUB_ID).build());
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ChatActivity extends Activity {
         MobileAds.initialize(this, Consts.ADS_APP_ID);
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(Consts.ADS_FULL_SCREEN_ID);
-        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).addTestDevice(Consts.ADS_TEST_ID).addTestDevice(Consts.ADS_TEST_SUB_ID).build());
     }
 
     /**
@@ -637,6 +637,11 @@ public class ChatActivity extends Activity {
                         @Override
                         public void onAdFailedToLoad(int errorCode) {
                             // Code to be executed when an ad request fails.
+                            Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
+                            intent.putExtra("ATX_ID",ATX_ID);
+                            intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
                         }
 
                         @Override
