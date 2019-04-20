@@ -601,8 +601,18 @@ public class ChatUploadActivity extends Activity {
         finish();
     }
 
+    @OnClick(R.id.tvBackTop)
+    void onTvBackTopClicked() {
+        finish();
+    }
+
     @OnClick(R.id.btnBack)
     void onBtnBackClicked() {
+        finish();
+    }
+
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
         finish();
     }
 

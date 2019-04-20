@@ -637,6 +637,11 @@ public class ChatActivity extends Activity {
                         @Override
                         public void onAdFailedToLoad(int errorCode) {
                             // Code to be executed when an ad request fails.
+                            Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
+                            intent.putExtra("ATX_ID",ATX_ID);
+                            intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
                         }
 
                         @Override
@@ -674,6 +679,11 @@ public class ChatActivity extends Activity {
 
     @OnClick(R.id.btnBack)
     void onBtnBackClicked() {
+        finish();
+    }
+
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
         finish();
     }
 

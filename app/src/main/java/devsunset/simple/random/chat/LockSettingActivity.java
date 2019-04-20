@@ -101,4 +101,12 @@ public class LockSettingActivity extends Activity  {
 
         finish();
     }
+
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(),0);
+
+        finish();
+    }
 }

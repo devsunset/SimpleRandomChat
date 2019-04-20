@@ -158,7 +158,7 @@ public class MessageDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
                             long curTime = System.currentTimeMillis();
                             long diffTime = (curTime - lastTime) / (1000 * 60 * 60 * 24);
 
-                            if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
+                            if (diffTime > Consts.ATTACH_FILE_MAX_DAY_PERIOD) {
                                 Toast.makeText(context,context.getApplicationContext().getResources().getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                             }else{
                                 Intent intent = new Intent(context, ChatDownloadActivity.class);

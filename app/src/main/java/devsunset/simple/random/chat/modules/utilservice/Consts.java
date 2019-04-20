@@ -51,13 +51,13 @@ public class Consts {
     public static final String IDS_PRIEFIX_BLA = "BLA_";
 
     // Data Clean Day
-    public static final int DATA_CLEAN_DAY = 15;
+    public static final int DATA_CLEAN_DAY = 7;
 
     // App Access Period
-    public static final int APP_ACCESS_PERIOD = 0;
+    public static final int APP_ACCESS_TIME_PERIOD = 3;
 
     // Attach File Download Period
-    public static final int ATTACH_FILE_MAX_PERIOD = 2;
+    public static final int ATTACH_FILE_MAX_DAY_PERIOD = 2;
 
     // Ads ADS_APP_ID
     // Sample - ca-app-pub-3940256099942544~3347511713
@@ -78,6 +78,5 @@ public class Consts {
 
     // Ads TEST SUB ID
     public static final String ADS_TEST_SUB_ID = "F2D7679FEA1408F5E5F5694F290F27B1";
-
 
 }

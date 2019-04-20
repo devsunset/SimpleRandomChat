@@ -188,7 +188,7 @@ public class ChatDownloadActivity extends Activity {
         long curTime = System.currentTimeMillis();
         long diffTime = (curTime - lastTime) / (1000 * 60 * 60 * 24);
 
-        if (diffTime > Consts.ATTACH_FILE_MAX_PERIOD) {
+        if (diffTime > Consts.ATTACH_FILE_MAX_DAY_PERIOD) {
             hud.dismiss();
             loadingText.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
@@ -295,6 +295,11 @@ public class ChatDownloadActivity extends Activity {
 
     @OnClick(R.id.btnBack)
     void onBtnBackClicked() {
+        finish();
+    }
+
+    @OnClick(R.id.tvBack)
+    void onTvBackClicked() {
         finish();
     }
 
