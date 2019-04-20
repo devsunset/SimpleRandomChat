@@ -1,110 +1,109 @@
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar(!**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/0(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/1(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/2(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/3(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/4(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/5(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/6(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/7(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/8(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/9(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/10(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/11(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/12(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/13(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/14(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/15(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/16(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/17(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/18(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/19(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/20(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/21(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/22(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/23(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/24(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/25(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/26(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/27(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/28(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/29(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/30(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/31(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/32(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/33(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/34(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/35(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/36(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/37(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/38(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/39(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/40(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/41(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/42(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/43(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/44(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/45(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/46(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/47(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/48(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/49(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/50(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/51(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/52(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/53(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/54(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/55(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/56(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/57(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/58(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/59(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/60(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/61(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/62(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/63(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/64(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/65(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/66(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/67(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/68(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/69(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/70(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/71(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/72(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/73(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/74(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/75(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/76(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/77(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/78(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/79(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/80(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/81(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/82(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/83(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/84(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/85(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/86(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/87(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/88(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/89(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/90(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/91(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/92(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/93(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/94(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/95(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/96(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/97(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/98(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/99(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/100(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/101(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/102(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/103(**.class)
--injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/104(**.class)
--outjars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/proguard/debug/0.jar
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/mergeJavaRes/release/0.jar(!**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/0(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/1(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/2(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/3(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/4(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/5(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/6(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/7(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/8(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/9(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/10(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/11(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/12(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/13(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/14(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/15(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/16(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/17(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/18(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/19(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/20(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/21(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/22(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/23(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/24(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/25(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/26(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/27(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/28(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/29(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/30(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/31(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/32(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/33(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/34(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/35(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/36(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/37(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/38(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/39(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/40(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/41(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/42(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/43(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/44(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/45(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/46(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/47(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/48(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/49(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/50(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/51(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/52(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/53(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/54(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/55(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/56(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/57(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/58(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/59(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/60(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/61(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/62(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/63(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/64(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/65(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/66(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/67(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/68(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/69(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/70(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/71(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/72(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/73(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/74(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/75(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/76(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/77(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/78(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/79(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/80(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/81(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/82(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/83(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/84(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/85(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/86(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/87(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/88(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/89(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/90(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/91(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/92(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/93(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/94(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/95(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/96(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/97(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/98(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/99(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/100(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/101(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/102(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/release/103(**.class)
+-outjars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/proguard/release/0.jar
 
 -libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/android.jar
 -libraryjars /Users/devsunset/Library/Android/sdk/build-tools/28.0.3/core-lambda-stubs.jar
@@ -114,35 +113,20 @@
 -libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/optional/android.test.runner.jar
 
 -forceprocessing
--printusage /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/debug/usage.txt
+-printusage /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/release/usage.txt
 -dontoptimize
--printmapping /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/debug/mapping.txt
+-printmapping /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/release/mapping.txt
 -dontusemixedcaseclassnames
 -keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod,SourceFile,LineNumberTable,Signature,InnerClasses,EnclosingMethod,*Annotation*,*Annotation*
 -renamesourcefileattribute SourceFile
 -verbose
 -dontnote com.android.vending.licensing.ILicensingService,com.google.vending.licensing.ILicensingService,com.google.android.vending.licensing.ILicensingService,android.support.**,androidx.**,org.apache.http.**,android.net.http.**,java.lang.invoke.**
--dontwarn org.jacoco.**,android.support.**,androidx.**,android.util.FloatMath,org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement,javax.annotation.**,kotlin.Unit,retrofit2.-KotlinExtensions,javax.annotation.**,org.codehaus.mojo.animal_sniffer.*,okhttp3.internal.platform.ConscryptPlatform,okio.**,com.google.firebase.perf.network.**,com.google.android.gms.measurement.AppMeasurement*,android.arch.persistence.room.paging.**,com.google.firebase.components.Component$Instantiation,android.security.NetworkSecurityPolicy,android.app.Notification,sun.misc.Unsafe,libcore.io.Memory,com.google.android.apps.common.proguard.UsedBy*,javax.annotation.**,org.checkerframework.**,com.google.firebase.analytics.FirebaseAnalytics,com.google.firebase.analytics.FirebaseAnalytics$Event,com.google.firebase.analytics.FirebaseAnalytics$Param
+-dontwarn android.support.**,androidx.**,android.util.FloatMath,org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement,javax.annotation.**,kotlin.Unit,retrofit2.-KotlinExtensions,javax.annotation.**,org.codehaus.mojo.animal_sniffer.*,okhttp3.internal.platform.ConscryptPlatform,okio.**,com.google.firebase.perf.network.**,com.google.android.gms.measurement.AppMeasurement*,android.arch.persistence.room.paging.**,com.google.firebase.components.Component$Instantiation,android.security.NetworkSecurityPolicy,android.app.Notification,sun.misc.Unsafe,libcore.io.Memory,com.google.android.apps.common.proguard.UsedBy*,javax.annotation.**,org.checkerframework.**,com.google.firebase.analytics.FirebaseAnalytics,com.google.firebase.analytics.FirebaseAnalytics$Event,com.google.firebase.analytics.FirebaseAnalytics$Param
 -ignorewarnings
 -printconfiguration /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/config.txt
--printseeds /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/debug/seeds.txt
+-printseeds /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/release/seeds.txt
 
 
-
--keep class com.vladium.** {
-    <fields>;
-    <methods>;
-}
-
--keep class org.jacoco.** {
-    <fields>;
-    <methods>;
-}
-
--keep interface  org.jacoco.** {
-    <fields>;
-    <methods>;
-}
 
 -keep public class com.google.vending.licensing.ILicensingService
 
@@ -242,142 +226,142 @@
     <methods>;
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:26
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:26
 -keep class android.support.v4.app.CoreComponentFactory {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:140
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:138
 -keep class cafe.adriel.androidaudiorecorder.AudioRecorderActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:91
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:89
 -keep class com.crashlytics.android.CrashlyticsInitProvider {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:204
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:202
 -keep class com.google.android.gms.ads.AdActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:200
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:198
 -keep class com.google.android.gms.common.api.GoogleApiActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:154
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:152
 -keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:168
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:166
 -keep class com.google.android.gms.measurement.AppMeasurementJobService {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:149
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:147
 -keep class com.google.android.gms.measurement.AppMeasurementReceiver {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:164
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:162
 -keep class com.google.android.gms.measurement.AppMeasurementService {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:136
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:134
 -keep class com.google.android.gms.oss.licenses.OssLicensesActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:133
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:131
 -keep class com.google.android.gms.oss.licenses.OssLicensesMenuActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:102
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:100
 -keep class com.google.firebase.components.ComponentDiscoveryService {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:174
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:172
 -keep class com.google.firebase.iid.FirebaseInstanceIdReceiver {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:186
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:184
 -keep class com.google.firebase.iid.FirebaseInstanceIdService {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:125
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:123
 -keep class com.google.firebase.messaging.FirebaseMessagingService {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:96
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:94
 -keep class com.google.firebase.perf.provider.FirebasePerfProvider {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:194
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:192
 -keep class com.google.firebase.provider.FirebaseInitProvider {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:137
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:135
 -keep class com.nabinbhandari.android.permissions.PermissionsActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:72
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:70
 -keep class com.theartofdev.edmodo.cropper.CropImageActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:56
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:54
 -keep class devsunset.simple.random.chat.ChatActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:68
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:66
 -keep class devsunset.simple.random.chat.ChatDownloadActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:64
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:62
 -keep class devsunset.simple.random.chat.ChatUploadActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:48
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:46
 -keep class devsunset.simple.random.chat.LockActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:52
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:50
 -keep class devsunset.simple.random.chat.LockSettingActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:37
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:35
 -keep class devsunset.simple.random.chat.MainActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:44
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:42
 -keep class devsunset.simple.random.chat.MessageContent {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:60
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:58
 -keep class devsunset.simple.random.chat.WebViewActivity {
     <init>();
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:77
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:75
 -keep class devsunset.simple.random.chat.modules.fcmservice.MyFirebaseMessagingService {
     <init>();
 }
@@ -476,7 +460,7 @@
 }
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_list.xml:9
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:83
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:84
 -keep class android.support.v7.widget.RecyclerView {
     <init>(android.content.Context,android.util.AttributeSet);
 }
@@ -509,12 +493,12 @@
     <init>(android.content.Context,android.util.AttributeSet);
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_download_activity.xml:119
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_download_activity.xml:120
 -keep class com.github.chrisbanes.photoview.PhotoView {
     <init>(android.content.Context,android.util.AttributeSet);
 }
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/lock_setting_activity.xml:58
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/lock_setting_activity.xml:59
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/lock_activity.xml:39
 -keep class com.goodiebag.pinview.Pinview {
     <init>(android.content.Context,android.util.AttributeSet);
