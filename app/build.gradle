@@ -17,6 +17,7 @@ android {
     buildTypes {
         debug {
             debuggable true
+            testCoverageEnabled = true
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -107,4 +108,5 @@ dependencies {
     implementation 'com.kaopiz:kprogresshud:1.2.0'
     //cropper
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
+
 }

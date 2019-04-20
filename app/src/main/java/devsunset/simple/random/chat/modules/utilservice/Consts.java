@@ -74,8 +74,10 @@ public class Consts {
     // public static final String ADS_REWARD_VIDEO_ID = "ca-app-pub-3940256099942544/5224354917";
 
     // Ads TEST ID
-    public static final String ADS_TEST_ID = "F2D7679FEA1408F5E5F5694F290F27B1";
+    public static final String ADS_TEST_ID = "C97C8E914168C5BCBAA709B1985675B6";
 
     // Ads TEST SUB ID
-    public static final String ADS_TEST_SUB_ID = "C97C8E914168C5BCBAA709B1985675B6";
+    public static final String ADS_TEST_SUB_ID = "F2D7679FEA1408F5E5F5694F290F27B1";
+
+
 }

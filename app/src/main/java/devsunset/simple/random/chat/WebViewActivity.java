@@ -60,9 +60,4 @@ public class WebViewActivity extends Activity{
     void onBtnBackClicked() {
         finish();
     }
-
-    @OnClick(R.id.tvBack)
-    void onTvBackClicked() {
-        finish();
-    }
 }

@@ -5,14 +5,14 @@
 
 
     <application
-        android:allowBackup="false"
-        tools:replace="android:allowBackup"
-        android:fullBackupContent="false"
+        android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light">
+        android:theme="@style/Theme.AppCompat.Light"
+        tools:replace="android:appComponentFactory">
         <activity android:name="devsunset.simple.random.chat.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,10 +70,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

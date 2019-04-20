@@ -25,7 +25,6 @@ public class DataVo {
     private final String RESULT_MESSAGE;
     private final List<HashMap<String,Object>> RESULT_DATA;
 
-
     /**
      * DataVo
      * @param CALL_FUNCTION

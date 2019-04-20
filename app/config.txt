@@ -1,36 +1,157 @@
-# This is a configuration file for ProGuard.
-# http://proguard.sourceforge.net/index.html#manual/usage.html
-#
-# Starting with version 2.2 of the Android plugin for Gradle, this file is distributed together with
-# the plugin and unpacked at build-time. The files in $ANDROID_HOME are no longer maintained and
-# will be ignored by new version of the Android plugin for Gradle.
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar(!**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/0(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/1(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/2(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/3(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/4(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/5(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/6(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/7(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/8(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/9(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/10(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/11(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/12(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/13(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/14(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/15(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/16(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/17(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/18(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/19(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/20(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/21(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/22(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/23(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/24(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/25(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/26(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/27(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/28(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/29(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/30(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/31(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/32(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/33(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/34(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/35(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/36(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/37(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/38(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/39(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/40(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/41(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/42(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/43(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/44(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/45(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/46(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/47(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/48(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/49(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/50(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/51(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/52(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/53(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/54(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/55(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/56(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/57(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/58(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/59(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/60(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/61(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/62(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/63(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/64(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/65(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/66(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/67(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/68(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/69(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/70(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/71(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/72(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/73(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/74(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/75(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/76(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/77(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/78(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/79(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/80(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/81(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/82(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/83(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/84(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/85(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/86(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/87(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/88(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/89(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/90(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/91(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/92(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/93(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/94(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/95(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/96(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/97(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/98(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/99(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/100(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/101(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/102(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/103(**.class)
+-injars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/FirebasePerformancePlugin/debug/104(**.class)
+-outjars /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/transforms/proguard/debug/0.jar
 
-# Optimization is turned off by default. Dex does not like code run
-# through the ProGuard optimize steps (and performs some
-# of these optimizations on its own).
-# Note that if you want to enable optimization, you cannot just
-# include optimization flags in your own project configuration file;
-# instead you will need to point to the
-# "proguard-android-optimize.txt" file instead of this one from your
-# project.properties file.
+-libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/android.jar
+-libraryjars /Users/devsunset/Library/Android/sdk/build-tools/28.0.3/core-lambda-stubs.jar
+-libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/optional/org.apache.http.legacy.jar
+-libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/optional/android.test.mock.jar
+-libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/optional/android.test.base.jar
+-libraryjars /Users/devsunset/Library/Android/sdk/platforms/android-28/optional/android.test.runner.jar
+
+-forceprocessing
+-printusage /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/debug/usage.txt
 -dontoptimize
-
+-printmapping /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/debug/mapping.txt
 -dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod,SourceFile,LineNumberTable,Signature,InnerClasses,EnclosingMethod,*Annotation*,*Annotation*
+-renamesourcefileattribute SourceFile
 -verbose
+-dontnote com.android.vending.licensing.ILicensingService,com.google.vending.licensing.ILicensingService,com.google.android.vending.licensing.ILicensingService,android.support.**,androidx.**,org.apache.http.**,android.net.http.**,java.lang.invoke.**
+-dontwarn org.jacoco.**,android.support.**,androidx.**,android.util.FloatMath,org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement,javax.annotation.**,kotlin.Unit,retrofit2.-KotlinExtensions,javax.annotation.**,org.codehaus.mojo.animal_sniffer.*,okhttp3.internal.platform.ConscryptPlatform,okio.**,com.google.firebase.perf.network.**,com.google.android.gms.measurement.AppMeasurement*,android.arch.persistence.room.paging.**,com.google.firebase.components.Component$Instantiation,android.security.NetworkSecurityPolicy,android.app.Notification,sun.misc.Unsafe,libcore.io.Memory,com.google.android.apps.common.proguard.UsedBy*,javax.annotation.**,org.checkerframework.**,com.google.firebase.analytics.FirebaseAnalytics,com.google.firebase.analytics.FirebaseAnalytics$Event,com.google.firebase.analytics.FirebaseAnalytics$Param
+-ignorewarnings
+-printconfiguration /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/config.txt
+-printseeds /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/outputs/mapping/debug/seeds.txt
 
-# Preserve some attributes that may be required for reflection.
--keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
+
+
+-keep class com.vladium.** {
+    <fields>;
+    <methods>;
+}
+
+-keep class org.jacoco.** {
+    <fields>;
+    <methods>;
+}
+
+-keep interface  org.jacoco.** {
+    <fields>;
+    <methods>;
+}
 
 -keep public class com.google.vending.licensing.ILicensingService
+
 -keep public class com.android.vending.licensing.ILicensingService
+
 -keep public class com.google.android.vending.licensing.ILicensingService
--dontnote com.android.vending.licensing.ILicensingService
--dontnote com.google.vending.licensing.ILicensingService
--dontnote com.google.android.vending.licensing.ILicensingService
 
 # For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
--keepclasseswithmembernames class * {
+-keepclasseswithmembers,allowshrinking class * {
     native <methods>;
 }
 
@@ -46,12 +167,12 @@
 }
 
 # For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
--keepclassmembers enum * {
+-keepclassmembers enum  * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
 
--keepclassmembers class * implements android.os.Parcelable {
+-keepclassmembers class * extends android.os.Parcelable {
     public static final ** CREATOR;
 }
 
@@ -61,555 +182,565 @@
 
 # Preserve annotated Javascript interface methods.
 -keepclassmembers class * {
-    @android.webkit.JavascriptInterface <methods>;
+    @android.webkit.JavascriptInterface
+    <methods>;
 }
-
-# The support libraries contains references to newer platform versions.
-# Don't warn about those in case this app is linking against an older
-# platform version. We know about them, and they are safe.
--dontnote android.support.**
--dontnote androidx.**
--dontwarn android.support.**
--dontwarn androidx.**
-
-# This class is deprecated, but remains for backward compatibility.
--dontwarn android.util.FloatMath
 
 # Understand the @Keep support annotation.
 -keep class android.support.annotation.Keep
+
 -keep class androidx.annotation.Keep
 
--keep @android.support.annotation.Keep class * {*;}
--keep @androidx.annotation.Keep class * {*;}
+-keep @android.support.annotation.Keep class * {
+    <fields>;
+    <methods>;
+}
 
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <methods>;
+-keep @androidx.annotation.Keep class * {
+    <fields>;
+    <methods>;
 }
 
 -keepclasseswithmembers class * {
-    @androidx.annotation.Keep <methods>;
+    @android.support.annotation.Keep
+    <methods>;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <fields>;
+    @androidx.annotation.Keep
+    <methods>;
 }
 
 -keepclasseswithmembers class * {
-    @androidx.annotation.Keep <fields>;
+    @android.support.annotation.Keep
+    <fields>;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <init>(...);
+    @androidx.annotation.Keep
+    <fields>;
 }
 
 -keepclasseswithmembers class * {
-    @androidx.annotation.Keep <init>(...);
+    @android.support.annotation.Keep
+    <init>(...);
 }
 
-# These classes are duplicated between android.jar and org.apache.http.legacy.jar.
--dontnote org.apache.http.**
--dontnote android.net.http.**
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep
+    <init>(...);
+}
 
-# These classes are duplicated between android.jar and core-lambda-stubs.jar.
--dontnote java.lang.invoke.**
+# 지정해서 워닝 무시할 때
+# -dontwarn 패키지명.**
+# 아래의 3가지 것들은 default 요소들이지만 중요한 option이라 설명한다.
+# -dontoptimize #없애면 난독화 X
+# -dontobfuscate #없애면 최적화 X
+# -keepresourcexmlattributenames manifest/** #없애면 manifest 난독화 X
+-keep class androidx.appcompat.widget.** {
+    <fields>;
+    <methods>;
+}
 
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:139
+-keep class cafe.adriel.androidaudiorecorder.AudioRecorderActivity {
+    <init>();
+}
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:90
+-keep class com.crashlytics.android.CrashlyticsInitProvider {
+    <init>();
+}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:203
+-keep class com.google.android.gms.ads.AdActivity {
+    <init>();
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:199
+-keep class com.google.android.gms.common.api.GoogleApiActivity {
+    <init>();
+}
 
-#빌드 후 mapping seed usage cofing 파일을 만들어주는 옵션
--printmapping map.txt
--printseeds seed.txt
--printusage usage.txt
--printconfiguration config.txt
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:153
+-keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver {
+    <init>();
+}
 
-#소스 파일의 라인을 섞지 않는 옵션 (이거 안해주면 나중에 stacktrace보고 어느 line에서 오류가 난 것인지 확인 불가)
--keepattributes SourceFile,LineNumberTable
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:167
+-keep class com.google.android.gms.measurement.AppMeasurementJobService {
+    <init>();
+}
 
-#소스 파일 변수 명 바꾸는 옵션
--renamesourcefileattribute SourceFile
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:148
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver {
+    <init>();
+}
 
-#보통 라이브러리는 딱히 난독화 할 필요없을 때 이렇게 적어준다.
-#-keep class 라이브러리패키지명.** { *; }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:163
+-keep class com.google.android.gms.measurement.AppMeasurementService {
+    <init>();
+}
 
-#워닝뜨는거 무시할때
--ignorewarnings
-#지정해서 워닝 무시할 때
-#-dontwarn 패키지명.**
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:135
+-keep class com.google.android.gms.oss.licenses.OssLicensesActivity {
+    <init>();
+}
 
-#아래의 3가지 것들은 default 요소들이지만 중요한 option이라 설명한다.
-#-dontoptimize #없애면 난독화 X
-#-dontobfuscate #없애면 최적화 X
-#-keepresourcexmlattributenames manifest/** #없애면 manifest 난독화 X
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:132
+-keep class com.google.android.gms.oss.licenses.OssLicensesMenuActivity {
+    <init>();
+}
 
--keep class androidx.appcompat.widget.** { *; }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:101
+-keep class com.google.firebase.components.ComponentDiscoveryService {
+    <init>();
+}
 
-###################################################################
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:173
+-keep class com.google.firebase.iid.FirebaseInstanceIdReceiver {
+    <init>();
+}
 
-# Begin: Common Proguard rules
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:185
+-keep class com.google.firebase.iid.FirebaseInstanceIdService {
+    <init>();
+}
 
-# Don't note duplicate definition (Legacy Apche Http Client)
--dontnote android.net.http.*
--dontnote org.apache.http.**
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:124
+-keep class com.google.firebase.messaging.FirebaseMessagingService {
+    <init>();
+}
 
-# Add when compile with JDK 1.7
--keepattributes EnclosingMethod
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:95
+-keep class com.google.firebase.perf.provider.FirebasePerfProvider {
+    <init>();
+}
 
-# End: Common Proguard rules
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:193
+-keep class com.google.firebase.provider.FirebaseInitProvider {
+    <init>();
+}
 
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:136
+-keep class com.nabinbhandari.android.permissions.PermissionsActivity {
+    <init>();
+}
 
-# Begin: Proguard rules for Firebase
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:71
+-keep class com.theartofdev.edmodo.cropper.CropImageActivity {
+    <init>();
+}
 
-# Authentication
--keepattributes *Annotation*
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:55
+-keep class devsunset.simple.random.chat.ChatActivity {
+    <init>();
+}
 
-# Realtime database
--keepattributes Signature
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:67
+-keep class devsunset.simple.random.chat.ChatDownloadActivity {
+    <init>();
+}
 
-# End: Proguard rules for Firebase
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:63
+-keep class devsunset.simple.random.chat.ChatUploadActivity {
+    <init>();
+}
 
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:47
+-keep class devsunset.simple.random.chat.LockActivity {
+    <init>();
+}
 
-# Begin: Proguard rules for okhttp3
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:51
+-keep class devsunset.simple.random.chat.LockSettingActivity {
+    <init>();
+}
 
--dontwarn okhttp3.**
--dontwarn okio.**
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:36
+-keep class devsunset.simple.random.chat.MainActivity {
+    <init>();
+}
 
--dontnote okhttp3.**
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:43
+-keep class devsunset.simple.random.chat.MessageContent {
+    <init>();
+}
 
-# End: Proguard rules for okhttp3
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:59
+-keep class devsunset.simple.random.chat.WebViewActivity {
+    <init>();
+}
 
-
-# Begin: Proguard rules for retrofit2
-
-# Platform calls Class.forName on types which do not exist on Android to determine platform.
--dontnote retrofit2.Platform
-# Platform used when running on RoboVM on iOS. Will not be used at runtime.
--dontnote retrofit2.Platform$IOS$MainThreadExecutor
-# Platform used when running on Java 8 VMs. Will not be used at runtime.
--dontwarn retrofit2.Platform$Java8
-# Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
-# Retain declared checked exceptions for use by a Proxy instance.
--keepattributes Exceptions
-
-# End: Proguard rules for retrofit2
-
-
-# Gson uses generic type information stored in a class file when working with fields. Proguard
-# removes such information by default, so configure it to keep all of it.
--keepattributes Signature
-
-# For using GSON @Expose annotation
--keepattributes *Annotation*
-
-# Gson specific classes
--keep class sun.misc.Unsafe { *; }
-#-keep class com.google.gson.stream.** { *; }
-
-# Application classes that will be serialized/deserialized over Gson
--keep class com.google.gson.examples.android.model.** { *; }
-
-# Prevent proguard from stripping interface information from TypeAdapterFactory,
-# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
-
--dontnote sun.misc.Unsafe
--dontnote com.google.gson.internal.UnsafeAllocator
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:76
+-keep class devsunset.simple.random.chat.modules.fcmservice.MyFirebaseMessagingService {
+    <init>();
+}
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:26
--keep class android.support.v4.app.CoreComponentFactory { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:140
--keep class cafe.adriel.androidaudiorecorder.AudioRecorderActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:91
--keep class com.crashlytics.android.CrashlyticsInitProvider { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:204
--keep class com.google.android.gms.ads.AdActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:200
--keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:154
--keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:168
--keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:149
--keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:164
--keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:136
--keep class com.google.android.gms.oss.licenses.OssLicensesActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:133
--keep class com.google.android.gms.oss.licenses.OssLicensesMenuActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:102
--keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:174
--keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:186
--keep class com.google.firebase.iid.FirebaseInstanceIdService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:125
--keep class com.google.firebase.messaging.FirebaseMessagingService { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:96
--keep class com.google.firebase.perf.provider.FirebasePerfProvider { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:194
--keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:137
--keep class com.nabinbhandari.android.permissions.PermissionsActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:72
--keep class com.theartofdev.edmodo.cropper.CropImageActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:56
--keep class devsunset.simple.random.chat.ChatActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:68
--keep class devsunset.simple.random.chat.ChatDownloadActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:64
--keep class devsunset.simple.random.chat.ChatUploadActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:48
--keep class devsunset.simple.random.chat.LockActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:52
--keep class devsunset.simple.random.chat.LockSettingActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:37
--keep class devsunset.simple.random.chat.MainActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:44
--keep class devsunset.simple.random.chat.MessageContent { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:60
--keep class devsunset.simple.random.chat.WebViewActivity { <init>(); }
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:77
--keep class devsunset.simple.random.chat.modules.fcmservice.MyFirebaseMessagingService { <init>(); }
+-keep class devsunset.simple.random.chat.whateverString {
+    <init>();
+}
+
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_content.xml:143
--keep class android.support.v4.view.ViewPager { <init>(...); }
+-keep class android.support.v4.view.ViewPager {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_material.xml:41
--keep class android.support.v4.widget.NestedScrollView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_material.xml:41
+-keep class android.support.v4.widget.NestedScrollView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_select_dialog_material.xml:23
--keep class android.support.v7.app.AlertController$RecycleListView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_select_dialog_material.xml:23
+-keep class android.support.v7.app.AlertController$RecycleListView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_action_menu_item_layout.xml:17
--keep class android.support.v7.view.menu.ActionMenuItemView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_action_menu_item_layout.xml:17
+-keep class android.support.v7.view.menu.ActionMenuItemView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_expanded_menu_layout.xml:17
--keep class android.support.v7.view.menu.ExpandedMenuView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_expanded_menu_layout.xml:17
+-keep class android.support.v7.view.menu.ExpandedMenuView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_popup_menu_item_layout.xml:17
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_list_menu_item_layout.xml:17
--keep class android.support.v7.view.menu.ListMenuItemView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_popup_menu_item_layout.xml:17
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_list_menu_item_layout.xml:17
+-keep class android.support.v7.view.menu.ListMenuItemView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_toolbar.xml:27
--keep class android.support.v7.widget.ActionBarContainer { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_toolbar.xml:27
+-keep class android.support.v7.widget.ActionBarContainer {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_toolbar.xml:43
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_action_mode_bar.xml:19
--keep class android.support.v7.widget.ActionBarContextView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_toolbar.xml:43
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_action_mode_bar.xml:19
+-keep class android.support.v7.widget.ActionBarContextView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_toolbar.xml:17
--keep class android.support.v7.widget.ActionBarOverlayLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_toolbar.xml:17
+-keep class android.support.v7.widget.ActionBarOverlayLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_action_menu_layout.xml:17
--keep class android.support.v7.widget.ActionMenuView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_action_menu_layout.xml:17
+-keep class android.support.v7.widget.ActionMenuView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_activity_chooser_view.xml:19
--keep class android.support.v7.widget.ActivityChooserView$InnerLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_activity_chooser_view.xml:19
+-keep class android.support.v7.widget.ActivityChooserView$InnerLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_material.xml:18
--keep class android.support.v7.widget.AlertDialogLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_material.xml:18
+-keep class android.support.v7.widget.AlertDialogLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/fb3287d4e0b2826b02631c3c889fac19/res/layout/item_simple_text_multichoice.xml:2
--keep class android.support.v7.widget.AppCompatCheckedTextView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/2d9d1bff380b639b25228254cbd30c31/res/layout/item_simple_text_multichoice.xml:2
+-keep class android.support.v7.widget.AppCompatCheckedTextView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_button_bar_material.xml:26
--keep class android.support.v7.widget.ButtonBarLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_button_bar_material.xml:26
+-keep class android.support.v7.widget.ButtonBarLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_content_include.xml:19
--keep class android.support.v7.widget.ContentFrameLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_content_include.xml:19
+-keep class android.support.v7.widget.ContentFrameLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_title_material.xml:45
--keep class android.support.v7.widget.DialogTitle { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_title_material.xml:45
+-keep class android.support.v7.widget.DialogTitle {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_simple_overlay_action_mode.xml:23
--keep class android.support.v7.widget.FitWindowsFrameLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_simple_overlay_action_mode.xml:23
+-keep class android.support.v7.widget.FitWindowsFrameLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_simple.xml:17
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_dialog_title_material.xml:22
--keep class android.support.v7.widget.FitWindowsLinearLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_simple.xml:17
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_dialog_title_material.xml:22
+-keep class android.support.v7.widget.FitWindowsLinearLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_list.xml:9
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:84
--keep class android.support.v7.widget.RecyclerView { <init>(...); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_activity.xml:83
+-keep class android.support.v7.widget.RecyclerView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_search_view.xml:75
--keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_search_view.xml:75
+-keep class android.support.v7.widget.SearchView$SearchAutoComplete {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_toolbar.xml:36
--keep class android.support.v7.widget.Toolbar { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_toolbar.xml:36
+-keep class android.support.v7.widget.Toolbar {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_simple_overlay_action_mode.xml:32
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_screen_simple.xml:25
--keep class android.support.v7.widget.ViewStubCompat { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_simple_overlay_action_mode.xml:32
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_screen_simple.xml:25
+-keep class android.support.v7.widget.ViewStubCompat {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_title_material.xml:56
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_material.xml:52
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/1cd97c55e6d854b22e33f5554d11abe9/res/layout/abc_alert_dialog_button_bar_material.xml:43
--keep class android.widget.Space { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_title_material.xml:56
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_material.xml:52
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/f5b84b5cbec39dbf6a5e111538d0bca4/res/layout/abc_alert_dialog_button_bar_material.xml:43
+-keep class android.widget.Space {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_setting.xml:370
--keep class com.github.angads25.toggle.widget.LabeledSwitch { <init>(...); }
+-keep class com.github.angads25.toggle.widget.LabeledSwitch {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_download_activity.xml:120
--keep class com.github.chrisbanes.photoview.PhotoView { <init>(...); }
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/chat_download_activity.xml:119
+-keep class com.github.chrisbanes.photoview.PhotoView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/lock_setting_activity.xml:59
+# Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/lock_setting_activity.xml:58
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/lock_activity.xml:39
--keep class com.goodiebag.pinview.Pinview { <init>(...); }
+-keep class com.goodiebag.pinview.Pinview {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_content.xml:18
--keep class com.google.android.gms.ads.AdView { <init>(...); }
+-keep class com.google.android.gms.ads.AdView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/3d01981fb555df28f3362b826c9fee99/res/layout/kprogresshud_hud.xml:2
--keep class com.kaopiz.kprogresshud.BackgroundLayout { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/c98654a82fc3c0a39466578f59f92631/res/layout/kprogresshud_hud.xml:2
+-keep class com.kaopiz.kprogresshud.BackgroundLayout {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/508772ba9735d289e2096e0e17edf075/res/layout/crop_image_activity.xml:2
--keep class com.theartofdev.edmodo.cropper.CropImageView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/7bb50e75339ea37bf84d4f20e8e66211/res/layout/crop_image_activity.xml:2
+-keep class com.theartofdev.edmodo.cropper.CropImageView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/508772ba9735d289e2096e0e17edf075/res/layout/crop_image_view.xml:13
--keep class com.theartofdev.edmodo.cropper.CropOverlayView { <init>(...); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/7bb50e75339ea37bf84d4f20e8e66211/res/layout/crop_image_view.xml:13
+-keep class com.theartofdev.edmodo.cropper.CropOverlayView {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_setting.xml:66
 # Referenced at /Users/devsunset/dev/workspace/android-workspace/SimpleRandomChat/app/src/main/res/layout/message_send.xml:27
--keep class lib.kingja.switchbutton.SwitchMultiButton { <init>(...); }
+-keep class lib.kingja.switchbutton.SwitchMultiButton {
+    <init>(android.content.Context,android.util.AttributeSet);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/2892428149120230b92a7b478f44920d/res/layout/aar_activity_audio_recorder.xml:44
--keepclassmembers class * { *** restartRecording(android.view.View); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/0a5e469649b6998389338553d3156c5b/res/layout/aar_activity_audio_recorder.xml:44
+-keepclassmembers class * {
+    *** restartRecording(android.view.View);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/2892428149120230b92a7b478f44920d/res/layout/aar_activity_audio_recorder.xml:72
--keepclassmembers class * { *** togglePlaying(android.view.View); }
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/0a5e469649b6998389338553d3156c5b/res/layout/aar_activity_audio_recorder.xml:72
+-keepclassmembers class * {
+    *** togglePlaying(android.view.View);
+}
 
-# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/2892428149120230b92a7b478f44920d/res/layout/aar_activity_audio_recorder.xml:59
--keepclassmembers class * { *** toggleRecording(android.view.View); }
-
+# Referenced at /Users/devsunset/.gradle/caches/transforms-2/files-2.1/0a5e469649b6998389338553d3156c5b/res/layout/aar_activity_audio_recorder.xml:59
+-keepclassmembers class * {
+    *** toggleRecording(android.view.View);
+}
 
 # Copyright (C) 2015 The Android Open Source Project
-#
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #      http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # When layoutManager xml attribute is used, RecyclerView inflates
-#LayoutManagers' constructors using reflection.
+# LayoutManagers' constructors using reflection.
 -keep public class * extends android.support.v7.widget.RecyclerView$LayoutManager {
-    public <init>(android.content.Context, android.util.AttributeSet, int, int);
+    public <init>(android.content.Context,android.util.AttributeSet,int,int);
     public <init>();
 }
 
-# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
-# EnclosingMethod is required to use InnerClasses.
--keepattributes Signature, InnerClasses, EnclosingMethod
-
 # Retain service method parameters when optimizing.
--keepclassmembers,allowshrinking,allowobfuscation interface * {
-    @retrofit2.http.* <methods>;
+-keepclassmembers,allowshrinking,allowobfuscation interface  * {
+    @retrofit2.http.*
+    <methods>;
 }
 
-# Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-
-# Ignore JSR 305 annotations for embedding nullability information.
--dontwarn javax.annotation.**
-
-# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
--dontwarn kotlin.Unit
-
-# Top-level functions that can only be used by Kotlin.
--dontwarn retrofit2.-KotlinExtensions
-
-# JSR 305 annotations are for embedding nullability information.
--dontwarn javax.annotation.**
-
 # A resource is loaded with a relative path so the package of this class must be preserved.
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
-
-# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
--dontwarn org.codehaus.mojo.animal_sniffer.*
-
-# OkHttp platform used only on JVM and when Conscrypt dependency is available.
--dontwarn okhttp3.internal.platform.ConscryptPlatform
+-keep,allowshrinking class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 # Retain generated class which implement Unbinder.
--keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
+-keep public class * extends butterknife.Unbinder {
+    public <init>(**,android.view.View);
+}
 
 # Prevent obfuscation of types which use ButterKnife annotations since the simple name
 # is used to reflectively look up the generated ViewBinding.
 -keep class butterknife.*
--keepclasseswithmembernames class * { @butterknife.* <methods>; }
--keepclasseswithmembernames class * { @butterknife.* <fields>; }
 
-# Needed when app is not using OkHttp
--dontwarn okio.**
+-keepclasseswithmembers,allowshrinking class * {
+    @butterknife.*
+    <methods>;
+}
 
-# Needed when app's compileSdkVersion < 24
--dontwarn com.google.firebase.perf.network.**
-
+-keepclasseswithmembers,allowshrinking class * {
+    @butterknife.*
+    <fields>;
+}
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.firebase-perf.zzep {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.firebase_remote_config.zzhi {
-  <fields>;
+    <fields>;
 }
 
 # Auto-generated proguard rule with obfuscated symbol
 -keepclassmembers class * {
-  @com.google.android.gms.internal.firebase_remote_config.zzcb <fields>;
+    @com.google.android.gms.internal.firebase_remote_config.zzcb
+    <fields>;
 }
-
-
-# Analytics library is optional.
-# Access to this class is protected by try/catch(NoClassDefFoundError e)
-# b/35686744 Don't fail during proguard if the class is missing from the APK.
--dontwarn com.google.android.gms.measurement.AppMeasurement*
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.ads.zzbbo {
-  <fields>;
+    <fields>;
 }
 
-
 -keep public class * extends android.arch.persistence.room.RoomDatabase
--dontwarn android.arch.persistence.room.paging.**
+
 # Copyright (C) 2018 The Android Open Source Project
-#
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #      http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # Ensure that reflectively-loaded inflater is not obfuscated. This can be
 # removed when we stop supporting AAPT1 builds.
--keepnames class android.support.v7.app.AppCompatViewInflater
+-keep,allowshrinking class android.support.v7.app.AppCompatViewInflater
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.measurement.zzuo {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.measurement.zzuo {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.clearcut.zzcg {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.measurement.zzuo {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.measurement.zzuo {
-  <fields>;
+    <fields>;
 }
 
--dontwarn com.google.firebase.components.Component$Instantiation
 # b/35135904 Ensure that proguard will not strip the mResultGuardian.
 -keepclassmembers class com.google.android.gms.common.api.internal.BasePendingResult {
-  com.google.android.gms.common.api.internal.BasePendingResult$ReleasableResultGuardian mResultGuardian;
+    com.google.android.gms.common.api.internal.BasePendingResult$ReleasableResultGuardian mResultGuardian;
 }
 
 # Keep implemtations of the AdMob mediation adapter interfaces. Adapters for
 # third party ad networks implement these interfaces and are invoked by the
 # AdMob SDK via reflection.
+-keep class * extends com.google.android.gms.ads.mediation.MediationAdapter {
+    public <fields>;
+    public <methods>;
+}
 
--keep class * implements com.google.android.gms.ads.mediation.MediationAdapter {
-  public *;
+-keep class * extends com.google.ads.mediation.MediationAdapter {
+    public <fields>;
+    public <methods>;
 }
--keep class * implements com.google.ads.mediation.MediationAdapter {
-  public *;
+
+-keep class * extends com.google.android.gms.ads.mediation.customevent.CustomEvent {
+    public <fields>;
+    public <methods>;
 }
--keep class * implements com.google.android.gms.ads.mediation.customevent.CustomEvent {
-  public *;
-}
--keep class * implements com.google.ads.mediation.customevent.CustomEvent {
-  public *;
+
+-keep class * extends com.google.ads.mediation.customevent.CustomEvent {
+    public <fields>;
+    public <methods>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.ads.zzbbo {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.ads.zzbbo {
-  <fields>;
+    <fields>;
 }
 
 # We keep all fields for every generated proto file as the runtime uses
 # reflection over them that ProGuard cannot detect. Without this keep
 # rule, fields may be removed that would cause runtime failures.
 -keepclassmembers class * extends com.google.android.gms.internal.measurement.zzuo {
-  <fields>;
+    <fields>;
 }
 
 # Proguard flags for consumers of the Google Play services SDK
 # https://developers.google.com/android/guides/setup#add_google_play_services_to_your_project
-
 # Keep SafeParcelable NULL value, needed for reflection by DowngradeableSafeParcel
 -keepclassmembers public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
     public static final *** NULL;
@@ -618,198 +749,222 @@
 # Needed for Parcelable/SafeParcelable classes & their creators to not get renamed, as they are
 # found via reflection.
 -keep class com.google.android.gms.common.internal.ReflectedParcelable
--keepnames class * implements com.google.android.gms.common.internal.ReflectedParcelable
--keepclassmembers class * implements android.os.Parcelable {
-  public static final *** CREATOR;
+
+-keep,allowshrinking class * extends com.google.android.gms.common.internal.ReflectedParcelable
+
+-keepclassmembers class * extends android.os.Parcelable {
+    public static final *** CREATOR;
 }
 
 # Keep the classes/members we need for client functionality.
--keep @interface android.support.annotation.Keep
+-keep @interface  android.support.annotation.Keep
+
 -keep @android.support.annotation.Keep class *
+
 -keepclasseswithmembers class * {
-  @android.support.annotation.Keep <fields>;
+    @android.support.annotation.Keep
+    <fields>;
 }
+
 -keepclasseswithmembers class * {
-  @android.support.annotation.Keep <methods>;
+    @android.support.annotation.Keep
+    <methods>;
 }
 
 # Keep the names of classes/members we need for client functionality.
--keep @interface com.google.android.gms.common.annotation.KeepName
--keepnames @com.google.android.gms.common.annotation.KeepName class *
--keepclassmembernames class * {
-  @com.google.android.gms.common.annotation.KeepName *;
+-keep @interface  com.google.android.gms.common.annotation.KeepName
+
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
 }
 
 # Keep Dynamite API entry points
--keep @interface com.google.android.gms.common.util.DynamiteApi
+-keep @interface  com.google.android.gms.common.util.DynamiteApi
+
 -keep @com.google.android.gms.common.util.DynamiteApi public class * {
-  public <fields>;
-  public <methods>;
+    public <fields>;
+    public <methods>;
 }
 
-# Needed when building against pre-Marshmallow SDK.
--dontwarn android.security.NetworkSecurityPolicy
-
-# Needed when building against Marshmallow SDK.
--dontwarn android.app.Notification
-
-# Protobuf has references not on the Android boot classpath
--dontwarn sun.misc.Unsafe
--dontwarn libcore.io.Memory
-
-# Internal Google annotations for generating Proguard keep rules.
--dontwarn com.google.android.apps.common.proguard.UsedBy*
-
-# Annotations referenced by the SDK but whose definitions are contained in
-# non-required dependencies.
--dontwarn javax.annotation.**
--dontwarn org.checkerframework.**
-
 # Copyright (C) 2016 The Android Open Source Project
-#
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #      http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # keep setters in VectorDrawables so that animations can still work.
 -keepclassmembers class android.support.graphics.drawable.VectorDrawableCompat$* {
-   void set*(***);
-   *** get*();
+    void set*(***);
+    *** get*();
 }
 
 # Copyright (C) 2017 The Android Open Source Project
-#
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #      http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# Prevent Parcelable objects from being removed or renamed.
+-keep class android.support.v4.media.** extends android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
 
 # Prevent Parcelable objects from being removed or renamed.
--keep class android.support.v4.media.** implements android.os.Parcelable {
+-keep class android.support.mediacompat.** extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
 
-# Prevent Parcelable objects from being removed or renamed.
--keep class android.support.mediacompat.** implements android.os.Parcelable {
+-keep class android.support.v4.media.Audio* extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.Audio* implements android.os.Parcelable {
+
+-keep class android.support.v4.media.MediaBrowserCompatUtils* extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.MediaBrowserCompatUtils* implements android.os.Parcelable {
+
+-keep class android.support.v4.media.MediaBrowserProtocol* extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.MediaBrowserProtocol* implements android.os.Parcelable {
+
+-keep class android.support.v4.media.MediaBrowserService* extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.MediaBrowserService* implements android.os.Parcelable {
+
+-keep class android.support.v4.media.Volume* extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.Volume* implements android.os.Parcelable {
+
+-keep class android.support.v4.media.app.** extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.app.** implements android.os.Parcelable {
+
+-keep class android.support.v4.media.session.MediaButton* extends android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }
--keep class android.support.v4.media.session.MediaButton* implements android.os.Parcelable {
-    public static final android.os.Parcelable$Creator *;
-}
+
 # Copyright (C) 2016 The Android Open Source Project
-#
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #      http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # CoordinatorLayout resolves the behaviors of its child components with reflection.
 -keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
-    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context,android.util.AttributeSet);
     public <init>();
 }
-
-# Make sure we keep annotations for CoordinatorLayout's DefaultBehavior and ViewPager's DecorView
--keepattributes *Annotation*
 
 # aapt2 is not (yet) keeping FQCNs defined in the appComponentFactory <application> attribute
 -keep class android.support.v4.app.CoreComponentFactory
 
--keepattributes *Annotation*
-
--keepclassmembers enum android.arch.lifecycle.Lifecycle$Event {
+-keepclassmembers enum  android.arch.lifecycle.Lifecycle$Event {
     <fields>;
 }
 
--keep class * implements android.arch.lifecycle.LifecycleObserver {
-}
+-keep class * extends android.arch.lifecycle.LifecycleObserver
 
--keep class * implements android.arch.lifecycle.GeneratedAdapter {
+-keep class * extends android.arch.lifecycle.GeneratedAdapter {
     <init>(...);
 }
 
 -keepclassmembers class ** {
-    @android.arch.lifecycle.OnLifecycleEvent *;
+    @android.arch.lifecycle.OnLifecycleEvent
+    <fields>;
+    @android.arch.lifecycle.OnLifecycleEvent
+    <methods>;
 }
+
 -keep public class * extends androidx.versionedparcelable.VersionedParcelable
--keep public class android.support.**Parcelizer { *; }
--keep public class androidx.**Parcelizer { *; }
+
+-keep public class android.support.**Parcelizer {
+    <fields>;
+    <methods>;
+}
+
+-keep public class androidx.**Parcelizer {
+    <fields>;
+    <methods>;
+}
+
 -keep public class androidx.versionedparcelable.ParcelImpl
 
 -keep class * extends android.arch.lifecycle.ViewModel {
     <init>();
 }
--keep @android.support.annotation.Keep class * {*;}
 
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <methods>;
+-keep @android.support.annotation.Keep class * {
+    <fields>;
+    <methods>;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <fields>;
+    @android.support.annotation.Keep
+    <methods>;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <init>(...);
+    @android.support.annotation.Keep
+    <fields>;
 }
 
-# Answers Proguard Config
--dontwarn com.google.firebase.analytics.FirebaseAnalytics
--dontwarn com.google.firebase.analytics.FirebaseAnalytics$Event
--dontwarn com.google.firebase.analytics.FirebaseAnalytics$Param
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep
+    <init>(...);
+}
 
 # Fabric Proguard Config
--keep class com.google.android.gms.common.GooglePlayServicesUtil {*;}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {*;}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {*;}
--keep class com.google.android.gms.measurement.AppMeasurement$OnEventListener {*;}
+-keep class com.google.android.gms.common.GooglePlayServicesUtil {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.google.android.gms.measurement.AppMeasurement$OnEventListener {
+    <fields>;
+    <methods>;
+}
+
 -keep class com.google.android.gms.measurement.AppMeasurement {
-    static com.google.android.gms.measurement.AppMeasurement getInstance(android.content.Context, java.lang.String, java.lang.String);
+    static com.google.android.gms.measurement.AppMeasurement getInstance(android.content.Context,java.lang.String,java.lang.String);
     void registerOnMeasurementEventListener(com.google.android.gms.measurement.AppMeasurement$OnEventListener);
 }
+
 -keep class com.google.firebase.FirebaseApp {
     static com.google.firebase.FirebaseApp getInstance();
     boolean isDataCollectionDefaultEnabled();
 }
-
--ignorewarnings

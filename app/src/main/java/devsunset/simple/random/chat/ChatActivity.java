@@ -637,11 +637,6 @@ public class ChatActivity extends Activity {
                         @Override
                         public void onAdFailedToLoad(int errorCode) {
                             // Code to be executed when an ad request fails.
-                            Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
-                            intent.putExtra("ATX_ID",ATX_ID);
-                            intent.putExtra("TO_APP_KEY",TO_APP_KEY);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            startActivity(intent);
                         }
 
                         @Override
@@ -682,11 +677,6 @@ public class ChatActivity extends Activity {
         finish();
     }
 
-    @OnClick(R.id.tvBack)
-    void onTvBackClicked() {
-        finish();
-    }
-
     @Override
     public void onDestroy() {
         // Always unregister when an object no longer should be on the bus.a
@@ -700,7 +690,7 @@ public class ChatActivity extends Activity {
      */
     @Subscribe
     public void receiveMessageReloadMessageList(String event) {
-        Logger.i("receiveMessageReloadMessageList process... :  "+event);
+        Logger.i("receiveMessageReloadMessageList process... ");
         getDatabase(ATX_ID);
     }
 }

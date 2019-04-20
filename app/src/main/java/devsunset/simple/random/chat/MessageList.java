@@ -90,7 +90,6 @@ public class MessageList extends Fragment {
 	 * @param talkAppId
 	 */
 	public void getDatabase(String talkAppId) {
-
 		class GetTasks extends AsyncTask<Void, Void, List<AppTalkMain>> {
 
 			@Override
@@ -221,7 +220,7 @@ public class MessageList extends Fragment {
 	 */
 	@Subscribe
 	public void receiveMessageReloadMessageList(String event) {
-		Logger.i("receiveMessageReloadMessageList process... :  "+event);
+		Logger.i("receiveMessageReloadMessageList process... ");
 
 		//답변한 메시지 목록에서 숨기기
 		if("Y".equals(AccountInfo.getAccountInfo(getActivity()).get("SET_SEND_LIST_HIDE_YN"))){
