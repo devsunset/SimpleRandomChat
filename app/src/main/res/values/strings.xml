@@ -3,7 +3,7 @@
         <string name="app_name">Signal</string>
         <string name="loading">Loading …</string>
         <string name="loading_wait">Loading … Please wait.</string>
-        <string name="notice_text">Do not request any personal information from the terminal or store it on the server. \n\n\nTo use voice and image transmission function, Process it.</string>
+        <string name="notice_text">Do not request any personal information from the terminal or store it on the server. \n\n\nThe storage is temporarily used for photo and voice transmission and deletion processing.</string>
         <string name="main_back_finish">\'Back\' button to exit again</string>
         <string name="network_error">Network connection failed</string>
         <string name="verification_code_subtext">Enter your screen lock password</string>
@@ -15,7 +15,7 @@
         <string name="send_result">message sent</string>
         <string name="new_message_receive">Receiving a new message</string>
         <string name="default_notification_channel_id">SIMPLE_RANDOM_CHAT</string>
-        <string name="default_received_message">Message arrival</string>
+        <string name="default_received_message">Receive message</string>
         <string name="alarm_title">Set message notifications</string>
         <string name="atype_msg">Notification + Pop-Up</string>
         <string name="btype_msg">Notification (silent,non-vibration) + Pop-Up</string>
@@ -26,7 +26,7 @@
         <string name="lock_pwd_msg">Lock screen</string>
         <string name="password_success">The password has been successfully set.</string>
         <string name="password_fail">Passwords do not match</string>
-        <string name="empty_message">No replies received</string>
+        <string name="empty_message">No answer message.</string>
         <string name="black_list_send">Report</string>
         <string name="bye_send">Delete</string>
         <string name="hide">Hidden</string>
