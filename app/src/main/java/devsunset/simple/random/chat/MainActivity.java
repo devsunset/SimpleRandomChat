@@ -252,7 +252,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         long curTime = System.currentTimeMillis();
         long diffTime = (curTime - lastTime) / (1000 * 60 * 60);
 
-        if (true || diffTime > Consts.APP_ACCESS_PERIOD) {
+        if (diffTime >= Consts.APP_ACCESS_PERIOD) {
 
             dataClean();
 

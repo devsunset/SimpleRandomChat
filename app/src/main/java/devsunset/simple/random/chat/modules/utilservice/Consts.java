@@ -54,7 +54,7 @@ public class Consts {
     public static final int DATA_CLEAN_DAY = 15;
 
     // App Access Period
-    public static final int APP_ACCESS_PERIOD = 1;
+    public static final int APP_ACCESS_PERIOD = 0;
 
     // Attach File Download Period
     public static final int ATTACH_FILE_MAX_PERIOD = 2;
