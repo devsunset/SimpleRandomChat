@@ -3,7 +3,8 @@
     <string name="app_name">Signal</string>
     <string name="loading">Loading…</string>
     <string name="loading_wait">Loading… 잠시만 기다려 주세요.</string>
-    <string name="notice_text">단말 기기의 개인정보를 요청 하거나 서버에 저장 하지 않습니다.\n\n\n음성,이미지 전송 기능 사용 시에만 권한 요청 확인 후 파일 처리를 위해 내부 Storge를 사용 후 삭제 처리 합니다.</string>
+    <string name="notice_text">단말 기기의 개인정보를 요청 하거나 서버에 저장 하지 않습니다.\n\n\n음성,이미지 전송 기능 사용 시에만 권한 요청 확인 후 파일 처리를 위해 내부 Storge를 사용 후 삭제 처리 합니다.\n\n\n청소년 보호법 상 음란물, 성매매 등 불법행위가 채팅방 내에서 사용될 경우 법적 처벌 받을 수 있습니다.\n\n\n채팅방에서 계좌번호, 주민번호, 신용카드 번호 등 개인정보의 요구는 피싱 등 범죄에 악용될 수 있으니 채팅 내 사용하지 않도록 주의 하시기 바랍니다. </string>
+    <string name="korea_warnning">청소년 보호법 상 음란물, 성매매 등 불법행위가 채팅방 내에서 사용될 경우 법적 처벌 받을 수 있습니다.\n\n채팅방에서 계좌번호, 주민번호, 신용카드 번호 등 개인정보의 요구는 피싱 등 범죄에 악용될 수 있으니 채팅 내 사용하지 않도록 주의 하시기 바랍니다.</string>
     <string name="main_back_finish">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다 </string>
     <string name="network_error">네트워크 연결에 실패 하였습니다</string>
     <string name="verification_code_subtext">화면 잠금 비밀 번호를 입력하세요</string>

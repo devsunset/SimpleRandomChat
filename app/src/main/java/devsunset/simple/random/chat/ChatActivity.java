@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -104,6 +105,8 @@ public class ChatActivity extends Activity {
 
     private KProgressHUD hud;
 
+    private static String strCountry ="";
+
     // Ads Full Screen
     private InterstitialAd mInterstitialAd;
 
@@ -124,6 +127,9 @@ public class ChatActivity extends Activity {
 
         //Event Bus 등록
         BusProvider.getInstance().register(this);
+
+        Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
+        strCountry = systemLocale.getCountry();
 
         httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
 
@@ -240,8 +246,9 @@ public class ChatActivity extends Activity {
                     if(appTalkThread.size() == 1 && APP_ID.equals(appTalkThread.get(0).getTALK_APP_ID())){
                         replyArea.setVisibility(View.GONE);
                         btnBlackListSend.setVisibility(View.GONE);
+                    }else if("KR".equalsIgnoreCase(strCountry) && appTalkThread.size() >= 1){
+                        btnBlackListSend.setVisibility(View.VISIBLE);
                     }
-
                 } else {
                     MessageItem mi = new MessageItem();
                     mi.setDrawableId(R.drawable.empty_message);

@@ -4,6 +4,7 @@
         <string name="loading">Loading …</string>
         <string name="loading_wait">Loading … Please wait.</string>
         <string name="notice_text">Do not request any personal information from the terminal or store it on the server. \n\n\nThe storage is temporarily used for photo and voice transmission and deletion processing.</string>
+        <string name="korea_warnning">-</string>
         <string name="main_back_finish">\'Back\' button to exit again</string>
         <string name="network_error">Network connection failed</string>
         <string name="verification_code_subtext">Enter your screen lock password</string>

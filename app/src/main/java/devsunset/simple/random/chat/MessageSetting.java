@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
@@ -18,6 +19,7 @@ import com.github.angads25.toggle.widget.LabeledSwitch;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +52,9 @@ public class MessageSetting extends Fragment {
 
 	@BindView(R.id.lockPwd)
 	LabeledSwitch switchLockPwd;
+
+	@BindView(R.id.korea_warnning_area)
+	LinearLayout korea_warnning_area;
 
 	// newInstance constructor for creating fragment with arguments
 	public static MessageSetting newInstance() {
@@ -147,6 +152,13 @@ public class MessageSetting extends Fragment {
 				}
 			}
 		});
+
+		Locale systemLocale = getResources().getConfiguration().locale;
+		String strCountry = systemLocale.getCountry();
+
+		if("KR".equalsIgnoreCase(strCountry)){
+			korea_warnning_area.setVisibility(View.VISIBLE);
+		}
 
 		return v;
 	}

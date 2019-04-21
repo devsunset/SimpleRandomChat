@@ -567,6 +567,54 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!-- KOREA WARNNING -->
+        <LinearLayout
+            android:id="@+id/korea_warnning_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_table_line"
+            android:orientation="vertical"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/table_row_height"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/common_table_line"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/textbox_horizontal_margin"
+                    android:paddingRight="@dimen/textbox_horizontal_margin">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:text="@string/korea_warnning"
+                        android:textSize="6pt" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
         <!-- 10 Row License -->
         <LinearLayout
             android:layout_width="match_parent"

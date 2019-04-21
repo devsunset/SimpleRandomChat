@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:gravity="center"
-        android:background="@color/baseColor"
+        android:background="@color/black"
         android:orientation="horizontal">
 
         <!-- Sample ID : ca-app-pub-3940256099942544/6300978111 -->
