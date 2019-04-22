@@ -89,6 +89,9 @@ public class ChatActivity extends Activity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.korea_warnning_desc)
+    LinearLayout korea_warnning_desc;
+
     private RecyclerView.LayoutManager mLayoutManager;
 
     private static String APP_ID = "";
@@ -130,6 +133,10 @@ public class ChatActivity extends Activity {
 
         Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
         strCountry = systemLocale.getCountry();
+
+        if("KR".equalsIgnoreCase(strCountry)){
+            korea_warnning_desc.setVisibility(View.VISIBLE);
+        }
 
         httpConnectService = HttpConnectClient.getClient().create(HttpConnectService.class);
 

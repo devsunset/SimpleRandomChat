@@ -45,7 +45,7 @@
             android:text="@string/black_list_send"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/btnByeSend"
@@ -73,11 +73,32 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/korea_warnning_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/korea_warnning_chat"
+            android:textColor="@color/black"
+            android:textSize="9dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
-        android:background="@color/content_bg"
+        android:background="@drawable/edittext_bg"
         android:gravity="top"
         android:orientation="horizontal">
 
@@ -120,8 +141,8 @@
             android:layout_marginRight="6dip"
             android:layout_marginBottom="3dip"
             android:layout_weight="1"
-            android:inputType="textMultiLine"
             android:hint="@string/send_input"
+            android:inputType="textMultiLine"
             android:minHeight="@dimen/textbox_height"
             android:padding="6dp" />
 
@@ -129,10 +150,10 @@
             android:id="@+id/btnReplyMessageSend"
             android:layout_width="70dp"
             android:layout_height="50dp"
+            android:layout_marginRight="6dp"
             android:background="@drawable/btn_selector_common"
             android:padding="6dp"
             android:text="SEND"
-            android:layout_marginRight="6dp"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
