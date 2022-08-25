@@ -27,6 +27,7 @@ public interface HttpConnectService {
 
     /**
      * App Notice
+     *
      * @param param
      * @return
      */
@@ -36,6 +37,7 @@ public interface HttpConnectService {
 
     /**
      * App Info Init
+     *
      * @param param
      * @return
      */
@@ -45,6 +47,7 @@ public interface HttpConnectService {
 
     /**
      * App Info Update
+     *
      * @param param
      * @return
      */
@@ -54,6 +57,7 @@ public interface HttpConnectService {
 
     /**
      * Send Message
+     *
      * @param param
      * @return
      */
@@ -63,6 +67,7 @@ public interface HttpConnectService {
 
     /**
      * Reply Message
+     *
      * @param param
      * @return
      */
@@ -72,6 +77,7 @@ public interface HttpConnectService {
 
     /**
      * Bye Message
+     *
      * @param param
      * @return
      */
@@ -81,6 +87,7 @@ public interface HttpConnectService {
 
     /**
      * Request Black List
+     *
      * @param param
      * @return
      */

@@ -39,5 +39,5 @@ public interface AppTalkThreadDao {
     void deleteByAtxId(String atxId);
 
     @Query("DELETE fROM APP_TALK_THREAD WHERE ATX_ID IN ( SELECT ATX_ID FROM APP_TALK_MAIN WHERE ATX_STATUS = :atxStatus AND ATX_LOCAL_TIME  < :cttm )")
-    void deleteByCttm(String atxStatus , String cttm);
+    void deleteByCttm(String atxStatus, String cttm);
 }

@@ -33,37 +33,17 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
-
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        final ImageView ivPicture;
-        final TextView tv_talk_text;
-        final TextView tv_countryName_talk_target;
-        final TextView tv_atx_local_time;
-        final LinearLayout list_item_rows;
-        final Button btnTranslation;
-        final ImageView ivTalkTypeVoiceImage;
-
-        MyViewHolder(View view){
-            super(view);
-            ivPicture = view.findViewById(R.id.iv_picture);
-            tv_talk_text = view.findViewById(R.id.tv_talk_text);
-            tv_countryName_talk_target = view.findViewById(R.id.tv_countryName_talk_target);
-            tv_atx_local_time = view.findViewById(R.id.tv_atx_local_time);
-            list_item_rows = view.findViewById(R.id.list_item_rows);
-            btnTranslation = view.findViewById(R.id.btnTranslation);
-            ivTalkTypeVoiceImage= view.findViewById(R.id.ivTalkTypeVoiceImage);
-        }
-    }
+public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final ArrayList<MessageItem> MessageItemArrayList;
-    public MessageMainAdapter(ArrayList<MessageItem> MessageItemArrayList){
+
+    public MessageMainAdapter(ArrayList<MessageItem> MessageItemArrayList) {
         this.MessageItemArrayList = MessageItemArrayList;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_recycler_main_row, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -75,79 +55,80 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         String target = MessageItemArrayList.get(position).getTALK_TARGET();
 
-        if(!"NO_DATA".equals(target)){
-            if(target !=null  && !"".equals(target)){
+        if (!"NO_DATA".equals(target)) {
+            if (target != null && !"".equals(target)) {
                 target = " - Me";
             }
             myViewHolder.tv_countryName_talk_target.setText(MessageItemArrayList.get(position).getCOUNTRY_NAME());
             myViewHolder.tv_atx_local_time.setText(MessageItemArrayList.get(position).getATX_LOCAL_TIME());
         }
 
-        if(!"NO_DATA".equals(MessageItemArrayList.get(position).getTALK_TARGET())){
-            if(MessageItemArrayList.get(position).getFROM_LANG().equals(MessageItemArrayList.get(position).getTO_LANG())){
+        if (!"NO_DATA".equals(MessageItemArrayList.get(position).getTALK_TARGET())) {
+            if (MessageItemArrayList.get(position).getFROM_LANG().equals(MessageItemArrayList.get(position).getTO_LANG())) {
                 myViewHolder.btnTranslation.setVisibility(View.GONE);
-            }else{
+            } else {
                 myViewHolder.btnTranslation.setVisibility(View.VISIBLE);
             }
 
-            if(Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+            if (Consts.MESSAGE_TYPE_TEXT.equals(MessageItemArrayList.get(position).getTALK_TYPE())) {
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.GONE);
-            }else  if(Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())){
+            } else if (Consts.MESSAGE_TYPE_IMAGE.equals(MessageItemArrayList.get(position).getTALK_TYPE())) {
                 myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.ic_camera);
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 myViewHolder.ivTalkTypeVoiceImage.setBackgroundResource(R.drawable.ic_audio);
                 myViewHolder.ivTalkTypeVoiceImage.setVisibility(View.VISIBLE);
             }
         }
 
-        if(MessageItemArrayList.get(position).drawableId == R.drawable.empty_message) {
+        if (MessageItemArrayList.get(position).drawableId == R.drawable.empty_message) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.empty_message_bg);
-        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.new_message){
+        } else if (MessageItemArrayList.get(position).drawableId == R.drawable.new_message) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.newmessage_bg);
-        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.man){
+        } else if (MessageItemArrayList.get(position).drawableId == R.drawable.man) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.man_bg);
-        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.man_me){
+        } else if (MessageItemArrayList.get(position).drawableId == R.drawable.man_me) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.man_bg);
-        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman){
+        } else if (MessageItemArrayList.get(position).drawableId == R.drawable.woman) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
-        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.woman_me){
+        } else if (MessageItemArrayList.get(position).drawableId == R.drawable.woman_me) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.woman_bg);
-        } else if(MessageItemArrayList.get(position).drawableId == R.drawable.trash){
+        } else if (MessageItemArrayList.get(position).drawableId == R.drawable.trash) {
             myViewHolder.list_item_rows.setBackgroundResource(R.drawable.delete_bg);
         }
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MessageItemArrayList.get(position).getATX_ID() !=null){
+                if (MessageItemArrayList.get(position).getATX_ID() != null) {
                     Context context = v.getContext();
 
                     // 삭제 상태인 경우 갱신 안함
-                    if(!Consts.MESSAGE_STATUS_DELETE.equals(MessageItemArrayList.get(position).getATX_STATUS())){
-                        readTalkMainStatus(context,MessageItemArrayList.get(position).getATX_ID());
+                    if (!Consts.MESSAGE_STATUS_DELETE.equals(MessageItemArrayList.get(position).getATX_STATUS())) {
+                        readTalkMainStatus(context, MessageItemArrayList.get(position).getATX_ID());
                     }
 
                     Intent intent = new Intent(context, ChatActivity.class);
-                    intent.putExtra("ATX_ID",MessageItemArrayList.get(position).getATX_ID());
-                    intent.putExtra("ATX_STATUS",MessageItemArrayList.get(position).getATX_STATUS());
-                    intent.putExtra("REPLY_APP_KEY",MessageItemArrayList.get(position).getREPLY_APP_KEY());
+                    intent.putExtra("ATX_ID", MessageItemArrayList.get(position).getATX_ID());
+                    intent.putExtra("ATX_STATUS", MessageItemArrayList.get(position).getATX_STATUS());
+                    intent.putExtra("REPLY_APP_KEY", MessageItemArrayList.get(position).getREPLY_APP_KEY());
                     context.startActivity(intent);
                 }
             }
         });
     }
 
-    private void readTalkMainStatus(Context ctx,String atxId) {
+    private void readTalkMainStatus(Context ctx, String atxId) {
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
 
                 DatabaseClient.getInstance(ctx).getAppDataBase()
-                        .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_REPLY,atxId);
+                        .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_REPLY, atxId);
 
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
             }
@@ -159,5 +140,26 @@ public class MessageMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         return MessageItemArrayList.size();
+    }
+
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        final ImageView ivPicture;
+        final TextView tv_talk_text;
+        final TextView tv_countryName_talk_target;
+        final TextView tv_atx_local_time;
+        final LinearLayout list_item_rows;
+        final Button btnTranslation;
+        final ImageView ivTalkTypeVoiceImage;
+
+        MyViewHolder(View view) {
+            super(view);
+            ivPicture = view.findViewById(R.id.iv_picture);
+            tv_talk_text = view.findViewById(R.id.tv_talk_text);
+            tv_countryName_talk_target = view.findViewById(R.id.tv_countryName_talk_target);
+            tv_atx_local_time = view.findViewById(R.id.tv_atx_local_time);
+            list_item_rows = view.findViewById(R.id.list_item_rows);
+            btnTranslation = view.findViewById(R.id.btnTranslation);
+            ivTalkTypeVoiceImage = view.findViewById(R.id.ivTalkTypeVoiceImage);
+        }
     }
 }

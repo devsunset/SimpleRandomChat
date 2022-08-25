@@ -27,13 +27,14 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-public class WebViewActivity extends Activity{
+public class WebViewActivity extends Activity {
 
     private WebView mWebView;
     private WebSettings mWebSettings;
 
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_activity);
         ButterKnife.bind(this);

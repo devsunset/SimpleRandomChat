@@ -12,16 +12,6 @@
         android:orientation="vertical"
         android:padding="3dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingStart="15dp"
-            android:paddingBottom="6dp"
-            android:text="@string/alarm_title"
-            android:textSize="8pt"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -29,7 +19,6 @@
             android:baselineAligned="false"
             android:orientation="horizontal" />
 
-        <!--1 Notification-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +69,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 2 A Type -->
+        <!--1 Notification-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,13 +109,8 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="A Type"
-                        android:textStyle="bold"
-                        android:textSize="8pt" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -135,12 +119,17 @@
                         android:text="@string/atype_msg"
                         android:textSize="7pt" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 3 B Type -->
+        <!-- 2 A Type -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,14 +169,9 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="B Type"
-                        android:textStyle="bold"
-                        android:textSize="8pt" />
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
 
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -196,11 +180,16 @@
                         android:text="@string/btype_msg"
                         android:textSize="7pt" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 4 C Type -->
+        <!-- 3 B Type -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -241,13 +230,8 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="C Type"
-                        android:textStyle="bold"
-                        android:textSize="8pt" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -256,12 +240,17 @@
                         android:text="@string/ctype_msg"
                         android:textSize="7pt" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 5 D Type-->
+        <!-- 4 C Type -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -301,13 +290,8 @@
                         android:gravity="center"
                         android:paddingStart="5dp"
                         android:text="D Type"
-                        android:textStyle="bold"
-                        android:textSize="8pt" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -316,11 +300,16 @@
                         android:text="@string/dtype_msg"
                         android:textSize="7pt" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 6 New Message -->
+        <!-- 5 D Type-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -381,7 +370,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 7 Row bye confirm -->
+        <!-- 6 New Message -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -443,7 +432,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 8 Row reply message hide -->
+        <!-- 7 Row bye confirm -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -505,7 +494,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 9 Row password -->
+        <!-- 8 Row reply message hide -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -567,7 +556,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- KOREA WARNNING -->
+        <!-- 9 Row password -->
         <LinearLayout
             android:id="@+id/korea_warnning_area"
             android:layout_width="match_parent"
@@ -615,14 +604,14 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 10 Row License -->
+        <!-- KOREA WARNNING -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/common_table_line"
             android:orientation="vertical"
-            android:paddingTop="5dp"
             android:paddingLeft="2dp"
+            android:paddingTop="5dp"
             android:paddingRight="2dp"
             android:paddingBottom="2dp">
 
@@ -651,6 +640,15 @@
                     android:paddingLeft="@dimen/textbox_horizontal_margin"
                     android:paddingRight="@dimen/textbox_horizontal_margin">
 
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="26dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/btn_next"
+                        android:gravity="center"
+                        android:textColor="@color/white" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -664,20 +662,11 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/btn_next"
-                        android:gravity="center"
-                        android:textColor="@color/white" />
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- 11 Row  write -->
+        <!-- 10 Row License -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -727,6 +716,17 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <!-- 11 Row  write -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingBottom="6dp"
+            android:text="@string/alarm_title"
+            android:textSize="8pt"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

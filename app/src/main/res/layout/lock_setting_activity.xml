@@ -42,8 +42,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="@drawable/app_logo" />
 
         <TextView
@@ -52,6 +52,16 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:text="PASSWORD"
+            android:textColor="#D1D1D1"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="PASSWORD CONFIRM"
             android:textColor="#D1D1D1"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -68,16 +78,6 @@
             app:pinHeight="40dp"
             app:pinLength="4"
             app:pinWidth="40dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="PASSWORD CONFIRM"
-            android:textColor="#D1D1D1"
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
         <com.goodiebag.pinview.Pinview
             android:id="@+id/pinview2"

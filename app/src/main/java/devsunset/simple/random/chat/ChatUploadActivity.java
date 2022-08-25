@@ -71,52 +71,39 @@ import retrofit2.Response;
 public class ChatUploadActivity extends Activity {
     //public class ChatUploadActivity extends Activity implements RewardedVideoAdListener {
 
-    @BindView(R.id.tv_audio_desc)
-    TextView tv_audio_desc;
-
-    @BindView(R.id.compressed_image)
-    ImageView compressedImageView;
-
-    @BindView(R.id.compressed_size)
-    TextView compressedSizeTextView;
-
-    @BindView(R.id.uploadbuttonarea)
-    LinearLayout uploadbuttonarea;
-
-    @BindView(R.id.loadingpage)
-    LinearLayout loadingpage;
-
-    @BindView(R.id.uploadpage)
-    LinearLayout uploadpage;
-
-    @BindView(R.id.btnAudio)
-    Button btnAudio;
-
-    @BindView(R.id.imageArea)
-    LinearLayout imageArea;
-
-    private HttpConnectService httpConnectService = null;
-
-    private File actualImage;
-    private File compressedImage;
-
     private static final int PICK_AUDIO_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
-
-    private static  String AUDIO_FILE_NAME = "";
-    private static  String IMAGE_FILE_NAME = "";
-
+    private static String AUDIO_FILE_NAME = "";
+    private static String IMAGE_FILE_NAME = "";
     private static String ATX_ID = "";
     private static String TO_APP_KEY = "";
-
     private static boolean EXECUTE_ACTION = false;
-
+    @BindView(R.id.tv_audio_desc)
+    TextView tv_audio_desc;
+    @BindView(R.id.compressed_image)
+    ImageView compressedImageView;
+    @BindView(R.id.compressed_size)
+    TextView compressedSizeTextView;
+    @BindView(R.id.uploadbuttonarea)
+    LinearLayout uploadbuttonarea;
+    @BindView(R.id.loadingpage)
+    LinearLayout loadingpage;
+    @BindView(R.id.uploadpage)
+    LinearLayout uploadpage;
+    @BindView(R.id.btnAudio)
+    Button btnAudio;
+    @BindView(R.id.imageArea)
+    LinearLayout imageArea;
+    private HttpConnectService httpConnectService = null;
+    private File actualImage;
+    private File compressedImage;
     private KProgressHUD hud;
 
     // Ads video
     //private RewardedVideoAd mRewardedVideoAd;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_upload_activity);
         ButterKnife.bind(this);
@@ -139,8 +126,8 @@ public class ChatUploadActivity extends Activity {
         String ctm = System.currentTimeMillis() + "";
         String uid = UUID.randomUUID().toString();
 
-        AUDIO_FILE_NAME = ctm+"_"+uid+".mp3";
-        IMAGE_FILE_NAME = ctm+"_"+uid+".jpg";
+        AUDIO_FILE_NAME = ctm + "_" + uid + ".mp3";
+        IMAGE_FILE_NAME = ctm + "_" + uid + ".jpg";
 
         /*
             // Ads Skip
@@ -217,7 +204,7 @@ public class ChatUploadActivity extends Activity {
     /**
      * init content
      */
-    private void initContent(){
+    private void initContent() {
         cleaAudio();
         clearImage();
         fileClear();
@@ -231,7 +218,7 @@ public class ChatUploadActivity extends Activity {
      */
     private void dirCheck() {
         File dir = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
-        if(!dir.exists()){
+        if (!dir.exists()) {
             //noinspection ResultOfMethodCallIgnored
             dir.mkdirs();
         }
@@ -239,12 +226,12 @@ public class ChatUploadActivity extends Activity {
 
     @OnClick(R.id.btnAudio)
     void onBtnAudioClicked() {
-        if(uploadbuttonarea.getVisibility() == View.VISIBLE){
+        if (uploadbuttonarea.getVisibility() == View.VISIBLE) {
             dirCheck();
             cleaAudio();
             clearImage();
 
-            String filePath = Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+AUDIO_FILE_NAME;
+            String filePath = Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + AUDIO_FILE_NAME;
             int color = getResources().getColor(R.color.baseColor);
             AndroidAudioRecorder.with(this)
                     // Required
@@ -264,7 +251,7 @@ public class ChatUploadActivity extends Activity {
 
     @OnClick(R.id.btnImage)
     void onBtnImageClicked() {
-        if(uploadbuttonarea.getVisibility() == View.VISIBLE){
+        if (uploadbuttonarea.getVisibility() == View.VISIBLE) {
             dirCheck();
             cleaAudio();
             clearImage();
@@ -281,7 +268,7 @@ public class ChatUploadActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 cleaAudio();
                 imageArea.setVisibility(View.GONE);
-                tv_audio_desc.setText("Audio File Size : "+String.format("%s", getReadableFileSize(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+AUDIO_FILE_NAME).length())));
+                tv_audio_desc.setText("Audio File Size : " + String.format("%s", getReadableFileSize(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + AUDIO_FILE_NAME).length())));
             } else if (resultCode == RESULT_CANCELED) {
                 cleaAudio();
             }
@@ -332,7 +319,7 @@ public class ChatUploadActivity extends Activity {
 
                 // 이름 변경
                 //noinspection ResultOfMethodCallIgnored
-                compressedImage.renameTo(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+IMAGE_FILE_NAME));
+                compressedImage.renameTo(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + IMAGE_FILE_NAME));
 
                 setCompressedImage();
 
@@ -362,12 +349,13 @@ public class ChatUploadActivity extends Activity {
      * image view
      */
     private void setCompressedImage() {
-        compressedImageView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+IMAGE_FILE_NAME));
-        compressedSizeTextView.setText(String.format("Image File Size : %s", getReadableFileSize(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+IMAGE_FILE_NAME).length())));
+        compressedImageView.setImageBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + IMAGE_FILE_NAME));
+        compressedSizeTextView.setText(String.format("Image File Size : %s", getReadableFileSize(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + IMAGE_FILE_NAME).length())));
     }
 
     /**
      * get file data size
+     *
      * @param size
      * @return
      */
@@ -383,13 +371,13 @@ public class ChatUploadActivity extends Activity {
     /**
      * temp file clear
      */
-    private void fileClear(){
+    private void fileClear() {
         dirCheck();
 
         File file = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
         File[] files = file.listFiles();
-        if(files !=null && files.length > 0){
-            for( int i=0; i<files.length; i++){
+        if (files != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
                 //noinspection ResultOfMethodCallIgnored
                 files[i].delete();
             }
@@ -400,7 +388,7 @@ public class ChatUploadActivity extends Activity {
     void onBtnReplyAudioImageMessageSendClicked() {
 
         // 파일 선택 여부 체크
-        if("Audio File Size : 0 B".equals(tv_audio_desc.getText().toString()) && "Image File Size : 0 B".equals(compressedSizeTextView.getText().toString())){
+        if ("Audio File Size : 0 B".equals(tv_audio_desc.getText().toString()) && "Image File Size : 0 B".equals(compressedSizeTextView.getText().toString())) {
             Toast.makeText(getApplicationContext(), getString(R.string.choose_file), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -409,10 +397,10 @@ public class ChatUploadActivity extends Activity {
         boolean audioCheck;
         String childPath;
 
-        if(!"Audio File Size : 0 B".equals(tv_audio_desc.getText().toString())){
+        if (!"Audio File Size : 0 B".equals(tv_audio_desc.getText().toString())) {
             audioCheck = true;
             childPath = "audio";
-        }else{
+        } else {
             audioCheck = false;
             childPath = "images";
         }
@@ -420,14 +408,14 @@ public class ChatUploadActivity extends Activity {
         String UPLOAD_FILE_NAME;
 
         // 파일 용량 체크
-        if(audioCheck){
+        if (audioCheck) {
             String tmp = tv_audio_desc.getText().toString();
-            if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB") ){
+            if (tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB")) {
                 Toast.makeText(getApplicationContext(), getString(R.string.limit_file_size), Toast.LENGTH_SHORT).show();
                 return;
             }
             UPLOAD_FILE_NAME = AUDIO_FILE_NAME;
-        }else{
+        } else {
             //image size check skips
             //String tmp = compressedSizeTextView.getText().toString();
             //if(tmp.contains("MB") || tmp.contains("GB") || tmp.contains("TB")){
@@ -439,7 +427,7 @@ public class ChatUploadActivity extends Activity {
 
         //Toast.makeText(getApplicationContext(), " EXECUTE_ACTION : "+EXECUTE_ACTION, Toast.LENGTH_SHORT).show();
 
-        if(EXECUTE_ACTION){
+        if (EXECUTE_ACTION) {
             return;
         }
 
@@ -454,14 +442,14 @@ public class ChatUploadActivity extends Activity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference mountainsRef = storageRef.child(UPLOAD_FILE_NAME);
-        StorageReference mountainImagesRef = storageRef.child(childPath+"/"+UPLOAD_FILE_NAME);
+        StorageReference mountainImagesRef = storageRef.child(childPath + "/" + UPLOAD_FILE_NAME);
         //noinspection ResultOfMethodCallIgnored
         mountainsRef.getName().equals(mountainImagesRef.getName());
         //noinspection ResultOfMethodCallIgnored
         mountainsRef.getPath().equals(mountainImagesRef.getPath());
 
-        Uri file = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+UPLOAD_FILE_NAME));
-        StorageReference riversRef = storageRef.child(childPath+"/"+file.getLastPathSegment());
+        Uri file = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + UPLOAD_FILE_NAME));
+        StorageReference riversRef = storageRef.child(childPath + "/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
 
         boolean finalAudioCheck = audioCheck;
@@ -475,10 +463,10 @@ public class ChatUploadActivity extends Activity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                if(finalAudioCheck){
-                    replyMessageSend(Consts.MESSAGE_TYPE_VOICE,AUDIO_FILE_NAME);
-                }else{
-                    replyMessageSend(Consts.MESSAGE_TYPE_IMAGE,IMAGE_FILE_NAME);
+                if (finalAudioCheck) {
+                    replyMessageSend(Consts.MESSAGE_TYPE_VOICE, AUDIO_FILE_NAME);
+                } else {
+                    replyMessageSend(Consts.MESSAGE_TYPE_IMAGE, IMAGE_FILE_NAME);
                 }
             }
         });
@@ -486,10 +474,11 @@ public class ChatUploadActivity extends Activity {
 
     /**
      * reply message send
+     *
      * @param type
      * @param fileName
      */
-    private void replyMessageSend(String type,String fileName) {
+    private void replyMessageSend(String type, String fileName) {
         HashMap<String, String> account = AccountInfo.getAccountInfo(this);
         String ctm = System.currentTimeMillis() + "";
         String talkId = UUID.randomUUID().toString();
@@ -505,10 +494,10 @@ public class ChatUploadActivity extends Activity {
         params.put("TALK_LANG", account.get("LANG"));
         params.put("TALK_TEXT", "");
         params.put("TALK_TYPE", type);
-        if(Consts.MESSAGE_TYPE_VOICE.equals(type)){
+        if (Consts.MESSAGE_TYPE_VOICE.equals(type)) {
             params.put("TALK_TEXT_IMAGE", "");
             params.put("TALK_TEXT_VOICE", fileName);
-        }else{
+        } else {
             params.put("TALK_TEXT_IMAGE", fileName);
             params.put("TALK_TEXT_VOICE", "");
         }

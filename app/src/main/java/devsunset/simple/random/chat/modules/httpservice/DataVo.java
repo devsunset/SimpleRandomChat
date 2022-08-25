@@ -23,16 +23,17 @@ public class DataVo {
     private final String CALL_FUNCTION;
     private final String RESULT_CODE;
     private final String RESULT_MESSAGE;
-    private final List<HashMap<String,Object>> RESULT_DATA;
+    private final List<HashMap<String, Object>> RESULT_DATA;
 
     /**
      * DataVo
+     *
      * @param CALL_FUNCTION
      * @param RESULT_CODE
      * @param RESULT_MESSAGE
      * @param RESULT_DATA
      */
-    public DataVo(String CALL_FUNCTION, String RESULT_CODE, String RESULT_MESSAGE, List<HashMap<String,Object>> RESULT_DATA) {
+    public DataVo(String CALL_FUNCTION, String RESULT_CODE, String RESULT_MESSAGE, List<HashMap<String, Object>> RESULT_DATA) {
         this.CALL_FUNCTION = CALL_FUNCTION;
         this.RESULT_CODE = RESULT_CODE;
         this.RESULT_MESSAGE = RESULT_MESSAGE;
@@ -41,6 +42,7 @@ public class DataVo {
 
     /**
      * call function
+     *
      * @return
      */
     public String getCALL_FUNCTION() {
@@ -49,6 +51,7 @@ public class DataVo {
 
     /**
      * result code S:Success , E:Error
+     *
      * @return
      */
     public String getRESULT_CODE() {
@@ -57,6 +60,7 @@ public class DataVo {
 
     /**
      * result message
+     *
      * @return
      */
     public String getRESULT_MESSAGE() {
@@ -65,9 +69,10 @@ public class DataVo {
 
     /**
      * result data List<HashMap<String,Object>>
+     *
      * @return
      */
-    public List<HashMap<String,Object>> getRESULT_DATA() {
+    public List<HashMap<String, Object>> getRESULT_DATA() {
         return RESULT_DATA;
     }
 }

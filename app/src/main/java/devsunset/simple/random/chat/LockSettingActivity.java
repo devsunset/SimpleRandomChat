@@ -31,7 +31,7 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  * @version 1.0
  * @since SimpleRandomChat 1.0
  */
-public class LockSettingActivity extends Activity  {
+public class LockSettingActivity extends Activity {
 
     @BindView(R.id.pinview1)
     Pinview pinview1;
@@ -42,7 +42,8 @@ public class LockSettingActivity extends Activity  {
     private String password = "";
     private String passwordConfirm = "";
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lock_setting_activity);
         ButterKnife.bind(this);
@@ -68,26 +69,26 @@ public class LockSettingActivity extends Activity  {
             @Override
             public void onDataEntered(Pinview pinview, boolean fromUser) {
 
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(),0);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(), 0);
 
                 passwordConfirm = pinview.getValue();
-                HashMap<String,String> params = new HashMap<String,String>();
-                if(!"".equals(password)
+                HashMap<String, String> params = new HashMap<String, String>();
+                if (!"".equals(password)
                         && password.length() == 4
                         && !"".equals(passwordConfirm)
                         && passwordConfirm.length() == 4
-                        && password.equals(passwordConfirm) ){
-                    params.put("SET_LOCK_YN","Y");
-                    params.put("SET_LOCK_PWD",passwordConfirm);
-                    AccountInfo.setAccountInfo(getApplicationContext(),params);
+                        && password.equals(passwordConfirm)) {
+                    params.put("SET_LOCK_YN", "Y");
+                    params.put("SET_LOCK_PWD", passwordConfirm);
+                    AccountInfo.setAccountInfo(getApplicationContext(), params);
                     Toast.makeText(getApplicationContext(), getString(R.string.password_success), Toast.LENGTH_SHORT).show();
                     finish();
-                }else{
-                    params.put("SET_LOCK_YN","N");
-                    params.put("SET_LOCK_PWD","-");
-                    AccountInfo.setAccountInfo(getApplicationContext(),params);
-                    Toast.makeText(getApplicationContext(),getString(R.string.password_fail),Toast.LENGTH_SHORT).show();
+                } else {
+                    params.put("SET_LOCK_YN", "N");
+                    params.put("SET_LOCK_PWD", "-");
+                    AccountInfo.setAccountInfo(getApplicationContext(), params);
+                    Toast.makeText(getApplicationContext(), getString(R.string.password_fail), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -96,16 +97,16 @@ public class LockSettingActivity extends Activity  {
 
     @OnClick(R.id.btnBack)
     void onBtnBackClicked() {
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(),0);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(), 0);
 
         finish();
     }
 
     @OnClick(R.id.tvBack)
     void onTvBackClicked() {
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(),0);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(pinview2.getWindowToken(), 0);
 
         finish();
     }

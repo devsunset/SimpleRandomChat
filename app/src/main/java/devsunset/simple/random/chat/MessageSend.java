@@ -5,7 +5,6 @@
  */
 package devsunset.simple.random.chat;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -46,16 +44,13 @@ import retrofit2.Response;
  */
 public class MessageSend extends Fragment {
 
-    private HttpConnectService httpConnectService = null;
-
     @BindView(R.id.chat_message)
     EditText chat_message;
-
     @BindView(R.id.toogleTargetGender)
     SwitchMultiButton toogleTargetGender;
-
     @BindView(R.id.toogleTargetCountry)
     SwitchMultiButton toogleTargetCountry;
+    private HttpConnectService httpConnectService = null;
 
     // newInstance constructor for creating fragment with arguments
     public static MessageSend newInstance() {
@@ -75,8 +70,8 @@ public class MessageSend extends Fragment {
 
         //toogleTargetGender.setText(getString(R.string.all),getString(R.string.man),getString(R.string.woman));
         //toogleTargetCountry.setText(getString(R.string.local),getString(R.string.world));
-        toogleTargetGender.setText("ALL","Man","Woman");
-        toogleTargetCountry.setText("Local","World");
+        toogleTargetGender.setText("ALL", "Man", "Woman");
+        toogleTargetCountry.setText("Local", "World");
 
         HashMap<String, String> account = AccountInfo.getAccountInfo(getContext());
 

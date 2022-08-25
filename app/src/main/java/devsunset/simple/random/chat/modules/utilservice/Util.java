@@ -109,7 +109,7 @@ public class Util {
     private static String getFileName(Context context, Uri uri) {
         String result = null;
 
-        if(uri !=null){
+        if (uri != null) {
             if (uri.getScheme().equals("content")) {
                 Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
                 try {
@@ -128,7 +128,7 @@ public class Util {
 
         if (result == null) {
             result = uri.getPath();
-            if(result !=null){
+            if (result != null) {
                 int cut = result.lastIndexOf(File.separator);
                 if (cut != -1) {
                     result = result.substring(cut + 1);
@@ -166,11 +166,11 @@ public class Util {
     /**
      * This method converts dp unit to equivalent pixels, depending on device density.
      *
-     * @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels
+     * @param dp      A value in dp (density independent pixels) unit. Which we need to convert into pixels
      * @param context Context to get resources and device specific display metrics
      * @return A float value to represent px equivalent to dp depending on device density
      */
-    public static float convertDpToPixel(float dp, Context context){
+    public static float convertDpToPixel(float dp, Context context) {
 
         Resources resources = context.getResources();
 
@@ -186,11 +186,11 @@ public class Util {
     /**
      * This method converts device specific pixels to density independent pixels.
      *
-     * @param px A value in px (pixels) unit. Which we need to convert into db
+     * @param px      A value in px (pixels) unit. Which we need to convert into db
      * @param context Context to get resources and device specific display metrics
      * @return A float value to represent dp equivalent to px value
      */
-    public static float convertPixelsToDp(float px, Context context){
+    public static float convertPixelsToDp(float px, Context context) {
 
         Resources resources = context.getResources();
 

@@ -248,7 +248,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String channelId = getString(R.string.default_notification_channel_id);
 
         Intent intent = new Intent(this, LockActivity.class);
-        intent.putExtra("PUSH_CALL_FLAG","Y");
+        intent.putExtra("PUSH_CALL_FLAG", "Y");
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -349,10 +349,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             @Override
             protected void onPostExecute(Void aVoid) {
                 if (Consts.MESSAGE_STATUS_PROCEDDING.equals(talkStatus) &&
-                        (   "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                         || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))
-                         || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))
-                        )){
+                        ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))
+                                || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))
+                        )) {
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
                     fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher));
@@ -409,10 +409,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                if ((   "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
-                        || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))
-                        || "Y".equals( AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))
-                    )) {
+                if (("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_YN"))
+                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_NOTI_YN"))
+                        || "Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_ALARM_POPUP_YN"))
+                )) {
                     FBCustomToast fbCustomToast = new FBCustomToast(getApplicationContext());
                     fbCustomToast.setMsg(getString(R.string.default_received_message));
                     fbCustomToast.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_launcher));
@@ -446,15 +446,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // 단말에 해당 값이 존재 하는지 체크
                 if (existDataCheck != null && !existDataCheck.isEmpty()) {
 
-                    if(Consts.MESSAGE_STATUS_FIRST.equals(existDataCheck.get(0).getATX_STATUS())){
+                    if (Consts.MESSAGE_STATUS_FIRST.equals(existDataCheck.get(0).getATX_STATUS())) {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                                 .AppTalkThreadDao().deleteByAtxId(atxId);
 
                         DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
                                 .AppTalkMainDao().deleteByAtxId(atxId);
-                    }else{
+                    } else {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                                .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_DELETE,atxId);
+                                .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_DELETE, atxId);
                     }
                 }
                 return null;

@@ -46,13 +46,13 @@
             android:background="@drawable/btn_microphone"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/replayText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/replay"
-            android:textSize="20dp"
+        <Button
+            android:id="@+id/btnImage"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_image"
             android:visibility="gone" />
 
 
@@ -76,17 +76,17 @@
                     android:text=""
                     android:textSize="15dp" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
                 <TextView
                     android:id="@+id/textAllLength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="15dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -97,13 +97,13 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnImage"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/btn_image"
+        <TextView
+            android:id="@+id/replayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/replay"
+            android:textSize="20dp"
             android:visibility="gone" />
 
         <TextView

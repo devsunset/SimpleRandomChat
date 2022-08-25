@@ -57,39 +57,46 @@ import devsunset.simple.random.chat.modules.utilservice.Consts;
  */
 public class ChatDownloadActivity extends Activity {
 
-    @BindView(R.id.btnAudio)
-    Button btnAudio;
-
-    @BindView(R.id.btnImage)
-    Button btnImage;
-
-    @BindView(R.id.view_image)
-    PhotoView view_image;
-
-    @BindView(R.id.loadingText)
-    TextView loadingText;
-
-    @BindView(R.id.replayText)
-    TextView replayText;
-
-    @BindView(R.id.playArea)
-    LinearLayout playArea;
-
     private static String TALK_TYPE = "";
     private static String TALK_TEXT_VOICE = "";
     private static String TALK_TEXT_IMAGE = "";
-
-    private KProgressHUD hud;
-
-    private MediaPlayer mediaPlayer = null;
     private final Handler myHandler = new Handler();
+    @BindView(R.id.btnAudio)
+    Button btnAudio;
+    @BindView(R.id.btnImage)
+    Button btnImage;
+    @BindView(R.id.view_image)
+    PhotoView view_image;
+    @BindView(R.id.loadingText)
+    TextView loadingText;
+    @BindView(R.id.replayText)
+    TextView replayText;
+    @BindView(R.id.playArea)
+    LinearLayout playArea;
+    private KProgressHUD hud;
+    private MediaPlayer mediaPlayer = null;
     private double startTime = 0;
     private double finalTime = 0;
 
-    private TextView tx1,tx2;
+    private TextView tx1, tx2;
     private SeekBar seekbar;
+    private final Runnable UpdateSongTime = new Runnable() {
+        public void run() {
+            try {
+                if (mediaPlayer != null) {
+                    startTime = mediaPlayer.getCurrentPosition();
+                    tx1.setText(String.format("%d sec", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
+                    seekbar.setProgress((int) startTime);
+                    myHandler.postDelayed(this, 100);
+                }
+            } catch (Exception e) {
+                Logger.e("UpdateSongTime : " + e.getMessage());
+            }
+        }
+    };
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_download_activity);
         ButterKnife.bind(this);
@@ -108,9 +115,9 @@ public class ChatDownloadActivity extends Activity {
         TALK_TEXT_VOICE = intent.getStringExtra("TALK_TEXT_VOICE");
         TALK_TEXT_IMAGE = intent.getStringExtra("TALK_TEXT_IMAGE");
 
-        if(Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)){
+        if (Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)) {
             btnAudio.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             btnImage.setVisibility(View.VISIBLE);
             view_image.setVisibility(View.VISIBLE);
         }
@@ -122,13 +129,14 @@ public class ChatDownloadActivity extends Activity {
 
         // 권한 획득
         // Multiple permissions:
-        String[] permissions = {Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
             @Override
             public void onGranted() {
                 dirCheck();
                 getData();
             }
+
             @Override
             public void onDenied(Context context, ArrayList<String> deniedPermissions) {
                 finish();
@@ -136,27 +144,12 @@ public class ChatDownloadActivity extends Activity {
         });
     }
 
-    private final Runnable UpdateSongTime = new Runnable() {
-        public void run() {
-            try{
-                if(mediaPlayer !=null){
-                    startTime = mediaPlayer.getCurrentPosition();
-                    tx1.setText(String.format("%d sec",TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
-                    seekbar.setProgress((int)startTime);
-                    myHandler.postDelayed(this, 100);
-                }
-            }catch(Exception e){
-                Logger.e("UpdateSongTime : " + e.getMessage());
-            }
-        }
-    };
-
     /**
      * directory check
      */
     private void dirCheck() {
         File dir = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
-        if(!dir.exists()){
+        if (!dir.exists()) {
             //noinspection ResultOfMethodCallIgnored
             dir.mkdirs();
         }
@@ -165,7 +158,7 @@ public class ChatDownloadActivity extends Activity {
     /**
      * attach data search
      */
-    private void getData(){
+    private void getData() {
 
         hud = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -176,15 +169,15 @@ public class ChatDownloadActivity extends Activity {
         String destSource;
         String fileName;
 
-        if(Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)){
-            destSource = "audio/"+TALK_TEXT_VOICE;
+        if (Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)) {
+            destSource = "audio/" + TALK_TEXT_VOICE;
             fileName = TALK_TEXT_VOICE;
-        }else{
-            destSource = "images/"+TALK_TEXT_IMAGE;
+        } else {
+            destSource = "images/" + TALK_TEXT_IMAGE;
             fileName = TALK_TEXT_IMAGE;
         }
 
-        long lastTime = Long.parseLong(fileName.substring(0,fileName.indexOf('_')));
+        long lastTime = Long.parseLong(fileName.substring(0, fileName.indexOf('_')));
         long curTime = System.currentTimeMillis();
         long diffTime = (curTime - lastTime) / (1000 * 60 * 60 * 24);
 
@@ -192,24 +185,24 @@ public class ChatDownloadActivity extends Activity {
             hud.dismiss();
             loadingText.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference gsReference = storage.getReferenceFromUrl("gs://src-server.appspot.com/"+destSource);
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://src-server.appspot.com/" + destSource);
 
-            if(Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)){
+            if (Consts.MESSAGE_TYPE_VOICE.equals(TALK_TYPE)) {
                 File localFile;
-                try{
-                    localFile = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE);
+                try {
+                    localFile = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + TALK_TEXT_VOICE);
                     gsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            try{
+                            try {
                                 hud.dismiss();
                                 loadingText.setVisibility(View.GONE);
                                 replayText.setVisibility(View.VISIBLE);
                                 playArea.setVisibility(View.VISIBLE);
                                 onBtnAudioClicked();
-                            }catch(Exception e) {
+                            } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -222,11 +215,11 @@ public class ChatDownloadActivity extends Activity {
                         }
                     });
 
-                }catch(Exception e){
+                } catch (Exception e) {
                     loadingText.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
                 }
-            }else{
+            } else {
                 final long ONE_MEGABYTE = 1024 * 1024;
                 gsReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
@@ -253,11 +246,11 @@ public class ChatDownloadActivity extends Activity {
     /**
      * temp file clear
      */
-    private void fileClear(){
+    private void fileClear() {
         File file = new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp");
         File[] files = file.listFiles();
-        if(files !=null && files.length > 0){
-            for( int i=0; i<files.length; i++){
+        if (files != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
                 //noinspection ResultOfMethodCallIgnored
                 files[i].delete();
             }
@@ -266,16 +259,16 @@ public class ChatDownloadActivity extends Activity {
 
     @OnClick(R.id.btnAudio)
     void onBtnAudioClicked() {
-        if((new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE)).exists()){
-            try{
-                if(mediaPlayer !=null){
+        if ((new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + TALK_TEXT_VOICE)).exists()) {
+            try {
+                if (mediaPlayer != null) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
                 }
 
                 mediaPlayer = new MediaPlayer();
 
-                FileInputStream MyFile = new FileInputStream(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/"+TALK_TEXT_VOICE));
+                FileInputStream MyFile = new FileInputStream(new File(Environment.getExternalStorageDirectory() + "/.src_temp_tmp/" + TALK_TEXT_VOICE));
                 mediaPlayer.setDataSource(MyFile.getFD());
                 mediaPlayer.prepare();
                 mediaPlayer.start();
@@ -285,9 +278,9 @@ public class ChatDownloadActivity extends Activity {
                 seekbar.setMax((int) finalTime);
                 tx2.setText(String.format("%d sec", TimeUnit.MILLISECONDS.toSeconds((long) finalTime)));
                 tx1.setText(String.format("%d sec", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
-                seekbar.setProgress((int)startTime);
-                myHandler.postDelayed(UpdateSongTime,100);
-            }catch(Exception e) {
+                seekbar.setProgress((int) startTime);
+                myHandler.postDelayed(UpdateSongTime, 100);
+            } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), getString(R.string.down_file_error), Toast.LENGTH_SHORT).show();
             }
         }
@@ -303,17 +296,18 @@ public class ChatDownloadActivity extends Activity {
         finish();
     }
 
-    @Override protected void onDestroy() {
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
 
-        try{
-            if(mediaPlayer !=null){
+        try {
+            if (mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             Logger.e("mediaPlayer onDestory : " + e.getMessage());
-        }finally {
+        } finally {
             fileClear();
         }
     }

@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="2dp"
     android:layout_marginLeft="6dp"
-    android:layout_marginRight="6dp"
     android:layout_marginTop="3dp"
+    android:layout_marginRight="6dp"
     android:layout_marginBottom="3dp"
-    android:background="@drawable/card_item_bg">
+    android:background="@drawable/card_item_bg"
+    android:padding="2dp">
 
     <LinearLayout
         android:id="@+id/list_item_rows"
@@ -32,26 +32,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/ivTalkTypeVoiceImage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="19dp"
                 android:layout_gravity="top"
-                android:paddingTop="3dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_countryName_talk_target"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#6290FF"
-                    android:text=""
-                    android:textSize="6pt"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                android:orientation="horizontal"
+                android:paddingTop="3dp">
 
                 <Button
                     android:id="@+id/btnTranslation"
@@ -61,22 +54,29 @@
                     android:visibility="gone" />
 
                 <TextView
+                    android:id="@+id/tv_countryName_talk_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#6290FF"
+                    android:textSize="6pt"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/tv_atx_local_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="6pt"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="" />
+                    android:text=""
+                    android:textSize="6pt" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/ivTalkTypeVoiceImage"
-                android:layout_marginTop="10dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_talk_text"

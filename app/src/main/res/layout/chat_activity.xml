@@ -30,11 +30,6 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <View
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <TextView
             android:id="@+id/btnBlackListSend"
             android:layout_width="wrap_content"
@@ -69,6 +64,11 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             android:visibility="gone" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -110,11 +110,6 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#D2D2D2" />
-
     <LinearLayout
         android:id="@+id/replyArea"
         android:layout_width="match_parent"
@@ -131,6 +126,17 @@
             android:layout_marginLeft="6dp"
             android:background="@drawable/icon_attach" />
 
+        <Button
+            android:id="@+id/btnReplyMessageSend"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/btn_selector_common"
+            android:padding="6dp"
+            android:text="SEND"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
         <EditText
             android:id="@+id/reply_message"
             style="@style/edittext_new"
@@ -146,17 +152,11 @@
             android:minHeight="@dimen/textbox_height"
             android:padding="6dp" />
 
-        <Button
-            android:id="@+id/btnReplyMessageSend"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="6dp"
-            android:background="@drawable/btn_selector_common"
-            android:padding="6dp"
-            android:text="SEND"
-            android:textColor="@color/white"
-            android:textSize="18dp" />
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#D2D2D2" />
 
 </LinearLayout>

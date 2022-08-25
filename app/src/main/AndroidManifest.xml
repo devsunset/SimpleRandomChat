@@ -6,13 +6,13 @@
 
     <application
         android:allowBackup="false"
-        tools:replace="android:allowBackup"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light">
+        android:theme="@style/Theme.AppCompat.Light"
+        tools:replace="android:allowBackup">
         <activity android:name="devsunset.simple.random.chat.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         <activity
             android:name="devsunset.simple.random.chat.LockActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="devsunset.simple.random.chat.LockSettingActivity"
             android:configChanges="orientation"
@@ -49,22 +49,23 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
 
         <!-- [START firebase_service] -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9759848654197811~5194135401" />
+        <!-- [END firebase_service] -->
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- REAL AdMob App ID: ca-app-pub-9759848654197811~5194135401 -->
         <service android:name=".modules.fcmservice.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!-- [END firebase_service] -->
-
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-        <!-- REAL AdMob App ID: ca-app-pub-9759848654197811~5194135401 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9759848654197811~5194135401" />
 
     </application>
 

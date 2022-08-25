@@ -36,13 +36,13 @@ public interface AppTalkMainDao {
     void deleteByAtxId(String atxId);
 
     @Query("DELETE FROM APP_TALK_MAIN WHERE ATX_STATUS = :atxStatus AND ATX_LOCAL_TIME  < :cttm")
-    void deleteByCttm(String atxStatus , String cttm);
+    void deleteByCttm(String atxStatus, String cttm);
 
     @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus WHERE ATX_ID =:atxId")
     void updateStatus(String atxStatus, String atxId);
 
     @Query("UPDATE APP_TALK_MAIN SET ATX_STATUS = :atxStatus, ATX_LOCAL_TIME= :atxLocalTime " +
             ", TALK_APP_ID =:talkAppId ,TALK_TEXT= :talkText ,TALK_TYPE= :talkType WHERE ATX_ID =:atxId")
-    void updateReplySend(String atxStatus, String atxLocalTime, String talkAppId, String talkText,String talkType, String atxId);
+    void updateReplySend(String atxStatus, String atxLocalTime, String talkAppId, String talkText, String talkType, String atxId);
 
 }

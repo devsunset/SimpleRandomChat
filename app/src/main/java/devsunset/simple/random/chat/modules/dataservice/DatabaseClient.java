@@ -19,9 +19,8 @@ import android.content.Context;
  */
 public class DatabaseClient {
 
-    private final Context mCtx;
     private static DatabaseClient mInstance;
-
+    private final Context mCtx;
     //our app database object
     private final AppDataBase appDataBase;
 

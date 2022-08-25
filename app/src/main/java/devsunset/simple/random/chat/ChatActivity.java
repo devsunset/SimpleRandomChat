@@ -72,44 +72,31 @@ import retrofit2.Response;
  */
 public class ChatActivity extends Activity {
 
-    private HttpConnectService httpConnectService = null;
-
-    @BindView(R.id.btnBlackListSend)
-    TextView btnBlackListSend;
-
-    @BindView(R.id.btnHide)
-    TextView btnHide;
-
-    @BindView(R.id.replyArea)
-    LinearLayout replyArea;
-
-    @BindView(R.id.reply_message)
-    EditText reply_message;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-
-    @BindView(R.id.korea_warnning_desc)
-    LinearLayout korea_warnning_desc;
-
-    private RecyclerView.LayoutManager mLayoutManager;
-
+    public static int BLACK_LIST = 1;
+    public static int BYE_SEND = 2;
+    public static int HIDE = 3;
     private static String APP_ID = "";
     private static String ATX_ID = "";
     private static String ATX_STATUS = "";
     private static String MY_LANG = "";
     private static String TO_APP_KEY = "";
-
-    public static int BLACK_LIST = 1;
-    public static int BYE_SEND = 2;
-    public static int HIDE = 3;
-
     private static boolean EXECUTE_ACTION = false;
-
+    private static String strCountry = "";
+    @BindView(R.id.btnBlackListSend)
+    TextView btnBlackListSend;
+    @BindView(R.id.btnHide)
+    TextView btnHide;
+    @BindView(R.id.replyArea)
+    LinearLayout replyArea;
+    @BindView(R.id.reply_message)
+    EditText reply_message;
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.korea_warnning_desc)
+    LinearLayout korea_warnning_desc;
+    private HttpConnectService httpConnectService = null;
+    private RecyclerView.LayoutManager mLayoutManager;
     private KProgressHUD hud;
-
-    private static String strCountry ="";
-
     // Ads Full Screen
     private InterstitialAd mInterstitialAd;
 
@@ -134,7 +121,7 @@ public class ChatActivity extends Activity {
         Locale systemLocale = getApplicationContext().getResources().getConfiguration().locale;
         strCountry = systemLocale.getCountry();
 
-        if("KR".equalsIgnoreCase(strCountry)){
+        if ("KR".equalsIgnoreCase(strCountry)) {
             korea_warnning_desc.setVisibility(View.VISIBLE);
         }
 
@@ -245,15 +232,15 @@ public class ChatActivity extends Activity {
                         btnHide.setVisibility(View.GONE);
                     }
 
-                    if(Consts.MESSAGE_STATUS_DELETE.equals(ATX_STATUS)){
+                    if (Consts.MESSAGE_STATUS_DELETE.equals(ATX_STATUS)) {
                         replyArea.setVisibility(View.GONE);
                         btnHide.setVisibility(View.GONE);
                     }
 
-                    if(appTalkThread.size() == 1 && APP_ID.equals(appTalkThread.get(0).getTALK_APP_ID())){
+                    if (appTalkThread.size() == 1 && APP_ID.equals(appTalkThread.get(0).getTALK_APP_ID())) {
                         replyArea.setVisibility(View.GONE);
                         btnBlackListSend.setVisibility(View.GONE);
-                    }else if("KR".equalsIgnoreCase(strCountry) && appTalkThread.size() >= 1){
+                    } else if ("KR".equalsIgnoreCase(strCountry) && appTalkThread.size() >= 1) {
                         btnBlackListSend.setVisibility(View.VISIBLE);
                     }
                 } else {
@@ -267,7 +254,7 @@ public class ChatActivity extends Activity {
                     btnHide.setVisibility(View.GONE);
                     btnBlackListSend.setVisibility(View.GONE);
                 }
-                MessageDetailAdapter myAdapter = new MessageDetailAdapter(messageArrayList,MY_LANG);
+                MessageDetailAdapter myAdapter = new MessageDetailAdapter(messageArrayList, MY_LANG);
                 mRecyclerView.setAdapter(myAdapter);
                 mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
 
@@ -283,7 +270,7 @@ public class ChatActivity extends Activity {
     @OnClick(R.id.btnBlackListSend)
     void onBtnBlackListClicked() {
         CustomDialog customDialog = new CustomDialog(ChatActivity.this);
-        customDialog.callFunction(getString(R.string.black_list_message),getString(R.string.black_list_message_desc),BLACK_LIST,this);
+        customDialog.callFunction(getString(R.string.black_list_message), getString(R.string.black_list_message_desc), BLACK_LIST, this);
     }
 
     /**
@@ -314,7 +301,7 @@ public class ChatActivity extends Activity {
             protected void onPostExecute(Void aVoid) {
                 HashMap<String, String> account = AccountInfo.getAccountInfo(getApplicationContext());
                 HashMap<String, Object> params = new HashMap<String, Object>();
-                params.put("BLA_ID", Consts.IDS_PRIEFIX_BLA+UUID.randomUUID().toString());
+                params.put("BLA_ID", Consts.IDS_PRIEFIX_BLA + UUID.randomUUID().toString());
                 params.put("ATX_ID", ATX_ID);
                 params.put("TALK_APP_ID", account.get("APP_ID"));
                 params.put("TO_APP_KEY", TO_APP_KEY);
@@ -326,10 +313,10 @@ public class ChatActivity extends Activity {
                             DataVo data = response.body();
                             if ("S".equals(data.getRESULT_CODE())) {
                                 Logger.i("blackListSendProcess Success");
-                            }else{
+                            } else {
                                 Logger.e("blackListSendProcess Fail");
                             }
-                        }else{
+                        } else {
                             Logger.e("blackListSendProcess Fail");
                         }
                         hud.dismiss();
@@ -355,11 +342,11 @@ public class ChatActivity extends Activity {
     @OnClick(R.id.btnByeSend)
     void onBtnByeSendClicked() {
 
-        if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))){
+        if ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))) {
             byeSendProcess();
-        }else{
+        } else {
             CustomDialog customDialog = new CustomDialog(ChatActivity.this);
-            customDialog.callFunction(getString(R.string.bye_message),getString(R.string.bye_message_desc),BYE_SEND,this);
+            customDialog.callFunction(getString(R.string.bye_message), getString(R.string.bye_message_desc), BYE_SEND, this);
         }
     }
 
@@ -399,14 +386,14 @@ public class ChatActivity extends Activity {
                 httpConnectService.byeMessage(params).enqueue(new Callback<DataVo>() {
                     @Override
                     public void onResponse(@NonNull Call<DataVo> call, @NonNull Response<DataVo> response) {
-                       if (response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             DataVo data = response.body();
                             if ("S".equals(data.getRESULT_CODE())) {
                                 Logger.i("byeSendProcess Success");
-                            }else{
+                            } else {
                                 Logger.e("byeSendProcess Fail");
                             }
-                        }else{
+                        } else {
                             Logger.e("byeSendProcess Fail");
                         }
                         hud.dismiss();
@@ -431,11 +418,11 @@ public class ChatActivity extends Activity {
      */
     @OnClick(R.id.btnHide)
     void onBtnHideClicked() {
-        if("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))){
+        if ("Y".equals(AccountInfo.getAccountInfo(getApplicationContext()).get("SET_BYE_CONFIRM_YN"))) {
             hideProcess();
-        }else{
+        } else {
             CustomDialog customDialog = new CustomDialog(ChatActivity.this);
-            customDialog.callFunction(getString(R.string.hide_message),getString(R.string.hide_message_desc),HIDE,this);
+            customDialog.callFunction(getString(R.string.hide_message), getString(R.string.hide_message_desc), HIDE, this);
         }
     }
 
@@ -455,7 +442,7 @@ public class ChatActivity extends Activity {
             protected Void doInBackground(Void... voids) {
 
                 DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_HIDE,ATX_ID);
+                        .AppTalkMainDao().updateStatus(Consts.MESSAGE_STATUS_HIDE, ATX_ID);
 
                 return null;
             }
@@ -472,14 +459,15 @@ public class ChatActivity extends Activity {
 
     /**
      * Custom Dialog return hahdler
+     *
      * @param type
      */
-    public void callReturn(int type){
-        if(type == BLACK_LIST){
+    public void callReturn(int type) {
+        if (type == BLACK_LIST) {
             blackListProcess();
-        }else if(type == BYE_SEND){
+        } else if (type == BYE_SEND) {
             byeSendProcess();
-        }else if(type == HIDE){
+        } else if (type == HIDE) {
             hideProcess();
         }
     }
@@ -504,7 +492,7 @@ public class ChatActivity extends Activity {
             message = message.substring(0, 500) + " ...";
         }
 
-        if(EXECUTE_ACTION){
+        if (EXECUTE_ACTION) {
             return;
         }
 
@@ -627,13 +615,12 @@ public class ChatActivity extends Activity {
 
     /**
      * attach button
-     *
      */
     @OnClick(R.id.btnAttach)
     void onBtnAttachClicked() {
         // 권한 획득
         // Multiple permissions:
-        String[] permissions = {Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         Permissions.check(this/*context*/, permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
             @Override
             public void onGranted() {
@@ -652,8 +639,8 @@ public class ChatActivity extends Activity {
                         public void onAdFailedToLoad(int errorCode) {
                             // Code to be executed when an ad request fails.
                             Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
-                            intent.putExtra("ATX_ID",ATX_ID);
-                            intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+                            intent.putExtra("ATX_ID", ATX_ID);
+                            intent.putExtra("TO_APP_KEY", TO_APP_KEY);
                             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(intent);
                         }
@@ -672,8 +659,8 @@ public class ChatActivity extends Activity {
                         public void onAdClosed() {
                             // Code to be executed when the interstitial ad is closed.
                             Intent intent = new Intent(getApplicationContext(), ChatUploadActivity.class);
-                            intent.putExtra("ATX_ID",ATX_ID);
-                            intent.putExtra("TO_APP_KEY",TO_APP_KEY);
+                            intent.putExtra("ATX_ID", ATX_ID);
+                            intent.putExtra("TO_APP_KEY", TO_APP_KEY);
                             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             startActivity(intent);
                         }
@@ -683,6 +670,7 @@ public class ChatActivity extends Activity {
                     Log.d("TAG", "The interstitial wasn't loaded yet.");
                 }
             }
+
             @Override
             public void onDenied(Context context, ArrayList<String> deniedPermissions) {
                 finish();
@@ -710,6 +698,7 @@ public class ChatActivity extends Activity {
 
     /**
      * Push 수신 시 목록 갱신 처리
+     *
      * @param event
      */
     @Subscribe

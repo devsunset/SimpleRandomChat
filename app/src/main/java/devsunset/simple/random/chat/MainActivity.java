@@ -56,13 +56,11 @@ import retrofit2.Response;
  */
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
-    private HttpConnectService httpConnectService = null;
-
-    private LovelySaveStateHandler saveStateHandler;
-    private int INIT_CHECK = 0;
-
     @BindView(R.id.progress)
     ProgressBar progress;
+    private HttpConnectService httpConnectService = null;
+    private LovelySaveStateHandler saveStateHandler;
+    private int INIT_CHECK = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -296,16 +294,17 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         class SaveTask extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
-                String cttm =  (System.currentTimeMillis() - (Consts.DATA_CLEAN_DAY * 24 * 60 * 60 * 1000))+"";
+                String cttm = (System.currentTimeMillis() - (Consts.DATA_CLEAN_DAY * 24 * 60 * 60 * 1000)) + "";
 
                 DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkThreadDao().deleteByCttm(Consts.MESSAGE_STATUS_FIRST,cttm);
+                        .AppTalkThreadDao().deleteByCttm(Consts.MESSAGE_STATUS_FIRST, cttm);
 
                 DatabaseClient.getInstance(getApplicationContext()).getAppDataBase()
-                        .AppTalkMainDao().deleteByCttm(Consts.MESSAGE_STATUS_FIRST,cttm);
+                        .AppTalkMainDao().deleteByCttm(Consts.MESSAGE_STATUS_FIRST, cttm);
 
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
                 //SKIP
